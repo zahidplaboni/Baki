@@ -68,8 +68,8 @@ I18N_RULES.push(
     [/^🔒 নাম আর বদলানো যাবে না \(সর্বোচ্চ (\d+) বার বদলানো হয়ে গেছে\)$/, '🔒 The name cannot be changed any more (already changed $1 times)']
 );
 Object.assign(EN_DICT, {"☝️ ছবি টেনে সরান · নিচের স্লাইডারে বড়-ছোট করুন":"☝️ Drag the photo to move · use the slider to zoom"});
-Object.assign(EN_DICT, {"📅 নতুন দাম কোন তারিখ থেকে": "📅 New price applies from", "— দাম বদলালে শুধু এই তারিখ থেকে নতুন দাম লাগবে, আগের বিক্রি পুরনো দামেই থাকবে": "— if you change the price, the new price applies only from this date; earlier sales stay at the old price", "✏️ আইটেমের নাম": "✏️ Item name", "— বদলালে আগের সব হিসাবেও নতুন নাম হবে": "— changing it renames it in all past entries too", "❌ নাম লিখুন": "❌ Enter a name", "❌ এই নামে আরেকটা আইটেম আছে": "❌ Another item has this name", "🖼️ আইকন": "🖼️ Icon", "— চাপলে বদলাবে (ঐচ্ছিক)": "— tap to change (optional)", "বাকি মিটিয়েছে": "Cleared dues", '🔕 ১ দিন পরে': '🔕 In 1 day', '🔕 ৩ দিন পরে': '🔕 In 3 days'});
-I18N_RULES.push([/^(.*?) · বাকি ([\d.,০-৯]+) ৳$/, "$1 · Due $2 ৳"],
+Object.assign(EN_DICT, {"💡 পেমেন্ট সাজেশনের রেঞ্জ": "💡 Payment suggestion range", "— কাস্টমার বাকির চেয়ে কত টাকা পর্যন্ত বেশি দিলেও এই আইটেমের পেমেন্ট সাজেস্ট হবে। ফাঁকা = সাজেশন বন্ধ": "— the item is suggested if the customer pays up to this much above the amount due. Empty = no suggestion", "✅ নিশ্চিত করুন": "✅ Confirm", "পরে ঠিক করব — শুধু মোট বাকি থেকে কাটো": "Decide later — just deduct from the total due", "কিছু বাছা হয়নি — পুরোটাই সাধারণ জমা হিসেবে যাবে": "Nothing selected — the whole amount goes to general payment", "❌ টাকা কম পড়ছে — আগে অন্যটা বাদ দিন": "❌ Not enough amount — untick another first", "📒 যাদের কাছে বাকি আছে": "📒 Who still owes", "✅ শোধ": "✅ Paid", "📅 নতুন দাম কোন তারিখ থেকে": "📅 New price applies from", "— দাম বদলালে শুধু এই তারিখ থেকে নতুন দাম লাগবে, আগের বিক্রি পুরনো দামেই থাকবে": "— if you change the price, the new price applies only from this date; earlier sales stay at the old price", "✏️ আইটেমের নাম": "✏️ Item name", "— বদলালে আগের সব হিসাবেও নতুন নাম হবে": "— changing it renames it in all past entries too", "❌ নাম লিখুন": "❌ Enter a name", "❌ এই নামে আরেকটা আইটেম আছে": "❌ Another item has this name", "🖼️ আইকন": "🖼️ Icon", "— চাপলে বদলাবে (ঐচ্ছিক)": "— tap to change (optional)", "বাকি মিটিয়েছে": "Cleared dues", '🔕 ১ দিন পরে': '🔕 In 1 day', '🔕 ৩ দিন পরে': '🔕 In 3 days'});
+I18N_RULES.push([/^💰 ([\d.,]+) ৳ কোন আইটেমের পেমেন্ট\?$/, '💰 Which item is the $1 ৳ payment for?'], [/^👤 (.+) — যা বাকি আছে:$/, '👤 $1 — still due:'], [/^✅ আইটেমের পেমেন্ট: ([\d.,]+) ৳$/, '✅ Item payment: $1 ৳'], [/^➕ বাকি ([\d.,]+) ৳ → সাধারণ জমা \(মোট বাকি থেকে কাটবে\)$/, '➕ Remaining $1 ৳ → general payment (deducted from total due)'], [/^📒 বাকি ([\d.,]+) ৳$/, '📒 Due $1 ৳'], [/^(\d+) দিন আগে থেকে$/, 'since $1 days ago'], [/^মোট আটকে আছে: ([\d.,]+) ৳$/, 'Total outstanding: $1 ৳'], [/^(.*?) · বাকি ([\d.,০-৯]+) ৳$/, "$1 · Due $2 ৳"],
  [/^(\d+|[০-৯]+)\/(৫০০|500)$/, '$1/500'],
     [/^💵 (\S+) নগদ · 📒 (\S+) বাকি \((কার্টুন|পিস|প্যাকেট|কেস)\)$/, (m, a, b, u) => '💵 ' + a + ' cash · 📒 ' + b + ' due (' + I18N_UNITS[u] + ')']);
 Object.assign(EN_DICT, {"💰 বাকি আদায় (জমা নিয়েছেন)": "💰 Dues collected (payments taken)", "💸 সরবরাহকারীকে দিয়েছেন": "💸 Paid to supplier", "🧮 হাতে নগদ থাকার কথা": "🧮 Cash expected in hand", "📒 বাকিতে বিক্রি (টাকা হাতে আসেনি)": "📒 Credit sales (no cash received)", "🧾 মোট বিক্রি": "🧾 Total sales", "💵 নগদ বিক্রি": "💵 Cash sales", "ক্যাশ গুনে নিচের ঘরে লিখুন, অ্যাপ মিলিয়ে দেখাবে": "Count your cash and enter it below; the app will compare it", "✅ হিসাব মিলে গেছে": "✅ The account matches", "আপনাকে এখনো কোনো পণ্য দেখার অনুমতি দেওয়া হয়নি।": "You have not been given permission to view any items yet.", "🔒 শুধু দেখার জন্য — কিছু যোগ বা বদলানো যাবে না": "🔒 View only — nothing can be added or changed", "কে কত নিয়েছে": "Who took how much", "এখনো কোনো বিক্রি নেই": "No sales yet", "বাকি খাতা": "Baki Khata", "সরবরাহকারী": "Supplier", "❌ শেষ": "❌ Out of stock", "পণ্য": "Item"});
@@ -2176,6 +2176,7 @@ function openItemEdit(i) {
     document.getElementById('editItemRemind').value = it.remind || '';
     document.getElementById('editItemSupName').value = it.supName || '';
     document.getElementById('editItemSupPrice').value = it.supPrice || '';
+    document.getElementById('editItemSupRange').value = (it.supRange === undefined || it.supRange === null) ? '' : it.supRange;
     document.getElementById('editItemSupFrom').value = todayLocal();
     document.getElementById('editItemSupHist').textContent = (it.supHist && it.supHist.length > 1) ? '🕘 ' + (LANG === 'en' ? 'Price history: ' : 'দামের ইতিহাস: ') + it.supHist.map(x => (x.from || (LANG === 'en' ? 'start' : 'শুরু')) + ' → ' + x.price).join(' | ') : '';
     document.getElementById('editItemEn').value = it.en || '';
@@ -2255,6 +2256,8 @@ function saveItemEdit() {
             it.supPrice = supPrice;
         } else { delete it.supPrice; delete it.supHist; }
     } else { delete it.supPrice; delete it.supName; delete it.supHist; }
+    { const rg = (document.getElementById('editItemSupRange').value || '').trim(); const rn = parseFloat(rg);
+      if (it.supName && rg !== '' && !isNaN(rn) && rn >= 0) it.supRange = rn; else delete it.supRange; }
     if (it.type === 'carton') { if (rate > 0) it.rate = rate; else delete it.rate; }
     save();
     closeModal('itemEditModal');
@@ -2679,6 +2682,28 @@ function openPaymentModal(cusIdx) {
     openModal('paymentModal');
     setTimeout(() => p.focus(), 200);
 }
+// কাস্টমারের কোনো আইটেমের বাকি কত (বাকির মোট − এই আইটেমে ভাগ করে দেওয়া পেমেন্ট)
+function itemBakiOut(c, name) {
+    let total = 0, alloc = 0;
+    (c.tx || []).forEach(t => { if (t && t.tp === name && !Calc.isCash(t)) total += Calc.num(t.amt); });
+    (c.payment || []).forEach(p => (p.alloc || []).forEach(a => { if (a.item === name) alloc += Calc.num(a.amt); }));
+    return Math.max(0, Calc.r2(total - alloc));
+}
+// রেঞ্জ সেট করা আইটেমগুলোর মধ্যে যেগুলো এই টাকার সাথে মেলে
+function paySuggest(c, amt) {
+    const names = []; (c.tx || []).forEach(t => { if (t && t.tp && !Calc.isCash(t) && !names.includes(t.tp)) names.push(t.tp); });
+    const out = [];
+    names.forEach(n => {
+        const it = itemOf(n); if (!it || it.supRange === undefined || it.supRange === null) return;
+        const o = itemBakiOut(c, n); if (!(o > 0)) return;
+        const rg = Calc.num(it.supRange), rate = Calc.num(it.rate);
+        const cands = [o]; if (rate > 0 && rate < o) cands.push(rate);
+        const m = cands.find(x => amt >= x && amt <= x + rg);
+        if (m !== undefined) out.push({ name: n, sup: it.supName || '', out: o, alloc: Calc.r2(m) });
+    });
+    return out;
+}
+let PAY_PEND = null;
 function savePayment() {
     const rawVal = document.getElementById('payAmountInput').value.trim().toLowerCase();
     const dt = document.getElementById('payDateInput').value;
@@ -2692,13 +2717,55 @@ function savePayment() {
         amt = parseFloat(rawVal);
         if (!amt || amt <= 0 || isNaN(amt)) return alert('সঠিক পরিমাণ লিখুন');
     }
-
-    const cusName = appData.customers[currentPayCusIdx].name;
-    const payCusIdx = currentPayCusIdx;
-
-    // পেমেন্ট মডাল বন্ধ করে দাও
+    const cus = appData.customers[currentPayCusIdx], tot = getCustomerTotals(cus);
     closeModal('paymentModal');
-
+    // পুরো বাকি মিটলে প্রশ্ন নেই; কম দিলে এবং সাজেশন মিললে প্রশ্ন
+    const sug = amt < tot.due ? paySuggest(cus, amt) : [];
+    if (sug.length) {
+        PAY_PEND = { idx: currentPayCusIdx, amt, dt, sug, sel: sug.length === 1 ? [0] : [] };
+        setTimeout(payAllocRender, 250);
+        return;
+    }
+    setTimeout(() => payFinish(currentPayCusIdx, amt, dt, []), 250);
+}
+function payAllocRender() {
+    const P = PAY_PEND; if (!P) return;
+    const c = appData.customers[P.idx];
+    document.getElementById('payAllocTitle').textContent = '💰 ' + P.amt + ' ৳ কোন আইটেমের পেমেন্ট?';
+    document.getElementById('payAllocWho').textContent = '👤 ' + c.name + ' — যা বাকি আছে:';
+    document.getElementById('payAllocList').innerHTML = P.sug.map((x, i) => {
+        const it = itemOf(x.name), on = P.sel.includes(i);
+        return '<div class="pa-it' + (on ? ' on' : '') + '" onclick="payAllocTick(' + i + ')"><span class="pa-ck">' + (on ? '✓' : '') + '</span><span>' + itemIconOf(it) + ' ' + escapeHtml(x.name) + (x.sup ? ' <small>(' + escapeHtml(x.sup) + ')</small>' : '') + '</span><b>' + x.alloc + ' ৳</b></div>';
+    }).join('');
+    const used = P.sel.reduce((a, i) => a + P.sug[i].alloc, 0);
+    document.getElementById('payAllocSum').innerHTML = P.sel.length
+        ? '<div>✅ আইটেমের পেমেন্ট: ' + Calc.r2(used) + ' ৳</div><div>➕ বাকি ' + Calc.r2(P.amt - used) + ' ৳ → সাধারণ জমা (মোট বাকি থেকে কাটবে)</div>'
+        : 'কিছু বাছা হয়নি — পুরোটাই সাধারণ জমা হিসেবে যাবে';
+    openModal('payAllocModal');
+}
+function payAllocTick(i) {
+    const P = PAY_PEND; if (!P) return;
+    const k = P.sel.indexOf(i);
+    if (k >= 0) P.sel.splice(k, 1);
+    else {
+        const used = P.sel.reduce((a, j) => a + P.sug[j].alloc, 0);
+        if (used + P.sug[i].alloc > P.amt + 0.001) return alert('❌ টাকা কম পড়ছে — আগে অন্যটা বাদ দিন');
+        P.sel.push(i);
+    }
+    payAllocRender();
+}
+function payAllocConfirm() {
+    const P = PAY_PEND; if (!P) return; PAY_PEND = null;
+    closeModal('payAllocModal');
+    setTimeout(() => payFinish(P.idx, P.amt, P.dt, P.sel.map(i => ({ item: P.sug[i].name, amt: P.sug[i].alloc }))), 250);
+}
+function payAllocSkip() {
+    const P = PAY_PEND; if (!P) return; PAY_PEND = null;
+    closeModal('payAllocModal');
+    setTimeout(() => payFinish(P.idx, P.amt, P.dt, []), 250);
+}
+function payFinish(payCusIdx, amt, dt, alloc) {
+    const cusName = appData.customers[payCusIdx].name;
     // তারপর পাসওয়ার্ড চাই
     setTimeout(function() {
         requestTransactionPin(
@@ -2706,7 +2773,7 @@ function savePayment() {
             `👤 ${cusName} — জমা ${amt} ৳`,
             function() {
                 if (!Array.isArray(appData.customers[payCusIdx].payment)) appData.customers[payCusIdx].payment = [];
-                appData.customers[payCusIdx].payment.push({
+                const rec = {
                     id: uid(),
                     dt: dt,
                     amt: amt,
@@ -2714,7 +2781,9 @@ function savePayment() {
                     byRole: currentUser.role,
                     byId: currentUser.id,
                     at: now()
-                });
+                };
+                if (alloc && alloc.length) rec.alloc = alloc;
+                appData.customers[payCusIdx].payment.push(rec);
                 const _pc = appData.customers[payCusIdx];
                 const _pLast = _pc.payment[_pc.payment.length - 1], _pTot = getCustomerTotals(_pc);
                 const _pm = () => waEntryMessage(_pc, 'pay', _pLast, _pTot);
@@ -2725,7 +2794,7 @@ function savePayment() {
                 waAskAfterEntry(_pc, _pm);
             }
         );
-    }, 250);
+    }, 50);
 }
 
 function markGone(c, ids) {
@@ -4866,10 +4935,25 @@ function viewerAcc() { return appData.employees.find(e => e.id === currentUser.i
 function viewerRows(name) {
     const rows = [];
     (appData.customers || []).forEach(c => {
-        const txs = (c.tx || []).concat((c.history || []).reduce((a, h) => a.concat(h.tx || []), []));
-        txs.forEach(t => { if (t && t.tp === name) rows.push({ c: c, dt: t.dt || '', qty: Calc.num(t.qty) || 0, amt: Calc.num(t.amt), cash: Calc.isCash(t) }); });
+        const cur = (c.tx || []).filter(t => t && t.tp === name).map(t => ({ t, hist: false }));
+        const old = (c.history || []).reduce((a, hh) => a.concat((hh.tx || []).filter(t => t && t.tp === name)), []).map(t => ({ t, hist: true }));
+        // এই আইটেমে ভাগ করে দেওয়া পেমেন্ট, পুরনো বাকি থেকে আগে কাটা হয়
+        let left = 0; (c.payment || []).forEach(p => (p.alloc || []).forEach(a => { if (a.item === name) left += Calc.num(a.amt); }));
+        cur.sort((a, b) => ((a.t.dt || '') < (b.t.dt || '') ? -1 : 1));
+        cur.forEach(x => {
+            const amt = Calc.num(x.t.amt), cash = Calc.isCash(x.t); let due = 0;
+            if (!cash) { const cv = Math.min(left, amt); left -= cv; due = Calc.r2(amt - cv); }
+            rows.push({ c: c, dt: x.t.dt || '', qty: Calc.num(x.t.qty) || 0, amt: amt, cash: cash, due: due, hist: false });
+        });
+        old.forEach(x => rows.push({ c: c, dt: x.t.dt || '', qty: Calc.num(x.t.qty) || 0, amt: Calc.num(x.t.amt), cash: Calc.isCash(x.t), due: 0, hist: true }));
     });
     return rows.sort((a, b) => (a.dt < b.dt ? 1 : a.dt > b.dt ? -1 : 0));
+}
+// কার কাছে এই আইটেমের কত বাকি আটকে আছে
+function viewerOwed(rows) {
+    const m = {};
+    rows.forEach(r => { if (r.due > 0) { const k = r.c.id || r.c.name; const o = m[k] || (m[k] = { c: r.c, due: 0, old: r.dt }); o.due = Calc.r2(o.due + r.due); if (r.dt && (!o.old || r.dt < o.old)) o.old = r.dt; } });
+    return Object.values(m).sort((a, b) => b.due - a.due);
 }
 function vwPick(n) { vwTab = n; renderViewer(); }
 function renderViewer() {
@@ -4890,10 +4974,18 @@ function renderViewer() {
     const box = (v, l, bg) => `<div style="background:${bg}"><b>${v}</b>${l}</div>`;
     let h = `<div class="vw-card"><div class="vw-sum">${box(Calc.r2(q), 'মোট বিক্রি' + (u ? ' (' + u + ')' : ''), '#eef2ff')}${box(Calc.r2(qc), 'নগদ', '#dcfce7')}${box(Calc.r2(qb), 'বাকি', '#fee2e2')}</div>` +
         `<div class="vw-sum">${box(Calc.r2(tk) + ' ৳', 'মোট টাকা', '#f8fafc')}${st ? box(st.remaining, 'এখন আছে', '#f8fafc') : ''}</div></div>`;
+    const owed = viewerOwed(rows);
+    if (owed.length) {
+        const tot = Calc.r2(owed.reduce((a, o) => a + o.due, 0));
+        h += '<div class="vw-card"><div class="vw-h">📒 যাদের কাছে বাকি আছে</div>' + owed.map(o => {
+            const days = o.old ? Math.max(0, Math.floor((Date.now() - new Date(o.old + 'T00:00:00').getTime()) / 864e5)) : 0;
+            return `<div class="vw-row"><div class="vw-av">${avatarHtml(o.c)}</div><div class="vw-nm"><div>${escapeHtml(o.c.name)}</div><small>${showPh && o.c.phone ? '<a href="tel:' + escapeHtml(String(o.c.phone).replace(/[^0-9+]/g, '')) + '" style="color:inherit">📞 ' + escapeHtml(o.c.phone) + '</a> · ' : ''}<span>${days} দিন আগে থেকে</span></small></div><div class="vw-q"><span class="vw-tag b">${o.due} ৳</span></div></div>`;
+        }).join('') + `<div style="text-align:right;font-weight:800;padding:8px 4px 0">মোট আটকে আছে: ${tot} ৳</div></div>`;
+    }
     h += '<div class="vw-card"><div class="vw-h">কে কত নিয়েছে</div>' + (rows.map(r => {
         const c = r.c;
         return `<div class="vw-row"><div class="vw-av">${avatarHtml(c)}</div><div class="vw-nm"><div>${escapeHtml(c.name)}</div><small>${showPh && c.phone ? '📞 ' + escapeHtml(c.phone) + ' · ' : ''}${escapeHtml(formatDateBn(r.dt))}</small></div>` +
-            `<div class="vw-q">${r.qty ? Calc.r2(r.qty) + ' ' + u : ''}<div><span class="vw-tag ${r.cash ? 'c' : 'b'}">${r.cash ? '💵 নগদ' : '📒 বাকি'}</span></div></div></div>`;
+            `<div class="vw-q">${r.qty ? Calc.r2(r.qty) + ' ' + u : ''}<div><span class="vw-tag ${r.cash || r.hist || r.due <= 0 ? 'c' : 'b'}">${r.cash ? '💵 নগদ' : (r.hist || r.due <= 0 ? '✅ শোধ' : '📒 বাকি ' + r.due + ' ৳')}</span></div></div></div>`;
     }).join('') || '<p style="text-align:center;color:#64748b">এখনো কোনো বিক্রি নেই</p>') + '</div>';
     body.innerHTML = h;
 }

@@ -1301,3 +1301,10 @@ body.kb-open .setup-body { padding-bottom: 45vh; }
 .ic-opt{font-size:22px;text-align:center;padding:4px 0;border-radius:10px;background:#f3f5f8;cursor:pointer}
 .ic-opt.on{background:#e0e7ff;outline:2px solid #4f46e5}
 .ic-hint{font-size:12px;color:#006a4e;min-height:14px;margin-bottom:4px}
+
+/* পেমেন্ট কোন আইটেমের — প্রশ্ন জানালা */
+.pa-it{display:flex;align-items:center;gap:8px;border:2px solid #cfd6df;border-radius:12px;padding:10px;margin:6px 0;font-size:14px;cursor:pointer}
+.pa-it b{margin-left:auto}.pa-it.on{border-color:#006a4e;background:#e6f4ef}
+.pa-ck{width:20px;height:20px;border-radius:6px;border:2px solid #9aa;display:inline-flex;align-items:center;justify-content:center;font-size:14px;color:#fff;flex:none}
+.pa-it.on .pa-ck{background:#006a4e;border-color:#006a4e}
+.pa-sum{background:#f3f5f8;border-radius:10px;padding:8px;font-size:13px;margin-top:8px;line-height:1.6}

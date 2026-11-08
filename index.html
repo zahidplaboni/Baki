@@ -855,6 +855,24 @@
     </div>
 </div>
 
+
+<div class="modal-overlay" id="payAllocModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4 id="payAllocTitle">💰 কোন আইটেমের পেমেন্ট?</h4></div>
+        <div class="modal-body">
+            <p id="payAllocWho" style="font-size:13px; color:#475569; margin:0 0 8px 0;"></p>
+            <div id="payAllocList"></div>
+            <div id="payAllocSum" class="pa-sum"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions" style="flex-direction:column">
+                <button class="modal-btn confirm" onclick="payAllocConfirm()">✅ নিশ্চিত করুন</button>
+                <button class="modal-btn cancel" onclick="payAllocSkip()">পরে ঠিক করব — শুধু মোট বাকি থেকে কাটো</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal-overlay" id="photoViewModal">
     <div class="modal-card" style="max-width:90%; width:auto;">
         <div class="modal-body" style="padding:10px;">
@@ -937,6 +955,8 @@
                     <label class="isb-lbl">📅 নতুন দাম কোন তারিখ থেকে <small>— দাম বদলালে শুধু এই তারিখ থেকে নতুন দাম লাগবে, আগের বিক্রি পুরনো দামেই থাকবে</small></label>
                     <input type="date" id="editItemSupFrom">
                     <div class="ic-hint" id="editItemSupHist" style="color:#475569"></div>
+                    <label class="isb-lbl">💡 পেমেন্ট সাজেশনের রেঞ্জ <small>— কাস্টমার বাকির চেয়ে কত টাকা পর্যন্ত বেশি দিলেও এই আইটেমের পেমেন্ট সাজেস্ট হবে। ফাঁকা = সাজেশন বন্ধ</small></label>
+                    <input type="number" id="editItemSupRange" inputmode="decimal" placeholder="যেমন: ৫">
                 </div>
                 <div id="editItemRateWrap">
                     <label class="isb-lbl">ডিফল্ট দাম <small>— প্রতি এক একক (পিস/প্যাকেট) এর দাম (ঐচ্ছিক)</small></label>
