@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>বাকি খাতা</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- কিবোর্ড আইকন (একবারই লেখা, সব জায়গায় <use> দিয়ে) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="ico-kbd" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="6" width="20" height="12" rx="2" stroke="white" stroke-width="1.8"/>
+        <rect x="5" y="9" width="2" height="2" rx="0.5" fill="white"/>
+        <rect x="8.5" y="9" width="2" height="2" rx="0.5" fill="white"/>
+        <rect x="12" y="9" width="2" height="2" rx="0.5" fill="white"/>
+        <rect x="15.5" y="9" width="3" height="2" rx="0.5" fill="white"/>
+        <rect x="5" y="12.5" width="2.5" height="2" rx="0.5" fill="white"/>
+        <rect x="9" y="12.5" width="6" height="2" rx="0.5" fill="white"/>
+        <rect x="16.5" y="12.5" width="2.5" height="2" rx="0.5" fill="white"/>
+    </symbol>
+</svg>
+
+<!-- ================== SETUP SCREEN ================== -->
+<div class="setup-screen" id="setupScreen">
+    <div class="setup-card">
+        <div class="setup-body">
+            <div class="setup-progress">
+                <div class="step active"></div>
+                <div class="step"></div>
+                <div class="step"></div>
+                <div class="step"></div>
+            </div>
+
+            <div class="setup-logo">📖</div>
+            <h1 class="setup-title">বাকি খাতা</h1>
+            <p class="setup-subtitle">🎉 স্বাগতম! মালিকের সেটআপ</p>
+
+            <div class="setup-welcome">
+                <div class="welcome-title">⚙️ একবার সেট করুন, সারাজীবন ব্যবহার করুন</div>
+                <div class="welcome-desc">এই তথ্য দিয়ে আপনি (মালিক) অ্যাপে ঢুকবেন। স্টাফ পরে সেটিংস থেকে যোগ করবেন।</div>
+            </div>
+
+            <div class="setup-section">
+                <div class="setup-section-title">🏪 ধাপ ১ — দোকানের তথ্য</div>
+                <label>দোকানের নাম:</label>
+                <input type="text" id="setupShopName" maxlength="40" placeholder="যেমন: করিম স্টোর">
+                <label>আপনার নাম (মালিক):</label>
+                <input type="text" id="setupOwnerName" maxlength="40" placeholder="যেমন: করিম আলী">
+            </div>
+
+            <div class="setup-section">
+                <div class="setup-section-title">🔑 ধাপ ২ — লগইন তথ্য</div>
+                <div class="setup-section-desc">এই ইউজারনেম ও পাসওয়ার্ড দিয়ে আপনি লগইন করবেন।</div>
+                <label>ইউজারনেম:</label>
+                <input type="text" id="setupUsername" maxlength="30" placeholder="যেমন: karim" autocomplete="off">
+                <label>পাসওয়ার্ড:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="setupPass1" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                    <span class="toggle-eye" onclick="togglePass('setupPass1', this)">👁️</span>
+                    <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('setupPass1', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+                </div>
+                <label>আবার লিখুন:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="setupPass2" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                    <span class="toggle-eye" onclick="togglePass('setupPass2', this)">👁️</span>
+                    <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('setupPass2', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+                </div>
+            </div>
+
+            <div class="setup-section">
+                <div class="setup-section-title">🔐 ধাপ ৩ — লেনদেনের পাসওয়ার্ড</div>
+                <div class="setup-section-desc">প্রতিটা লেনদেন (টাকা জমা, বিক্রি এন্ট্রি, হিসাব এডিট) করার সময় এই পাসওয়ার্ড দিতে হবে। মালিক ও স্টাফ উভয়েই এই পাসওয়ার্ড জানবে। পরে শুধু মালিক বদলাতে পারবে।</div>
+                <label>লেনদেনের পাসওয়ার্ড:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="setupTxPin1" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                    <span class="toggle-eye" onclick="togglePass('setupTxPin1', this)">👁️</span>
+                    <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('setupTxPin1', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+                </div>
+                <label>আবার লিখুন:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="setupTxPin2" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                    <span class="toggle-eye" onclick="togglePass('setupTxPin2', this)">👁️</span>
+                    <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('setupTxPin2', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+                </div>
+            </div>
+
+            <div class="setup-section">
+                <div class="setup-section-title">🛡️ ধাপ ৪ — সিকিউরিটি প্রশ্ন</div>
+                <div class="setup-section-desc">পাসওয়ার্ড ভুলে গেলে এই প্রশ্নের উত্তর দিয়ে রিকভার করবেন।</div>
+                <label>প্রশ্ন নির্বাচন করুন:</label>
+                <select id="setupQuestion">
+                    <option value="">— প্রশ্ন বেছে নিন —</option>
+                    <option value="আপনার মায়ের নাম কী?">আপনার মায়ের নাম কী?</option>
+                    <option value="আপনার প্রথম স্কুলের নাম কী?">আপনার প্রথম স্কুলের নাম কী?</option>
+                    <option value="আপনার প্রিয় শিক্ষকের নাম কী?">আপনার প্রিয় শিক্ষকের নাম কী?</option>
+                    <option value="আপনার জন্মশহরের নাম কী?">আপনার জন্মশহরের নাম কী?</option>
+                    <option value="আপনার প্রিয় খাবারের নাম কী?">আপনার প্রিয় খাবারের নাম কী?</option>
+                    <option value="আপনার প্রথম বন্ধুর নাম কী?">আপনার প্রথম বন্ধুর নাম কী?</option>
+                    <option value="আপনার প্রিয় রঙের নাম কী?">আপনার প্রিয় রঙের নাম কী?</option>
+                    <option value="আপনার প্রথম পোষা প্রাণীর নাম কী?">আপনার প্রথম পোষা প্রাণীর নাম কী?</option>
+                    <option value="__custom__">✏️ নিজের প্রশ্ন লিখুন</option>
+                </select>
+                <div id="setupCustomQWrap" style="display:none;">
+                    <label>নিজের প্রশ্ন:</label>
+                    <input type="text" id="setupCustomQuestion" maxlength="80" placeholder="যেমন: আমার দাদার বাড়ির নাম?">
+                </div>
+                <label>প্রশ্নের উত্তর:</label>
+                <input type="text" id="setupAnswer" maxlength="50" placeholder="উত্তর লিখুন">
+            </div>
+
+            <div class="setup-error" id="setupErrorBox"></div>
+
+            <button class="setup-submit-btn" onclick="completeSetup()">
+                🚀 সেটআপ সম্পন্ন করুন
+            </button>
+            <button class="setup-submit-btn" style="background:#fff;color:#4f46e5;border:2px solid #4f46e5;margin-top:10px" onclick="openCloudJoin()">
+                ☁️ আগে থেকে দোকান আছে? কোড দিয়ে যুক্ত হন
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ================== LOGIN SCREEN ================== -->
+<div class="login-screen" id="loginScreen">
+    <div class="login-card">
+        <span class="lg-pill lg-login" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span>
+        <div class="login-logo">📖</div>
+        <h1 class="login-title">বাকি খাতা</h1>
+        <p class="login-subtitle" id="loginShopName">লগইন করুন</p>
+
+        <div class="login-form">
+            <label>👤 ইউজারনেম:</label>
+            <div class="user-wrap">
+                <input type="text" id="loginUser" placeholder="ইউজারনেম লিখুন" autocomplete="off" oninput="fpUpdateLogin()">
+                <div id="loginSavedWrap" class="user-drop" style="display:none">
+                    <span class="user-drop-arrow">▾</span>
+                    <select id="loginUserPick" aria-label="সংরক্ষিত ইউজারনেম" onchange="pickLoginUser()"></select>
+                </div>
+            </div>
+            <div class="remember-row">
+                <label><input type="checkbox" id="loginRemember" checked> এই ফোনে ইউজারনেম মনে রাখুন</label>
+                <span id="loginForget" class="remember-forget" style="display:none" onclick="forgetLoginUser()">🗑️ এটা মুছুন</span>
+            </div>
+
+            <label>🔒 পাসওয়ার্ড:</label>
+            <div class="password-wrapper">
+                <input type="password" id="loginPass" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••" onkeydown="if(event.key==='Enter') doLogin()">
+                <span class="toggle-eye" onclick="togglePass('loginPass', this)">👁️</span>
+                <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('loginPass', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+            </div>
+
+            <div class="login-error" id="loginErrorBox"></div>
+
+            <button class="login-btn" onclick="doLogin()">🔓 লগইন করুন</button>
+            <button type="button" class="login-fp-btn" id="loginFpBtn" onclick="fpLogin()" style="display:none"></button>
+
+            <span class="forgot-link" onclick="openLoginRecovery()">🔑 পাসওয়ার্ড ভুলে গেছি?</span>
+        </div>
+    </div>
+</div>
+
+<!-- ================== MAIN APP ================== -->
+<div id="viewerScreen" class="viewer-screen" style="display:none;">
+    <div class="vw-top"><div><b id="vwShop">বাকি খাতা</b><div class="vw-sub" id="vwUser"></div></div><div class="vw-right"><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span><span class="vw-badge">👁️ তদারকি</span><button type="button" class="vw-out" onclick="doLogout()">লগআউট</button></div></div>
+    <div class="vw-tabs" id="vwTabs"></div>
+    <div id="vwBody"></div>
+    <div class="vw-lock">🔒 শুধু দেখার জন্য — কিছু যোগ বা বদলানো যাবে না</div>
+</div>
+<div class="app" id="mainApp" style="display:none;">
+
+    <header class="app-bar">
+        <div class="app-bar-left">
+            <div class="app-logo">📖</div>
+            <div class="app-title-block">
+                <span class="app-title" id="appTitleMain">বাকি খাতা</span>
+                <span class="app-shop" id="appShopName">দোকানের নাম</span>
+            </div>
+        </div>
+        <div class="app-bar-right">
+            <div class="flip-clock-outer">
+                <div class="flip-clock-inner">
+                    <div class="digits-container" id="clockDigits"></div>
+                    <div class="ampm-flag">
+                        <span class="ampm-text" id="ampmText">PM</span>
+                        <span class="flag-icon" id="userFlag" onclick="detectDynamicFlag()" title="আইপি রিফ্রেশ করুন">🌐</span>
+                    </div>
+                </div>
+            </div>
+            <button class="user-btn" id="userBtn" onclick="toggleUserMenu(event)" title="প্রোফাইল">
+                <span id="userInitial">?</span>
+            </button>
+            <div class="user-menu" id="userMenu">
+                <div class="user-menu-head">
+                    <div class="um-avatar" id="umAvatar">?</div>
+                    <div class="um-info">
+                        <div class="um-name" id="umName">—</div>
+                        <div class="um-role" id="umRole">—</div>
+                    </div>
+                </div>
+                <div class="user-menu-item" onclick="openMyProfile()"><span class="um-icon">👤</span> আমার প্রোফাইল</div>
+                <div class="user-menu-item" onclick="openChangeMyPassword()"><span class="um-icon">🔑</span> পাসওয়ার্ড পরিবর্তন</div>
+                <div class="user-menu-item" onclick="openMyRecoverySetup()"><span class="um-icon">🛡️</span> সিকিউরিটি প্রশ্ন সেট</div>
+                <div class="user-menu-item danger" onclick="doLogout()"><span class="um-icon">🚪</span> লগআউট</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-content" id="appContent">
+
+        <section class="page active" id="page-home">
+            <div class="date-strip" id="dateStrip"><span class="bd-flag" aria-hidden="true"></span><span id="digitalDate" data-nt>সোমবার<small>২৮ সেপ্টেম্বর, ২০২৬</small></span><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span><span class="sync-dot" id="syncDot" onclick="syncDotTap()" style="display:none"></span></div>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon si-blue">👥</div>
+                    <div class="stat-body">
+                        <span class="stat-value" id="topTotalCust">০</span>
+                        <span class="stat-label">মোট কাস্টমার</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon si-red">💰</div>
+                    <div class="stat-body">
+                        <span class="stat-value red" id="topTotalDue">৳ ০</span>
+                        <span class="stat-label">সর্বমোট বাকি</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shop-bar" onclick="requestEditShopName()">
+                <div class="shop-bar-icon">🏪</div>
+                <div class="shop-bar-text">
+                    <span class="sb-name" id="shopNameText">দোকানের নাম</span>
+                    <span class="sb-hint">ট্যাপ করে দোকানের তথ্য পরিবর্তন করুন 🔒</span>
+                </div>
+                <div class="shop-bar-arrow">›</div>
+            </div>
+
+            <div id="noticeBox" style="display:none"></div>
+            <div class="remind-bar" id="remindBar" style="display:none" onclick="openRemindList()">
+                <span>🔔 <b id="remindCount">০ জনের</b> আবার কেনার সময় হয়েছে</span><span class="rb-arrow">দেখুন ›</span>
+            </div>
+
+            <div class="home-toolbar">
+                <div class="search-wrapper">
+                    <input type="text" id="searchBar" class="search-box" placeholder="🔍 নাম বা নম্বর..." onkeyup="handleSearchInput(event)" oninput="searchClearVis()" onfocus="closeFilterOnSearch()" autocomplete="off">
+                    <div class="search-inside-actions">
+                        <button type="button" class="search-clear-btn" id="searchClearBtn" onclick="clearSearch()" title="মুছুন" style="display:none">✕</button>
+                        <button class="filter-toggle-btn" id="filterToggleBtn" onclick="toggleFilterPanel()" title="তারিখ ফিল্টার">
+                            📅
+                        </button>
+                        <span class="home-count-badge" id="countBadge">০ জন</span>
+                    </div>
+                    <div id="autocompleteList" class="autocomplete-list"></div>
+                </div>
+            </div>
+
+            <div class="filter-panel" id="filterPanel">
+                <div class="filter-panel-title">
+                    <span>📅 তারিখ অনুযায়ী ফিল্টার</span>
+                    <button class="clear-filter-btn" onclick="clearDateFilter()">✕ ক্লিয়ার</button>
+                </div>
+                <div class="date-filter-row">
+                    <button class="date-filter-btn active" data-dfilter="all" onclick="setDateFilter('all', this)">সব</button>
+                    <button class="date-filter-btn" data-dfilter="today" onclick="setDateFilter('today', this)">আজ</button>
+                    <button class="date-filter-btn" data-dfilter="7" onclick="setDateFilter('7', this)">৭ দিন</button>
+                    <button class="date-filter-btn" data-dfilter="15" onclick="setDateFilter('15', this)">১৫ দিন</button>
+                    <button class="date-filter-btn" data-dfilter="30" onclick="setDateFilter('30', this)">৩০ দিন</button>
+                </div>
+                <div class="date-custom-row">
+                    <input type="date" id="customDateInput">
+                    <button onclick="setCustomDateFilter()">নির্দিষ্ট তারিখ</button>
+                </div>
+                <div class="filter-active-info" id="filterActiveInfo"></div>
+            </div>
+
+            <div class="section">
+                <div id="list"></div>
+            </div>
+        </section>
+
+        <section class="page" id="page-add">
+            <div class="page-hero"><span class="lg-pill lg-hero" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span>
+                <div class="page-hero-icon">➕</div>
+                <h2 class="page-hero-title">নতুন কাস্টমার</h2>
+                <p class="page-hero-sub">নতুন কাস্টমার যোগ করুন এবং হিসাব শুরু করুন</p>
+            </div>
+
+            <div class="section">
+                <form id="cForm">
+                    <label>👤 কাস্টমারের নাম:</label>
+                    <input type="text" id="cName" placeholder="যেমন: করিম আলী" required>
+                    <label>📞 হোয়াটসঅ্যাপ নম্বর (কোডসহ):</label>
+                    <input type="text" id="cPhone" placeholder="যেমন: 88018XXXXXXXX" inputmode="numeric" required>
+                    <button type="submit" class="btn-primary">✅ কাস্টমার যোগ করুন</button>
+                </form>
+            </div>
+
+            <div class="section">
+                <div class="item-manager" id="itemManager">
+                    <div class="item-manager-head" onclick="toggleItemManager()">
+                        <h4>⚙️ আইটেম ম্যানেজ</h4>
+                        <span class="arrow">▼</span>
+                    </div>
+                    <div class="item-manager-body">
+                        <label style="font-size:12px; margin-bottom:6px;">নতুন আইটেমের নাম:</label>
+                        <div class="item-add-row">
+                            <input type="text" id="newItemInput" placeholder="যেমন: চাল, ডাল, পানি..." oninput="itemSugShow('newItem')" onkeydown="if(event.key==='Enter'){event.preventDefault(); addNewItem();}">
+                        </div>
+<label class="isb-lbl" style="margin-top:0">🌐 ইংরেজি নাম <small>— যারা বাংলা পড়েন না, তারা এটাই দেখবেন (ঐচ্ছিক)</small></label>
+<div class="en-row"><input type="text" id="newItemEn" maxlength="40" placeholder="e.g. Cigarette"><button type="button" class="en-btn" id="newItemEnBtn" onclick="itemSugOnline('newItem')">🌐 অনুবাদ</button></div>
+<div class="en-sug" id="newItemSug"></div>
+<label class="isb-lbl">🖼️ আইকন <small>— চাপলে বদলাবে (ঐচ্ছিক)</small></label>
+<div class="ic-grid" id="newItemIcons" data-nt></div>
+<div class="ic-hint" id="newItemIconHint"></div>
+                        <label style="font-size:12px; margin-bottom:6px;">হিসাবের ধরন:</label>
+                        <div class="item-type-row">
+                            <div class="type-btn active" id="type-carton" data-type="carton" onclick="selectType('carton')">🧮 সংখ্যা × দাম<small>যেমন কার্টুন, পিস</small></div>
+                            <div class="type-btn" id="type-free" data-type="free" onclick="selectType('free')">⚖️ ফ্রি<small>পরিমাণ+টাকা</small></div>
+                            <div class="type-btn" id="type-money" data-type="money" onclick="selectType('money')">💵 শুধু টাকা<small>রিচার্জ</small></div>
+                        </div>
+                        <div class="item-stock-box" id="itemStockBox" style="display:none">
+                            <label class="isb-lbl" style="margin-top:0">একক (শব্দ) <small>— কেস/কার্টুন/পিস/প্যাকেট। বেছে নিন</small></label>
+                            <select id="newItemUnitSel" class="unit-sel" onchange="unitSelChange('newItem')"></select>
+                <input type="text" id="newItemUnit" maxlength="15" placeholder="নিজে লিখুন (যেমন: ডজন)" style="display:none">
+                            <label class="isb-check" style="margin-top:10px"><input type="checkbox" id="newItemStock" onchange="syncItemBox()"> 📦 এই আইটেমের স্টক রাখুন</label>
+                            <div id="newItemStockFields" style="display:none">
+                                <label class="isb-lbl">কম হলে সতর্কতা <small>— এই সংখ্যা বা এর কমে লাল দেখাবে (ঐচ্ছিক)</small></label>
+                                <input type="number" id="newItemLow" inputmode="numeric" placeholder="যেমন: ৫">
+                            </div>
+                            <div id="newItemRateWrap" style="display:none">
+                                <label class="isb-lbl">ডিফল্ট দাম <small>— প্রতি এক একক (পিস/প্যাকেট) এর দাম (ঐচ্ছিক)</small></label>
+                                <input type="number" id="newItemRate" inputmode="numeric" placeholder="যেমন: ১০">
+                            </div>
+                            <div class="isb-note" id="newItemNote"></div>
+                        </div>
+                        <div class="item-stock-box" id="itemRemindBox" style="display:none">
+                            <label class="isb-lbl" style="margin-top:0">🔔 কত দিন পর মনে করাবে <small>— ঐচ্ছিক। যেমন রিচার্জে ২৯</small></label>
+                            <input type="number" id="newItemRemind" inputmode="numeric" placeholder="যেমন: ২৯">
+                        </div>
+                        <button onclick="addNewItem()" class="btn-blue">➕ নতুন আইটেম যোগ করুন</button>
+                        <label style="font-size:12px; margin:10px 0 6px 0; display:block;">বর্তমান আইটেম তালিকা:</label>
+                        <div class="item-chips" id="itemChips"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="page-reports">
+            <div class="page-hero"><span class="lg-pill lg-hero" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span>
+                <div class="page-hero-icon">📊</div>
+                <h2 class="page-hero-title">রিপোর্ট</h2>
+                <p class="page-hero-sub">আপনার ব্যবসার সারসংক্ষেপ</p>
+            </div>
+            <div class="section">
+                <div class="report-grid">
+                    <div class="report-card"><div class="rc-icon si-blue">👥</div><div class="rc-value" id="repTotalCust">০</div><div class="rc-label">মোট কাস্টমার</div></div>
+                    <div class="report-card"><div class="rc-icon si-red">💰</div><div class="rc-value red" id="repTotalDue">৳ ০</div><div class="rc-label">সর্বমোট বাকি</div></div>
+                    <div class="report-card"><div class="rc-icon si-green">✅</div><div class="rc-value green" id="repPaidCust">০</div><div class="rc-label">বাকি মিটিয়েছে</div></div>
+                    <div class="report-card"><div class="rc-icon si-orange">⏳</div><div class="rc-value orange" id="repDueCust">০</div><div class="rc-label">বাকি আছে</div></div>
+                </div>
+            </div>
+            <div class="section" id="repSalesSection" style="display:none">
+                <div class="section-title"><span class="st-icon">💵</span> বিক্রির হিসাব</div>
+                <button class="dc-open" onclick="openDayClose()">🌙 দিনের হিসাব মেলান</button>
+                <div class="sales-chips" id="salesChips">
+                    <button data-k="today" onclick="setSalesRange('today')">আজ</button>
+                    <button data-k="yesterday" onclick="setSalesRange('yesterday')">গতকাল</button>
+                    <button data-k="week" onclick="setSalesRange('week')">গত ৭ দিন</button>
+                    <button data-k="month" onclick="setSalesRange('month')">এই মাস</button>
+                    <button data-k="lastmonth" onclick="setSalesRange('lastmonth')">গত মাস</button>
+                    <button data-k="custom" onclick="setSalesRange('custom')">📅 তারিখ বাছুন</button>
+                </div>
+                <div class="sales-custom" id="salesCustom" style="display:none"><input type="date" id="salesFrom" onchange="renderSales()" aria-label="থেকে"><input type="date" id="salesTo" onchange="renderSales()" aria-label="পর্যন্ত"></div>
+                <div class="sales-range" id="salesRangeText"></div>
+                <div class="report-grid" id="salesCards"></div>
+                <div id="salesItems" class="sales-items"></div>
+            </div>
+            <div class="section">
+                <div class="section-title"><span class="st-icon">🔴</span> যাদের সবচেয়ে বেশি বাকি</div>
+                <div id="topDueList"></div>
+            </div>
+        </section>
+
+        <section class="page" id="page-stock"></section>
+
+        <section class="page" id="page-settings">
+            <div class="page-hero"><span class="lg-pill lg-hero" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span>
+                <div class="page-hero-icon">⚙️</div>
+                <h2 class="page-hero-title">সেটিংস</h2>
+                <p class="page-hero-sub">অ্যাপ কনফিগারেশন</p>
+            </div>
+
+            <div class="section">
+                <div class="settings-list">
+                    <div class="settings-row" onclick="handleSetting('backup')"><div class="sr-icon si-backup">📥</div><div class="sr-body"><div class="sr-title">ব্যাকআপ নিন</div><div class="sr-sub">ডেটা JSON ফাইলে সেভ করুন</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('restore')"><div class="sr-icon si-restore">📤</div><div class="sr-body"><div class="sr-title">রিস্টোর করুন</div><div class="sr-sub">ব্যাকআপ ফাইল থেকে ডেটা ফিরিয়ে আনুন</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('employees')"><div class="sr-icon si-emp">👥</div><div class="sr-body"><div class="sr-title">স্টাফ ম্যানেজমেন্ট</div><div class="sr-sub">নতুন স্টাফ যোগ করুন / ডিলিট করুন</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="openSecurityMenu()"><div class="sr-icon si-pass">🔑</div><div class="sr-body"><div class="sr-title">পাসওয়ার্ড ও নিরাপত্তা</div><div class="sr-sub">পাসওয়ার্ড, লেনদেনের পাসওয়ার্ড, ফিঙ্গারপ্রিন্ট, সিকিউরিটি প্রশ্ন</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('deletelog')"><div class="sr-icon si-pass">🗑️</div><div class="sr-body"><div class="sr-title">ডিলিট লগ</div><div class="sr-sub">কে, কখন, কী ডিলিট করেছে (শুধু মালিক)</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('pdfreport')"><div class="sr-icon si-backup">📄</div><div class="sr-body"><div class="sr-title">সব হিসাব PDF</div><div class="sr-sub">সব কাস্টমারের হিসাব এক PDF-এ, পণ্য বেছে (শুধু মালিক)</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('notice')"><div class="sr-icon si-backup">📢</div><div class="sr-body"><div class="sr-title">স্টাফকে নোটিশ</div><div class="sr-sub">নোটিশ লিখুন — স্টাফের হোম পেজে দেখাবে (শুধু মালিক)</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('walert')"><div class="sr-icon si-restore">💬</div><div class="sr-body"><div class="sr-title">এন্ট্রির পর WhatsApp বার্তা</div><div class="sr-sub" id="waRowSub">শুধু মালিক</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('doclang')"><div class="sr-icon si-restore">📄</div><div class="sr-body"><div class="sr-title">PDF ও মেসেজের ভাষা</div><div class="sr-sub" id="docLangSub">শুধু মালিক</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('recharge')"><div class="sr-icon si-backup">📲</div><div class="sr-body"><div class="sr-title">রিচার্জ অ্যাপ বাছুন</div><div class="sr-sub">নম্বরের পাশে "📲 রিচার্জ" চাপলে যে অ্যাপ খুলবে (শুধু মালিক, APK-তে)</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('bulk')"><div class="sr-icon si-restore">📨</div><div class="sr-body"><div class="sr-title">সবাইকে হিসাব পাঠান</div><div class="sr-sub">একে একে WhatsApp-এ যার যার হিসাব (শুধু মালিক)</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('cloud')"><div class="sr-icon si-restore">☁️</div><div class="sr-body"><div class="sr-title">ক্লাউড সিঙ্ক</div><div class="sr-sub" id="cloudRowSub">স্টাফের ফোনেও একই হিসাব (শুধু মালিক)</div></div><div class="sr-arrow">›</div></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="about-card">
+                    <div class="about-logo">📖</div>
+                    <div class="about-title">বাকি খাতা</div>
+                    <div class="about-version">সংস্করণ ১১.০</div>
+                    <div class="about-desc">আপনার ব্যবসার হিসাব রাখার সহজ সমাধান</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <nav class="bottom-nav">
+        <button class="nav-btn active" data-page="home" onclick="switchPage('home', this)"><span class="nav-icon">🏠</span><span class="nav-label">হোম</span></button>
+        <button class="nav-btn" data-page="add" onclick="switchPage('add', this)"><span class="nav-icon">➕</span><span class="nav-label">যোগ করুন</span></button>
+        <button class="nav-btn" data-page="reports" onclick="switchPage('reports', this)"><span class="nav-icon">📊</span><span class="nav-label">রিপোর্ট</span></button>
+        <button class="nav-btn" data-page="stock" onclick="switchPage('stock', this)"><span class="nav-icon">📦</span><span class="nav-label">স্টক</span></button>
+        <button class="nav-btn" data-page="settings" onclick="switchPage('settings', this)"><span class="nav-icon">⚙️</span><span class="nav-label">সেটিংস</span></button>
+    </nav>
+
+    <div id="kbSpacer"></div>
+</div>
+<!-- HIDDEN INPUTS -->
+<input type="file" id="importFileInput" style="display:none;" onchange="importData(event)">
+<input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="handlePhotoUpload(event)">
+<input type="file" id="galleryInput" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)">
+<input type="file" id="myCameraInput" accept="image/*" capture="environment" style="display:none;" onchange="handleMyPhotoUpload(event)">
+<input type="file" id="myGalleryInput" accept="image/*" style="display:none;" onchange="handleMyPhotoUpload(event)">
+
+<!-- ================== MODALS ================== -->
+
+<div class="modal-overlay" id="employeeAddModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>👥 নতুন ইউজার যোগ করুন</h4></div>
+        <div class="modal-body">
+            <label>নাম:</label>
+            <input type="text" id="empName" maxlength="40" placeholder="যেমন: রহিম">
+            <label>ইউজারনেম:</label>
+            <input type="text" id="empUsername" maxlength="30" placeholder="ইউজারনেম" autocomplete="off">
+            <label>পাসওয়ার্ড:</label>
+            <div class="password-wrapper">
+                <input type="password" id="empPass" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                <span class="toggle-eye" onclick="togglePass('empPass', this)">👁️</span>
+                <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('empPass', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+            </div>
+            <label>ইউজারের ধরন:</label>
+            <div class="role-pick"><button type="button" id="rpStaff" class="rp on" onclick="setEmpRole('staff')">🧑‍💼 স্টাফ<small>এন্ট্রি করতে পারবে</small></button><button type="button" id="rpView" class="rp" onclick="setEmpRole('viewer')">👁️ তদারকি<small>শুধু দেখবে</small></button></div>
+            <div id="viewerPerm" style="display:none">
+                <label>কোন কোন পণ্য দেখতে পারবে?</label>
+                <div id="empPermItems"></div>
+                <label class="pk"><input type="checkbox" id="empPermPhone" checked> 📞 কাস্টমারের মোবাইল নম্বর দেখতে পারবে</label>
+            </div>
+            <p style="font-size:11px; color:#64748b; text-align:left; margin:0 0 10px 0;">💡 স্টাফ পরে নিজের পাসওয়ার্ড ও সিকিউরিটি প্রশ্ন বদলাতে পারবে।</p>
+            <div class="modal-error" id="empAddError"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('employeeAddModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="saveNewEmployee()">যোগ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="employeesListModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>👥 স্টাফ তালিকা</h4></div>
+        <div class="modal-body">
+            <button class="btn-primary" style="margin-bottom:12px;" onclick="openAddEmployeeModal()">➕ নতুন স্টাফ যোগ করুন</button>
+            <div id="employeesListWrap"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('employeesListModal')">বন্ধ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="myProfileModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>👤 আমার প্রোফাইল</h4></div>
+        <div class="modal-body">
+            <div class="profile-view">
+                <div class="my-photo-wrap">
+                    <div class="my-photo" id="pvPhoto" onclick="openMyPhotoSourceModal()">
+                        <span id="pvPhotoText">?</span>
+                    </div>
+                    <button class="my-photo-btn" onclick="openMyPhotoSourceModal()" title="ছবি পরিবর্তন">📷</button>
+                </div>
+                <div class="pv-name" id="pvName">—</div>
+                <div class="pv-role" id="pvRole">—</div>
+                <div class="pv-detail" id="pvDetail">—</div>
+                <div class="my-photo-actions" id="myPhotoActions" style="display:none;">
+                    <button class="my-photo-action-btn change" onclick="openMyPhotoSourceModal()">📷 ছবি পরিবর্তন</button>
+                    <button class="my-photo-action-btn delete" onclick="removeMyPhoto()">🗑️ ছবি মুছুন</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('myProfileModal')">বন্ধ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="myPhotoSourceModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>📸 আপনার ছবি দিন</h4></div>
+        <div class="modal-body">
+            <button class="photo-source-btn camera" onclick="pickMyFromCamera()">
+                <span class="src-icon">📷</span>
+                <span class="src-text"><span>ক্যামেরা দিয়ে তুলুন</span><small>এখনই ছবি উঠান</small></span>
+            </button>
+            <button class="photo-source-btn gallery" onclick="pickMyFromGallery()">
+                <span class="src-icon">🖼️</span>
+                <span class="src-text"><span>গ্যালারি থেকে বাছুন</span><small>ফোনে সেভ করা ছবি</small></span>
+            </button>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('myPhotoSourceModal')">বাতিল</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="pinModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>🔒 নিরাপত্তার স্বার্থে পাসওয়ার্ড দিন</h4></div>
+        <div class="modal-body">
+            <div class="password-wrapper">
+                <input type="password" id="pinInput" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••" onkeydown="if(event.key==='Enter') submitPin()">
+                <span class="toggle-eye" onclick="togglePass('pinInput', this)">👁️</span>
+                <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('pinInput', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+            </div>
+            <span class="forgot-link" onclick="openRecoveryFlowFromPin()">🔑 পাসওয়ার্ড ভুলে গেছি?</span>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closePinModal()">বাতিল</button>
+                <button class="modal-btn confirm" onclick="submitPin()">ওকে</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="transactionPinModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4 id="txPinTitle">🔐 লেনদেনের পাসওয়ার্ড দিন</h4></div>
+        <div class="modal-body">
+            <p id="txPinSubtitle" style="font-size:12px; color:#475569; text-align:center; margin:0 0 12px 0;"></p>
+            <div class="password-wrapper">
+                <input type="password" id="txPinInput" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••" onkeydown="if(event.key==='Enter') submitTransactionPin()">
+                <span class="toggle-eye" onclick="togglePass('txPinInput', this)">👁️</span>
+                <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('txPinInput', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+            </div>
+            <p style="font-size:11px; color:#64748b; text-align:center; margin:0;">💡 এই পাসওয়ার্ড মালিক ও স্টাফ উভয়ের কাছে থাকবে</p>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('transactionPinModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="submitTransactionPin()">নিশ্চিত করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="shopEditModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>🏪 দোকানের তথ্য পরিবর্তন</h4></div>
+        <div class="modal-body">
+            <div class="shop-edit-info">🔒 পরিবর্তনের জন্য পাসওয়ার্ড দিন</div>
+            <label>দোকানের নাম:</label>
+            <input type="text" id="shopEditNameInput" maxlength="40" style="text-align:center; font-weight:700; margin-bottom:10px;">
+            <label>মোবাইল নম্বর:</label>
+            <input type="text" id="shopEditPhoneInput" inputmode="numeric" maxlength="15" style="text-align:center; margin-bottom:10px;">
+            <label>ঠিকানা:</label>
+            <input type="text" id="shopEditAddressInput" maxlength="100" style="text-align:center; margin-bottom:10px;">
+            <label>পাসওয়ার্ড:</label>
+            <div class="password-wrapper">
+                <input type="password" id="shopEditPassInput" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                <span class="toggle-eye" onclick="togglePass('shopEditPassInput', this)">👁️</span>
+                <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('shopEditPassInput', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+            </div>
+            <div class="modal-error" id="shopEditError"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('shopEditModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="confirmShopNameChange()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="noteModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>📝 কাস্টমার নোট (শুধু মালিক)</h4></div>
+        <div class="modal-body">
+            <p style="font-size:12px; color:#475569; margin:0 0 10px 0; text-align:left;"><b id="noteCustomerName">কাস্টমার</b> সম্পর্কে যা মনে রাখতে চান লিখুন।</p>
+            <p style="font-size:11px; color:#dc2626; margin:0 0 10px 0; text-align:left; background:#fef2f2; padding:6px 8px; border-radius:6px;">⚠️ এই নোট শুধু মালিকের দেখার জন্য।</p>
+            <label>নোট:</label>
+            <textarea id="noteInput" class="note-textarea" maxlength="500" placeholder="যেমন: বাড়ি ৫ নম্বর রোডে..." oninput="updateNoteCharCount()"></textarea>
+            <div class="note-char-count"><span id="noteCharCount">0</span>/৫০০</div>
+            <div class="modal-error" id="noteError"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn danger" id="noteDeleteBtn" onclick="deleteNote()" style="display:none;">🗑️ মুছুন</button>
+                <button class="modal-btn cancel" onclick="closeModal('noteModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="saveNote()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="editTxModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>✏️ হিসাব এডিট করুন</h4></div>
+        <div class="modal-body">
+            <div class="edit-info-badge" id="editInfoBadge"></div>
+            <label>নতুন বিবরণ:</label>
+            <input type="text" id="editTpInput" placeholder="বিবরণ" style="margin-bottom:10px;">
+            <label>নতুন টাকা:</label>
+            <input type="number" id="editAmtInput" inputmode="numeric" placeholder="টাকা">
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('editTxModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="saveEditTx()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="editPhoneModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>✏️ নাম ও নম্বর পরিবর্তন</h4></div>
+        <div class="modal-body">
+            <label style="font-size:12px;font-weight:800;margin-bottom:4px;display:block">👤 নাম</label>
+            <input type="text" id="editNameInput" maxlength="40" placeholder="কাস্টমারের নাম">
+            <div id="editNameNote" style="font-size:11px;color:#64748b;margin:4px 2px 10px"></div>
+            <label style="font-size:12px;font-weight:800;margin-bottom:4px;display:block">📞 ফোন নম্বর</label>
+            <input type="text" id="editPhoneInput" inputmode="numeric" placeholder="88018XXXXXXXX" style="text-align:center;">
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('editPhoneModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="saveEditPhone()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="changePassModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4 id="changePassTitle">🔑 পাসওয়ার্ড পরিবর্তন</h4></div>
+        <div class="modal-body">
+            <div id="changePassStep0">
+                <div class="recovery-info-box" style="background:#eef2ff; border-color:#a5b4fc;">
+                    <span class="rec-label" style="color:#4338ca;">ধাপ ১ — সিকিউরিটি প্রশ্ন যাচাই</span>
+                    <div class="rec-question" id="changePassQuestion" style="margin-top:6px; color:#3730a3;">—</div>
+                    <span class="rec-hint" style="color:#6366f1;">হিন্ট: উত্তর শুরু হয় <b id="changePassHint" style="color:#4338ca;">?</b> দিয়ে</span>
+                </div>
+                <label>আপনার উত্তর:</label>
+                <input type="text" id="changePassAnswerInput" maxlength="50" placeholder="উত্তর লিখুন" style="text-align:center; font-weight:700;">
+                <div class="recovery-error-box" id="changePassErrorBox"></div>
+            </div>
+            <div id="changePassStep1" style="display:none;">
+                <div class="recovery-success-box">✅ উত্তর সঠিক! এখন নতুন পাসওয়ার্ড সেট করুন।</div>
+                <label>নতুন পাসওয়ার্ড:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="newPassInput" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                    <span class="toggle-eye" onclick="togglePass('newPassInput', this)">👁️</span>
+                    <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('newPassInput', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+                </div>
+                <label>নতুন পাসওয়ার্ড আবার লিখুন:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="confirmPassInput" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                    <span class="toggle-eye" onclick="togglePass('confirmPassInput', this)">👁️</span>
+                    <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('confirmPassInput', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+                </div>
+                <div class="modal-error" id="passErrorMsg"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('changePassModal')">বাতিল</button>
+                <button class="modal-btn confirm" id="changePassActionBtn" onclick="verifyChangePassAnswer()">যাচাই করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="changeTxPinModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>🔐 লেনদেনের পাসওয়ার্ড পরিবর্তন</h4></div>
+        <div class="modal-body">
+            <label>বর্তমান লেনদেন পাসওয়ার্ড:</label>
+            <div class="password-wrapper">
+                <input type="password" id="oldTxPinInput" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                <span class="toggle-eye" onclick="togglePass('oldTxPinInput', this)">👁️</span>
+                <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('oldTxPinInput', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+            </div>
+            <label>নতুন লেনদেন পাসওয়ার্ড:</label>
+            <div class="password-wrapper">
+                <input type="password" id="newTxPinInput" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                <span class="toggle-eye" onclick="togglePass('newTxPinInput', this)">👁️</span>
+                <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('newTxPinInput', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+            </div>
+            <label>নতুন পাসওয়ার্ড আবার:</label>
+            <div class="password-wrapper">
+                <input type="password" id="confirmTxPinInput" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                <span class="toggle-eye" onclick="togglePass('confirmTxPinInput', this)">👁️</span>
+                <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('confirmTxPinInput', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+            </div>
+            <div class="modal-error" id="txPinErrorMsg"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('changeTxPinModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="saveNewTxPin()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="recoverySetupModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>🛡️ সিকিউরিটি প্রশ্ন সেট করুন</h4></div>
+        <div class="modal-body">
+            <p style="font-size:12px; color:#475569; margin:0 0 12px 0; text-align:left;">পাসওয়ার্ড ভুলে গেলে এই প্রশ্নের উত্তর দিয়ে নতুন পাসওয়ার্ড সেট করতে পারবেন।</p>
+            <label>প্রশ্ন নির্বাচন করুন:</label>
+            <select id="recQuestionSelect" onchange="onRecQuestionChange()">
+                <option value="">— প্রশ্ন বেছে নিন —</option>
+                <option value="আপনার মায়ের নাম কী?">আপনার মায়ের নাম কী?</option>
+                <option value="আপনার প্রথম স্কুলের নাম কী?">আপনার প্রথম স্কুলের নাম কী?</option>
+                <option value="আপনার প্রিয় শিক্ষকের নাম কী?">আপনার প্রিয় শিক্ষকের নাম কী?</option>
+                <option value="আপনার জন্মশহরের নাম কী?">আপনার জন্মশহরের নাম কী?</option>
+                <option value="আপনার প্রিয় খাবারের নাম কী?">আপনার প্রিয় খাবারের নাম কী?</option>
+                <option value="আপনার প্রথম বন্ধুর নাম কী?">আপনার প্রথম বন্ধুর নাম কী?</option>
+                <option value="আপনার প্রিয় রঙের নাম কী?">আপনার প্রিয় রঙের নাম কী?</option>
+                <option value="আপনার প্রথম পোষা প্রাণীর নাম কী?">আপনার প্রথম পোষা প্রাণীর নাম কী?</option>
+                <option value="__custom__">✏️ নিজের প্রশ্ন লিখুন</option>
+            </select>
+            <div id="customQuestionWrap" style="display:none;">
+                <label>নিজের প্রশ্ন লিখুন:</label>
+                <input type="text" id="customQuestionInput" maxlength="80" placeholder="যেমন: আমার দাদার বাড়ির নাম?">
+            </div>
+            <label>প্রশ্নের উত্তর:</label>
+            <input type="text" id="recAnswerInput" maxlength="50" placeholder="উত্তর লিখুন">
+            <div class="modal-error" id="recSetupError"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('recoverySetupModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="saveRecoverySetup()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="recoveryFlowModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4 id="recoveryModalTitle">🔓 পাসওয়ার্ড ভুলে গেছেন?</h4></div>
+        <div class="modal-body">
+            <div id="recoveryStep0">
+                <div class="recovery-info-box">
+                    <span class="rec-label">ধাপ ১ — ইউজারনেম দিন</span>
+                    <div style="font-size:12px; color:#7e22ce; font-weight:600; margin-top:4px;">যার পাসওয়ার্ড ভুলে গেছেন তার ইউজারনেম লিখুন</div>
+                </div>
+                <label>ইউজারনেম:</label>
+                <input type="text" id="recoveryUserInput" placeholder="ইউজারনেম লিখুন" autocomplete="off">
+                <div class="recovery-error-box" id="recoveryUserErrorBox"></div>
+            </div>
+            
+            <div id="recoveryStep1" style="display:none;">
+                <div class="recovery-info-box">
+                    <span class="rec-label">ধাপ ২ — সিকিউরিটি প্রশ্নের উত্তর দিন</span>
+                    <div class="rec-question" id="recShowQuestion" style="margin-top:6px;">—</div>
+                    <span class="rec-hint">হিন্ট: উত্তর শুরু হয় <b id="recShowHint">?</b> দিয়ে</span>
+                </div>
+                <label>আপনার উত্তর:</label>
+                <input type="text" id="recoveryAnswerInput" maxlength="50" placeholder="উত্তর লিখুন" style="text-align:center; font-weight:700;">
+                <div class="recovery-error-box" id="recoveryErrorBox"></div>
+            </div>
+            
+            <div id="recoveryStep2" style="display:none;">
+                <div class="recovery-success-box">✅ উত্তর সঠিক! এখন নতুন পাসওয়ার্ড সেট করুন।</div>
+                <label>নতুন পাসওয়ার্ড:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="recoveryNewPass" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                    <span class="toggle-eye" onclick="togglePass('recoveryNewPass', this)">👁️</span>
+                    <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('recoveryNewPass', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+                </div>
+                <label>আবার লিখুন:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="recoveryConfirmPass" class="pin-input" inputmode="numeric" maxlength="20" placeholder="••••">
+                    <span class="toggle-eye" onclick="togglePass('recoveryConfirmPass', this)">👁️</span>
+                    <button type="button" class="pass-keyboard-btn" onclick="togglePassKeyboard('recoveryConfirmPass', this)"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+                </div>
+                <div class="modal-error" id="recoveryResetError"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('recoveryFlowModal')">বাতিল</button>
+                <button class="modal-btn confirm" id="recoveryActionBtn" onclick="verifyRecoveryUser()">পরবর্তী →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="paymentModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>💰 টাকা জমা নিন</h4></div>
+        <div class="modal-body">
+            <p id="payInfo" style="font-size:13px; color:#475569; margin:0 0 10px 0;"></p>
+            <div class="pay-hint">
+                <div class="pay-hint-line"><span class="hint-icon">💡</span><span><b>p</b> লিখলে পুরো বাকি টাকা অটো জমা হবে</span></div>
+            </div>
+            <label>জমার পরিমাণ:</label>
+<div class="pay-input-wrapper">
+                <input type="text" id="payAmountInput" inputmode="numeric" placeholder="টাকা লিখুন বা p লিখুন">
+                <button type="button" class="keyboard-btn" onclick="togglePassKeyboard('payAmountInput', this)" title="পুরো কিবোর্ড চালু করুন"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+            </div>
+            <label>তারিখ:</label>
+            <input type="date" id="payDateInput">
+            <div class="collected-by-info" id="collectedByInfo"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('paymentModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="savePayment()">জমা দিন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="photoViewModal">
+    <div class="modal-card" style="max-width:90%; width:auto;">
+        <div class="modal-body" style="padding:10px;">
+            <img id="photoViewImg" style="max-width:100%; max-height:70vh; border-radius:12px; display:block;">
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('photoViewModal')">বন্ধ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="photoSourceModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>📸 কাস্টমারের ছবি দিন</h4></div>
+        <div class="modal-body">
+            <button class="photo-source-btn camera" onclick="pickFromCamera()">
+                <span class="src-icon">📷</span>
+                <span class="src-text"><span>ক্যামেরা দিয়ে তুলুন</span><small>এখনই ছবি উঠান</small></span>
+            </button>
+            <button class="photo-source-btn gallery" onclick="pickFromGallery()">
+                <span class="src-icon">🖼️</span>
+                <span class="src-text"><span>গ্যালারি থেকে বাছুন</span><small>ফোনে সেভ করা ছবি</small></span>
+            </button>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('photoSourceModal')">বাতিল</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="confirmDeleteModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>⚠️ নিশ্চিত করুন</h4></div>
+        <div class="modal-body">
+            <p id="confirmDeleteText" style="text-align:center; color:#334155; font-size:14px; line-height:1.6;"></p>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('confirmDeleteModal')">বাতিল</button>
+                <button class="modal-btn danger" onclick="confirmDeleteAction()">হ্যাঁ, ডিলিট করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="itemEditModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4 id="itemEditTitle">✏️ আইটেম সেটিংস</h4></div>
+        <div class="modal-body">
+            <div class="item-stock-box" style="border-style:solid">
+<label class="isb-lbl" style="margin-top:0">✏️ আইটেমের নাম <small>— বদলালে আগের সব হিসাবেও নতুন নাম হবে</small></label>
+<input type="text" id="editItemName" maxlength="40" style="width:100%;box-sizing:border-box;margin-bottom:8px">
+<label class="isb-lbl" style="margin-top:0">🌐 ইংরেজি নাম <small>— যারা বাংলা পড়েন না, তারা এটাই দেখবেন (ঐচ্ছিক)</small></label>
+<div class="en-row"><input type="text" id="editItemEn" maxlength="40" placeholder="e.g. Cigarette"><button type="button" class="en-btn" id="editItemEnBtn" onclick="itemSugOnline('editItem')">🌐 অনুবাদ</button></div>
+<div class="en-sug" id="editItemSug"></div>
+<label class="isb-lbl">🖼️ আইকন <small>— চাপলে বদলাবে (ঐচ্ছিক)</small></label>
+<div class="ic-grid" id="editItemIcons" data-nt></div>
+<div class="ic-hint" id="editItemIconHint"></div>
+            </div>
+            <div class="item-stock-box" style="border-style:solid">
+                <label class="isb-lbl" style="margin-top:0">🔔 কত দিন পর মনে করাবে <small>— ঐচ্ছিক। ফাঁকা = বন্ধ</small></label>
+                <input type="number" id="editItemRemind" inputmode="numeric" placeholder="যেমন: ২৯">
+            </div>
+            <div class="item-stock-box" id="editStockWrap" style="border-style:solid">
+                <label class="isb-lbl" style="margin-top:0">একক (শব্দ) <small>— কার্টুন/পিস/প্যাকেট। বেছে নিন</small></label>
+                <select id="editItemUnitSel" class="unit-sel" onchange="unitSelChange('editItem')"></select>
+                <input type="text" id="editItemUnit" maxlength="15" placeholder="নিজে লিখুন (যেমন: ডজন)" style="display:none">
+                <label class="isb-check" style="margin-top:10px"><input type="checkbox" id="editItemStock" onchange="syncItemEdit()"> 📦 স্টক রাখুন</label>
+                <div id="editItemStockFields" style="display:none">
+                    <label class="isb-lbl">কম হলে সতর্কতা <small>— এই সংখ্যা বা এর কমে লাল দেখাবে (ঐচ্ছিক)</small></label>
+                    <input type="number" id="editItemLow" inputmode="numeric" placeholder="যেমন: ৫">
+                    <label class="isb-lbl">🤝 সরবরাহকারীর নাম <small>— মাল যার (ঐচ্ছিক)</small></label>
+                    <input type="text" id="editItemSupName" placeholder="যেমন: মাইকেল">
+                    <label class="isb-lbl">সরবরাহকারীকে প্রতি একক কত দেবেন <small>— বিক্রি হলে এই দামে তার পাওনা হবে</small></label>
+                    <input type="number" id="editItemSupPrice" inputmode="decimal" placeholder="যেমন: ৪৫">
+                    <label class="isb-lbl">📅 নতুন দাম কোন তারিখ থেকে <small>— দাম বদলালে শুধু এই তারিখ থেকে নতুন দাম লাগবে, আগের বিক্রি পুরনো দামেই থাকবে</small></label>
+                    <input type="date" id="editItemSupFrom">
+                    <div class="ic-hint" id="editItemSupHist" style="color:#475569"></div>
+                </div>
+                <div id="editItemRateWrap">
+                    <label class="isb-lbl">ডিফল্ট দাম <small>— প্রতি এক একক (পিস/প্যাকেট) এর দাম (ঐচ্ছিক)</small></label>
+                    <input type="number" id="editItemRate" inputmode="numeric" placeholder="যেমন: ১০">
+                </div>
+                <div class="isb-note" id="editItemNote"></div>
+            </div>
+            <div class="modal-error" id="editItemError"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('itemEditModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="saveItemEdit()">সেভ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="remindModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>🔔 আবার কেনার সময় হয়েছে</h4></div>
+        <div class="modal-body" id="remindBody"></div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('remindModal')">বন্ধ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="waAskModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>💬 কাস্টমারকে জানাবেন?</h4></div>
+        <div class="modal-body">
+            <div id="waAskName" style="font-weight:800;margin-bottom:8px"></div>
+            <div class="wa-lang"><span>বার্তার ভাষা:</span><span class="wl-pill" data-nt><span id="waLangBn" onclick="waAskLang('bn')">বাংলা</span><span id="waLangEn" onclick="waAskLang('en')">English</span></span></div>
+            <div id="waAskWarn" style="display:none;background:#fef3c7;border:1.5px solid #fcd34d;color:#92400e;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:700;margin-bottom:8px">⚠️ এই কাস্টমারের ফোন নম্বর নেই বা খুব ছোট। পাঠালে WhatsApp-এ নিজে কাস্টমার বেছে নিতে হবে।</div>
+            <div id="waAskMsg" data-nt style="white-space:pre-wrap;background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:12px;font-size:13px;line-height:1.6;color:#14532d"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="waAskClose()">এখন না</button>
+                <a id="waAskLink" href="#" target="_blank" class="modal-btn confirm" onclick="setTimeout(waAskClose,400)" style="text-decoration:none;text-align:center;background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff">💬 পাঠান</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="rechargeAppModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>📲 রিচার্জ অ্যাপ বাছুন</h4></div>
+        <div class="modal-body">
+            <div id="rcCurrent" style="font-weight:800;font-size:13px;margin-bottom:8px"></div>
+            <input type="text" id="rcSearch" placeholder="অ্যাপের নাম খুঁজুন" oninput="renderRechargeApps()" autocomplete="off">
+            <div id="rcList" class="rc-list"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="clearRechargeApp()">বাছা মুছুন</button>
+                <button class="modal-btn confirm" onclick="closeModal('rechargeAppModal')">বন্ধ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="bulkModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>📨 সবাইকে হিসাব পাঠান</h4></div>
+        <div class="modal-body">
+            <div id="bulkSelect">
+                <div id="bulkChips" class="bk-chips">
+                    <button type="button" data-m="due" class="on" onclick="setBulkMode('due')">🔴 যাদের বাকি আছে</button>
+                    <button type="button" data-m="all" onclick="setBulkMode('all')">👥 সবার হিসাব</button>
+                </div>
+                <div class="bk-bar"><b id="bkCount"></b><span><a href="#" onclick="bulkToggleAll(true);return false">সব</a> · <a href="#" onclick="bulkToggleAll(false);return false">কেউ না</a></span></div>
+                <div class="wa-lang"><span>বার্তার ভাষা:</span><span class="wl-pill" data-nt><span id="bkLangBn" onclick="bulkLang('bn')">বাংলা</span><span id="bkLangEn" onclick="bulkLang('en')">English</span></span></div>
+                <div id="bkList" class="bk-list"></div>
+                <div id="bkNoPhone"></div>
+                <label class="bk-opt"><input type="checkbox" id="bkAuto"> ব্যাক করলে নিজে থেকে পরেরজন খুলুক
+                    <select id="bkDelay"><option value="1">১ সেকেন্ড</option><option value="2" selected>২ সেকেন্ড</option></select></label>
+                <div class="bk-note">শুরু চাপলে প্রথমজনের WhatsApp খুলবে। <b>Send</b> চেপে <b>ব্যাক</b> চাপুন। ফিরে এসে "পরের জন" বাটন চাপলে (বা টিক দিলে নিজে থেকে) পরেরজন খুলবে।</div>
+                <button class="bk-go" id="bkStart" onclick="bulkStart()">▶ একটানা পাঠানো শুরু করুন</button>
+            </div>
+            <div id="bulkRun" style="display:none;text-align:center">
+                <div class="bk-prog" id="bkProg"></div>
+                <div class="bk-barline"><i id="bkBar"></i></div>
+                <div id="bkMsg" class="bk-msg"></div>
+                <button class="bk-go" id="bkNextBtn" onclick="bulkNext()">পরের জন →</button>
+                <div id="bkDone" class="bk-done"></div>
+                <button class="bk-stop" onclick="bulkStop()">⏸ থামান / নতুন করে শুরু</button>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('bulkModal')">বন্ধ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="pdfModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>📄 সব কাস্টমারের হিসাব (PDF)</h4></div>
+        <div class="modal-body">
+            <label>কোন পণ্যের হিসাব চাই:</label>
+            <label class="pdf-opt pdf-all"><input type="checkbox" id="pdfAll" checked onchange="pdfToggleAll(this)"> ✅ সব পণ্য</label>
+            <div id="pdfItems"></div>
+            <label class="pdf-opt"><input type="checkbox" id="pdfHistory"> 📁 হিস্টোরিসহ (পরিশোধ হয়ে যাওয়া পুরনো হিসাব)</label>
+            <label class="pdf-opt"><input type="checkbox" id="pdfOnlyDue"> 🔴 শুধু যাদের বাকি আছে</label>
+            <label style="margin-top:10px">তারিখ (ঐচ্ছিক):</label>
+            <div class="date-custom-row" style="margin-top:0">
+                <input type="date" id="pdfFrom" aria-label="থেকে"><input type="date" id="pdfTo" aria-label="পর্যন্ত">
+            </div>
+            <p class="pdf-note">💡 PDF তৈরি হলে সেভ/শেয়ার করার বাটন আসবে।</p>
+            <div class="modal-error" id="pdfError"></div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('pdfModal')">বাতিল</button>
+                <button class="modal-btn confirm" onclick="createPdfReport()">📄 PDF বানান</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="noticeModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>📢 স্টাফকে নোটিশ</h4></div>
+        <div class="modal-body">
+            <label>কাকে দেবেন:</label>
+            <select id="noticeTo"></select>
+            <label style="margin-top:10px">নোটিশ:</label>
+            <textarea id="noticeText" rows="3" maxlength="600" placeholder="যেমন: আজ আমি বাইরে আছি। বিকালে ২০ কার্টুন মাল আসবে, ১২,০০০ টাকা দিয়ে রিসিভ করে নিও।"></textarea>
+            <div class="modal-error" id="noticeError"></div>
+            <button class="modal-btn confirm" style="width:100%;margin:8px 0 14px" onclick="sendNotice()">📤 নোটিশ পাঠান</button>
+            <label>আগের নোটিশ:</label>
+            <div id="noticeList"></div>
+        </div>
+        <div class="modal-footer"><div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('noticeModal')">বন্ধ করুন</button></div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="cropModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>✂️ ছবি ঠিক করুন</h4></div>
+        <div class="modal-body" style="text-align:center">
+            <canvas id="cropCanvas" width="300" height="300" class="crop-canvas"
+                onpointerdown="cropPointer('down',event)" onpointermove="cropPointer('move',event)" onpointerup="cropPointer('up',event)" onpointercancel="cropPointer('up',event)"></canvas>
+            <p class="pdf-note" style="margin:8px 0">☝️ ছবি টেনে সরান &nbsp;·&nbsp; নিচের স্লাইডারে বড়-ছোট করুন</p>
+            <input type="range" id="cropZoom" min="1" max="4" step="0.02" value="1" class="crop-zoom" oninput="cropSetZoom(parseFloat(this.value))">
+        </div>
+        <div class="modal-footer"><div class="modal-actions">
+            <button class="modal-btn cancel" onclick="cropCancel()">বাতিল</button>
+            <button class="modal-btn confirm" onclick="cropConfirm()">✅ ঠিক আছে</button>
+        </div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="cloudModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>☁️ ক্লাউড সিঙ্ক</h4></div>
+        <div class="modal-body">
+            <div id="cloudBody"></div>
+            <div class="modal-error" id="cloudError"></div>
+        </div>
+        <div class="modal-footer"><div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('cloudModal')">বন্ধ করুন</button></div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="cloudJoinModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>☁️ দোকানে যুক্ত হন</h4></div>
+        <div class="modal-body">
+            <p class="pdf-note" style="margin:0 0 10px">মালিকের কাছ থেকে <b>দোকান কোড</b> নিন (সেটিংস → ক্লাউড সিঙ্ক)। যুক্ত হলে নিজের ইউজারনেম-পাসওয়ার্ডে লগইন করবেন।</p>
+            <label>দোকান কোড:</label>
+            <input type="text" id="cloudJoinCode" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX" autocomplete="off" autocapitalize="characters" style="text-transform:uppercase;letter-spacing:1px">
+            <div class="modal-error" id="cloudJoinError"></div>
+        </div>
+        <div class="modal-footer"><div class="modal-actions">
+            <button class="modal-btn cancel" onclick="closeModal('cloudJoinModal')">বাতিল</button>
+            <button class="modal-btn confirm" id="cloudJoinBtn" onclick="cloudJoinSubmit()">☁️ যুক্ত হন</button>
+        </div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="pdfDoneModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>✅ PDF তৈরি হয়েছে</h4></div>
+        <div class="modal-body">
+            <p class="pdf-note" id="pdfDoneInfo" style="margin:0 0 12px"></p>
+            <button class="modal-btn confirm" id="pdfShareBtn" style="width:100%;margin-bottom:8px" onclick="pdfShare()">📤 শেয়ার / সেভ (WhatsApp, ফাইল…)</button>
+            <button class="modal-btn confirm" style="width:100%;margin-bottom:8px" onclick="pdfDownload()">⬇️ ডাউনলোড</button>
+            <button class="modal-btn cancel" id="pdfPrintBtn" style="width:100%" onclick="pdfPrintFallback()">🖨️ প্রিন্ট স্ক্রিনে খুলুন</button>
+        </div>
+        <div class="modal-footer"><div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('pdfDoneModal')">বন্ধ করুন</button></div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="supPayModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4 id="supPayTitle">💸 টাকা দিলাম</h4></div>
+        <div class="modal-body">
+            <label class="isb-lbl">কত টাকা দিলেন:</label>
+            <input type="number" id="supPayAmt" inputmode="decimal" placeholder="যেমন: ৩১৫০">
+            <label class="isb-lbl">তারিখ:</label>
+            <input type="date" id="supPayDate">
+            <div class="modal-error" id="supPayErr"></div>
+        </div>
+        <div class="modal-footer"><div class="modal-actions">
+            <button class="modal-btn cancel" onclick="closeModal('supPayModal')">বাতিল</button>
+            <button class="modal-btn confirm" onclick="saveSupPay()">✅ সেভ করুন</button>
+        </div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="supPickModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>📤 কোন আইটেমের হিসাব পাঠাবেন?</h4></div>
+        <div class="modal-body" id="supPickList"></div>
+        <div class="modal-footer"><div class="modal-actions">
+            <button class="modal-btn cancel" onclick="closeModal('supPickModal')">বাতিল</button>
+            <button class="modal-btn confirm" onclick="supPickGo()">📄 হিসাব দেখুন</button>
+        </div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="supReportModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4 id="supRepTitle">📤 সরবরাহকারীর হিসাব</h4></div>
+        <div class="modal-body"><textarea id="supRepText" readonly style="width:100%;min-height:300px;font-size:13px;line-height:1.5;border:1.5px solid #e2e8f0;border-radius:12px;padding:10px;font-family:inherit;box-sizing:border-box"></textarea></div>
+        <div class="modal-footer"><div class="modal-actions">
+            <button class="modal-btn cancel" onclick="closeModal('supReportModal')">বন্ধ</button>
+            <button class="modal-btn cancel" onclick="supRepCopy()">📋 কপি</button>
+            <button class="modal-btn confirm" onclick="supRepWa()">💬 WhatsApp</button>
+        </div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="bkRemindModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>💾 ব্যাকআপ নেওয়ার সময় হয়েছে</h4></div>
+        <div class="modal-body"><p id="bkRemindText" style="margin:0;line-height:1.6;font-size:15px;color:#334155"></p></div>
+        <div class="modal-footer"><div class="modal-actions">
+            <button class="modal-btn cancel" onclick="closeModal('bkRemindModal')">পরে</button>
+            <button class="modal-btn confirm" onclick="backupRemindGo()">💾 এখনই ব্যাকআপ নিন</button>
+        </div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="dayCloseModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>🌙 দিনের হিসাব মেলান</h4></div>
+        <div class="modal-body">
+            <input type="date" id="dcDate" onchange="renderDayClose()" aria-label="তারিখ" style="width:100%;margin-bottom:6px">
+            <div id="dcDateText" class="dc-date"></div>
+            <div id="dcBody"></div>
+            <label class="isb-lbl">💵 ক্যাশ গুনে হাতে পেয়েছেন কত:</label>
+            <input type="number" id="dcCounted" inputmode="decimal" placeholder="যেমন: ৩৫০০" oninput="dayCloseDiff()">
+            <div id="dcDiff" class="dc-diff"></div>
+        </div>
+        <div class="modal-footer"><div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('dayCloseModal')">বন্ধ করুন</button></div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="viewerPermModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4 id="vpTitle">👁️ দেখার অনুমতি</h4></div>
+        <div class="modal-body">
+            <label>কোন কোন পণ্য দেখতে পারবে?</label>
+            <div id="vpItems"></div>
+            <label class="pk"><input type="checkbox" id="vpPhone"> 📞 কাস্টমারের মোবাইল নম্বর দেখতে পারবে</label>
+            <div class="modal-error" id="vpErr"></div>
+        </div>
+        <div class="modal-footer"><div class="modal-actions">
+            <button class="modal-btn cancel" onclick="closeModal('viewerPermModal')">বাতিল</button>
+            <button class="modal-btn confirm" onclick="saveViewerPerm()">✅ সেভ করুন</button>
+        </div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="securityModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>🔑 পাসওয়ার্ড ও নিরাপত্তা</h4></div>
+        <div class="modal-body settings-list">
+            <div class="settings-row" onclick="secGo('password')"><div class="sr-icon si-pass">🔑</div><div class="sr-body"><div class="sr-title">পাসওয়ার্ড পরিবর্তন</div><div class="sr-sub">সিকিউরিটি প্রশ্ন যাচাই করে বদলান</div></div><div class="sr-arrow">›</div></div>
+            <div class="settings-row" id="secTxPinRow" onclick="secGo('txpin')"><div class="sr-icon si-emp">🔐</div><div class="sr-body"><div class="sr-title">লেনদেনের পাসওয়ার্ড</div><div class="sr-sub">শুধু মালিক পরিবর্তন করতে পারবেন</div></div><div class="sr-arrow">›</div></div>
+            <div class="settings-row" onclick="secGo('fingerprint')"><div class="sr-icon si-pass sr-fp"><svg class="ic-svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41-.24.13-.54.04-.68-.2-.13-.24-.04-.55.2-.68C7.82 2.52 9.86 2 12.01 2c2.13 0 3.99.47 6.03 1.52.25.13.34.43.21.67-.09.18-.26.28-.44.28zM3.5 9.72c-.1 0-.2-.03-.29-.09-.23-.16-.28-.47-.12-.7.99-1.4 2.25-2.5 3.75-3.27C9.98 4.04 14 4.03 17.15 5.65c1.5.77 2.76 1.86 3.75 3.25.16.22.11.54-.12.7-.23.16-.54.11-.7-.12-.9-1.26-2.04-2.25-3.39-2.94-2.87-1.47-6.54-1.47-9.4.01-1.36.7-2.5 1.7-3.4 2.96-.08.14-.23.21-.39.21zm6.25 12.07c-.13 0-.26-.05-.35-.15-.87-.87-1.34-1.43-2.01-2.64-.69-1.23-1.05-2.73-1.05-4.34 0-2.97 2.54-5.39 5.66-5.39s5.66 2.42 5.66 5.39c0 .28-.22.5-.5.5s-.5-.22-.5-.5c0-2.42-2.09-4.39-4.66-4.39-2.57 0-4.66 1.97-4.66 4.39 0 1.44.32 2.77.93 3.85.64 1.15 1.08 1.64 1.85 2.42.19.2.19.51 0 .71-.11.1-.24.15-.37.15zm7.17-1.85c-1.19 0-2.24-.3-3.1-.89-1.49-1.01-2.38-2.65-2.38-4.39 0-.28.22-.5.5-.5s.5.22.5.5c0 1.41.72 2.74 1.94 3.56.71.48 1.54.71 2.54.71.24 0 .64-.03 1.04-.1.27-.05.53.13.58.41.05.27-.13.53-.41.58-.57.11-1.07.12-1.21.12zM14.91 22c-.04 0-.09-.01-.13-.02-1.59-.44-2.63-1.03-3.72-2.1-1.4-1.39-2.17-3.24-2.17-5.22 0-1.62 1.38-2.94 3.08-2.94 1.7 0 3.08 1.32 3.08 2.94 0 1.07.93 1.94 2.08 1.94s2.08-.87 2.08-1.94c0-3.77-3.25-6.83-7.25-6.83-2.84 0-5.44 1.58-6.61 4.03-.39.81-.59 1.76-.59 2.8 0 .78.07 2.01.67 3.61.1.26-.03.55-.29.64-.26.1-.55-.04-.64-.29-.49-1.31-.73-2.61-.73-3.96 0-1.2.23-2.29.68-3.24 1.33-2.79 4.28-4.6 7.51-4.6 4.55 0 8.25 3.51 8.25 7.83 0 1.62-1.38 2.94-3.08 2.94s-3.08-1.32-3.08-2.94c0-1.07-.93-1.94-2.08-1.94s-2.08.87-2.08 1.94c0 1.71.66 3.31 1.87 4.51.95.94 1.86 1.46 3.27 1.85.27.07.42.35.35.61-.05.23-.26.38-.47.38z"/></svg></div><div class="sr-body"><div class="sr-title">ফিঙ্গারপ্রিন্ট লগইন</div><div class="sr-sub" id="fpRowSub">শুধু লগইনের জন্য (APK-তে)</div></div><div class="sr-arrow">›</div></div>
+            <div class="settings-row" onclick="secGo('recovery')"><div class="sr-icon si-rec">🛡️</div><div class="sr-body"><div class="sr-title">সিকিউরিটি প্রশ্ন</div><div class="sr-sub">পাসওয়ার্ড রিকভারির প্রশ্ন সেট করুন</div></div><div class="sr-arrow">›</div></div>
+        </div>
+        <div class="modal-footer"><div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('securityModal')">বন্ধ করুন</button></div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="deleteLogModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>🗑️ ডিলিট লগ (শুধু মালিক)</h4></div>
+        <div class="dl-keep"><label for="dlKeep">🧹 পুরোনো লগ নিজে মুছুক:</label>
+            <select id="dlKeep" onchange="setLogKeep()"><option value="0">কখনো না</option><option value="7">৭ দিন পর</option><option value="15">১৫ দিন পর</option><option value="30">৩০ দিন পর</option></select></div>
+        <div class="modal-body" id="deleteLogBody"></div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('deleteLogModal')">বন্ধ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="printArea"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
