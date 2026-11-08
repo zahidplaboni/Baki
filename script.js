@@ -263,6 +263,7 @@ async function itemSugOnline(pfx) {
     const box = document.getElementById(pfx + 'Sug'); if (box) box.innerHTML = '<span class="en-chip" onclick="itemSugPick(\'' + pfx + '\',this.textContent)">' + escapeHtml(t) + '</span>';
 }
 // ---------- 📄 PDF ও মেসেজের ভাষা: ডিফল্ট = অ্যাপের ভাষা অনুযায়ী ('auto'); সেটিংসে "সবসময় বাংলা/English"ও বাছা যায় ----------
+let SEARCH_PIN = null;
 let DOC_OVERRIDE = null;   // শুধু একটা মেসেজের জন্য ভাষা বদলাতে (পপআপের বোতাম); কাজ শেষে সবসময় null করা হয়
 function docLangNow() {
     if (DOC_OVERRIDE !== null) return DOC_OVERRIDE;
@@ -2475,6 +2476,7 @@ function customerCardHtml(cus, idx) {
 function show(dataToRender) {
     if (!dataToRender) dataToRender = appData.customers;
     dataToRender = sortByRecent(dataToRender);
+    if (SEARCH_PIN) { const k = dataToRender.findIndex(c => c.id === SEARCH_PIN); if (k > 0) dataToRender.unshift(dataToRender.splice(k, 1)[0]); }
     const container = document.getElementById('list');
     if (!container) return;
     updateCount(dataToRender.length);
@@ -3065,12 +3067,14 @@ function searchClearVis() {
 function clearSearch() {
     const i = document.getElementById('searchBar');
     i.value = '';
+    SEARCH_PIN = null;
     document.getElementById('autocompleteList').style.display = 'none';
     searchClearVis();
     filterCustomers();
     i.focus();
 }
 function handleSearchInput(e) {
+    SEARCH_PIN = null;
     closeFilterOnSearch();
     searchClearVis();
 
@@ -3078,7 +3082,7 @@ function handleSearchInput(e) {
     const box = document.getElementById('autocompleteList');
     filterCustomers();
     if (!q) { box.style.display = 'none'; return; }
-    const matches = appData.customers.filter(c => c.name.toLowerCase().startsWith(q) || c.phone.startsWith(q));
+    const matches = sortByRecent(appData.customers.filter(c => c.name.toLowerCase().startsWith(q) || c.phone.startsWith(q)));
     if (matches.length > 0) {
         box.innerHTML = '';
         matches.forEach(c => {
@@ -3086,6 +3090,7 @@ function handleSearchInput(e) {
             item.className = 'autocomplete-item';
             item.innerHTML = `<div class="ac-left"><div class="ac-avatar">${avatarHtml(c)}</div><strong>${escapeHtml(c.name)}</strong></div><span>📞 ${c.phone}</span>`;
             item.onclick = function() {
+                SEARCH_PIN = c.id;   // যাকে চাপা হলো, তার কার্ডই সবার উপরে আসবে (একই নামের আরেকজন থাকলেও)
                 document.getElementById('searchBar').value = c.name;
                 box.style.display = 'none';
                 filterCustomers();
