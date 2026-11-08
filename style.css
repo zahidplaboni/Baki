@@ -1308,3 +1308,15 @@ body.kb-open .setup-body { padding-bottom: 45vh; }
 .pa-ck{width:20px;height:20px;border-radius:6px;border:2px solid #9aa;display:inline-flex;align-items:center;justify-content:center;font-size:14px;color:#fff;flex:none}
 .pa-it.on .pa-ck{background:#006a4e;border-color:#006a4e}
 .pa-sum{background:#f3f5f8;border-radius:10px;padding:8px;font-size:13px;margin-top:8px;line-height:1.6}
+
+/* রিফ্রেশ বাটন + ডান দিকের বাটন-গ্রুপ (সিঙ্ক | রিফ্রেশ | ভাষা) */
+.hdr-act{display:inline-flex;align-items:center;gap:6px;margin-left:auto;flex:0 0 auto}
+.hdr-act .lg-pill{margin:0;position:relative}
+.hdr-act .sync-dot{position:static;transform:none;flex:none}
+.hdr-act.hero{position:absolute;top:10px;right:10px;margin:0;z-index:2}
+.rf-btn{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#34d399,#059669);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;flex:none;box-shadow:0 4px 12px #05966955;-webkit-tap-highlight-color:transparent;user-select:none}
+.rf-btn:active{transform:scale(.92)}
+.rf-btn.spin{animation:bkspin .9s linear infinite}
+.vw-right .rf-btn{width:32px;height:32px;font-size:16px}
+.rf-toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#065f46;color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;font-weight:700;z-index:99999;box-shadow:0 6px 20px #0005;max-width:86vw;text-align:center}
+.date-strip{padding-right:12px!important}.date-strip .hdr-act{margin-left:auto}

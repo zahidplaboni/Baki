@@ -68,7 +68,7 @@ I18N_RULES.push(
     [/^🔒 নাম আর বদলানো যাবে না \(সর্বোচ্চ (\d+) বার বদলানো হয়ে গেছে\)$/, '🔒 The name cannot be changed any more (already changed $1 times)']
 );
 Object.assign(EN_DICT, {"☝️ ছবি টেনে সরান · নিচের স্লাইডারে বড়-ছোট করুন":"☝️ Drag the photo to move · use the slider to zoom"});
-Object.assign(EN_DICT, {"💡 পেমেন্ট সাজেশনের রেঞ্জ": "💡 Payment suggestion range", "— কাস্টমার বাকির চেয়ে কত টাকা পর্যন্ত বেশি দিলেও এই আইটেমের পেমেন্ট সাজেস্ট হবে। ফাঁকা = সাজেশন বন্ধ": "— the item is suggested if the customer pays up to this much above the amount due. Empty = no suggestion", "✅ নিশ্চিত করুন": "✅ Confirm", "পরে ঠিক করব — শুধু মোট বাকি থেকে কাটো": "Decide later — just deduct from the total due", "কিছু বাছা হয়নি — পুরোটাই সাধারণ জমা হিসেবে যাবে": "Nothing selected — the whole amount goes to general payment", "❌ টাকা কম পড়ছে — আগে অন্যটা বাদ দিন": "❌ Not enough amount — untick another first", "📒 যাদের কাছে বাকি আছে": "📒 Who still owes", "✅ শোধ": "✅ Paid", "📅 নতুন দাম কোন তারিখ থেকে": "📅 New price applies from", "— দাম বদলালে শুধু এই তারিখ থেকে নতুন দাম লাগবে, আগের বিক্রি পুরনো দামেই থাকবে": "— if you change the price, the new price applies only from this date; earlier sales stay at the old price", "✏️ আইটেমের নাম": "✏️ Item name", "— বদলালে আগের সব হিসাবেও নতুন নাম হবে": "— changing it renames it in all past entries too", "❌ নাম লিখুন": "❌ Enter a name", "❌ এই নামে আরেকটা আইটেম আছে": "❌ Another item has this name", "🖼️ আইকন": "🖼️ Icon", "— চাপলে বদলাবে (ঐচ্ছিক)": "— tap to change (optional)", "বাকি মিটিয়েছে": "Cleared dues", '🔕 ১ দিন পরে': '🔕 In 1 day', '🔕 ৩ দিন পরে': '🔕 In 3 days'});
+Object.assign(EN_DICT, {"✅ আপডেট হয়েছে": "✅ Updated", "✅ নতুন করে সাজানো হয়েছে": "✅ Refreshed", "❌ দোকান কোড দিন (সেটিংস → ক্লাউড সিঙ্ক)": "❌ Enter the shop code (Settings → Cloud sync)", "❌ আপডেট হয়নি — ইন্টারনেট দেখুন": "❌ Not updated — check the internet", "💡 পেমেন্ট সাজেশনের রেঞ্জ": "💡 Payment suggestion range", "— কাস্টমার বাকির চেয়ে কত টাকা পর্যন্ত বেশি দিলেও এই আইটেমের পেমেন্ট সাজেস্ট হবে। ফাঁকা = সাজেশন বন্ধ": "— the item is suggested if the customer pays up to this much above the amount due. Empty = no suggestion", "✅ নিশ্চিত করুন": "✅ Confirm", "পরে ঠিক করব — শুধু মোট বাকি থেকে কাটো": "Decide later — just deduct from the total due", "কিছু বাছা হয়নি — পুরোটাই সাধারণ জমা হিসেবে যাবে": "Nothing selected — the whole amount goes to general payment", "❌ টাকা কম পড়ছে — আগে অন্যটা বাদ দিন": "❌ Not enough amount — untick another first", "📒 যাদের কাছে বাকি আছে": "📒 Who still owes", "✅ শোধ": "✅ Paid", "📅 নতুন দাম কোন তারিখ থেকে": "📅 New price applies from", "— দাম বদলালে শুধু এই তারিখ থেকে নতুন দাম লাগবে, আগের বিক্রি পুরনো দামেই থাকবে": "— if you change the price, the new price applies only from this date; earlier sales stay at the old price", "✏️ আইটেমের নাম": "✏️ Item name", "— বদলালে আগের সব হিসাবেও নতুন নাম হবে": "— changing it renames it in all past entries too", "❌ নাম লিখুন": "❌ Enter a name", "❌ এই নামে আরেকটা আইটেম আছে": "❌ Another item has this name", "🖼️ আইকন": "🖼️ Icon", "— চাপলে বদলাবে (ঐচ্ছিক)": "— tap to change (optional)", "বাকি মিটিয়েছে": "Cleared dues", '🔕 ১ দিন পরে': '🔕 In 1 day', '🔕 ৩ দিন পরে': '🔕 In 3 days'});
 I18N_RULES.push([/^💰 ([\d.,]+) ৳ কোন আইটেমের পেমেন্ট\?$/, '💰 Which item is the $1 ৳ payment for?'], [/^👤 (.+) — যা বাকি আছে:$/, '👤 $1 — still due:'], [/^✅ আইটেমের পেমেন্ট: ([\d.,]+) ৳$/, '✅ Item payment: $1 ৳'], [/^➕ বাকি ([\d.,]+) ৳ → সাধারণ জমা \(মোট বাকি থেকে কাটবে\)$/, '➕ Remaining $1 ৳ → general payment (deducted from total due)'], [/^📒 বাকি ([\d.,]+) ৳$/, '📒 Due $1 ৳'], [/^(\d+) দিন আগে থেকে$/, 'since $1 days ago'], [/^মোট আটকে আছে: ([\d.,]+) ৳$/, 'Total outstanding: $1 ৳'], [/^(.*?) · বাকি ([\d.,০-৯]+) ৳$/, "$1 · Due $2 ৳"],
  [/^(\d+|[০-৯]+)\/(৫০০|500)$/, '$1/500'],
     [/^💵 (\S+) নগদ · 📒 (\S+) বাকি \((কার্টুন|পিস|প্যাকেট|কেস)\)$/, (m, a, b, u) => '💵 ' + a + ' cash · 📒 ' + b + ' due (' + I18N_UNITS[u] + ')']);
@@ -908,12 +908,55 @@ function showLoginScreen(focusDelay) {
     fpUpdateLogin();
 }
 
+
+// ---------- 🔄 রিফ্রেশ (লগইন না হারিয়ে ক্লাউড থেকে নতুন ডেটা) ----------
+let RF_BUSY = false;
+function rfToast(m) {
+    try {
+        const old = document.getElementById('rfToast'); if (old) old.remove();
+        const d = document.createElement('div'); d.id = 'rfToast'; d.className = 'rf-toast'; d.setAttribute('data-nt', '');
+        d.textContent = (typeof LANG !== 'undefined' && LANG === 'en') ? i18nTr(m) : m;
+        document.body.appendChild(d); setTimeout(() => { if (d.parentNode) d.remove(); }, 2200);
+    } catch (e) {}
+}
+async function refreshAll(btn) {
+    if (RF_BUSY) return;
+    RF_BUSY = true; if (btn) btn.classList.add('spin');
+    let msg = '✅ আপডেট হয়েছে';
+    try {
+        if (CS && !CS.needKey) {
+            let w = 0; while (csBusy && w < 80) { await new Promise(r => setTimeout(r, 100)); w++; }
+            await syncNow(true);
+            if (CS.err) msg = '❌ ' + CS.err;
+        } else if (CS && CS.needKey) msg = '❌ দোকান কোড দিন (সেটিংস → ক্লাউড সিঙ্ক)';
+        else msg = '✅ নতুন করে সাজানো হয়েছে';
+        cloudRefreshUI();
+        try { if (currentUser && !currentUser.viewer) { if (typeof renderStock === 'function') renderStock(); if (typeof renderReports === 'function') renderReports(); } } catch (e) {}
+        try { applyLang(); } catch (e) {}
+    } catch (e) { msg = '❌ আপডেট হয়নি — ইন্টারনেট দেখুন'; }
+    if (btn) btn.classList.remove('spin');
+    RF_BUSY = false;
+    rfToast(msg);
+}
+// ---------- ব্রাউজার রিফ্রেশেও লগইন ধরে রাখা (শুধু তদারকি/স্টাফ, ট্যাব বন্ধ করলে শেষ) ----------
+function bkSessSave() {
+    try { if (currentUser && currentUser.role !== 'owner') sessionStorage.setItem('bkSess', JSON.stringify({ id: currentUser.id, u: currentUser.username })); } catch (e) {}
+}
+function bkSessClear() { try { sessionStorage.removeItem('bkSess'); } catch (e) {} }
+function bkSessRestore() {
+    try {
+        const j = JSON.parse(sessionStorage.getItem('bkSess') || 'null'); if (!j) return false;
+        const a = (appData.employees || []).find(e => e.id === j.id && e.username === j.u); if (!a) { bkSessClear(); return false; }
+        currentUser = { role: 'employee', id: a.id, name: a.name, username: a.username, viewer: !!a.viewer };
+        openMainApp(); return true;
+    } catch (e) { return false; }
+}
 function initApp() {
     if (!appData.setupDone) {
         document.getElementById('setupScreen').classList.add('active');
         document.getElementById('setupScreen').style.display = 'flex';
     } else {
-        showLoginScreen(400);
+        if (!bkSessRestore()) showLoginScreen(400);
     }
 }
 function completeSetup() {
@@ -992,6 +1035,7 @@ function doLogin() {
         lockClear('login');
         currentUser = { role: role, id: acc.id, name: acc.name, username: acc.username, viewer: role !== 'owner' && !!acc.viewer };
         rememberLoginUser(acc.username);
+        bkSessSave();
         openMainApp();
         return;
     }
@@ -1077,6 +1121,7 @@ function showEmployeeLockedMsg() {
 
 function doLogout() {
     if (!confirm('লগআউট করতে চান?')) return;
+    bkSessClear();
     currentUser = null;
     closeUserMenu();
     document.getElementById('viewerScreen').style.display = 'none';
@@ -3706,7 +3751,7 @@ function renderStock() {
             <div class="section"><div class="section-title"><span class="st-icon">📋</span> মাল তোলার তালিকা</div>
                 ${list || '<p style="text-align:center;color:#64748b;padding:16px;background:#fff;border-radius:14px;">এখনো কোনো মাল তোলা হয়নি</p>'}</div>`;
     }
-    el.innerHTML = '<div class="page-hero"><span class="lg-pill lg-hero" data-nt onclick="toggleLang(event)" title="Language">' + langPillText() + '</span><div class="page-hero-icon">📦</div><h2 class="page-hero-title">স্টক</h2><p class="page-hero-sub">মাল তোলা, বিক্রি ও এখন কত আছে</p></div>' + body;
+    el.innerHTML = '<div class="page-hero"><span class="hdr-act hero"><span class="sync-dot" onclick="syncDotTap()" style="display:none"></span><span class="rf-btn" data-nt onclick="refreshAll(this)" title="Refresh">🔄</span><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">' + langPillText() + '</span></span><div class="page-hero-icon">📦</div><h2 class="page-hero-title">স্টক</h2><p class="page-hero-sub">মাল তোলা, বিক্রি ও এখন কত আছে</p></div>' + body;
     const sel = document.getElementById('stkItem');
     if (sel && keepItem && names.includes(keepItem)) sel.value = keepItem;
     updateLowBadge();
@@ -4353,14 +4398,14 @@ function cloudStatusText() {
     return '✅ সিঙ্ক হয়েছে ' + new Date(CS.last).toLocaleTimeString(LANG === 'en' ? 'en-GB' : 'bn-BD', { hour: 'numeric', minute: '2-digit' });
 }
 function updateSyncDot() {
-    const el = document.getElementById('syncDot');
-    if (!el) return;
-    if (!CS) { el.style.display = 'none'; return; }
-    el.style.display = 'inline-flex';
-    el.classList.remove('busy', 'bad');
-    if (CS.needKey || CS.err) { el.classList.add('bad'); el.textContent = '!'; el.title = cloudStatusText(); }
-    else if (csBusy || !CS.last) { el.classList.add('busy'); el.textContent = '⟳'; el.title = cloudStatusText(); }
-    else { el.textContent = '✓'; el.title = cloudStatusText(); }
+    document.querySelectorAll('.sync-dot').forEach(el => {
+        if (!CS) { el.style.display = 'none'; return; }
+        el.style.display = 'inline-flex';
+        el.classList.remove('busy', 'bad');
+        if (CS.needKey || CS.err) { el.classList.add('bad'); el.textContent = '!'; el.title = cloudStatusText(); }
+        else if (csBusy || !CS.last) { el.classList.add('busy'); el.textContent = '⟳'; el.title = cloudStatusText(); }
+        else { el.textContent = '✓'; el.title = cloudStatusText(); }
+    });
 }
 function syncDotTap() {
     if (!CS) return;
@@ -4781,6 +4826,7 @@ function fpLogin() {
             if (!r || !fpValid(a.id)) return fpUpdateLogin();
             currentUser = { role: r.role, id: a.id, name: a.name, username: a.username, viewer: r.role !== 'owner' && !!a.viewer };
             rememberLoginUser(a.username);
+            bkSessSave();
             openMainApp();
         } else if (s !== 'cancel') {
             const box = document.getElementById('loginErrorBox');
@@ -4994,3 +5040,6 @@ function renderViewer() {
     }).join('') || '<p style="text-align:center;color:#64748b">এখনো কোনো বিক্রি নেই</p>') + '</div>';
     body.innerHTML = h;
 }
+
+// স্টক পেজ নতুন করে আঁকলে সিঙ্ক-আইকনের অবস্থাও ঠিক করে দেয়
+(function () { const _rs = renderStock; renderStock = function () { const r = _rs.apply(this, arguments); try { updateSyncDot(); } catch (e) {} return r; }; })();

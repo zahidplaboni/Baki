@@ -167,7 +167,7 @@
 
 <!-- ================== MAIN APP ================== -->
 <div id="viewerScreen" class="viewer-screen" style="display:none;">
-    <div class="vw-top"><div><b id="vwShop">বাকি খাতা</b><div class="vw-sub" id="vwUser"></div></div><div class="vw-right"><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span><span class="vw-badge">👁️ তদারকি</span><button type="button" class="vw-out" onclick="doLogout()">লগআউট</button></div></div>
+    <div class="vw-top"><div><b id="vwShop">বাকি খাতা</b><div class="vw-sub" id="vwUser"></div></div><div class="vw-right"><span class="vw-badge">👁️ তদারকি</span><span class="rf-btn" data-nt onclick="refreshAll(this)" title="Refresh">🔄</span><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span><button type="button" class="vw-out" onclick="doLogout()">লগআউট</button></div></div>
     <div class="vw-tabs" id="vwTabs"></div>
     <div id="vwBody"></div>
     <div class="vw-lock">🔒 শুধু দেখার জন্য — কিছু যোগ বা বদলানো যাবে না</div>
@@ -214,7 +214,7 @@
     <main class="app-content" id="appContent">
 
         <section class="page active" id="page-home">
-            <div class="date-strip" id="dateStrip"><span class="bd-flag" aria-hidden="true"></span><span id="digitalDate" data-nt>সোমবার<small>২৮ সেপ্টেম্বর, ২০২৬</small></span><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span><span class="sync-dot" id="syncDot" onclick="syncDotTap()" style="display:none"></span></div>
+            <div class="date-strip" id="dateStrip"><span class="bd-flag" aria-hidden="true"></span><span id="digitalDate" data-nt>সোমবার<small>২৮ সেপ্টেম্বর, ২০২৬</small></span><span class="hdr-act"><span class="sync-dot" id="syncDot" onclick="syncDotTap()" style="display:none"></span><span class="rf-btn" data-nt onclick="refreshAll(this)" title="Refresh">🔄</span><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span></span></div>
 
             <div class="stats-row">
                 <div class="stat-card">
@@ -286,7 +286,7 @@
         </section>
 
         <section class="page" id="page-add">
-            <div class="page-hero"><span class="lg-pill lg-hero" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span>
+            <div class="page-hero"><span class="hdr-act hero"><span class="sync-dot" onclick="syncDotTap()" style="display:none"></span><span class="rf-btn" data-nt onclick="refreshAll(this)" title="Refresh">🔄</span><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span></span>
                 <div class="page-hero-icon">➕</div>
                 <h2 class="page-hero-title">নতুন কাস্টমার</h2>
                 <p class="page-hero-sub">নতুন কাস্টমার যোগ করুন এবং হিসাব শুরু করুন</p>
@@ -353,7 +353,7 @@
         </section>
 
         <section class="page" id="page-reports">
-            <div class="page-hero"><span class="lg-pill lg-hero" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span>
+            <div class="page-hero"><span class="hdr-act hero"><span class="sync-dot" onclick="syncDotTap()" style="display:none"></span><span class="rf-btn" data-nt onclick="refreshAll(this)" title="Refresh">🔄</span><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span></span>
                 <div class="page-hero-icon">📊</div>
                 <h2 class="page-hero-title">রিপোর্ট</h2>
                 <p class="page-hero-sub">আপনার ব্যবসার সারসংক্ষেপ</p>
@@ -391,7 +391,7 @@
         <section class="page" id="page-stock"></section>
 
         <section class="page" id="page-settings">
-            <div class="page-hero"><span class="lg-pill lg-hero" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span>
+            <div class="page-hero"><span class="hdr-act hero"><span class="sync-dot" onclick="syncDotTap()" style="display:none"></span><span class="rf-btn" data-nt onclick="refreshAll(this)" title="Refresh">🔄</span><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span></span>
                 <div class="page-hero-icon">⚙️</div>
                 <h2 class="page-hero-title">সেটিংস</h2>
                 <p class="page-hero-sub">অ্যাপ কনফিগারেশন</p>
