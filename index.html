@@ -166,6 +166,29 @@
     </div>
 </div>
 
+<div class="login-screen" id="licenseScreen" style="display:none">
+    <div class="login-card">
+        <span class="th-login" data-nt onclick="openThemeModal()" title="Theme">🎨</span>
+        <span class="lg-pill lg-login" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span>
+        <div class="login-logo">📖</div>
+        <h1 class="login-title">বাকি খাতা</h1>
+        <p class="login-subtitle">লাইসেন্স লগইন</p>
+        <div class="login-form">
+            <div class="lic-note">🔑 অ্যাপ চালু করতে আপনাকে দেওয়া ইমেইল ও পাসওয়ার্ড দিন। এটা শুধু একবার লাগবে।</div>
+            <label>📧 ইমেইল:</label>
+            <input type="email" id="licEmail" placeholder="example@gmail.com" autocomplete="off" autocapitalize="none" spellcheck="false">
+            <label>🔒 পাসওয়ার্ড:</label>
+            <div class="password-wrapper">
+                <input type="password" id="licPass" class="pin-input" placeholder="••••••" autocomplete="off" onkeydown="if(event.key==='Enter') licenseLogin()">
+                <span class="toggle-eye" onclick="togglePass('licPass', this)">👁️</span>
+            </div>
+            <div class="login-error" id="licError"></div>
+            <button class="login-btn" id="licBtn" onclick="licenseLogin()">🚀 চালু করুন</button>
+            <button type="button" class="lic-join" onclick="openCloudJoin()">☁️ স্টাফ বা সরবরাহকারী? দোকান কোড দিয়ে যুক্ত হন</button>
+        </div>
+    </div>
+</div>
+
 <!-- ================== MAIN APP ================== -->
 <div id="viewerScreen" class="viewer-screen" style="display:none;">
     <div class="vw-top"><div><b id="vwShop">বাকি খাতা</b><div class="vw-sub" id="vwUser"></div></div><div class="vw-right"><span class="vw-badge">👁️ তদারকি</span><span class="rf-btn" data-nt onclick="refreshAll(this)" title="Refresh">🔄</span><span class="lg-pill" data-nt onclick="toggleLang(event)" title="Language">🌐 EN</span><button type="button" class="vw-out" onclick="doLogout()">লগআউট</button></div></div>
@@ -1178,6 +1201,13 @@
             <p class="pdf-note" style="margin:0 0 10px">মালিকের কাছ থেকে <b>দোকান কোড</b> নিন (সেটিংস → ক্লাউড সিঙ্ক)। যুক্ত হলে নিজের ইউজারনেম-পাসওয়ার্ডে লগইন করবেন।</p>
             <label>দোকান কোড:</label>
             <input type="text" id="cloudJoinCode" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX" autocomplete="off" autocapitalize="characters" style="text-transform:uppercase;letter-spacing:1px">
+            <div class="lic-or" onclick="cloudJoinToggle()" id="cloudJoinTog">📧 কোডের বদলে ইমেইল ও পাসওয়ার্ড দিয়ে যুক্ত হব</div>
+            <div id="cloudJoinMail" style="display:none">
+                <label>ইমেইল:</label>
+                <input type="email" id="cloudJoinEmail" autocomplete="off" autocapitalize="none" spellcheck="false">
+                <label>পাসওয়ার্ড:</label>
+                <input type="password" id="cloudJoinPass" autocomplete="off">
+            </div>
             <div class="modal-error" id="cloudJoinError"></div>
         </div>
         <div class="modal-footer"><div class="modal-actions">
