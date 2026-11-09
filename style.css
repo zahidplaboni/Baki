@@ -1452,3 +1452,98 @@ html[data-theme="sunset"] .colon{color:#fb923c!important}
 html[data-theme="sunset"] .ampm-text{color:#fed7aa!important}
 html[data-theme="ocean"] .nav-btn[data-page="add"] .n3d{filter:hue-rotate(0deg) saturate(1.15) drop-shadow(0 3px 3px rgba(8,145,178,.35))}
 html[data-theme="glass"] .nav-btn[data-page="add"] .n3d{filter:hue-rotate(95deg) saturate(.95) drop-shadow(0 3px 4px rgba(147,51,234,.35))}
+
+/* ===== সেটিংসের আইকন: থিম অনুযায়ী প্রিমিয়াম ডিজাইন ===== */
+.sr-icon{transition:transform .18s ease,box-shadow .18s ease;position:relative}
+.settings-row:active .sr-icon{transform:scale(.9)}
+html[data-theme] .sr-icon::after{content:"";position:absolute;pointer-events:none}
+/* মিডনাইট: নিয়ন-রিং গাঢ় টাইল */
+html[data-theme="midnight"] .settings-list .sr-icon{background:linear-gradient(145deg,#1e1b4b,#312e81)!important;border:1.5px solid #818cf8;border-radius:14px;box-shadow:0 0 14px rgba(129,140,248,.55),inset 0 0 8px rgba(129,140,248,.3);filter:invert(1) hue-rotate(180deg) drop-shadow(0 0 4px rgba(253,230,138,.5))}
+html[data-theme="midnight"] .settings-row:nth-child(3n+2) .sr-icon{border-color:#22d3ee;box-shadow:0 0 14px rgba(34,211,238,.5),inset 0 0 8px rgba(34,211,238,.25)}
+html[data-theme="midnight"] .settings-row:nth-child(3n) .sr-icon{border-color:#e879f9;box-shadow:0 0 14px rgba(232,121,249,.5),inset 0 0 8px rgba(232,121,249,.25)}
+/* ওশান: চকচকে গোল বুদবুদ */
+html[data-theme="ocean"] .settings-list .sr-icon{border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff 0,#bae6fd 38%,#38bdf8 100%)!important;border:2px solid #fff;box-shadow:0 6px 14px rgba(8,145,178,.35),inset 0 -4px 8px rgba(3,105,161,.25)}
+html[data-theme="ocean"] .settings-row:nth-child(3n+2) .sr-icon{background:radial-gradient(circle at 30% 25%,#fff 0,#99f6e4 38%,#14b8a6 100%)!important;box-shadow:0 6px 14px rgba(13,148,136,.35),inset 0 -4px 8px rgba(15,118,110,.25)}
+html[data-theme="ocean"] .settings-row:nth-child(3n) .sr-icon{background:radial-gradient(circle at 30% 25%,#fff 0,#a5f3fc 38%,#06b6d4 100%)!important}
+html[data-theme="ocean"] .sr-icon::after{top:5px;left:9px;width:14px;height:6px;border-radius:50%;background:rgba(255,255,255,.75);transform:rotate(-25deg)}
+html[data-theme="ocean"] .sr-arrow{color:#0891b2}
+/* গ্লাস: কুয়াশা-কাচের স্কুইরকল, নরম আভা */
+html[data-theme="glass"] .settings-list .sr-icon{border-radius:16px;background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(233,213,255,.55))!important;border:1.5px solid #fff;box-shadow:0 8px 20px rgba(168,85,247,.3),inset 0 1px 0 #fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+html[data-theme="glass"] .settings-row:nth-child(3n+2) .sr-icon{background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(191,219,254,.6))!important;box-shadow:0 8px 20px rgba(59,130,246,.28),inset 0 1px 0 #fff}
+html[data-theme="glass"] .settings-row:nth-child(3n) .sr-icon{background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(254,205,211,.6))!important;box-shadow:0 8px 20px rgba(244,63,94,.25),inset 0 1px 0 #fff}
+html[data-theme="glass"] .sr-icon::after{inset:0;border-radius:16px;background:linear-gradient(120deg,rgba(255,255,255,.65) 0,rgba(255,255,255,0) 45%)}
+html[data-theme="glass"] .sr-arrow{color:#a855f7}
+/* সানসেট: থ্রিডি বেভেল বোতাম */
+html[data-theme="sunset"] .settings-list .sr-icon{border-radius:13px;background:linear-gradient(180deg,#ffedd5,#fdba74)!important;border-bottom:4px solid #c2410c;box-shadow:0 5px 10px rgba(194,65,12,.3),inset 0 2px 0 rgba(255,255,255,.8)}
+html[data-theme="sunset"] .settings-row:nth-child(3n+2) .sr-icon{background:linear-gradient(180deg,#fef3c7,#fcd34d)!important;border-bottom-color:#b45309}
+html[data-theme="sunset"] .settings-row:nth-child(3n) .sr-icon{background:linear-gradient(180deg,#ffe4e6,#fda4af)!important;border-bottom-color:#be123c}
+html[data-theme="sunset"] .sr-icon::after{top:2px;left:6px;right:6px;height:8px;border-radius:8px;background:rgba(255,255,255,.45)}
+html[data-theme="sunset"] .sr-arrow{color:#ea580c}
+html[data-theme="sunset"] .settings-row:active .sr-icon{transform:translateY(3px);border-bottom-width:1px}
+
+/* ===== বোতাম ও ছোটখাট উপাদান: থিম অনুযায়ী ===== */
+.wa-btn,#waAskLink,.cc-pay-btn,.history-btn,.modal-btn.confirm,.cc-action-btn,.modal-btn.cancel,.modal-btn.danger{transition:transform .15s ease,box-shadow .15s ease}
+.wa-btn:active,#waAskLink:active,.cc-pay-btn:active,.history-btn:active,.modal-btn:active,.cc-action-btn:active{transform:scale(.97)}
+
+/* মিডনাইট: নিয়ন-বর্ডার বোতাম */
+html[data-theme="midnight"] .wa-btn,html[data-theme="midnight"] #waAskLink{background:linear-gradient(135deg,#052e16,#14532d)!important;color:#86efac!important;border:1.5px solid #22c55e!important;border-radius:14px!important;box-shadow:0 0 14px rgba(34,197,94,.5),inset 0 0 10px rgba(34,197,94,.25)!important;text-shadow:0 0 8px #22c55e!important}
+html[data-theme="midnight"] .cc-pay-btn{background:linear-gradient(135deg,#083344,#164e63)!important;color:#67e8f9!important;border:1.5px solid #22d3ee!important;border-radius:14px!important;box-shadow:0 0 14px rgba(34,211,238,.45),inset 0 0 10px rgba(34,211,238,.2)!important;text-shadow:0 0 8px #22d3ee}
+html[data-theme="midnight"] .history-btn{background:linear-gradient(135deg,#2e1065,#4c1d95)!important;color:#e9d5ff!important;border:1.5px solid #a78bfa!important;border-radius:14px!important;box-shadow:0 0 14px rgba(167,139,250,.45)!important}
+html[data-theme="midnight"] .modal-btn.confirm{background:linear-gradient(135deg,#312e81,#4338ca)!important;border:1.5px solid #818cf8!important;box-shadow:0 0 14px rgba(129,140,248,.5)!important}
+html[data-theme="midnight"] .cc-action-btn.print{border-color:#818cf8;color:#c7d2fe}
+html[data-theme="midnight"] .type-btn.active,html[data-theme="midnight"] .rp.on{box-shadow:0 0 12px rgba(129,140,248,.7)}
+/* ওশান: গোল পিল, চকচকে */
+html[data-theme="ocean"] .wa-btn,html[data-theme="ocean"] #waAskLink{background:linear-gradient(180deg,#4ade80,#16a34a)!important;border-radius:30px!important;box-shadow:0 6px 16px rgba(22,163,74,.38),inset 0 2px 0 rgba(255,255,255,.55)!important}
+html[data-theme="ocean"] .cc-pay-btn{background:linear-gradient(180deg,#38bdf8,#0369a1)!important;border-radius:30px!important;box-shadow:0 6px 16px rgba(3,105,161,.35),inset 0 2px 0 rgba(255,255,255,.5)!important}
+html[data-theme="ocean"] .history-btn{background:linear-gradient(180deg,#2dd4bf,#0f766e)!important;border-radius:30px!important;box-shadow:0 6px 16px rgba(15,118,110,.32),inset 0 2px 0 rgba(255,255,255,.5)!important}
+html[data-theme="ocean"] .modal-btn.confirm{border-radius:30px!important;box-shadow:0 6px 14px rgba(8,145,178,.35),inset 0 2px 0 rgba(255,255,255,.5)}
+html[data-theme="ocean"] .modal-btn.cancel{border-radius:30px;background:#e0f2fe;color:#0369a1}
+html[data-theme="ocean"] .cc-action-btn{border-radius:30px}
+html[data-theme="ocean"] .cc-action-btn.print{border-color:#7dd3fc;color:#0369a1;background:#f0f9ff}
+html[data-theme="ocean"] .type-btn,html[data-theme="ocean"] .rp{border-radius:20px}
+/* গ্লাস: কাচের মতো স্বচ্ছ বোতাম */
+html[data-theme="glass"] .wa-btn,html[data-theme="glass"] #waAskLink{background:linear-gradient(135deg,rgba(34,197,94,.9),rgba(22,163,74,.85))!important;border:1.5px solid rgba(255,255,255,.8)!important;border-radius:18px!important;box-shadow:0 8px 22px rgba(34,197,94,.35),inset 0 1px 0 rgba(255,255,255,.7)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+html[data-theme="glass"] .cc-pay-btn{background:linear-gradient(135deg,rgba(14,165,233,.9),rgba(99,102,241,.88))!important;border:1.5px solid rgba(255,255,255,.8)!important;border-radius:18px!important;box-shadow:0 8px 22px rgba(99,102,241,.35),inset 0 1px 0 rgba(255,255,255,.7)!important}
+html[data-theme="glass"] .history-btn{background:linear-gradient(135deg,rgba(168,85,247,.9),rgba(236,72,153,.85))!important;border:1.5px solid rgba(255,255,255,.8)!important;border-radius:18px!important;box-shadow:0 8px 22px rgba(168,85,247,.35),inset 0 1px 0 rgba(255,255,255,.7)!important}
+html[data-theme="glass"] .modal-btn.confirm{border:1.5px solid rgba(255,255,255,.8);border-radius:16px;box-shadow:0 8px 20px rgba(147,51,234,.35),inset 0 1px 0 rgba(255,255,255,.6)}
+html[data-theme="glass"] .modal-btn.cancel{background:rgba(255,255,255,.7);border:1.5px solid #fff;border-radius:16px;color:#7e22ce}
+html[data-theme="glass"] .cc-action-btn{border-radius:16px;background:rgba(255,255,255,.7)}
+html[data-theme="glass"] .type-btn,html[data-theme="glass"] .rp{border-radius:14px;background:rgba(255,255,255,.7);border-color:#e9d5ff}
+/* সানসেট: থ্রিডি বেভেল (নিচে মোটা ধার) */
+html[data-theme="sunset"] .wa-btn,html[data-theme="sunset"] #waAskLink{background:linear-gradient(180deg,#4ade80,#16a34a)!important;border-bottom:4px solid #166534!important;border-radius:14px!important;box-shadow:0 6px 12px rgba(22,101,52,.3),inset 0 2px 0 rgba(255,255,255,.5)!important}
+html[data-theme="sunset"] .cc-pay-btn{background:linear-gradient(180deg,#fb923c,#ea580c)!important;border-bottom:4px solid #9a3412!important;border-radius:14px!important;box-shadow:0 6px 12px rgba(154,52,18,.3),inset 0 2px 0 rgba(255,255,255,.45)!important}
+html[data-theme="sunset"] .history-btn{background:linear-gradient(180deg,#fb7185,#e11d48)!important;border-bottom:4px solid #9f1239!important;border-radius:14px!important;box-shadow:0 6px 12px rgba(159,18,57,.28),inset 0 2px 0 rgba(255,255,255,.45)!important}
+html[data-theme="sunset"] .modal-btn.confirm{background:linear-gradient(180deg,#fb923c,#ea580c)!important;border-bottom:4px solid #9a3412;border-radius:13px;box-shadow:inset 0 2px 0 rgba(255,255,255,.45)}
+html[data-theme="sunset"] .modal-btn.cancel{background:#ffedd5;color:#9a3412;border-bottom:4px solid #fdba74;border-radius:13px}
+html[data-theme="sunset"] .cc-action-btn{border-bottom-width:3px;border-radius:12px}
+html[data-theme="sunset"] .type-btn,html[data-theme="sunset"] .rp{border-bottom-width:3px}
+html[data-theme="sunset"] .wa-btn:active,html[data-theme="sunset"] .cc-pay-btn:active,html[data-theme="sunset"] .history-btn:active,html[data-theme="sunset"] .modal-btn:active{transform:translateY(3px);border-bottom-width:1px!important}
+html[data-theme="midnight"] .cc-action-btn{background:#1b2350!important;color:#c7d2fe!important}
+html[data-theme="midnight"] .cc-action-btn.note{border-color:#fbbf24;color:#fde68a!important}
+
+/* ===== ডেভেলপারের পরিচয় কার্ড ===== */
+.dev-card{position:relative;background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:34px 16px 18px;text-align:center;margin-bottom:14px;box-shadow:0 8px 24px rgba(79,70,229,.12);overflow:hidden}
+.dev-ribbon{position:absolute;top:0;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:11px;font-weight:800;padding:5px 18px;border-radius:0 0 14px 14px;letter-spacing:.3px}
+.dev-avatar{width:68px;height:68px;margin:6px auto 8px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,#c7d2fe 60%,#818cf8);display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 8px 18px rgba(79,70,229,.3),inset 0 -4px 8px rgba(67,56,202,.2)}
+.dev-name{font-size:17px;font-weight:900;color:#1e293b}
+.dev-addr{font-size:12px;color:#64748b;font-weight:700;margin-top:2px}
+.dev-links{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.dev-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 12px;border-radius:14px;text-decoration:none;color:#fff;font-size:13px;font-weight:800;word-break:break-all}
+.dev-btn b{font-weight:800}
+.dev-call{background:linear-gradient(135deg,#0ea5e9,#0369a1)}
+.dev-wa{background:linear-gradient(135deg,#22c55e,#15803d)}
+.dev-mail{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.dev-btn:active{transform:scale(.97)}
+html[data-theme="midnight"] .dev-btn{border:1.5px solid rgba(255,255,255,.35)}
+html[data-theme="ocean"] .dev-card{border-color:#bae6fd;box-shadow:0 10px 28px rgba(8,145,178,.16)}
+html[data-theme="ocean"] .dev-ribbon{background:linear-gradient(135deg,#0c4a6e,#0891b2)}
+html[data-theme="ocean"] .dev-btn{border-radius:30px;box-shadow:0 5px 12px rgba(8,145,178,.25),inset 0 2px 0 rgba(255,255,255,.45)}
+html[data-theme="glass"] .dev-card{background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid #fff;border-radius:24px}
+html[data-theme="glass"] .dev-ribbon{background:linear-gradient(135deg,#7c3aed,#c026d3)}
+html[data-theme="glass"] .dev-btn{border:1.5px solid rgba(255,255,255,.8);border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+html[data-theme="sunset"] .dev-card{border-color:#fed7aa}
+html[data-theme="sunset"] .dev-ribbon{background:linear-gradient(135deg,#be123c,#ea580c)}
+html[data-theme="sunset"] .dev-btn{border-bottom:4px solid rgba(0,0,0,.28);border-radius:13px}
+html[data-theme="midnight"] .dev-btn,html[data-theme="midnight"] .dev-ribbon{filter:invert(1) hue-rotate(180deg)}
+.dev-avatar{overflow:hidden;padding:0;border:3px solid #fff}
+.dev-avatar img{width:100%;height:100%;object-fit:cover;display:block}
