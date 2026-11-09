@@ -9,7 +9,7 @@ const I18N_RULES = [
     [/^(\d+)\s*জনের$/, '$1 customer(s)'],
     [/^(\d+)\s*জন$/, '$1 customers']
 ];
-Object.assign(EN_DICT, {"ডেভেলপারের পরিচয়":"Developer","জাহিদুল ইসলাম (ছিদ্দিক)":"ZAHIDUL ISLAM (CIDDIQ)","নোয়াখালী, চাপরাশিরহাট ৩৮১১":"Noakhali, ChaprashirHat 3811","বাংলাদেশ":"Bangladesh","যেমন: সিদ্দিক":"e.g. Ciddiq","যেমন: সাজ্জাদ":"e.g. Sajjad","যেমন: জাহিদুল":"e.g. Zahidul","যেমন: সামিরা স্টোর":"e.g. Samira Store","যেমন: zahidul":"e.g. zahidul","যেমন: শারমিন":"e.g. Sharmin","থিম ও রং": "Theme & colors", "ডিফল্ট": "Default", "মিডনাইট": "Midnight", "ওশান": "Ocean", "গ্লাস": "Glass", "সানসেট": "Sunset", "পছন্দের রং বেছে নিন। শুধু এই ফোনে/ব্রাউজারে বদলাবে।": "Pick your colors. Applies only on this phone/browser.", "নতুন কাস্টমার": "New customer", "নতুন কাস্টমার যোগ করুন এবং হিসাব শুরু করুন": "Add a new customer and start the account", "কাস্টমারের নাম": "Customer's name", "হোয়াটসঅ্যাপ নম্বর (কোডসহ)": "WhatsApp number (with country code)", "কাস্টমার যোগ করুন": "Add customer", "আইটেম ম্যানেজ": "Manage items", "নতুন আইটেমের নাম": "New item name", "হিসাবের ধরন": "Account type", "সংখ্যা × দাম": "Quantity × price", "যেমন কার্টুন, পিস": "e.g. carton, piece", "ফ্রি": "Free", "পরিমাণ+টাকা": "Quantity + amount", "শুধু টাকা": "Amount only", "রিচার্জ": "Recharge", "একক (শব্দ)": "Unit (word)", "— কেস/কার্টুন/পিস/প্যাকেট। বেছে নিন": "— case / carton / piece / packet. Choose one", "এই আইটেমের স্টক রাখুন": "Keep stock for this item", "কম হলে সতর্কতা": "Low-stock alert", "— এই সংখ্যা বা এর কমে লাল দেখাবে (ঐচ্ছিক)": "— shows red at or below this number (optional)", "ডিফল্ট দাম": "Default price", "— প্রতি এক একক (পিস/প্যাকেট) এর দাম (ঐচ্ছিক)": "— price per unit (piece/packet) (optional)", "কত দিন পর মনে করাবে": "Remind after how many days", "— ঐচ্ছিক। যেমন রিচার্জে ২৯": "— optional. e.g. 29 for recharge", "নতুন আইটেম যোগ করুন": "Add new item", "বর্তমান আইটেম তালিকা": "Current item list", "টাকা": "Amount", "যেমন: করিম আলী": "e.g. Karim Ali", "যেমন: 88018XXXXXXXX": "e.g. 88018XXXXXXXX", "যেমন: চাল, ডাল, পানি...": "e.g. rice, lentils, water...", "নিজে লিখুন (যেমন: ডজন)": "Type your own (e.g. dozen)", "যেমন: ৫": "e.g. 5", "যেমন: ১০": "e.g. 10", "যেমন: ২৯": "e.g. 29", "নগদ": "Cash", "বাকি": "Due", "জমা": "Payment", "পরিবর্তন": "Change", "ডিলিট": "Delete", "হিস্টোরি": "History", "নোট": "Note", "নোট (শুধু মালিক)": "Note (owner only)", "আছে": "Yes", "তারিখ": "Date", "বিবরণ": "Details", "কোনো বিল নেই": "No bills", "সব পরিশোধিত": "All paid", "পরিশোধিত": "Paid", "মোট বিল": "Total bill", "মোট জমা": "Total paid", "টাকা জমা নিন": "Collect payment", "আজকে কী নিলো যোগ করুন": "Add what they took today", "পরিমাণ": "Quantity", "দাম/পিস": "Price/pc", "মোট টাকা": "Total amount", "সেভ করুন": "Save", "যোগ করেছেন": "Added by", "বর্তমান বাকি": "Current due", "আগের": "Previous", "এন্ট্রি করেছিলেন": "Entered by", "স্টকে আছে": "In stock", "কোনো কাস্টমার নেই": "No customers", "ক্যালকুলেটর": "Calculator", "লিখলে পুরো বাকি টাকা অটো জমা হবে": "Type p to auto-fill the full due amount", "জমার পরিমাণ": "Payment amount", "বাতিল": "Cancel", "জমা দিন": "Submit payment", "টাকা লিখুন বা p লিখুন": "Enter amount or type p", "পুরো কিবোর্ড চালু করুন": "Show full keyboard", "হিসাব এডিট করুন": "Edit entry", "নতুন বিবরণ": "New details", "নতুন টাকা": "New amount", "নাম ও নম্বর পরিবর্তন": "Change name & number", "নাম": "Name", "ফোন নম্বর": "Phone number", "কাস্টমার নোট (শুধু মালিক)": "Customer note (owner only)", "কাস্টমার": "Customer", "সম্পর্কে যা মনে রাখতে চান লিখুন": "— write what you want to remember.", "এই নোট শুধু মালিকের দেখার জন্য": "This note is for the owner only", "মুছুন": "Clear", "যেমন: বাড়ি ৫ নম্বর রোডে...": "e.g. House on Road 5...", "নিশ্চিত করুন": "Please confirm", "হ্যাঁ, ডিলিট করুন": "Yes, delete", "লেনদেনের পাসওয়ার্ড দিন": "Enter transaction password", "এই পাসওয়ার্ড মালিক ও স্টাফ উভয়ের কাছে থাকবে": "Both owner and staff will have this password", "নিরাপত্তার স্বার্থে পাসওয়ার্ড দিন": "Enter your password for security", "ওকে": "OK", "বিক্রি এন্ট্রি নিশ্চিত করুন": "Confirm sale entry", "হিসাব এডিট করতে পাসওয়ার্ড দিন": "Enter password to edit", "সঠিক পাসওয়ার্ড দিলে এডিট স্ক্রিন আসবে": "The edit screen opens after the correct password", "টাকা জমা নিশ্চিত করুন": "Confirm payment", "হিসাব ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete", "জমা ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete payment", "সঠিক পাসওয়ার্ড দিলে ডিলিটের নিশ্চিতকরণ আসবে": "Delete confirmation appears after the correct password", "এই হিসাবটি ডিলিট করবেন": "Delete this entry", "এই জমার রেকর্ড ডিলিট করবেন": "Delete this payment record", "কাস্টমারের ছবি দিন": "Add customer's photo", "ক্যামেরা দিয়ে তুলুন": "Take with camera", "এখনই ছবি উঠান": "Take a photo now", "গ্যালারি থেকে বাছুন": "Choose from gallery", "ফোনে সেভ করা ছবি": "A photo saved on the phone", "বন্ধ করুন": "Close", "কাস্টমারকে জানাবেন": "Notify the customer", "এই কাস্টমারের ফোন নম্বর নেই বা খুব ছোট। পাঠালে WhatsApp-এ নিজে কাস্টমার বেছে নিতে হবে।": "This customer's phone number is missing or too short. You'll need to pick the customer yourself in WhatsApp.", "এখন না": "Not now", "পাঠান": "Send", "আবার কেনার সময় হয়েছে": "due to buy again", "রিচার্জ অ্যাপ বাছুন": "Choose recharge app", "বাছা মুছুন": "Clear choice", "বন্ধ": "Close", "অ্যাপের নাম খুঁজুন": "Search app name", "আজকের লেনদেন": "Today's transactions", "শেষ ৭ দিনের লেনদেন": "Last 7 days transactions", "শেষ ১৫ দিনের লেনদেন": "Last 15 days transactions", "শেষ ৩০ দিনের লেনদেন": "Last 30 days transactions", "একটি তারিখ নির্বাচন করুন": "Select a date", "🔒 দোকানের তথ্য শুধু মালিক পরিবর্তন করতে পারবেন।": "🔒 Only the owner can change shop details.", "আইটেমের নাম লিখুন!": "Enter the item name!", "❌ এই আইটেম আগে থেকেই আছে!": "❌ This item already exists!", "স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "Enter the stock unit (e.g. piece, packet)", "একক হলো শব্দ, সংখ্যা নয়।": "The unit is a word, not a number.", "যেমন: পিস, প্যাকেট, কার্টুন।": "e.g. piece, packet, carton.", "📦 এই আইটেমের স্টক চালু আছে।": "📦 Stock is on for this item.", "আগে ✏️ চেপে স্টক বন্ধ করুন, তারপর ডিলিট করুন।": "First press ✏️ and turn stock off, then delete.", "❌ স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "❌ Enter the stock unit (e.g. piece, packet)", "❌ একক হলো শব্দ, সংখ্যা নয় (যেমন: পিস, প্যাকেট, কার্টুন)": "❌ The unit is a word, not a number (e.g. piece, packet, carton)", "স্টক বন্ধ করলে আগের হিসাব মুছবে না, আবার চালু করলে ফিরে আসবে।": "Turning stock off keeps the old records; they return when you turn it on again.", "স্টক বন্ধ করলে আগের হিসাব মুছবে না।": "Turning stock off keeps the old records.", "✅ কাস্টমার যোগ হয়েছে!": "✅ Customer added!", "সঠিক টাকা লিখুন": "Enter a valid amount", "পরিমাণ লিখুন": "Enter the quantity", "সঠিক তথ্য দিন": "Enter valid details", "তারিখ নির্বাচন করুন": "Select a date", "❌ এই কাস্টমারের কোনো বাকি নেই!": "❌ This customer has no due!", "সঠিক পরিমাণ লিখুন": "Enter a valid quantity", "নাম খালি রাখা যাবে না": "Name cannot be empty", "সঠিক ফোন নম্বর লিখুন": "Enter a valid phone number", "🔒 নাম আর বদলানো যাবে না": "🔒 The name cannot be changed any more", "তবুও সেভ করবেন?": "Save anyway?"});
+Object.assign(EN_DICT, {"🏷️ ছাড় (ডিসকাউন্ট) — ঐচ্ছিক:":"🏷️ Discount — optional:","ছাড়":"Discount","🏷️ ছাড়":"🏷️ Discount","🏷️ ছাড়:":"🏷️ Discount:","ছাড় দিলে বাকি কমবে, কিন্তু জমার টাকায় ধরা হবে না":"Discount reduces the due but is not counted as money received","❌ জমা + ছাড় বাকির চেয়ে বেশি হয়ে গেছে":"❌ Payment + discount is more than the due","মোট ছাড়":"Total discount","মোট ছাড় (ডিসকাউন্ট)":"Total discounts given","ডেভেলপারের পরিচয়":"Developer","জাহিদুল ইসলাম (ছিদ্দিক)":"ZAHIDUL ISLAM (CIDDIQ)","নোয়াখালী, চাপরাশিরহাট ৩৮১১":"Noakhali, ChaprashirHat 3811","বাংলাদেশ":"Bangladesh","যেমন: সিদ্দিক":"e.g. Ciddiq","যেমন: সাজ্জাদ":"e.g. Sajjad","যেমন: জাহিদুল":"e.g. Zahidul","যেমন: সামিরা স্টোর":"e.g. Samira Store","যেমন: zahidul":"e.g. zahidul","যেমন: শারমিন":"e.g. Sharmin","থিম ও রং": "Theme & colors", "ডিফল্ট": "Default", "মিডনাইট": "Midnight", "ওশান": "Ocean", "গ্লাস": "Glass", "সানসেট": "Sunset", "পছন্দের রং বেছে নিন। শুধু এই ফোনে/ব্রাউজারে বদলাবে।": "Pick your colors. Applies only on this phone/browser.", "নতুন কাস্টমার": "New customer", "নতুন কাস্টমার যোগ করুন এবং হিসাব শুরু করুন": "Add a new customer and start the account", "কাস্টমারের নাম": "Customer's name", "হোয়াটসঅ্যাপ নম্বর (কোডসহ)": "WhatsApp number (with country code)", "কাস্টমার যোগ করুন": "Add customer", "আইটেম ম্যানেজ": "Manage items", "নতুন আইটেমের নাম": "New item name", "হিসাবের ধরন": "Account type", "সংখ্যা × দাম": "Quantity × price", "যেমন কার্টুন, পিস": "e.g. carton, piece", "ফ্রি": "Free", "পরিমাণ+টাকা": "Quantity + amount", "শুধু টাকা": "Amount only", "রিচার্জ": "Recharge", "একক (শব্দ)": "Unit (word)", "— কেস/কার্টুন/পিস/প্যাকেট। বেছে নিন": "— case / carton / piece / packet. Choose one", "এই আইটেমের স্টক রাখুন": "Keep stock for this item", "কম হলে সতর্কতা": "Low-stock alert", "— এই সংখ্যা বা এর কমে লাল দেখাবে (ঐচ্ছিক)": "— shows red at or below this number (optional)", "ডিফল্ট দাম": "Default price", "— প্রতি এক একক (পিস/প্যাকেট) এর দাম (ঐচ্ছিক)": "— price per unit (piece/packet) (optional)", "কত দিন পর মনে করাবে": "Remind after how many days", "— ঐচ্ছিক। যেমন রিচার্জে ২৯": "— optional. e.g. 29 for recharge", "নতুন আইটেম যোগ করুন": "Add new item", "বর্তমান আইটেম তালিকা": "Current item list", "টাকা": "Amount", "যেমন: করিম আলী": "e.g. Karim Ali", "যেমন: 88018XXXXXXXX": "e.g. 88018XXXXXXXX", "যেমন: চাল, ডাল, পানি...": "e.g. rice, lentils, water...", "নিজে লিখুন (যেমন: ডজন)": "Type your own (e.g. dozen)", "যেমন: ৫": "e.g. 5", "যেমন: ১০": "e.g. 10", "যেমন: ২৯": "e.g. 29", "নগদ": "Cash", "বাকি": "Due", "জমা": "Payment", "পরিবর্তন": "Change", "ডিলিট": "Delete", "হিস্টোরি": "History", "নোট": "Note", "নোট (শুধু মালিক)": "Note (owner only)", "আছে": "Yes", "তারিখ": "Date", "বিবরণ": "Details", "কোনো বিল নেই": "No bills", "সব পরিশোধিত": "All paid", "পরিশোধিত": "Paid", "মোট বিল": "Total bill", "মোট জমা": "Total paid", "টাকা জমা নিন": "Collect payment", "আজকে কী নিলো যোগ করুন": "Add what they took today", "পরিমাণ": "Quantity", "দাম/পিস": "Price/pc", "মোট টাকা": "Total amount", "সেভ করুন": "Save", "যোগ করেছেন": "Added by", "বর্তমান বাকি": "Current due", "আগের": "Previous", "এন্ট্রি করেছিলেন": "Entered by", "স্টকে আছে": "In stock", "কোনো কাস্টমার নেই": "No customers", "ক্যালকুলেটর": "Calculator", "লিখলে পুরো বাকি টাকা অটো জমা হবে": "Type p to auto-fill the full due amount", "জমার পরিমাণ": "Payment amount", "বাতিল": "Cancel", "জমা দিন": "Submit payment", "টাকা লিখুন বা p লিখুন": "Enter amount or type p", "পুরো কিবোর্ড চালু করুন": "Show full keyboard", "হিসাব এডিট করুন": "Edit entry", "নতুন বিবরণ": "New details", "নতুন টাকা": "New amount", "নাম ও নম্বর পরিবর্তন": "Change name & number", "নাম": "Name", "ফোন নম্বর": "Phone number", "কাস্টমার নোট (শুধু মালিক)": "Customer note (owner only)", "কাস্টমার": "Customer", "সম্পর্কে যা মনে রাখতে চান লিখুন": "— write what you want to remember.", "এই নোট শুধু মালিকের দেখার জন্য": "This note is for the owner only", "মুছুন": "Clear", "যেমন: বাড়ি ৫ নম্বর রোডে...": "e.g. House on Road 5...", "নিশ্চিত করুন": "Please confirm", "হ্যাঁ, ডিলিট করুন": "Yes, delete", "লেনদেনের পাসওয়ার্ড দিন": "Enter transaction password", "এই পাসওয়ার্ড মালিক ও স্টাফ উভয়ের কাছে থাকবে": "Both owner and staff will have this password", "নিরাপত্তার স্বার্থে পাসওয়ার্ড দিন": "Enter your password for security", "ওকে": "OK", "বিক্রি এন্ট্রি নিশ্চিত করুন": "Confirm sale entry", "হিসাব এডিট করতে পাসওয়ার্ড দিন": "Enter password to edit", "সঠিক পাসওয়ার্ড দিলে এডিট স্ক্রিন আসবে": "The edit screen opens after the correct password", "টাকা জমা নিশ্চিত করুন": "Confirm payment", "হিসাব ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete", "জমা ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete payment", "সঠিক পাসওয়ার্ড দিলে ডিলিটের নিশ্চিতকরণ আসবে": "Delete confirmation appears after the correct password", "এই হিসাবটি ডিলিট করবেন": "Delete this entry", "এই জমার রেকর্ড ডিলিট করবেন": "Delete this payment record", "কাস্টমারের ছবি দিন": "Add customer's photo", "ক্যামেরা দিয়ে তুলুন": "Take with camera", "এখনই ছবি উঠান": "Take a photo now", "গ্যালারি থেকে বাছুন": "Choose from gallery", "ফোনে সেভ করা ছবি": "A photo saved on the phone", "বন্ধ করুন": "Close", "কাস্টমারকে জানাবেন": "Notify the customer", "এই কাস্টমারের ফোন নম্বর নেই বা খুব ছোট। পাঠালে WhatsApp-এ নিজে কাস্টমার বেছে নিতে হবে।": "This customer's phone number is missing or too short. You'll need to pick the customer yourself in WhatsApp.", "এখন না": "Not now", "পাঠান": "Send", "আবার কেনার সময় হয়েছে": "due to buy again", "রিচার্জ অ্যাপ বাছুন": "Choose recharge app", "বাছা মুছুন": "Clear choice", "বন্ধ": "Close", "অ্যাপের নাম খুঁজুন": "Search app name", "আজকের লেনদেন": "Today's transactions", "শেষ ৭ দিনের লেনদেন": "Last 7 days transactions", "শেষ ১৫ দিনের লেনদেন": "Last 15 days transactions", "শেষ ৩০ দিনের লেনদেন": "Last 30 days transactions", "একটি তারিখ নির্বাচন করুন": "Select a date", "🔒 দোকানের তথ্য শুধু মালিক পরিবর্তন করতে পারবেন।": "🔒 Only the owner can change shop details.", "আইটেমের নাম লিখুন!": "Enter the item name!", "❌ এই আইটেম আগে থেকেই আছে!": "❌ This item already exists!", "স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "Enter the stock unit (e.g. piece, packet)", "একক হলো শব্দ, সংখ্যা নয়।": "The unit is a word, not a number.", "যেমন: পিস, প্যাকেট, কার্টুন।": "e.g. piece, packet, carton.", "📦 এই আইটেমের স্টক চালু আছে।": "📦 Stock is on for this item.", "আগে ✏️ চেপে স্টক বন্ধ করুন, তারপর ডিলিট করুন।": "First press ✏️ and turn stock off, then delete.", "❌ স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "❌ Enter the stock unit (e.g. piece, packet)", "❌ একক হলো শব্দ, সংখ্যা নয় (যেমন: পিস, প্যাকেট, কার্টুন)": "❌ The unit is a word, not a number (e.g. piece, packet, carton)", "স্টক বন্ধ করলে আগের হিসাব মুছবে না, আবার চালু করলে ফিরে আসবে।": "Turning stock off keeps the old records; they return when you turn it on again.", "স্টক বন্ধ করলে আগের হিসাব মুছবে না।": "Turning stock off keeps the old records.", "✅ কাস্টমার যোগ হয়েছে!": "✅ Customer added!", "সঠিক টাকা লিখুন": "Enter a valid amount", "পরিমাণ লিখুন": "Enter the quantity", "সঠিক তথ্য দিন": "Enter valid details", "তারিখ নির্বাচন করুন": "Select a date", "❌ এই কাস্টমারের কোনো বাকি নেই!": "❌ This customer has no due!", "সঠিক পরিমাণ লিখুন": "Enter a valid quantity", "নাম খালি রাখা যাবে না": "Name cannot be empty", "সঠিক ফোন নম্বর লিখুন": "Enter a valid phone number", "🔒 নাম আর বদলানো যাবে না": "🔒 The name cannot be changed any more", "তবুও সেভ করবেন?": "Save anyway?"});
 
 Object.assign(EN_DICT, {"বার্তার ভাষা:":"Message language:"});
 Object.assign(EN_DICT, {"📝 নোট (শুধু মালিক)":"📝 Note (owner only)","📞 হোয়াটসঅ্যাপ নম্বর (কোডসহ):":"📞 WhatsApp number (with country code):","⚙️ আইটেম ম্যানেজ":"⚙️ Manage items"});
@@ -304,6 +304,10 @@ I18N_RULES.push(
     [/^প্রিয় (.*),$/, 'Dear $1,'],
     [/^- (\S+): (.*) = (\S+) টাকা$/, '- $1: $2 = $3 Tk'],
     [/^- (\S+): জমা (\S+) টাকা$/, '- $1: payment $2 Tk'],
+    [/^- (\S+): ছাড় (\S+) টাকা$/, '- $1: discount $2 Tk'],
+    [/^🔹 মোট ছাড়: (\S+) টাকা$/, '🔹 Total discount: $1 Tk'],
+    [/^🏷️ (\S+) তারিখে (\S+) টাকা ছাড় দেওয়া হয়েছে।$/, '🏷️ On $1, a discount of $2 Tk was given.'],
+    [/^💵 (\S+) তারিখে (\S+) টাকা জমা নেওয়া হয়েছে এবং (\S+) টাকা ছাড় দেওয়া হয়েছে।$/, '💵 On $1, $2 Tk payment was received and a $3 Tk discount was given.'],
     [/^🔹 মোট (বাকি বিল|বিল): (\S+) টাকা$/, (m, w, n) => '🔹 Total ' + (w === 'বিল' ? 'bills' : 'due bills') + ': ' + n + ' Tk'],
     [/^🔹 মোট জমা: (\S+) টাকা$/, '🔹 Total paid: $1 Tk'],
     [/^🔹 বাকি: (\S+) টাকা।$/, '🔹 Due: $1 Tk.'],
@@ -496,28 +500,28 @@ const Calc = {
     isCash(t) { return !!t && t.pay === 'cash'; },
 
     totals(cus) {
-        let bill = 0, paid = 0, cash = 0;
+        let bill = 0, paid = 0, cash = 0, disc = 0;
         (cus.tx || []).forEach(t => { if (Calc.isCash(t)) cash += Calc.num(t.amt); else bill += Calc.num(t.amt); });
-        (cus.payment || []).forEach(p => { paid += Calc.num(p.amt); });
-        bill = Calc.r2(bill); paid = Calc.r2(paid); cash = Calc.r2(cash);
-        return { bill, paid, due: Calc.r2(bill - paid), cash };
+        (cus.payment || []).forEach(p => { if (p.disc) disc += Calc.num(p.amt); else paid += Calc.num(p.amt); });
+        bill = Calc.r2(bill); paid = Calc.r2(paid); cash = Calc.r2(cash); disc = Calc.r2(disc);
+        return { bill, paid, disc, due: Calc.r2(bill - paid - disc), cash };
     },
 
     // নির্দিষ্ট সময়ে নগদ বিক্রি, বাকিতে বিক্রি, বাকি আদায় (জমা) — পুরনো (হিস্টোরির) হিসাবসহ
     salesReport(data, from, to) {
         const inR = d => !!d && (!from || d >= from) && (!to || d <= to);
-        const out = { cash: 0, baki: 0, collected: 0, items: {} };
+        const out = { cash: 0, baki: 0, collected: 0, discount: 0, items: {} };
         const addTx = t => {
             if (!t || !inR(t.dt)) return;
             const a = Calc.num(t.amt), it = out.items[t.tp] || (out.items[t.tp] = { cash: 0, baki: 0 });
             if (Calc.isCash(t)) { out.cash += a; it.cash += a; } else { out.baki += a; it.baki += a; }
         };
-        const addPay = p => { if (p && inR(p.dt)) out.collected += Calc.num(p.amt); };
+        const addPay = p => { if (p && inR(p.dt)) { if (p.disc) out.discount += Calc.num(p.amt); else out.collected += Calc.num(p.amt); } };
         (data.customers || []).forEach(c => {
             (c.tx || []).forEach(addTx); (c.payment || []).forEach(addPay);
             (c.history || []).forEach(h => { (h.tx || []).forEach(addTx); (h.payment || []).forEach(addPay); });
         });
-        out.cash = Calc.r2(out.cash); out.baki = Calc.r2(out.baki); out.collected = Calc.r2(out.collected);
+        out.cash = Calc.r2(out.cash); out.baki = Calc.r2(out.baki); out.collected = Calc.r2(out.collected); out.discount = Calc.r2(out.discount);
         Object.keys(out.items).forEach(k => { out.items[k].cash = Calc.r2(out.items[k].cash); out.items[k].baki = Calc.r2(out.items[k].baki); });
         return out;
     },
@@ -2411,12 +2415,12 @@ function buildWaMessage0(cus, totals) {
         const line = `\n- ${t.dt}: ${txLabel(t).text} = ${t.amt} টাকা`;
         if (Calc.isCash(t)) cashLines += line; else bakiLines += line;
     });
-    (cus.payment || []).forEach(p => { payLines += `\n- ${p.dt}: জমা ${p.amt} টাকা`; });
+    (cus.payment || []).forEach(p => { payLines += p.disc ? `\n- ${p.dt}: ছাড় ${p.amt} টাকা` : `\n- ${p.dt}: জমা ${p.amt} টাকা`; });
     const billWord = cashLines ? 'বাকি বিল' : 'বিল';
     const shopLine = appData.shop.name ? `🏪 ${appData.shop.name}\n` : '';
     let msg = `${shopLine}\nপ্রিয় ${cus.name},\nআপনার হিসাব:\n\n📋 ${billWord}:${bakiLines || '\n- নেই'}\n\n`;
     if (cashLines) msg += `💵 নগদ বিক্রি (পরিশোধিত, বাকিতে ধরা হয়নি):${cashLines}\n\n`;
-    msg += `💵 জমা:${payLines || '\n- নেই'}\n\n🔹 মোট ${billWord}: ${totals.bill} টাকা\n🔹 মোট জমা: ${totals.paid} টাকা\n🔹 বাকি: ${totals.due} টাকা।`;
+    msg += `💵 জমা:${payLines || '\n- নেই'}\n\n🔹 মোট ${billWord}: ${totals.bill} টাকা\n🔹 মোট জমা: ${totals.paid} টাকা${totals.disc > 0 ? `\n🔹 মোট ছাড়: ${totals.disc} টাকা` : ''}\n🔹 বাকি: ${totals.due} টাকা।`;
     return msg;
 }
 
@@ -2451,7 +2455,7 @@ function customerCardHtml(cus, idx) {
         const byTag = p.byName ? `<span class="by-tag">👤 ${escapeHtml(p.byName)}</span>` : '';
         payRows += `<tr class="pay-row">
             <td>${escapeHtml(p.dt)}</td>
-            <td>💵 জমা ${byTag}</td>
+            <td>${p.disc ? '🏷️ ছাড়' : '💵 জমা'} ${byTag}</td>
             <td>${escapeHtml(p.amt)} ৳ <button class="action-btn" onclick="delPayment(${idx}, ${pIdx})">❌</button></td>
         </tr>`;
     });
@@ -2537,6 +2541,7 @@ function customerCardHtml(cus, idx) {
             <div class="cc-summary">
                 <div class="cc-summary-row"><span>📋 মোট বিল:</span><span><b>${totals.bill} টাকা</b></span></div>
                 <div class="cc-summary-row"><span>💵 মোট জমা:</span><span style="color:#16a34a;"><b>${totals.paid} টাকা</b></span></div>
+                ${totals.disc > 0 ? `<div class="cc-summary-row"><span>🏷️ ছাড়:</span><span style="color:#d97706;"><b>${totals.disc} টাকা</b></span></div>` : ''}
                 <div class="cc-summary-row total ${isPaidFull ? 'paid-full' : 'due'}">
                     <span>${isPaidFull ? '✅ পরিশোধিত:' : '🔴 বাকি:'}</span>
                     <span>${Math.max(0, totals.due)} টাকা</span>
@@ -2767,11 +2772,14 @@ function openPaymentModal(cusIdx) {
     const totals = getCustomerTotals(appData.customers[cusIdx]);
     document.getElementById('payInfo').innerHTML = 
         `👤 <b>${escapeHtml(appData.customers[cusIdx].name)}</b><br>` +
-        `মোট বিল: <b>${totals.bill} টাকা</b> | জমা: <b>${totals.paid} টাকা</b><br>` +
+        `মোট বিল: <b>${totals.bill} টাকা</b> | জমা: <b>${totals.paid} টাকা</b>` + (totals.disc > 0 ? ` | ছাড়: <b>${totals.disc} টাকা</b>` : '') + `<br>` +
         `বর্তমান বাকি: <b style="color:#dc2626;">${totals.due} টাকা</b>`;
     const p = document.getElementById('payAmountInput');
     p.value = totals.due > 0 ? totals.due : '';
     document.getElementById('payDateInput').value = todayLocal();
+    const dv = document.getElementById('payDiscInput'); if (dv) dv.value = '';
+    const dw = document.getElementById('payDiscWrap'); if (dw) dw.style.display = isOwner() ? '' : 'none';
+    payDiscPreview();
     const collected = document.getElementById('collectedByInfo');
     collected.innerText = '👤 টাকা নিচ্ছেন: ' + currentUser.name + (isOwner() ? ' (মালিক)' : ' (স্টাফ)');
     collected.classList.add('show');
@@ -2799,30 +2807,48 @@ function paySuggest(c, amt) {
     });
     return out;
 }
+function payDiscVal() { const el = document.getElementById('payDiscInput'); const v = el ? parseFloat(String(el.value).trim()) : 0; return (v > 0 && isOwner()) ? Calc.r2(v) : 0; }
+function payDiscPreview() {
+    const el = document.getElementById('payDiscNote'); if (!el) return;
+    const cus = appData.customers[currentPayCusIdx]; if (!cus) { el.textContent = ''; return; }
+    const tot = getCustomerTotals(cus), d = payDiscVal();
+    const raw = (document.getElementById('payAmountInput').value || '').trim().toLowerCase();
+    let a = raw === 'p' ? Math.max(0, tot.due - d) : (parseFloat(raw) || 0);
+    if (!(d > 0)) { el.textContent = ''; el.className = 'pay-disc-note'; return; }
+    const left = Calc.r2(tot.due - a - d);
+    el.className = 'pay-disc-note show' + (left < 0 ? ' bad' : '');
+    el.textContent = left < 0 ? '❌ জমা + ছাড় বাকির চেয়ে বেশি হয়ে গেছে' : ('📊 জমা ' + a + ' + ছাড় ' + d + ' → বাকি থাকবে ' + left + ' টাকা');
+}
 let PAY_PEND = null;
 function savePayment() {
     const rawVal = document.getElementById('payAmountInput').value.trim().toLowerCase();
     const dt = document.getElementById('payDateInput').value;
     if (!dt) return alert('তারিখ নির্বাচন করুন');
+    const cus0 = appData.customers[currentPayCusIdx], tot0 = getCustomerTotals(cus0);
+    const disc = payDiscVal();
     let amt = 0;
     if (rawVal === 'p') {
-        const totals = getCustomerTotals(appData.customers[currentPayCusIdx]);
-        if (totals.due <= 0) return alert('❌ এই কাস্টমারের কোনো বাকি নেই!');
-        amt = totals.due;
+        if (tot0.due <= 0) return alert('❌ এই কাস্টমারের কোনো বাকি নেই!');
+        amt = Calc.r2(tot0.due - disc);
+        if (amt < 0) return alert('❌ ছাড় বাকির চেয়ে বেশি হয়ে গেছে');
+    } else if (rawVal === '' && disc > 0) {
+        amt = 0;
     } else {
         amt = parseFloat(rawVal);
         if (!amt || amt <= 0 || isNaN(amt)) return alert('সঠিক পরিমাণ লিখুন');
     }
-    const cus = appData.customers[currentPayCusIdx], tot = getCustomerTotals(cus);
+    if (amt + disc <= 0) return alert('সঠিক পরিমাণ লিখুন');
+    if (disc > 0 && Calc.r2(amt + disc) > tot0.due + 0.001) return alert('❌ জমা + ছাড় বাকির (' + tot0.due + ' টাকা) চেয়ে বেশি হতে পারে না');
+    const cus = cus0, tot = tot0;
     closeModal('paymentModal');
     // পুরো বাকি মিটলে প্রশ্ন নেই; কম দিলে এবং সাজেশন মিললে প্রশ্ন
-    const sug = amt < tot.due ? paySuggest(cus, amt) : [];
+    const sug = (amt > 0 && amt + disc < tot.due) ? paySuggest(cus, amt) : [];
     if (sug.length) {
-        PAY_PEND = { idx: currentPayCusIdx, amt, dt, sug, sel: sug.length === 1 ? [0] : [] };
+        PAY_PEND = { idx: currentPayCusIdx, amt, dt, sug, disc, sel: sug.length === 1 ? [0] : [] };
         setTimeout(payAllocRender, 250);
         return;
     }
-    setTimeout(() => payFinish(currentPayCusIdx, amt, dt, []), 250);
+    setTimeout(() => payFinish(currentPayCusIdx, amt, dt, [], disc), 250);
 }
 function payAllocRender() {
     const P = PAY_PEND; if (!P) return;
@@ -2853,20 +2879,21 @@ function payAllocTick(i) {
 function payAllocConfirm() {
     const P = PAY_PEND; if (!P) return; PAY_PEND = null;
     closeModal('payAllocModal');
-    setTimeout(() => payFinish(P.idx, P.amt, P.dt, P.sel.map(i => ({ item: P.sug[i].name, amt: P.sug[i].alloc }))), 250);
+    setTimeout(() => payFinish(P.idx, P.amt, P.dt, P.sel.map(i => ({ item: P.sug[i].name, amt: P.sug[i].alloc })), P.disc || 0), 250);
 }
 function payAllocSkip() {
     const P = PAY_PEND; if (!P) return; PAY_PEND = null;
     closeModal('payAllocModal');
-    setTimeout(() => payFinish(P.idx, P.amt, P.dt, []), 250);
+    setTimeout(() => payFinish(P.idx, P.amt, P.dt, [], P.disc || 0), 250);
 }
-function payFinish(payCusIdx, amt, dt, alloc) {
+function payFinish(payCusIdx, amt, dt, alloc, disc) {
+    disc = disc || 0;
     const cusName = appData.customers[payCusIdx].name;
     // তারপর পাসওয়ার্ড চাই
     setTimeout(function() {
         requestTransactionPin(
             '🔐 টাকা জমা নিশ্চিত করুন',
-            `👤 ${cusName} — জমা ${amt} ৳`,
+            `👤 ${cusName} — ` + (amt > 0 ? `জমা ${amt} ৳` : '') + (amt > 0 && disc > 0 ? ' + ' : '') + (disc > 0 ? `ছাড় ${disc} ৳` : ''),
             function() {
                 if (!Array.isArray(appData.customers[payCusIdx].payment)) appData.customers[payCusIdx].payment = [];
                 const rec = {
@@ -2879,9 +2906,10 @@ function payFinish(payCusIdx, amt, dt, alloc) {
                     at: now()
                 };
                 if (alloc && alloc.length) rec.alloc = alloc;
-                appData.customers[payCusIdx].payment.push(rec);
+                if (amt > 0) appData.customers[payCusIdx].payment.push(rec);
+                if (disc > 0) appData.customers[payCusIdx].payment.push({ id: uid(), dt: dt, amt: disc, disc: true, byName: currentUser.name, byRole: currentUser.role, byId: currentUser.id, at: now() });
                 const _pc = appData.customers[payCusIdx];
-                const _pLast = _pc.payment[_pc.payment.length - 1], _pTot = getCustomerTotals(_pc);
+                const _pLast = { dt: dt, amt: amt, disc: disc }, _pTot = getCustomerTotals(_pc);
                 const _pm = () => waEntryMessage(_pc, 'pay', _pLast, _pTot);
                 archiveIfFullyPaid(_pc);
                 save();
@@ -3145,7 +3173,7 @@ function renderHistory(idx) {
             });
             (h.payment || []).forEach(p => {
                 const byTag = p.byName ? ` <span class="by-tag">👤 ${escapeHtml(p.byName)}</span>` : '';
-                html += `<tr class="hist-paid-row"><td>${escapeHtml(p.dt)}</td><td>💵 জমা${byTag}</td><td>${escapeHtml(p.amt)} ৳</td></tr>`;
+                html += `<tr class="hist-paid-row"><td>${escapeHtml(p.dt)}</td><td>${p.disc ? '🏷️ ছাড়' : '💵 জমা'}${byTag}</td><td>${escapeHtml(p.amt)} ৳</td></tr>`;
             });
         });
         html += `</tbody></table></div>`;
@@ -3255,7 +3283,8 @@ function renderSales() {
         `<div class="report-card"><div class="rc-icon si-green">💵</div><div class="rc-value green">৳ ${f(r.cash)}</div><div class="rc-label">নগদ বিক্রি</div></div>` +
         `<div class="report-card"><div class="rc-icon si-orange">📒</div><div class="rc-value orange">৳ ${f(r.baki)}</div><div class="rc-label">বাকিতে বিক্রি</div></div>` +
         `<div class="report-card"><div class="rc-icon si-blue">💰</div><div class="rc-value">৳ ${f(r.collected)}</div><div class="rc-label">বাকি আদায় (জমা)</div></div>` +
-        `<div class="report-card"><div class="rc-icon si-red">🧾</div><div class="rc-value red">৳ ${f(r.cash + r.baki)}</div><div class="rc-label">মোট বিক্রি</div></div>`;
+        `<div class="report-card"><div class="rc-icon si-red">🧾</div><div class="rc-value red">৳ ${f(r.cash + r.baki)}</div><div class="rc-label">মোট বিক্রি</div></div>` +
+        (r.discount > 0 ? `<div class="report-card"><div class="rc-icon si-orange">🏷️</div><div class="rc-value orange">৳ ${f(r.discount)}</div><div class="rc-label">মোট ছাড় (ডিসকাউন্ট)</div></div>` : '');
     const rows = Object.keys(r.items).map(k => ({ k, c: r.items[k].cash, b: r.items[k].baki })).sort((a, b) => (b.c + b.b) - (a.c + a.b));
     document.getElementById('salesItems').innerHTML = rows.length
         ? '<div class="sales-row head"><span>পণ্য</span><span>নগদ</span><span>বাকি</span></div>' +
@@ -3451,7 +3480,7 @@ function buildBlock(c, o) {
         let text = txLabel(t).text + (h ? ' (হিস্টোরি)' : '');
         rows.push({ dt: t.dt, text, kind: Calc.isCash(t) ? 'cash' : 'baki', amt: String(t.amt), n: Calc.num(t.amt) });
     };
-    const addPay = p => { if (inRange(p.dt)) rows.push({ dt: p.dt, text: 'জমা', kind: 'pay', amt: '−' + p.amt, n: 0 }); };
+    const addPay = p => { if (inRange(p.dt)) rows.push({ dt: p.dt, text: p.disc ? 'ছাড়' : 'জমা', kind: 'pay', amt: '−' + p.amt, n: 0 }); };
     (c.tx || []).forEach(t => addTx(t, false));
     if (o.hist) (c.history || []).forEach(h => (h.tx || []).forEach(t => addTx(t, true)));
     if (o.payments) {
@@ -3474,6 +3503,7 @@ function docForCustomer(cus) {
     const T = Calc.totals(cus);
     const rows = buildBlock(cus, { names: null, hist: false, payments: true });
     const foot = [{ l: 'মোট বিল', v: T.bill + ' টাকা' }, { l: 'মোট জমা', v: T.paid + ' টাকা', c: '#16a34a' },
+        ...(T.disc > 0 ? [{ l: 'ছাড়', v: T.disc + ' টাকা', c: '#d97706' }] : []),
         { l: T.due > 0 ? 'বাকি' : 'পরিশোধিত', v: Math.max(0, T.due) + ' টাকা', c: T.due > 0 ? '#dc2626' : '#10b981', b: 1 }];
     if (T.cash > 0) foot.push({ l: 'নগদ বিক্রি (পরিশোধিত)', v: T.cash + ' টাকা', c: '#166534' });
     return { header: docHeader('কাস্টমার হিসাব'), blocks: [{ name: cus.name, phone: cus.phone, due: T.due > 0 ? 'মোট বাকি: ' + fmtNum(T.due) + ' টাকা' : 'সব পরিশোধিত', dueBad: T.due > 0, rows, foot }], summary: [], single: true };
@@ -4565,7 +4595,9 @@ function waEntryMessage0(cus, kind, e, totals) {
     const shop = appData.shop.name ? `\n🏪 ${appData.shop.name}` : '';
     let body;
     if (kind === 'pay') {
-        body = `💵 ${e.dt} তারিখে ${e.amt} টাকা জমা নেওয়া হয়েছে।`;
+        body = e.disc > 0 && e.amt > 0 ? `💵 ${e.dt} তারিখে ${e.amt} টাকা জমা নেওয়া হয়েছে এবং ${e.disc} টাকা ছাড় দেওয়া হয়েছে।`
+            : e.disc > 0 ? `🏷️ ${e.dt} তারিখে ${e.disc} টাকা ছাড় দেওয়া হয়েছে।`
+            : `💵 ${e.dt} তারিখে ${e.amt} টাকা জমা নেওয়া হয়েছে।`;
     } else if (Calc.isCash(e)) {
         body = `💵 ${e.dt} তারিখে ${txLabel(e).text} — ${e.amt} টাকা নগদে নেওয়া হয়েছে (বাকি নয়)।`;
     } else {

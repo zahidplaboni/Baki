@@ -856,8 +856,14 @@
             </div>
             <label>জমার পরিমাণ:</label>
 <div class="pay-input-wrapper">
-                <input type="text" id="payAmountInput" inputmode="numeric" placeholder="টাকা লিখুন বা p লিখুন">
+                <input type="text" id="payAmountInput" inputmode="numeric" placeholder="টাকা লিখুন বা p লিখুন" oninput="payDiscPreview()">
                 <button type="button" class="keyboard-btn" onclick="togglePassKeyboard('payAmountInput', this)" title="পুরো কিবোর্ড চালু করুন"><svg viewBox="0 0 24 24"><use href="#ico-kbd"/></svg></button>
+            </div>
+            <div id="payDiscWrap">
+                <label>🏷️ ছাড় (ডিসকাউন্ট) — ঐচ্ছিক:</label>
+                <input type="text" id="payDiscInput" inputmode="numeric" placeholder="০" oninput="payDiscPreview()">
+                <div class="pay-disc-hint">ছাড় দিলে বাকি কমবে, কিন্তু জমার টাকায় ধরা হবে না</div>
+                <div class="pay-disc-note" id="payDiscNote"></div>
             </div>
             <label>তারিখ:</label>
             <input type="date" id="payDateInput">

@@ -1547,3 +1547,10 @@ html[data-theme="sunset"] .dev-btn{border-bottom:4px solid rgba(0,0,0,.28);borde
 html[data-theme="midnight"] .dev-btn,html[data-theme="midnight"] .dev-ribbon{filter:invert(1) hue-rotate(180deg)}
 .dev-avatar{overflow:hidden;padding:0;border:3px solid #fff}
 .dev-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ===== ডিসকাউন্ট ===== */
+#payDiscInput{width:100%;box-sizing:border-box;padding:11px 12px;border:1.5px solid #fcd34d;border-radius:12px;font-size:16px;font-weight:800;background:#fffbeb;margin-bottom:4px}
+.pay-disc-hint{font-size:11px;color:#92400e;font-weight:700;margin-bottom:6px}
+.pay-disc-note{display:none;font-size:12px;font-weight:800;color:#166534;background:#f0fdf4;border:1px dashed #86efac;border-radius:10px;padding:8px 10px;margin-bottom:8px}
+.pay-disc-note.show{display:block}
+.pay-disc-note.bad{color:#991b1b;background:#fef2f2;border-color:#fca5a5}
