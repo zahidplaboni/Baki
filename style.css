@@ -1554,3 +1554,65 @@ html[data-theme="midnight"] .dev-btn,html[data-theme="midnight"] .dev-ribbon{fil
 .pay-disc-note{display:none;font-size:12px;font-weight:800;color:#166534;background:#f0fdf4;border:1px dashed #86efac;border-radius:10px;padding:8px 10px;margin-bottom:8px}
 .pay-disc-note.show{display:block}
 .pay-disc-note.bad{color:#991b1b;background:#fef2f2;border-color:#fca5a5}
+
+.sales-sum{background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:14px 16px;margin:12px 0;box-shadow:0 4px 14px rgba(15,23,42,.06)}
+.ss-title{font-weight:900;font-size:13px;color:#334155;margin-bottom:8px}
+.ss-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:14px;font-weight:700;color:#475569}
+.ss-row.m b{color:#16a34a}
+.ss-row.t{border-top:2px dashed #cbd5e1;margin-top:6px;padding-top:10px;font-size:15px;font-weight:900}
+.ss-row.t.up b{color:#dc2626}.ss-row.t.dn b{color:#16a34a}
+html[data-theme="glass"] .sales-sum{background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:#fff;border-radius:22px}
+html[data-theme="ocean"] .sales-sum{border-color:#bae6fd;border-radius:20px}
+html[data-theme="sunset"] .sales-sum{border-color:#fed7aa}
+
+/* ===== ব্যাকআপ/রিস্টোর পপআপ ===== */
+.bk-opt{display:flex;align-items:center;gap:12px;padding:12px;border:1.5px solid #e2e8f0;border-radius:16px;margin-bottom:10px;cursor:pointer;background:#fff}
+.bk-opt:active{transform:scale(.98)}
+.bk-ic{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.bk-a{background:linear-gradient(135deg,#dbeafe,#93c5fd)}.bk-b{background:linear-gradient(135deg,#dcfce7,#86efac)}
+.bk-t{font-weight:900;font-size:14px;color:#1e293b}.bk-s{font-size:11.5px;color:#64748b;font-weight:600;margin-top:2px}
+
+/* ===== আমাদের সম্পর্কে কার্ড: থিম অনুযায়ী ===== */
+.about-logo{width:74px;height:74px;margin:0 auto 8px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;background:rgba(255,255,255,.22);box-shadow:inset 0 2px 0 rgba(255,255,255,.5),0 8px 18px rgba(0,0,0,.2)}
+.about-card{position:relative;overflow:hidden}
+.about-card>*{position:relative;z-index:1}
+html[data-theme="midnight"] .about-card{filter:invert(1) hue-rotate(180deg);background:radial-gradient(circle at 85% 10%,rgba(99,102,241,.45),transparent 45%),radial-gradient(circle at 10% 100%,rgba(34,211,238,.3),transparent 45%),linear-gradient(145deg,#0b1020,#1e1b4b)!important;border:1.5px solid #6366f1;box-shadow:0 0 22px rgba(99,102,241,.55),inset 0 0 22px rgba(99,102,241,.2)}
+html[data-theme="midnight"] .about-title{text-shadow:0 0 12px #818cf8}
+html[data-theme="midnight"] .about-logo{background:rgba(99,102,241,.25);box-shadow:0 0 18px rgba(129,140,248,.7)}
+html[data-theme="ocean"] .about-card{background:radial-gradient(circle at 15% 25%,rgba(255,255,255,.35) 0 14px,transparent 15px),radial-gradient(circle at 88% 18%,rgba(255,255,255,.28) 0 22px,transparent 23px),radial-gradient(circle at 78% 82%,rgba(255,255,255,.22) 0 12px,transparent 13px),linear-gradient(160deg,#0c4a6e 0%,#0891b2 55%,#2dd4bf 100%);border-radius:26px;box-shadow:0 12px 28px rgba(8,145,178,.35)}
+html[data-theme="ocean"] .about-card::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-18px;height:46px;border-radius:50%;background:rgba(255,255,255,.18)}
+html[data-theme="glass"] .about-card{background:radial-gradient(circle at 12% 18%,rgba(244,114,182,.75),transparent 42%),radial-gradient(circle at 90% 80%,rgba(96,165,250,.7),transparent 45%),linear-gradient(135deg,#a855f7,#7c3aed);border:1.5px solid rgba(255,255,255,.85);border-radius:28px;box-shadow:0 14px 34px rgba(168,85,247,.38),inset 0 1px 0 rgba(255,255,255,.7)}
+html[data-theme="glass"] .about-logo{background:rgba(255,255,255,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1.5px solid rgba(255,255,255,.8)}
+html[data-theme="sunset"] .about-card{background:radial-gradient(circle at 82% 22%,#fde68a 0 26px,rgba(253,230,138,.35) 27px 46px,transparent 47px),linear-gradient(180deg,#be123c 0%,#ea580c 55%,#fb923c 100%);border-radius:22px;border-bottom:5px solid #9a3412;box-shadow:0 12px 26px rgba(194,65,12,.35)}
+html[data-theme="sunset"] .about-card::after{content:"";position:absolute;left:-8%;right:-8%;bottom:-26px;height:56px;border-radius:50% 50% 0 0;background:rgba(124,45,18,.35)}
+
+/* ===== ক্যালকুলেটর: সব থিমে সব অংশের রং ===== */
+html[data-theme="midnight"] .calc-float{filter:invert(1) hue-rotate(180deg)}
+html[data-theme="midnight"] .calc-float{background:#050816;border:1.5px solid #22d3ee;box-shadow:0 0 22px rgba(34,211,238,.45)}
+html[data-theme="midnight"] .calc-bar{background:#0f172a;color:#67e8f9}
+html[data-theme="midnight"] .ck{background:#111a3a;color:#e0f2fe;border:1px solid #1e3a5f}
+html[data-theme="midnight"] .ck.op{background:#0e3a52;color:#67e8f9;border-color:#22d3ee}
+html[data-theme="midnight"] .ck.eq{background:linear-gradient(135deg,#a855f7,#ec4899);border:0;color:#fff}
+html[data-theme="midnight"] #calcRes{color:#67e8f9}
+html[data-theme="ocean"] .calc-float{background:linear-gradient(180deg,#0c4a6e,#075985);box-shadow:0 12px 28px rgba(8,145,178,.45)}
+html[data-theme="ocean"] .calc-bar{background:linear-gradient(90deg,#0891b2,#0e7490);color:#e0f7fa}
+html[data-theme="ocean"] .ck{background:#0e7490;box-shadow:0 3px 0 #164e63}
+html[data-theme="ocean"] .ck.op{background:#06b6d4;box-shadow:0 3px 0 #0e7490}
+html[data-theme="ocean"] .ck.eq{background:#14b8a6;box-shadow:0 3px 0 #0f766e}
+html[data-theme="ocean"] #calcRes{color:#a5f3fc}
+html[data-theme="glass"] .calc-float{background:linear-gradient(145deg,rgba(124,58,237,.92),rgba(192,38,211,.88));border:1.5px solid rgba(255,255,255,.7);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 12px 30px rgba(168,85,247,.45)}
+html[data-theme="glass"] .calc-bar{background:rgba(255,255,255,.18);color:#fff}
+html[data-theme="glass"] .ck{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.5)}
+html[data-theme="glass"] .ck.op{background:rgba(255,255,255,.34)}
+html[data-theme="glass"] .ck.eq{background:linear-gradient(135deg,#f472b6,#fb7185);border-color:#fff}
+html[data-theme="glass"] #calcRes{color:#f5d0fe}
+html[data-theme="sunset"] .calc-float{background:#2b1408;box-shadow:0 12px 28px rgba(194,65,12,.45)}
+html[data-theme="sunset"] .calc-bar{background:linear-gradient(90deg,#9a3412,#c2410c);color:#fed7aa}
+html[data-theme="sunset"] .ck{background:#4a2511;box-shadow:0 3px 0 #1e0d04;color:#ffedd5}
+html[data-theme="sunset"] .ck.op{background:#c2410c;box-shadow:0 3px 0 #7c2d12}
+html[data-theme="sunset"] .ck.eq{background:linear-gradient(180deg,#fbbf24,#f59e0b);color:#451a03;box-shadow:0 3px 0 #b45309}
+html[data-theme="sunset"] #calcRes{color:#fdba74}
+html[data-theme="ocean"] .calc-open{background:#e0f7fa;border-color:#67e8f9;color:#0e7490}
+html[data-theme="glass"] .calc-open{background:rgba(255,255,255,.7);border-color:#e9d5ff;color:#7e22ce}
+html[data-theme="sunset"] .calc-open{background:#ffedd5;border-color:#fdba74;color:#c2410c}
+html[data-theme="midnight"] .calc-open{color:#a5b4fc}

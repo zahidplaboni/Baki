@@ -381,6 +381,7 @@
                 <div class="sales-custom" id="salesCustom" style="display:none"><input type="date" id="salesFrom" onchange="renderSales()" aria-label="থেকে"><input type="date" id="salesTo" onchange="renderSales()" aria-label="পর্যন্ত"></div>
                 <div class="sales-range" id="salesRangeText"></div>
                 <div class="report-grid" id="salesCards"></div>
+                <div class="sales-sum" id="salesSum"></div>
                 <div id="salesItems" class="sales-items"></div>
             </div>
             <div class="section">
@@ -400,8 +401,7 @@
 
             <div class="section">
                 <div class="settings-list">
-                    <div class="settings-row" onclick="handleSetting('backup')"><div class="sr-icon si-backup">📥</div><div class="sr-body"><div class="sr-title">ব্যাকআপ নিন</div><div class="sr-sub">ডেটা JSON ফাইলে সেভ করুন</div></div><div class="sr-arrow">›</div></div>
-                    <div class="settings-row" onclick="handleSetting('restore')"><div class="sr-icon si-restore">📤</div><div class="sr-body"><div class="sr-title">রিস্টোর করুন</div><div class="sr-sub">ব্যাকআপ ফাইল থেকে ডেটা ফিরিয়ে আনুন</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="openBackupModal()"><div class="sr-icon si-backup">💾</div><div class="sr-body"><div class="sr-title">ব্যাকআপ ও রিস্টোর</div><div class="sr-sub">ডেটা সেভ করুন অথবা ফাইল থেকে ফিরিয়ে আনুন</div></div><div class="sr-arrow">›</div></div>
                     <div class="settings-row" onclick="handleSetting('employees')"><div class="sr-icon si-emp">👥</div><div class="sr-body"><div class="sr-title">স্টাফ ম্যানেজমেন্ট</div><div class="sr-sub">নতুন স্টাফ যোগ করুন / ডিলিট করুন</div></div><div class="sr-arrow">›</div></div>
                     <div class="settings-row" onclick="openSecurityMenu()"><div class="sr-icon si-pass">🔑</div><div class="sr-body"><div class="sr-title">পাসওয়ার্ড ও নিরাপত্তা</div><div class="sr-sub">পাসওয়ার্ড, লেনদেনের পাসওয়ার্ড, ফিঙ্গারপ্রিন্ট, সিকিউরিটি প্রশ্ন</div></div><div class="sr-arrow">›</div></div>
                     <div class="settings-row" onclick="handleSetting('deletelog')"><div class="sr-icon si-pass">🗑️</div><div class="sr-body"><div class="sr-title">ডিলিট লগ</div><div class="sr-sub">কে, কখন, কী ডিলিট করেছে (শুধু মালিক)</div></div><div class="sr-arrow">›</div></div>
@@ -893,6 +893,17 @@
                 <button class="modal-btn cancel" onclick="payAllocSkip()">পরে ঠিক করব — শুধু মোট বাকি থেকে কাটো</button>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="backupModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>💾 ব্যাকআপ ও রিস্টোর</h4></div>
+        <div class="modal-body">
+            <div class="bk-opt" onclick="closeModal('backupModal');handleSetting('backup')"><div class="bk-ic bk-a">📥</div><div><div class="bk-t">ব্যাকআপ নিন</div><div class="bk-s">ডেটা JSON ফাইলে সেভ করুন</div></div></div>
+            <div class="bk-opt" onclick="closeModal('backupModal');handleSetting('restore')"><div class="bk-ic bk-b">📤</div><div><div class="bk-t">রিস্টোর করুন</div><div class="bk-s">ব্যাকআপ ফাইল থেকে ডেটা ফিরিয়ে আনুন</div></div></div>
+        </div>
+        <div class="modal-footer"><div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('backupModal')">বন্ধ করুন</button></div></div>
     </div>
 </div>
 
