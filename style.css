@@ -1320,3 +1320,84 @@ body.kb-open .setup-body { padding-bottom: 45vh; }
 .vw-right .rf-btn{width:32px;height:32px;font-size:16px}
 .rf-toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#065f46;color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;font-weight:700;z-index:99999;box-shadow:0 6px 20px #0005;max-width:86vw;text-align:center}
 .date-strip{padding-right:12px!important}.date-strip .hdr-act{margin-left:auto}
+
+/* ===== থ্রিডি নিচের আইকন ===== */
+.nav-icon{width:32px;height:32px;position:relative}
+.n3d{width:32px;height:32px;display:block;filter:drop-shadow(0 3px 3px rgba(15,23,42,.28));transition:transform .2s ease,filter .2s ease;opacity:.92}
+.nav-btn.active .n3d{transform:translateY(-3px) scale(1.14);opacity:1;filter:drop-shadow(0 6px 5px rgba(15,23,42,.32))}
+.nav-btn:active .n3d{transform:scale(.92)}
+.nav-btn .nav-label{margin-top:1px}
+.nav-btn.has-low .nav-icon::after,.nav-btn.has-warn .nav-icon::after{top:-3px;right:-4px}
+
+/* ===== থিম নির্বাচন ===== */
+.th-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.th-opt{border:2px solid #e2e8f0;border-radius:16px;padding:8px;cursor:pointer;background:#fff;text-align:center;font-weight:800;font-size:13px;color:#334155;position:relative;-webkit-tap-highlight-color:transparent}
+.th-opt.on{border-color:#4f46e5;box-shadow:0 0 0 3px rgba(79,70,229,.18)}
+.th-opt .th-sw{height:54px;border-radius:11px;margin-bottom:6px;position:relative;overflow:hidden}
+.th-opt .th-sw i{position:absolute;left:8px;right:8px;bottom:7px;height:15px;border-radius:6px;background:rgba(255,255,255,.88)}
+.th-opt .th-sw b{position:absolute;left:8px;top:7px;width:30px;height:8px;border-radius:4px;background:rgba(255,255,255,.7)}
+.th-opt .th-ck{position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;background:#4f46e5;color:#fff;font-size:12px;display:none;align-items:center;justify-content:center}
+.th-opt.on .th-ck{display:flex}
+.th-login{position:absolute;top:14px;left:14px;width:34px;height:34px;border-radius:50%;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;box-shadow:0 2px 8px rgba(79,70,229,.2)}
+
+/* ===== থিম: মিডনাইট (গাঢ়) ===== */
+html[data-theme="midnight"]{filter:invert(1) hue-rotate(180deg);background:#eaefff}
+html[data-theme="midnight"] body{background:#eaefff!important}
+html[data-theme="midnight"] :is(.app-bar,.btn-primary,.cc-avatar,.cc-pay-btn,.cc-toggle-btn,.date-strip,.dc-open,.emp-avatar,.history-btn,.keyboard-btn,.lg-pill,.login-btn,.login-screen,.modal-btn.confirm,.my-photo,.pass-keyboard-btn,.rf-btn,.rm-wa,.setup-screen,.setup-welcome,.si-blue,.si-green,.si-orange,.si-red,.si-emp,.si-pass,.si-restore,.si-backup,.top-due-rank,.um-avatar,.user-btn,.vw-top,.wa-btn,[style*="gradient"],img,video,.n3d,.sync-dot){filter:invert(1) hue-rotate(180deg)}
+html[data-theme="midnight"] :is(.app-bar,.btn-primary,.cc-avatar,.cc-pay-btn,.cc-toggle-btn,.date-strip,.dc-open,.emp-avatar,.history-btn,.keyboard-btn,.lg-pill,.login-btn,.login-screen,.modal-btn.confirm,.my-photo,.pass-keyboard-btn,.rf-btn,.rm-wa,.setup-screen,.setup-welcome,.si-blue,.si-green,.si-orange,.si-red,.si-emp,.si-pass,.si-restore,.si-backup,.top-due-rank,.um-avatar,.user-btn,.vw-top,.wa-btn,[style*="gradient"],img,video,.n3d,.sync-dot) :is(.app-bar,.btn-primary,.cc-avatar,.cc-pay-btn,.cc-toggle-btn,.date-strip,.dc-open,.emp-avatar,.history-btn,.keyboard-btn,.lg-pill,.login-btn,.login-screen,.modal-btn.confirm,.my-photo,.pass-keyboard-btn,.rf-btn,.rm-wa,.setup-screen,.setup-welcome,.si-blue,.si-green,.si-orange,.si-red,.si-emp,.si-pass,.si-restore,.si-backup,.top-due-rank,.um-avatar,.user-btn,.vw-top,.wa-btn,[style*="gradient"],img,video,.n3d,.sync-dot){filter:none}
+html[data-theme="midnight"] .customer-card,html[data-theme="midnight"] .stat-card,html[data-theme="midnight"] .modal-card,html[data-theme="midnight"] .report-card,html[data-theme="midnight"] .stk-card,html[data-theme="midnight"] .vw-card,html[data-theme="midnight"] .filter-panel,html[data-theme="midnight"] .settings-list,html[data-theme="midnight"] .user-menu,html[data-theme="midnight"] .notice-card,html[data-theme="midnight"] .top-due-item,html[data-theme="midnight"] .item-stock-box,html[data-theme="midnight"] .history-month-group,html[data-theme="midnight"] .sales-items,html[data-theme="midnight"] .remind-bar,html[data-theme="midnight"] .autocomplete-list{background:#d9e0ff!important;border-color:#bdc7ff!important}
+html[data-theme="midnight"] .bottom-nav{background:#e3e9ff!important;border-top-color:#bdc7ff!important}
+html[data-theme="midnight"] input,html[data-theme="midnight"] select,html[data-theme="midnight"] textarea,html[data-theme="midnight"] .home-toolbar .search-wrapper,html[data-theme="midnight"] .search-box{background:#dee4fd!important;border-color:#b1bee9!important}
+html[data-theme="midnight"] .modal-overlay{background:rgba(255,255,255,.62)}
+html[data-theme="midnight"] .th-opt{background:#d9e0ff}
+html[data-theme="midnight"] .th-login{background:#d9e0ff}
+
+/* ===== থিম: ওশান (নীল-সবুজ, হালকা) ===== */
+html[data-theme="ocean"]{--primary:#0891b2;--primary-dark:#0e7490;--primary-light:#ecfeff;--slate-50:#f0fdfa;--slate-100:#e0f2fe;--slate-200:#bae6fd}
+html[data-theme="ocean"] body{background:linear-gradient(180deg,#d9f3fb 0,#eefcf9 38%,#f8fafc 100%) fixed!important}
+html[data-theme="ocean"] .app-bar,html[data-theme="ocean"] .vw-top{background:linear-gradient(135deg,#0c4a6e,#0891b2 70%,#2dd4bf)!important}
+html[data-theme="ocean"] .date-strip{background:linear-gradient(135deg,#0c4a6e,#0891b2,#2dd4bf)!important;background-size:200% 200%!important;border-color:rgba(255,255,255,.35)!important;box-shadow:0 10px 26px rgba(8,145,178,.32)!important}
+html[data-theme="ocean"] .login-screen,html[data-theme="ocean"] .setup-screen{background:linear-gradient(135deg,#0c4a6e 0%,#0891b2 55%,#2dd4bf 100%)!important}
+html[data-theme="ocean"] .page-hero{background:linear-gradient(135deg,#e0f7fa,#ecfdf5)!important;border-color:#7dd3fc!important}
+html[data-theme="ocean"] .user-menu-head{background:linear-gradient(135deg,#e0f7fa,#f0fdfa)!important}
+html[data-theme="ocean"] .customer-card,html[data-theme="ocean"] .stat-card,html[data-theme="ocean"] .report-card,html[data-theme="ocean"] .stk-card,html[data-theme="ocean"] .vw-card{border:1px solid #bae6fd!important;border-radius:20px!important;box-shadow:0 10px 28px rgba(8,145,178,.14)!important}
+html[data-theme="ocean"] .bottom-nav{border-radius:26px 26px 0 0;border-top:0;box-shadow:0 -8px 30px rgba(8,145,178,.2)}
+html[data-theme="ocean"] .nav-btn.active{color:#0891b2}
+html[data-theme="ocean"] .login-btn,html[data-theme="ocean"] .modal-btn.confirm{background:linear-gradient(135deg,#0891b2,#0e7490)!important}
+html[data-theme="ocean"] .btn-primary{background:linear-gradient(135deg,#14b8a6,#0d9488)!important}
+html[data-theme="ocean"] .cc-pay-btn{background:linear-gradient(135deg,#0ea5e9,#0369a1)!important}
+html[data-theme="ocean"] .th-opt.on{border-color:#0891b2;box-shadow:0 0 0 3px rgba(8,145,178,.2)}
+html[data-theme="ocean"] .th-opt .th-ck{background:#0891b2}
+html[data-theme="ocean"] input:focus,html[data-theme="ocean"] select:focus{border-color:#06b6d4!important}
+
+/* ===== থিম: গ্লাস (কাচের মতো, বেগুনি-গোলাপি) ===== */
+html[data-theme="glass"]{--primary:#9333ea;--primary-dark:#7e22ce;--primary-light:#faf5ff}
+html[data-theme="glass"] body{background:radial-gradient(circle at 8% 0%,#f5d0fe 0,transparent 45%),radial-gradient(circle at 100% 28%,#bfdbfe 0,transparent 45%),radial-gradient(circle at 0% 100%,#fecdd3 0,transparent 45%),#faf5ff fixed!important}
+html[data-theme="glass"] .app-bar,html[data-theme="glass"] .vw-top{background:linear-gradient(135deg,#7c3aed,#c026d3 55%,#fb7185)!important}
+html[data-theme="glass"] .date-strip{background:linear-gradient(135deg,#7c3aed,#c026d3,#fb7185)!important;background-size:200% 200%!important;border-color:rgba(255,255,255,.5)!important;box-shadow:0 10px 26px rgba(168,85,247,.35)!important}
+html[data-theme="glass"] .login-screen,html[data-theme="glass"] .setup-screen{background:linear-gradient(135deg,#7c3aed 0%,#c026d3 55%,#fb7185 100%)!important}
+html[data-theme="glass"] .page-hero{background:rgba(255,255,255,.5)!important;border:1px solid rgba(255,255,255,.9)!important;border-radius:24px!important;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+html[data-theme="glass"] .customer-card,html[data-theme="glass"] .stat-card,html[data-theme="glass"] .report-card,html[data-theme="glass"] .stk-card,html[data-theme="glass"] .vw-card,html[data-theme="glass"] .settings-list,html[data-theme="glass"] .filter-panel{background:rgba(255,255,255,.58)!important;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.95)!important;border-radius:24px!important;box-shadow:0 10px 32px rgba(168,85,247,.16)!important}
+html[data-theme="glass"] .bottom-nav{background:rgba(255,255,255,.72)!important;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid #fff;border-radius:26px 26px 0 0;box-shadow:0 -8px 30px rgba(168,85,247,.22)}
+html[data-theme="glass"] .nav-btn.active{color:#9333ea}
+html[data-theme="glass"] .login-btn,html[data-theme="glass"] .modal-btn.confirm{background:linear-gradient(135deg,#a855f7,#7e22ce)!important}
+html[data-theme="glass"] .home-toolbar .search-wrapper,html[data-theme="glass"] input,html[data-theme="glass"] select,html[data-theme="glass"] textarea{background:rgba(255,255,255,.75)!important;border-color:#e9d5ff!important}
+html[data-theme="glass"] .modal-card{background:rgba(255,255,255,.88)!important;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+html[data-theme="glass"] .th-opt.on{border-color:#9333ea;box-shadow:0 0 0 3px rgba(147,51,234,.2)}
+html[data-theme="glass"] .th-opt .th-ck{background:#9333ea}
+
+/* ===== থিম: সানসেট (কমলা-গরম) ===== */
+html[data-theme="sunset"]{--primary:#ea580c;--primary-dark:#c2410c;--primary-light:#fff7ed;--slate-50:#fffaf5;--slate-100:#ffedd5;--slate-200:#fed7aa}
+html[data-theme="sunset"] body{background:linear-gradient(180deg,#ffedd5 0,#fff8f1 40%,#fffbf7 100%) fixed!important}
+html[data-theme="sunset"] .app-bar,html[data-theme="sunset"] .vw-top{background:linear-gradient(135deg,#9a3412,#ea580c 60%,#fb923c)!important}
+html[data-theme="sunset"] .date-strip{background:linear-gradient(135deg,#be123c,#ea580c,#fbbf24)!important;background-size:200% 200%!important;border-color:rgba(255,255,255,.4)!important;box-shadow:0 10px 26px rgba(234,88,12,.35)!important}
+html[data-theme="sunset"] .login-screen,html[data-theme="sunset"] .setup-screen{background:linear-gradient(135deg,#9a3412 0%,#ea580c 50%,#fbbf24 100%)!important}
+html[data-theme="sunset"] .page-hero{background:linear-gradient(135deg,#fff1e0,#fef3c7)!important;border-color:#fdba74!important}
+html[data-theme="sunset"] .user-menu-head{background:linear-gradient(135deg,#fff1e0,#fef3c7)!important}
+html[data-theme="sunset"] .customer-card,html[data-theme="sunset"] .stat-card,html[data-theme="sunset"] .report-card,html[data-theme="sunset"] .stk-card,html[data-theme="sunset"] .vw-card{border:1px solid #fed7aa!important;border-radius:20px!important;box-shadow:0 8px 24px rgba(234,88,12,.14)!important}
+html[data-theme="sunset"] .bottom-nav{border-top:3px solid #fb923c;box-shadow:0 -6px 24px rgba(234,88,12,.16)}
+html[data-theme="sunset"] .nav-btn.active{color:#ea580c}
+html[data-theme="sunset"] .login-btn,html[data-theme="sunset"] .modal-btn.confirm{background:linear-gradient(135deg,#f97316,#c2410c)!important}
+html[data-theme="sunset"] input:focus,html[data-theme="sunset"] select:focus{border-color:#fb923c!important}
+html[data-theme="sunset"] .th-opt.on{border-color:#ea580c;box-shadow:0 0 0 3px rgba(234,88,12,.2)}
+html[data-theme="sunset"] .th-opt .th-ck{background:#ea580c}
