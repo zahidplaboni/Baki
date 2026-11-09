@@ -979,6 +979,27 @@ function openThemeModal() {
 }
 applyTheme(themeNow());
 
+/* নিচের বোতামে আতশবাজি / তারা (সানসেট ও গ্লাস থিমে) */
+function navBurst(btn) {
+    try {
+        const th = document.documentElement.getAttribute('data-theme');
+        if (th !== 'sunset' && th !== 'glass' && th !== 'midnight') return;
+        const cols = th === 'sunset' ? ['#fbbf24', '#f97316', '#ef4444', '#fde68a'] : th === 'glass' ? ['#f0abfc', '#c084fc', '#93c5fd', '#fff'] : ['#22d3ee', '#a78bfa', '#f0abfc', '#fde68a'];
+        const host = btn.querySelector('.nav-icon') || btn;
+        for (let i = 0; i < 14; i++) {
+            const p = document.createElement('span');
+            p.className = 'nv-part' + (th !== 'sunset' && i % 2 ? ' star' : '');
+            const a = (Math.PI * 2 * i) / 14, d = 22 + Math.random() * 16;
+            p.style.setProperty('--dx', Math.cos(a) * d + 'px');
+            p.style.setProperty('--dy', Math.sin(a) * d + 'px');
+            p.style.background = cols[i % cols.length];
+            host.appendChild(p);
+            setTimeout(() => p.remove(), 850);
+        }
+    } catch (e) {}
+}
+document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('.nav-btn'); if (b) navBurst(b); }, true);
+
 function initApp() {
     if (!appData.setupDone) {
         document.getElementById('setupScreen').classList.add('active');

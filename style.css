@@ -1401,3 +1401,54 @@ html[data-theme="sunset"] .login-btn,html[data-theme="sunset"] .modal-btn.confir
 html[data-theme="sunset"] input:focus,html[data-theme="sunset"] select:focus{border-color:#fb923c!important}
 html[data-theme="sunset"] .th-opt.on{border-color:#ea580c;box-shadow:0 0 0 3px rgba(234,88,12,.2)}
 html[data-theme="sunset"] .th-opt .th-ck{background:#ea580c}
+
+/* ===== থিম অনুযায়ী আলাদা আইকন, অ্যানিমেশন ও ঘড়ি ===== */
+@keyframes nvBob{0%,100%{transform:translateY(-3px) scale(1.14)}50%{transform:translateY(-7px) scale(1.14)}}
+@keyframes nvPulse{0%,100%{transform:translateY(-3px) scale(1.12)}50%{transform:translateY(-3px) scale(1.22)}}
+@keyframes nvShine{0%{background-position:-60px 0}100%{background-position:60px 0}}
+@keyframes nvPop{0%{transform:scale(.7)}60%{transform:scale(1.3) translateY(-5px)}100%{transform:translateY(-3px) scale(1.14)}}
+@keyframes nvPart{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2)}}
+.nv-part{position:absolute;left:50%;top:40%;width:7px;height:7px;border-radius:50%;pointer-events:none;z-index:5;animation:nvPart .8s ease-out forwards}
+.nv-part.star{border-radius:0;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
+.nav-btn{position:relative}
+.nav-btn.active .n3d{animation:nvPop .45s ease-out}
+
+/* মিডনাইট: নিয়ন আভা */
+html[data-theme="midnight"] .nav-btn .n3d{filter:invert(1) hue-rotate(180deg) drop-shadow(0 0 5px #fde68a) saturate(1.25) brightness(1.08)}
+html[data-theme="midnight"] .nav-btn.active .n3d{animation:nvPulse 1.6s ease-in-out infinite;filter:invert(1) hue-rotate(180deg) drop-shadow(0 0 9px #fbbf24) saturate(1.4) brightness(1.15)}
+/* ওশান: ঢেউয়ের মতো দুলবে, নীল-সবুজ রং */
+html[data-theme="ocean"] .nav-btn .n3d{filter:hue-rotate(165deg) saturate(1.15) drop-shadow(0 3px 3px rgba(8,145,178,.35))}
+html[data-theme="ocean"] .nav-btn.active .n3d{animation:nvBob 1.8s ease-in-out infinite;filter:hue-rotate(165deg) saturate(1.3) drop-shadow(0 7px 5px rgba(8,145,178,.4))}
+/* গ্লাস: কাচের পিল + ঝলক + তারা */
+html[data-theme="glass"] .nav-btn .n3d{filter:hue-rotate(255deg) saturate(.95) drop-shadow(0 3px 4px rgba(147,51,234,.35))}
+html[data-theme="glass"] .nav-btn.active .nav-icon{background:linear-gradient(110deg,rgba(255,255,255,.55) 30%,rgba(255,255,255,.95) 50%,rgba(255,255,255,.55) 70%) 0 0/120px 100%;border-radius:14px;box-shadow:0 4px 14px rgba(168,85,247,.3),inset 0 0 0 1px #fff;animation:nvShine 2.2s linear infinite}
+/* সানসেট: গরম রং + আতশবাজি */
+html[data-theme="sunset"] .nav-btn .n3d{filter:hue-rotate(-18deg) saturate(1.35) drop-shadow(0 3px 3px rgba(194,65,12,.35))}
+html[data-theme="sunset"] .nav-btn.active .n3d{filter:hue-rotate(-18deg) saturate(1.5) drop-shadow(0 6px 5px rgba(194,65,12,.4))}
+
+/* ঘড়ি: মিডনাইট — নিয়ন ডিজিটাল */
+html[data-theme="midnight"] .flip-clock-outer{background:linear-gradient(90deg,#22d3ee,#a78bfa)!important;box-shadow:0 0 14px rgba(34,211,238,.55)}
+html[data-theme="midnight"] .flip-clock-inner{background:#050816!important}
+html[data-theme="midnight"] .digit-box{background:transparent!important;color:#67e8f9!important;text-shadow:0 0 8px #22d3ee,0 0 2px #fff;font-family:"Courier New",monospace}
+html[data-theme="midnight"] .colon{color:#f0abfc!important;text-shadow:0 0 8px #e879f9;animation:nvBlink 1s steps(2) infinite}
+html[data-theme="midnight"] .ampm-text{color:#a5f3fc!important}
+@keyframes nvBlink{50%{opacity:.25}}
+/* ঘড়ি: ওশান — থ্রিডি নীল বোতাম-ডিজিট */
+html[data-theme="ocean"] .flip-clock-outer{background:linear-gradient(90deg,#38bdf8,#2dd4bf)!important}
+html[data-theme="ocean"] .flip-clock-inner{background:linear-gradient(180deg,#e0f7fa,#bae6fd)!important}
+html[data-theme="ocean"] .digit-box{background:linear-gradient(180deg,#22d3ee,#0891b2)!important;color:#fff!important;border-radius:7px;box-shadow:0 3px 0 #0e7490,0 5px 6px rgba(8,145,178,.4);text-shadow:0 1px 2px rgba(0,0,0,.3);margin-bottom:3px}
+html[data-theme="ocean"] .colon{color:#0e7490!important}
+/* ঘড়ি: গ্লাস — কুয়াশা-কাচ */
+html[data-theme="glass"] .flip-clock-outer{background:linear-gradient(90deg,#f0abfc,#93c5fd)!important}
+html[data-theme="glass"] .flip-clock-inner{background:rgba(255,255,255,.28)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+html[data-theme="glass"] .digit-box{background:rgba(255,255,255,.38)!important;color:#fff!important;border:1px solid rgba(255,255,255,.85);text-shadow:0 1px 4px rgba(124,58,237,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+html[data-theme="glass"] .colon{color:#fff!important}
+html[data-theme="glass"] .ampm-text{color:#fff!important;text-shadow:0 1px 3px rgba(124,58,237,.6)}
+/* ঘড়ি: সানসেট — ফ্লিপ-কার্ড */
+html[data-theme="sunset"] .flip-clock-outer{background:linear-gradient(90deg,#fbbf24,#ef4444)!important}
+html[data-theme="sunset"] .flip-clock-inner{background:#2b1408!important}
+html[data-theme="sunset"] .digit-box{background:linear-gradient(180deg,#4a2511 0,#3a1b0a 49%,#140800 49%,#1e0d04 51%,#2f1708 51%,#3d1f0c 100%)!important;color:#ffedd5!important;border-radius:4px;box-shadow:0 2px 0 #000,0 3px 5px rgba(0,0,0,.5);font-family:Arial,sans-serif}
+html[data-theme="sunset"] .colon{color:#fb923c!important}
+html[data-theme="sunset"] .ampm-text{color:#fed7aa!important}
+html[data-theme="ocean"] .nav-btn[data-page="add"] .n3d{filter:hue-rotate(0deg) saturate(1.15) drop-shadow(0 3px 3px rgba(8,145,178,.35))}
+html[data-theme="glass"] .nav-btn[data-page="add"] .n3d{filter:hue-rotate(95deg) saturate(.95) drop-shadow(0 3px 4px rgba(147,51,234,.35))}
