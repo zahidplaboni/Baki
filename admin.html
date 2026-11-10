@@ -9,7 +9,7 @@ button{background:#1a3a5c;color:#fff;border:0;font-weight:700;cursor:pointer;mar
 .em{font-weight:700;word-break:break-all}.sm{font-size:13px;color:#566}.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:13px;font-weight:700;color:#fff}
 .ok{background:#1e7f4f}.warn{background:#e08a00}.bad{background:#c62828}.off{background:#7a8794}
 #msg{padding:10px;border-radius:10px;margin-bottom:10px;display:none;font-weight:700}.m1{background:#e1f5e9;color:#176a40}.m2{background:#fde8e8;color:#a00}
-.days{width:80px;display:inline-block}
+.days{width:80px;display:inline-block}.sec{border:1.5px solid #dbe4ee;border-radius:12px;padding:10px;margin-top:10px;background:#f8fafc}.st{font-weight:800;color:#1a3a5c;margin-bottom:6px;font-size:14px}.hint{font-size:12px;color:#566;margin-top:4px}
 </style></head><body>
 <h1>🔑 লাইসেন্স কন্ট্রোল</h1><div id="msg"></div>
 <div id="login" class="card"><b>অ্যাডমিন লগইন</b><input id="ae" type="email" placeholder="অ্যাডমিন ইমেইল" autocomplete="username"><input id="ap" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password"><button onclick="doLogin()">প্রবেশ</button></div>
@@ -48,12 +48,21 @@ function render(){$('cnt').textContent=ROWS.length+' টি লাইসেন�
  return `<div class="card"><div class="top"><span class="em">${esc(r.email)}</span><span class="pill ${pill}">${txt}</span></div>
  <div class="sm">${r.shop?'🏪 '+esc(r.shop)+' · ':''}মেয়াদ: ${r.exp?dmy(r.exp):'নেই'} · শেষ সিঙ্ক: ${ago(r.seen)}${r.docs!=null?' · ডেটা: '+r.docs+' টি':''}</div>
  ${r.msg?'<div class="sm">📝 '+esc(r.msg)+'</div>':''}
- <div class="row" style="margin-top:8px"><input class="days" id="d_${r.id}" type="number" value="31"><button class="g" onclick="addDays('${r.id}',0)">আজ থেকে</button><button onclick="addDays('${r.id}',1)">মেয়াদের সাথে যোগ</button></div>
- <div class="row"><input type="date" id="t_${r.id}" style="width:auto"><button class="o" onclick="setDate('${r.id}')">তারিখ বদলান</button></div>
- <div class="row">${r.locked?`<button class="g" onclick="lock('${r.id}',false)">🔓 খুলে দিন</button>`:`<button class="r" onclick="lock('${r.id}',true)">🔒 এখনই লক</button>`}<button class="o" onclick="note('${r.id}')">📝 বার্তা</button><button class="o" style="color:#c62828" onclick="delLic('${r.id}')">🗑️ তালিকা থেকে মুছুন</button></div></div>`}).join('')}
+ <div class="sec"><div class="st">📆 দিন দিয়ে মেয়াদ দিন (টাকা পেলে এটা)</div>
+  <div class="row"><input class="days" id="d_${r.id}" type="number" value="31"><span>দিন</span></div>
+  <div class="row"><button class="g" onclick="addDays('${r.id}',0)">আজ থেকে গোনা শুরু</button><button onclick="addDays('${r.id}',1)">বর্তমান মেয়াদের সাথে যোগ</button></div>
+  <div class="hint">"আজ থেকে" = আজ থেকে এত দিন (লকও খোলে)। "যোগ" = এখনকার মেয়াদ শেষের পর এত দিন বাড়ে।</div></div>
+ <div class="sec"><div class="st">🗓️ নির্দিষ্ট তারিখ দিন</div>
+  <div class="row"><input type="date" id="t_${r.id}" style="width:auto" onchange="showDate('${r.id}')"><button class="o" onclick="setDate('${r.id}')">এই তারিখ সেট করুন</button></div>
+  <div class="hint" id="td_${r.id}">তারিখ বাছুন, তারপর বোতাম চাপুন। ওই তারিখের রাত ১১:৫৯ পর্যন্ত চলবে।</div></div>
+ <div class="sec"><div class="st">🔒 লক ও বার্তা</div>
+  <div class="row">${r.locked?`<button class="g" onclick="lock('${r.id}',false)">🔓 খুলে দিন</button>`:`<button class="r" onclick="lock('${r.id}',true)">🔒 এখনই লক</button>`}<button class="o" onclick="note('${r.id}')">📝 বার্তা</button><button class="o" style="color:#c62828" onclick="delLic('${r.id}')">🗑️ তালিকা থেকে মুছুন</button></div></div>
+</div></div>`}).join('')}
 const R=id=>ROWS.find(r=>r.id===id);
 async function addDays(id,keep){const n=parseInt($('d_'+id).value,10);if(!(n>0))return say('❌ দিন লিখুন',1);const r=R(id);const base=keep&&r.exp>Date.now()?r.exp:Date.now();
  try{await setFields(id,{expiry:{integerValue:String(base+n*DAY)},locked:{booleanValue:false}});say('✅ মেয়াদ '+dmy(base+n*DAY)+' পর্যন্ত, লক খোলা');load()}catch(e){say('❌ '+e.message,1)}}
+const MN=['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+function showDate(id){const v=$('t_'+id).value;if(!v)return;const [y,m,d]=v.split('-').map(Number);$('td_'+id).textContent='➜ '+d+' '+MN[m-1]+' '+y+' এর রাত ১১:৫৯ পর্যন্ত চলবে';}
 async function setDate(id){const v=$('t_'+id).value;if(!v)return say('❌ তারিখ বাছুন',1);const [y,m,d]=v.split('-').map(Number);const ms=new Date(y,m-1,d,23,59,59).getTime();
  try{await setFields(id,{expiry:{integerValue:String(ms)}});say('✅ মেয়াদ '+dmy(ms));load()}catch(e){say('❌ '+e.message,1)}}
 async function lock(id,on){if(on&&!confirm('এখনই লক করবেন?'))return;try{await setFields(id,{locked:{booleanValue:on}});say(on?'🔒 লক হয়েছে':'🔓 খুলেছে');load()}catch(e){say('❌ '+e.message,1)}}
