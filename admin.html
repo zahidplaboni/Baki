@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>লাইসেন্স কন্ট্রোল</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef2f7;font-family:system-ui,'Noto Sans Bengali',sans-serif;color:#1d2b3a;padding:14px;max-width:760px;margin:auto}
+h1{font-size:21px;margin:6px 0 12px;color:#1a3a5c}.card{background:#fff;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 1px 6px #0002}
+input,button{font:inherit;padding:10px;border-radius:10px;border:1px solid #bcc7d4}input{width:100%;margin:4px 0}
+button{background:#1a3a5c;color:#fff;border:0;font-weight:700;cursor:pointer;margin:3px 2px}button.g{background:#1e7f4f}button.r{background:#c62828}button.o{background:#e6e9ee;color:#1a3a5c}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.top{display:flex;justify-content:space-between;align-items:center}
+.em{font-weight:700;word-break:break-all}.sm{font-size:13px;color:#566}.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:13px;font-weight:700;color:#fff}
+.ok{background:#1e7f4f}.warn{background:#e08a00}.bad{background:#c62828}.off{background:#7a8794}
+#msg{padding:10px;border-radius:10px;margin-bottom:10px;display:none;font-weight:700}.m1{background:#e1f5e9;color:#176a40}.m2{background:#fde8e8;color:#a00}
+.days{width:80px;display:inline-block}
+</style></head><body>
+<h1>🔑 লাইসেন্স কন্ট্রোল</h1><div id="msg"></div>
+<div id="login" class="card"><b>অ্যাডমিন লগইন</b><input id="ae" type="email" placeholder="অ্যাডমিন ইমেইল" autocomplete="username"><input id="ap" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password"><button onclick="doLogin()">প্রবেশ</button></div>
+<div id="app" style="display:none">
+ <div class="card"><div class="top"><b>➕ নতুন লাইসেন্স</b><button class="o" onclick="logout()">বের হই</button></div>
+  <input id="ne" type="email" placeholder="ক্রেতার ইমেইল"><input id="np" type="text" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)">
+  <div class="row"><span>মেয়াদ</span><input id="nd" class="days" type="number" value="31"><span>দিন</span><button class="g" onclick="newLic()">তৈরি করুন</button></div></div>
+ <div class="top"><b id="cnt"></b><button class="o" onclick="load()">🔄 নতুন করে আনুন</button></div>
+ <div id="list"></div>
+</div>
+<script>
+const FB={apiKey:'AIzaSyB7DEynloD4oURQxEspaQKx0vbdzHx9K8s',projectId:'baki-khata-6066d'};
+const BASE='https://firestore.googleapis.com/v1/projects/'+FB.projectId+'/databases/(default)/documents';
+const DAY=86400000;let A=null;
+const $=id=>document.getElementById(id);const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function say(t,bad){const m=$('msg');m.textContent=t;m.className=bad?'m2':'m1';m.style.display='block';clearTimeout(say.t);say.t=setTimeout(()=>m.style.display='none',6000)}
+async function auth(kind,body){const r=await fetch('https://identitytoolkit.googleapis.com/v1/accounts:'+kind+'?key='+FB.apiKey,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error((j.error&&j.error.message)||'HTTP '+r.status);return j}
+async function tok(){if(A.exp-60000>Date.now())return A.idToken;const r=await fetch('https://securetoken.googleapis.com/v1/token?key='+FB.apiKey,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=refresh_token&refresh_token='+encodeURIComponent(A.refresh)});const j=await r.json();if(!r.ok)throw new Error('সেশন শেষ, আবার লগইন করুন');A.idToken=j.id_token;A.refresh=j.refresh_token;A.exp=Date.now()+(+j.expires_in||3600)*1000;sv();return A.idToken}
+function sv(){try{sessionStorage.setItem('bkAdm',JSON.stringify(A))}catch(e){}}
+async function fs(path,opt){const r=await fetch(BASE+path,Object.assign({},opt,{headers:Object.assign({'Content-Type':'application/json',Authorization:'Bearer '+await tok()},(opt||{}).headers)}));const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error((j.error&&j.error.status)||'HTTP '+r.status);return j}
+const docName=id=>'projects/'+FB.projectId+'/databases/(default)/documents/licenses/'+id;
+async function commit(w){return fs(':commit',{method:'POST',body:JSON.stringify({writes:[w]})})}
+async function setFields(id,fields){return commit({update:{name:docName(id),fields},updateMask:{fieldPaths:Object.keys(fields)},currentDocument:{exists:true}})}
+async function doLogin(){try{const j=await auth('signInWithPassword',{email:$('ae').value.trim(),password:$('ap').value,returnSecureToken:true});A={idToken:j.idToken,refresh:j.refreshToken,uid:j.localId,exp:Date.now()+(+j.expiresIn||3600)*1000};sv();enter()}catch(e){say('❌ '+(/INVALID|NOT_FOUND/.test(e.message)?'ইমেইল বা পাসওয়ার্ড ভুল':e.message),1)}}
+function logout(){A=null;try{sessionStorage.removeItem('bkAdm')}catch(e){}$('app').style.display='none';$('login').style.display='block';$('ap').value=''}
+function enter(){$('login').style.display='none';$('app').style.display='block';load()}
+const val=f=>f?(f.stringValue!=null?f.stringValue:f.integerValue!=null?+f.integerValue:f.booleanValue!=null?f.booleanValue:f.timestampValue||null):null;
+const dmy=ms=>{const d=new Date(ms);return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear()};
+const ago=ts=>{if(!ts)return 'কখনো না';const m=Math.floor((Date.now()-Date.parse(ts))/60000);if(m<2)return 'এইমাত্র';if(m<60)return m+' মিনিট আগে';const h=Math.floor(m/60);if(h<24)return h+' ঘণ্টা আগে';return Math.floor(h/24)+' দিন আগে'};
+let ROWS=[];
+async function load(){try{const j=await fs(':runQuery',{method:'POST',body:JSON.stringify({structuredQuery:{from:[{collectionId:'licenses'}],limit:500}})});
+ ROWS=j.filter(x=>x.document).map(x=>{const f=x.document.fields||{};return{id:x.document.name.split('/').pop(),email:val(f.email)||'(ইমেইল অজানা)',shop:val(f.shop)||'',docs:val(f.docs),seen:val(f.lastSeen),exp:val(f.expiry)||0,locked:!!val(f.locked),msg:val(f.msg)||''}});
+ ROWS.sort((a,b)=>(a.exp||9e15)-(b.exp||9e15));render()}catch(e){say('❌ '+(/PERMISSION/.test(e.message)?'এই অ্যাকাউন্টের অনুমতি নেই — Firestore রুলে অ্যাডমিন UID বসান':e.message),1)}}
+function render(){$('cnt').textContent=ROWS.length+' টি লাইসেন্স';$('list').innerHTML=ROWS.map(r=>{const left=r.exp?Math.ceil((r.exp-Date.now())/DAY):null;
+ let pill,txt;if(r.locked){pill='off';txt='🔒 লক করা'}else if(left!==null&&left<=0){pill='bad';txt='❌ মেয়াদ শেষ'}else if(left!==null&&left<=5){pill='warn';txt='⚠️ '+left+' দিন বাকি'}else{pill='ok';txt=left===null?'✅ মেয়াদহীন':'✅ '+left+' দিন বাকি'}
+ return `<div class="card"><div class="top"><span class="em">${esc(r.email)}</span><span class="pill ${pill}">${txt}</span></div>
+ <div class="sm">${r.shop?'🏪 '+esc(r.shop)+' · ':''}মেয়াদ: ${r.exp?dmy(r.exp):'নেই'} · শেষ সিঙ্ক: ${ago(r.seen)}${r.docs!=null?' · ডেটা: '+r.docs+' টি':''}</div>
+ ${r.msg?'<div class="sm">📝 '+esc(r.msg)+'</div>':''}
+ <div class="row" style="margin-top:8px"><input class="days" id="d_${r.id}" type="number" value="31"><button class="g" onclick="addDays('${r.id}',0)">আজ থেকে</button><button onclick="addDays('${r.id}',1)">মেয়াদের সাথে যোগ</button></div>
+ <div class="row"><input type="date" id="t_${r.id}" style="width:auto"><button class="o" onclick="setDate('${r.id}')">তারিখ বদলান</button></div>
+ <div class="row">${r.locked?`<button class="g" onclick="lock('${r.id}',false)">🔓 খুলে দিন</button>`:`<button class="r" onclick="lock('${r.id}',true)">🔒 এখনই লক</button>`}<button class="o" onclick="note('${r.id}')">📝 বার্তা</button></div></div>`}).join('')}
+const R=id=>ROWS.find(r=>r.id===id);
+async function addDays(id,keep){const n=parseInt($('d_'+id).value,10);if(!(n>0))return say('❌ দিন লিখুন',1);const r=R(id);const base=keep&&r.exp>Date.now()?r.exp:Date.now();
+ try{await setFields(id,{expiry:{integerValue:String(base+n*DAY)},locked:{booleanValue:false}});say('✅ মেয়াদ '+dmy(base+n*DAY)+' পর্যন্ত, লক খোলা');load()}catch(e){say('❌ '+e.message,1)}}
+async function setDate(id){const v=$('t_'+id).value;if(!v)return say('❌ তারিখ বাছুন',1);const [y,m,d]=v.split('-').map(Number);const ms=new Date(y,m-1,d,23,59,59).getTime();
+ try{await setFields(id,{expiry:{integerValue:String(ms)}});say('✅ মেয়াদ '+dmy(ms));load()}catch(e){say('❌ '+e.message,1)}}
+async function lock(id,on){if(on&&!confirm('এখনই লক করবেন?'))return;try{await setFields(id,{locked:{booleanValue:on}});say(on?'🔒 লক হয়েছে':'🔓 খুলেছে');load()}catch(e){say('❌ '+e.message,1)}}
+async function note(id){const t=prompt('লক স্ক্রিনে যে বার্তা দেখাবে (খালি রাখলে সাধারণ বার্তা):',R(id).msg);if(t===null)return;try{await setFields(id,{msg:{stringValue:t.trim()}});say('✅ বার্তা সেভ');load()}catch(e){say('❌ '+e.message,1)}}
+async function newLic(){const email=$('ne').value.trim().toLowerCase(),pw=$('np').value,n=parseInt($('nd').value,10);
+ if(!/^\S+@\S+\.\S+$/.test(email))return say('❌ সঠিক ইমেইল দিন',1);if(pw.length<6)return say('❌ পাসওয়ার্ড কমপক্ষে ৬ অক্ষর',1);if(!(n>0))return say('❌ দিন লিখুন',1);
+ try{let j;try{j=await auth('signUp',{email,password:pw,returnSecureToken:false})}catch(e){if(!/EMAIL_EXISTS/.test(e.message))throw e;j=await auth('signInWithPassword',{email,password:pw,returnSecureToken:false})}
+  const uid=j.localId;await commit({update:{name:docName(uid),fields:{email:{stringValue:email},expiry:{integerValue:String(Date.now()+n*DAY)},locked:{booleanValue:false},createdAt:{integerValue:String(Date.now())}}}});
+  say('✅ তৈরি হয়েছে। ক্রেতাকে ইমেইল ও পাসওয়ার্ড পাঠান।');$('ne').value='';$('np').value='';load()}
+ catch(e){say('❌ '+(/EMAIL_EXISTS|INVALID_LOGIN/.test(e.message)?'এই ইমেইল আগে থেকেই আছে (পাসওয়ার্ড মেলেনি)':/WEAK/.test(e.message)?'পাসওয়ার্ড দুর্বল':e.message),1)}}
+try{const s=JSON.parse(sessionStorage.getItem('bkAdm'));if(s&&s.refresh){A=s;enter()}}catch(e){}
+</script></body></html>

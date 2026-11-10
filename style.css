@@ -1626,3 +1626,14 @@ html[data-theme="ocean"] .lic-note{background:#e0f7fa;border-color:#67e8f9;color
 html[data-theme="glass"] .lic-note{background:rgba(255,255,255,.6);border-color:#d8b4fe;color:#7e22ce}
 html[data-theme="sunset"] .lic-note{background:#ffedd5;border-color:#fdba74;color:#c2410c}
 html[data-theme="midnight"] .login-screen input,html[data-theme="midnight"] .setup-screen input,html[data-theme="midnight"] .login-screen select,html[data-theme="midnight"] .setup-screen select{background:#fff!important;border-color:#e2e8f0!important}
+
+/* লাইসেন্স লক */
+#lockScreen{position:fixed;inset:0;z-index:100000;background:linear-gradient(160deg,#1a3a5c,#0d1f33);align-items:center;justify-content:center;padding:20px}
+.lk-card{background:#fff;color:#222;border-radius:22px;padding:26px 20px;max-width:360px;width:100%;text-align:center;box-shadow:0 10px 40px #0008}
+.lk-ic{font-size:54px}.lk-card h2{margin:6px 0;color:#b3261e;font-size:22px}.lk-card p{color:#555;margin:8px 0;font-size:15px}
+#lkExp{font-weight:700;color:#444}.lk-safe{font-size:13px!important;color:#1e7f4f!important}
+.lk-btn{display:block;width:100%;box-sizing:border-box;margin-top:10px;padding:13px;border:0;border-radius:12px;background:#1e7f4f;color:#fff;font-size:16px;font-weight:700;text-decoration:none;font-family:inherit}
+.lk-btn.alt{background:#e8eef5;color:#1a3a5c}
+html[data-theme=midnight] #lockScreen{filter:invert(1) hue-rotate(180deg)}
+#licBar{position:fixed;top:0;left:0;right:0;z-index:9000;background:#ffb020;color:#4a2c00;text-align:center;padding:6px 10px;font-size:14px;font-weight:700}
+html[data-theme=midnight] #licBar{filter:invert(1) hue-rotate(180deg)}
