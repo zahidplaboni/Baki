@@ -1637,3 +1637,92 @@ html[data-theme="midnight"] .login-screen input,html[data-theme="midnight"] .set
 html[data-theme=midnight] #lockScreen{filter:invert(1) hue-rotate(180deg)}
 #licBar{position:fixed;top:0;left:0;right:0;z-index:9000;background:#ffb020;color:#4a2c00;text-align:center;padding:6px 10px;font-size:14px;font-weight:700}
 html[data-theme=midnight] #licBar{filter:invert(1) hue-rotate(180deg)}
+
+/* ===== থিম: বাংলাদেশ (পতাকার সবুজ ও লাল + মানচিত্র) ===== */
+html[data-theme="bd"]{--primary:#006a4e;--primary-dark:#004d38;--primary-light:#e8f6ef;--slate-50:#f3faf6;--slate-100:#e3f1ea;--slate-200:#cfe6da}
+html[data-theme="bd"] body{background:linear-gradient(180deg,#e3f1ea 0,#f3faf6 40%,#f8fcfa 100%) fixed!important}
+html[data-theme="bd"] .app-bar,html[data-theme="bd"] .vw-top{background:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 235 300'%3E%3Cpath d='M4,8 L25,5 L45,15 L55,30 L80,20 L95,30 L120,35 L150,70 L180,73 L200,75 L212,85 L200,110 L190,125 L180,155 L170,170 L160,180 L185,185 L208,180 L215,195 L220,220 L230,235 L217,295 L200,270 L198,250 L192,225 L190,212 L170,192 L150,190 L135,210 L120,230 L105,240 L80,242 L55,240 L52,215 L45,195 L35,170 L45,150 L35,130 L15,110 L5,100 L25,70 L25,50 L8,35 L10,20Z' fill='white' fill-opacity='.16'/%3E%3C/svg%3E") right -8px center/auto 150% no-repeat,linear-gradient(135deg,#004d38,#006a4e 60%,#00835f)!important;border-bottom:3px solid #f42a41}
+html[data-theme="bd"] .date-strip{background:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 235 300'%3E%3Cpath d='M4,8 L25,5 L45,15 L55,30 L80,20 L95,30 L120,35 L150,70 L180,73 L200,75 L212,85 L200,110 L190,125 L180,155 L170,170 L160,180 L185,185 L208,180 L215,195 L220,220 L230,235 L217,295 L200,270 L198,250 L192,225 L190,212 L170,192 L150,190 L135,210 L120,230 L105,240 L80,242 L55,240 L52,215 L45,195 L35,170 L45,150 L35,130 L15,110 L5,100 L25,70 L25,50 L8,35 L10,20Z' fill='white' fill-opacity='.15'/%3E%3C/svg%3E") right 46px center/auto 125% no-repeat,linear-gradient(135deg,#004d38,#006a4e 65%,#00835f)!important;border-color:rgba(255,255,255,.4)!important;box-shadow:0 10px 26px rgba(0,106,78,.35)!important}
+html[data-theme="bd"] .login-screen,html[data-theme="bd"] .setup-screen{background:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 235 300'%3E%3Cpath d='M4,8 L25,5 L45,15 L55,30 L80,20 L95,30 L120,35 L150,70 L180,73 L200,75 L212,85 L200,110 L190,125 L180,155 L170,170 L160,180 L185,185 L208,180 L215,195 L220,220 L230,235 L217,295 L200,270 L198,250 L192,225 L190,212 L170,192 L150,190 L135,210 L120,230 L105,240 L80,242 L55,240 L52,215 L45,195 L35,170 L45,150 L35,130 L15,110 L5,100 L25,70 L25,50 L8,35 L10,20Z' fill='white' fill-opacity='.12'/%3E%3C/svg%3E") center top 8px/auto 150px no-repeat,linear-gradient(160deg,#006a4e 0%,#004d38 60%,#02281d 100%)!important}
+html[data-theme="bd"] .page-hero{background:linear-gradient(135deg,#e8f6ef,#f6fbf8)!important;border-color:#a8dcc3!important}
+html[data-theme="bd"] .user-menu-head{background:linear-gradient(135deg,#e8f6ef,#f6fbf8)!important}
+html[data-theme="bd"] .customer-card,html[data-theme="bd"] .stat-card,html[data-theme="bd"] .report-card,html[data-theme="bd"] .stk-card,html[data-theme="bd"] .vw-card{border:1px solid #cfe6da!important;border-left:6px solid #006a4e!important;border-radius:18px!important;box-shadow:0 8px 22px rgba(0,106,78,.13)!important}
+html[data-theme="bd"] .bottom-nav{border-top:3px solid #006a4e;box-shadow:0 -6px 24px rgba(0,106,78,.16)}
+html[data-theme="bd"] .bottom-nav::before{content:"";position:absolute;left:0;top:-3px;height:3px;width:30%;background:#f42a41}
+html[data-theme="bd"] .nav-btn.active{color:#006a4e}
+html[data-theme="bd"] .login-btn,html[data-theme="bd"] .modal-btn.confirm{background:linear-gradient(135deg,#00946a,#006a4e)!important}
+html[data-theme="bd"] .login-btn{position:relative}
+html[data-theme="bd"] .login-btn::after{content:"";position:absolute;right:16px;top:50%;margin-top:-8px;width:16px;height:16px;border-radius:50%;background:#f42a41;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+html[data-theme="bd"] input:focus,html[data-theme="bd"] select:focus{border-color:#006a4e!important;box-shadow:0 0 0 3px rgba(0,106,78,.15)!important}
+html[data-theme="bd"] .th-opt.on{border-color:#006a4e;box-shadow:0 0 0 3px rgba(0,106,78,.2)}
+html[data-theme="bd"] .th-opt .th-ck{background:#006a4e}
+/* নেভ আইকন: সবুজ-লাল */
+html[data-theme="bd"] #nhR stop:first-child{stop-color:#ff6b7d}html[data-theme="bd"] #nhR stop:last-child{stop-color:#d6192f}
+html[data-theme="bd"] #nhB stop:first-child{stop-color:#f3fff9}html[data-theme="bd"] #nhB stop:last-child{stop-color:#b9e6d1}
+html[data-theme="bd"] #nhD stop:first-child{stop-color:#0a8a64}html[data-theme="bd"] #nhD stop:last-child{stop-color:#04412f}
+html[data-theme="bd"] .n3d [fill="#9fd7f5"]{fill:#fff}html[data-theme="bd"] .n3d [fill="#ffd36b"]{fill:#f42a41}
+html[data-theme="bd"] #naG stop:first-child{stop-color:#34d399}html[data-theme="bd"] #naG stop:last-child{stop-color:#006a4e}
+html[data-theme="bd"] .n3d [fill="#0b6e64"]{fill:#04412f}html[data-theme="bd"] .n3d [fill="#0a5c54"]{fill:#022b1e}
+html[data-theme="bd"] #nrC stop:first-child{stop-color:#34d399}html[data-theme="bd"] #nrC stop:last-child{stop-color:#006a4e}
+html[data-theme="bd"] #nrB stop:first-child{stop-color:#ff8a96}html[data-theme="bd"] #nrB stop:last-child{stop-color:#f42a41}
+html[data-theme="bd"] #nrA stop:first-child{stop-color:#2fbf8c}html[data-theme="bd"] #nrA stop:last-child{stop-color:#004d38}
+html[data-theme="bd"] .n3d [fill="#94a3b8"]{fill:#7fa593}
+html[data-theme="bd"] #nsT stop:first-child{stop-color:#8ae6bf}html[data-theme="bd"] #nsT stop:last-child{stop-color:#2fa77c}
+html[data-theme="bd"] #nsL stop:first-child{stop-color:#1e9a6e}html[data-theme="bd"] #nsL stop:last-child{stop-color:#0b6b4e}
+html[data-theme="bd"] #nsR stop:first-child{stop-color:#0a7a58}html[data-theme="bd"] #nsR stop:last-child{stop-color:#04412f}
+html[data-theme="bd"] #ngG stop:first-child{stop-color:#3ccf99}html[data-theme="bd"] #ngG stop:last-child{stop-color:#006a4e}
+html[data-theme="bd"] #ngH stop:first-child{stop-color:#f3fff9}html[data-theme="bd"] #ngH stop:last-child{stop-color:#04412f}
+html[data-theme="bd"] .n3d [fill="#334155"]{fill:#f42a41}
+html[data-theme="bd"] .nav-btn .n3d{filter:drop-shadow(0 3px 3px rgba(0,106,78,.35))}
+html[data-theme="bd"] .nav-btn.active .n3d{animation:nvPop .45s ease-out,nvPulse 2s ease-in-out .45s infinite;filter:drop-shadow(0 6px 5px rgba(244,42,65,.4))}
+/* ঘড়ি: গাঢ় সবুজ ফ্লিপ-কার্ড */
+html[data-theme="bd"] .flip-clock-outer{background:linear-gradient(90deg,#f42a41,#006a4e)!important}
+html[data-theme="bd"] .flip-clock-inner{background:#04281d!important}
+html[data-theme="bd"] .digit-box{background:linear-gradient(180deg,#0b5a42 0,#06442f 49%,#021a12 49%,#042a1d 51%,#07412e 51%,#0a5a42 100%)!important;color:#fff!important;border-radius:4px;box-shadow:0 2px 0 #000,0 3px 5px rgba(0,0,0,.5);font-family:Arial,sans-serif}
+html[data-theme="bd"] .colon{color:#f42a41!important}
+html[data-theme="bd"] .ampm-text{color:#b9e6d1!important}
+/* সেটিংস আইকন */
+html[data-theme="bd"] .settings-list .sr-icon{border-radius:13px;background:linear-gradient(180deg,#e3f7ee,#7fd1ac)!important;border-bottom:4px solid #006a4e;box-shadow:0 5px 10px rgba(0,106,78,.3),inset 0 2px 0 rgba(255,255,255,.8)}
+html[data-theme="bd"] .settings-row:nth-child(3n+2) .sr-icon{background:linear-gradient(180deg,#ffe3e7,#ff9aa6)!important;border-bottom-color:#c8102e}
+html[data-theme="bd"] .settings-row:nth-child(3n) .sr-icon{background:linear-gradient(180deg,#ffffff,#cfe6da)!important;border-bottom-color:#4d8f77}
+html[data-theme="bd"] .sr-icon::after{top:2px;left:6px;right:6px;height:8px;border-radius:8px;background:rgba(255,255,255,.5)}
+html[data-theme="bd"] .sr-arrow{color:#006a4e}
+html[data-theme="bd"] .settings-row:active .sr-icon{transform:translateY(3px);border-bottom-width:1px}
+/* বোতাম */
+html[data-theme="bd"] .wa-btn,html[data-theme="bd"] #waAskLink{background:linear-gradient(180deg,#34d399,#006a4e)!important;border-bottom:4px solid #04412f!important;border-radius:14px!important;box-shadow:0 6px 12px rgba(4,65,47,.3),inset 0 2px 0 rgba(255,255,255,.5)!important}
+html[data-theme="bd"] .cc-pay-btn{background:linear-gradient(180deg,#00b37e,#006a4e)!important;border-bottom:4px solid #04412f!important;border-radius:14px!important;box-shadow:0 6px 12px rgba(4,65,47,.3),inset 0 2px 0 rgba(255,255,255,.45)!important}
+html[data-theme="bd"] .history-btn{background:linear-gradient(180deg,#ff6b7d,#d6192f)!important;border-bottom:4px solid #9b0f22!important;border-radius:14px!important;box-shadow:0 6px 12px rgba(155,15,34,.28),inset 0 2px 0 rgba(255,255,255,.45)!important}
+html[data-theme="bd"] .modal-btn.confirm{background:linear-gradient(180deg,#00b37e,#006a4e)!important;border-bottom:4px solid #04412f;border-radius:13px;box-shadow:inset 0 2px 0 rgba(255,255,255,.45)}
+html[data-theme="bd"] .modal-btn.cancel{background:#ffe9ec;color:#b3132a;border-bottom:4px solid #f5a3ac;border-radius:13px}
+html[data-theme="bd"] .cc-action-btn{border-bottom-width:3px;border-radius:12px}
+html[data-theme="bd"] .type-btn,html[data-theme="bd"] .rp{border-bottom-width:3px}
+html[data-theme="bd"] .wa-btn:active,html[data-theme="bd"] .cc-pay-btn:active,html[data-theme="bd"] .history-btn:active,html[data-theme="bd"] .modal-btn:active{transform:translateY(3px);border-bottom-width:1px!important}
+html[data-theme="bd"] .dev-card{border-color:#a8dcc3}
+html[data-theme="bd"] .dev-ribbon{background:linear-gradient(135deg,#d6192f,#006a4e)}
+html[data-theme="bd"] .dev-btn{border-bottom:4px solid rgba(0,0,0,.28);border-radius:13px}
+html[data-theme="bd"] .sales-sum{border-color:#a8dcc3}
+html[data-theme="bd"] .about-card{background:radial-gradient(circle at 84% 26%,#f42a41 0 19px,rgba(255,255,255,.22) 20px 28px,transparent 29px),url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 235 300'%3E%3Cpath d='M4,8 L25,5 L45,15 L55,30 L80,20 L95,30 L120,35 L150,70 L180,73 L200,75 L212,85 L200,110 L190,125 L180,155 L170,170 L160,180 L185,185 L208,180 L215,195 L220,220 L230,235 L217,295 L200,270 L198,250 L192,225 L190,212 L170,192 L150,190 L135,210 L120,230 L105,240 L80,242 L55,240 L52,215 L45,195 L35,170 L45,150 L35,130 L15,110 L5,100 L25,70 L25,50 L8,35 L10,20Z' fill='white' fill-opacity='.14'/%3E%3C/svg%3E") 18% 60%/auto 120% no-repeat,linear-gradient(180deg,#006a4e 0%,#004d38 100%);border-radius:22px;border-bottom:5px solid #f42a41;box-shadow:0 12px 26px rgba(0,106,78,.35)}
+html[data-theme="bd"] .calc-float{background:#06281d;box-shadow:0 12px 28px rgba(0,106,78,.45)}
+html[data-theme="bd"] .calc-bar{background:linear-gradient(90deg,#004d38,#006a4e);color:#cfe6da}
+html[data-theme="bd"] .ck{background:#0b4a37;box-shadow:0 3px 0 #021a12;color:#e3f7ee}
+html[data-theme="bd"] .ck.op{background:#c8102e;box-shadow:0 3px 0 #7a0a1c}
+html[data-theme="bd"] .ck.eq{background:linear-gradient(180deg,#ff6b7d,#f42a41);color:#fff;box-shadow:0 3px 0 #9b0f22}
+html[data-theme="bd"] #calcRes{color:#7fe3b8}
+html[data-theme="bd"] .calc-open{background:#e3f7ee;border-color:#7fd1ac;color:#006a4e}
+html[data-theme="bd"] .lic-note{background:#e3f7ee;border-color:#7fd1ac;color:#006a4e}
+html[data-theme="bd"] .shop-bar{background:linear-gradient(135deg,#e8f6ef,#d3eddf);border:1.5px dashed #006a4e}
+html[data-theme="bd"] .sb-hint,html[data-theme="bd"] .shop-bar-arrow{color:#006a4e}
+html[data-theme="bd"] .pay-hint-line{background:#e8f6ef!important;border-color:#a8dcc3!important;color:#06432f!important}
+html[data-theme="bd"] #payDiscInput{background:#fff3f4;border-color:#f5a3ac}
+html[data-theme="bd"] .dev-call{background:linear-gradient(135deg,#00946a,#006a4e)}
+html[data-theme="bd"] .dev-wa{background:linear-gradient(135deg,#34d399,#0b8a62)}
+html[data-theme="bd"] .dev-mail{background:linear-gradient(135deg,#ff6b7d,#d6192f)}
+html[data-theme="bd"] .lg-pill,html[data-theme="bd"] .lg-pill.lg-login,html[data-theme="bd"] .lg-pill.lg-hero{background:linear-gradient(135deg,#ff6b7d,#d6192f)!important;box-shadow:0 4px 12px rgba(214,25,47,.4)!important;border-color:#fff!important}
+html[data-theme="bd"] .lg-pill span,html[data-theme="bd"] .lg-pill.lg-login span,html[data-theme="bd"] .lg-pill.lg-hero span{color:#fff!important}
+html[data-theme="bd"] .user-btn{background:linear-gradient(135deg,#ff6b7d,#d6192f)!important}
+html[data-theme="bd"] .item-manager{background:linear-gradient(135deg,#e8f6ef,#f6fbf8);border-color:#7fd1ac}
+html[data-theme="bd"] .item-manager-head h4{color:#006a4e}
+html[data-theme="bd"] .item-manager-head .arrow{color:#f42a41}
+html[data-theme="bd"] .pay-hint{background:#e8f6ef;border-color:#a8dcc3;color:#06432f}html[data-theme="bd"] .pay-hint b{color:#006a4e}
+html[data-theme="bd"] .dc-open{background:linear-gradient(135deg,#006a4e,#004d38);border-bottom:4px solid #f42a41}
+html[data-theme="bd"] .sales-chips .on{background:#006a4e!important;border-color:#006a4e!important;color:#fff!important;box-shadow:0 3px 0 #f42a41}

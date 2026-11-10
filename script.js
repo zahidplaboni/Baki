@@ -962,7 +962,8 @@ const BK_THEMES = [
     { id: 'midnight', n: 'মিডনাইট', sw: 'linear-gradient(135deg,#0f172a,#312e81,#6366f1)', bar: '#0b1020' },
     { id: 'ocean',    n: 'ওশান',    sw: 'linear-gradient(135deg,#0c4a6e,#0891b2,#2dd4bf)', bar: '#0891b2' },
     { id: 'glass',    n: 'গ্লাস',    sw: 'linear-gradient(135deg,#7c3aed,#c026d3,#fb7185)', bar: '#7c3aed' },
-    { id: 'sunset',   n: 'সানসেট',  sw: 'linear-gradient(135deg,#be123c,#ea580c,#fbbf24)', bar: '#ea580c' }
+    { id: 'sunset',   n: 'সানসেট',  sw: 'linear-gradient(135deg,#be123c,#ea580c,#fbbf24)', bar: '#ea580c' },
+    { id: 'bd',       n: 'বাংলাদেশ', sw: 'linear-gradient(135deg,#006a4e 62%,#f42a41 62%)', bar: '#006a4e' }
 ];
 function themeNow() { try { const t = localStorage.getItem('bkTheme'); if (BK_THEMES.some(x => x.id === t)) return t; } catch (e) {} return 'default'; }
 function applyTheme(id) {
@@ -989,8 +990,8 @@ applyTheme(themeNow());
 function navBurst(btn) {
     try {
         const th = document.documentElement.getAttribute('data-theme');
-        if (th !== 'sunset' && th !== 'glass' && th !== 'midnight') return;
-        const cols = th === 'sunset' ? ['#fbbf24', '#f97316', '#ef4444', '#fde68a'] : th === 'glass' ? ['#f0abfc', '#c084fc', '#93c5fd', '#fff'] : ['#22d3ee', '#a78bfa', '#f0abfc', '#fde68a'];
+        if (th !== 'sunset' && th !== 'glass' && th !== 'midnight' && th !== 'bd') return;
+        const cols = th === 'bd' ? ['#006a4e', '#f42a41', '#ffffff', '#00b37e'] : th === 'sunset' ? ['#fbbf24', '#f97316', '#ef4444', '#fde68a'] : th === 'glass' ? ['#f0abfc', '#c084fc', '#93c5fd', '#fff'] : ['#22d3ee', '#a78bfa', '#f0abfc', '#fde68a'];
         const host = btn.querySelector('.nav-icon') || btn;
         for (let i = 0; i < 14; i++) {
             const p = document.createElement('span');
