@@ -1964,23 +1964,34 @@ function updateClock() {
     }
 }
 
-async function detectDynamicFlag() {
+let flagBusy = false, flagAt = 0, flagHooked = false;
+async function detectDynamicFlag(force) {
     const flagEl = document.getElementById('userFlag');
-    if (!flagEl) return;
-    try {
-        const res = await fetch('https://www.cloudflare.com/cdn-cgi/trace');
-        const data = await res.text();
-        const locLine = data.split('\n').find(l => l.startsWith('loc='));
-        if (locLine) {
-            const cc = locLine.split('=')[1];
-            if (cc && cc !== 'XX') { flagEl.innerText = getFlagEmoji(cc); return; }
-        }
-    } catch(e) {}
-    try {
-        const res = await fetch('https://ipapi.co/json/');
-        const data = await res.json();
-        if (data && data.country_code) { flagEl.innerText = getFlagEmoji(data.country_code); return; }
-    } catch(e) {}
+    if (!flagEl || flagBusy) return;
+    if (force !== true && Date.now() - flagAt < 20000) return;      // একসাথে বারবার নয়
+    flagBusy = true;
+    const get = async (url, kind) => {
+        const c = new AbortController(), t = setTimeout(() => c.abort(), 6000);
+        try { const r = await fetch(url, { cache: 'no-store', signal: c.signal }); return kind === 'text' ? await r.text() : await r.json(); }
+        finally { clearTimeout(t); }
+    };
+    const ok = cc => { cc = String(cc || '').trim(); if (/^[A-Za-z]{2}$/.test(cc) && cc.toUpperCase() !== 'XX') { flagEl.innerText = getFlagEmoji(cc); flagEl.title = cc.toUpperCase(); try { localStorage.setItem('bkFlag', cc.toUpperCase()); } catch (e) {} return true; } return false; };
+    const tries = [
+        async () => { const t = await get('https://www.cloudflare.com/cdn-cgi/trace?_=' + Date.now(), 'text'); const l = t.split('\n').find(x => x.startsWith('loc=')); return ok(l && l.split('=')[1]); },
+        async () => { const d = await get('https://ipapi.co/json/?_=' + Date.now()); return ok(d && d.country_code); },
+        async () => { const d = await get('https://api.country.is/?_=' + Date.now()); return ok(d && d.country); },
+        async () => { const d = await get('https://ipwho.is/?_=' + Date.now()); return ok(d && d.country_code); }
+    ];
+    for (const f of tries) { try { if (await f()) { flagAt = Date.now(); break; } } catch (e) {} }
+    flagBusy = false;
+    if (!flagHooked) {          // ভিপিএন বা নেট বদলালে নিজে থেকে নতুন করে দেখবে
+        flagHooked = true;
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) detectDynamicFlag(); });
+        window.addEventListener('online', () => detectDynamicFlag(true));
+        window.addEventListener('focus', () => detectDynamicFlag());
+        try { if (navigator.connection && navigator.connection.addEventListener) navigator.connection.addEventListener('change', () => detectDynamicFlag(true)); } catch (e) {}
+        setInterval(() => { if (!document.hidden) detectDynamicFlag(true); }, 120000);
+    }
 }
 
 function renderShopName() {
@@ -2783,7 +2794,7 @@ function openPaymentModal(cusIdx) {
     p.value = totals.due > 0 ? totals.due : '';
     document.getElementById('payDateInput').value = todayLocal();
     const dv = document.getElementById('payDiscInput'); if (dv) dv.value = '';
-    const dw = document.getElementById('payDiscWrap'); if (dw) dw.style.display = isOwner() ? '' : 'none';
+    const dw = document.getElementById('payDiscWrap'); if (dw) dw.style.display = (DISC_ENTRY && isOwner()) ? '' : 'none';
     payDiscPreview();
     const collected = document.getElementById('collectedByInfo');
     collected.innerText = '👤 টাকা নিচ্ছেন: ' + currentUser.name + (isOwner() ? ' (মালিক)' : ' (স্টাফ)');
@@ -2812,7 +2823,8 @@ function paySuggest(c, amt) {
     });
     return out;
 }
-function payDiscVal() { const el = document.getElementById('payDiscInput'); const v = el ? parseFloat(String(el.value).trim()) : 0; return (v > 0 && isOwner()) ? Calc.r2(v) : 0; }
+let DISC_ENTRY = true;    // নতুন ছাড় দেওয়ার ঘর বন্ধ (আগের ছাড়ের রেকর্ড আগের মতোই দেখা যাবে)। আবার চালু করতে true করুন
+function payDiscVal() { if (!DISC_ENTRY) return 0; const el = document.getElementById('payDiscInput'); const v = el ? parseFloat(String(el.value).trim()) : 0; return (v > 0 && isOwner()) ? Calc.r2(v) : 0; }
 function payDiscPreview() {
     const el = document.getElementById('payDiscNote'); if (!el) return;
     const cus = appData.customers[currentPayCusIdx]; if (!cus) { el.textContent = ''; return; }
