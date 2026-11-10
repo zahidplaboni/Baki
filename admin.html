@@ -50,13 +50,15 @@ function render(){$('cnt').textContent=ROWS.length+' টি লাইসেন�
  ${r.msg?'<div class="sm">📝 '+esc(r.msg)+'</div>':''}
  <div class="row" style="margin-top:8px"><input class="days" id="d_${r.id}" type="number" value="31"><button class="g" onclick="addDays('${r.id}',0)">আজ থেকে</button><button onclick="addDays('${r.id}',1)">মেয়াদের সাথে যোগ</button></div>
  <div class="row"><input type="date" id="t_${r.id}" style="width:auto"><button class="o" onclick="setDate('${r.id}')">তারিখ বদলান</button></div>
- <div class="row">${r.locked?`<button class="g" onclick="lock('${r.id}',false)">🔓 খুলে দিন</button>`:`<button class="r" onclick="lock('${r.id}',true)">🔒 এখনই লক</button>`}<button class="o" onclick="note('${r.id}')">📝 বার্তা</button></div></div>`}).join('')}
+ <div class="row">${r.locked?`<button class="g" onclick="lock('${r.id}',false)">🔓 খুলে দিন</button>`:`<button class="r" onclick="lock('${r.id}',true)">🔒 এখনই লক</button>`}<button class="o" onclick="note('${r.id}')">📝 বার্তা</button><button class="o" style="color:#c62828" onclick="delLic('${r.id}')">🗑️ তালিকা থেকে মুছুন</button></div></div>`}).join('')}
 const R=id=>ROWS.find(r=>r.id===id);
 async function addDays(id,keep){const n=parseInt($('d_'+id).value,10);if(!(n>0))return say('❌ দিন লিখুন',1);const r=R(id);const base=keep&&r.exp>Date.now()?r.exp:Date.now();
  try{await setFields(id,{expiry:{integerValue:String(base+n*DAY)},locked:{booleanValue:false}});say('✅ মেয়াদ '+dmy(base+n*DAY)+' পর্যন্ত, লক খোলা');load()}catch(e){say('❌ '+e.message,1)}}
 async function setDate(id){const v=$('t_'+id).value;if(!v)return say('❌ তারিখ বাছুন',1);const [y,m,d]=v.split('-').map(Number);const ms=new Date(y,m-1,d,23,59,59).getTime();
  try{await setFields(id,{expiry:{integerValue:String(ms)}});say('✅ মেয়াদ '+dmy(ms));load()}catch(e){say('❌ '+e.message,1)}}
 async function lock(id,on){if(on&&!confirm('এখনই লক করবেন?'))return;try{await setFields(id,{locked:{booleanValue:on}});say(on?'🔒 লক হয়েছে':'🔓 খুলেছে');load()}catch(e){say('❌ '+e.message,1)}}
+async function delLic(id){const r=R(id);if(!confirm('"'+r.email+'" তালিকা থেকে মুছবেন?\n\nসতর্কতা: Firebase Authentication-এ এই ইউজার এখনো থাকলে মেয়াদের নিয়ম উঠে যাবে, সে সীমাহীন চালাতে পারবে। আগে Authentication থেকেও মুছুন বা এখানে লক রাখুন।'))return;
+ try{await fs('/licenses/'+id,{method:'DELETE'});say('🗑️ তালিকা থেকে মুছেছে');load()}catch(e){say('❌ '+e.message,1)}}
 async function note(id){const t=prompt('লক স্ক্রিনে যে বার্তা দেখাবে (খালি রাখলে সাধারণ বার্তা):',R(id).msg);if(t===null)return;try{await setFields(id,{msg:{stringValue:t.trim()}});say('✅ বার্তা সেভ');load()}catch(e){say('❌ '+e.message,1)}}
 async function newLic(){const email=$('ne').value.trim().toLowerCase(),pw=$('np').value,n=parseInt($('nd').value,10);
  if(!/^\S+@\S+\.\S+$/.test(email))return say('❌ সঠিক ইমেইল দিন',1);if(pw.length<6)return say('❌ পাসওয়ার্ড কমপক্ষে ৬ অক্ষর',1);if(!(n>0))return say('❌ দিন লিখুন',1);
