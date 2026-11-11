@@ -4598,7 +4598,8 @@ function licApply() {
 function licFetch(u, o) { const c = new AbortController(), t = setTimeout(() => c.abort(), 8000); return fetch(u, Object.assign({ signal: c.signal }, o)).finally(() => clearTimeout(t)); }
 let LIC_AT = 0;
 async function licCheck(force) {
-    if (!CS || !CS.lic || !CS.uid) return;
+    if (!CS || !CS.lic || !CS.uid) { try { if (window.AndroidApp && AndroidApp.clearNotifyAuth) AndroidApp.clearNotifyAuth(); } catch (e) {} return; }
+    try { if (window.AndroidApp && AndroidApp.setNotifyAuth && CS.refresh) AndroidApp.setNotifyAuth(CS.refresh, CS.uid, FB.apiKey, FB.projectId); } catch (e) {}
     if (force !== true && Date.now() - LIC_AT < 110000) { licApply(); return; }     // খরচ বাঁচাতে ২ মিনিটে একবার
     LIC_AT = Date.now();
     let L = licRead(); if (!L || L.uid !== CS.uid) L = { uid: CS.uid };
@@ -4638,6 +4639,7 @@ function noticeCheck() {
     document.getElementById('ntTitle').textContent = L.ntitle || 'নোটিশ';
     document.getElementById('ntText').textContent = L.ntext;
     el.dataset.nid = String(L.nid); el.style.display = 'flex';
+    try { if (window.AndroidApp && AndroidApp.noticeSeen) AndroidApp.noticeSeen(String(L.nid)); } catch (e) {}
     try { applyLang(); } catch (e) {}
 }
 function noticeClose() {
