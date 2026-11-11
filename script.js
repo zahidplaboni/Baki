@@ -4635,15 +4635,17 @@ async function licCheck(force) {
             L.nid = f.noticeId ? (parseInt(f.noticeId.integerValue || 0, 10) || 0) : 0; L.ntext = (f.notice && f.notice.stringValue) || ''; L.ntitle = (f.noticeTitle && f.noticeTitle.stringValue) || '';
         } else throw new Error('HTTP ' + r.status);
         licWrite(L);
-        if (!L.none && (force === true || !L.wrote || Date.now() - L.wrote > 600000)) {          // শেষ দেখা + ডেটার সংখ্যা জানানো (১০ মিনিটে একবার, সঙ্গে সার্ভারের সময়)
+        let ft = ''; try { if (window.AndroidApp && AndroidApp.getFcmToken) ft = String(AndroidApp.getFcmToken() || ''); } catch (e) {}
+        if (!L.none && (force === true || !L.wrote || Date.now() - L.wrote > 600000 || (ft && ft !== L.fcm))) {          // শেষ দেখা + ডেটার সংখ্যা জানানো (১০ মিনিটে একবার, সঙ্গে সার্ভারের সময়)
             try {
                 L.wrote = Date.now(); licWrite(L);
                 const n = (appData.customers || []).length + (((appData.stock || {}).entries) || []).length;
                 const c = await licFetch(fsBase() + ':commit', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + tok },
                     body: JSON.stringify({ writes: [{
-                        update: { name: 'projects/' + FB.projectId + '/databases/(default)/documents/licenses/' + CS.uid, fields: { docs: { integerValue: String(n) }, shop: { stringValue: String((appData.shop && appData.shop.name) || '') } } },
-                        updateMask: { fieldPaths: ['docs', 'shop'] }, currentDocument: { exists: true },
+                        update: { name: 'projects/' + FB.projectId + '/databases/(default)/documents/licenses/' + CS.uid, fields: { docs: { integerValue: String(n) }, shop: { stringValue: String((appData.shop && appData.shop.name) || '') }, ...(ft ? { fcm: { stringValue: ft } } : {}) } },
+                        updateMask: { fieldPaths: ft ? ['docs', 'shop', 'fcm'] : ['docs', 'shop'] }, currentDocument: { exists: true },
                         updateTransforms: [{ fieldPath: 'lastSeen', setToServerValue: 'REQUEST_TIME' }] }] }) });
+                if (c.ok && ft) { L.fcm = ft; licWrite(L); }
                 if (c.ok) { const cj = await c.json(); if (cj.commitTime) { L.skew = Date.parse(cj.commitTime) - Date.now(); licWrite(L); } }
             } catch (e) {}
         }
