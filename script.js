@@ -1075,9 +1075,21 @@ function completeSetup() {
         showLoginScreen(300);
     }, 1600);
 }
+function loginKbAuto() {      // স্টাফ/তদারকি ইউজারের পাসওয়ার্ডে অক্ষর থাকতে পারে — পুরো কিবোর্ড দেখাও
+    try {
+        const u = (document.getElementById('loginUser').value || '').trim().toLowerCase(), p = document.getElementById('loginPass');
+        if (!u || !p || (appData.owner && appData.owner.username === u)) return;
+        if (p.getAttribute('inputmode') === 'numeric') {
+            p.setAttribute('inputmode', 'text'); p.removeAttribute('pattern');
+            const b = document.querySelector('#loginScreen .pass-keyboard-btn'); if (b) b.classList.add('active');
+        }
+    } catch (e) {}
+}
 function doLogin() {
-    const username = document.getElementById('loginUser').value.trim().toLowerCase();
+    const nk = v => { try { return String(v).normalize('NFKC'); } catch (e) { return String(v); } };   // চীনা/জাপানি কিবোর্ডের ফুল-উইডথ সংখ্যা/অক্ষর (২２３৩) সাধারণ করা
+    const username = nk(document.getElementById('loginUser').value).trim().toLowerCase();
     const password = document.getElementById('loginPass').value;
+    const passN = nk(password);
     const errBox = document.getElementById('loginErrorBox');
     const showError = (m) => { errBox.innerText = m; errBox.style.display = 'block'; };
     errBox.style.display = 'none';
@@ -1090,7 +1102,8 @@ function doLogin() {
     let acc = null, role = 'employee';
     if (appData.owner && appData.owner.username === username) { acc = appData.owner; role = 'owner'; }
     else acc = appData.employees.find(e => e.username === username) || null;
-    if (acc && verifySecret(password, acc.passHash)) {
+    // iPhone কিবোর্ড শেষে ফাঁকা যোগ করলে তাও চলবে
+    if (acc && (verifySecret(password, acc.passHash) || verifySecret(passN, acc.passHash) || verifySecret(password.trim(), acc.passHash) || verifySecret(passN.trim(), acc.passHash))) {
         lockClear('login');
         currentUser = { role: role, id: acc.id, name: acc.name, username: acc.username, viewer: role !== 'owner' && !!acc.viewer };
         rememberLoginUser(acc.username);
@@ -1100,6 +1113,13 @@ function doLogin() {
     }
     const n = lockFail('login');
     showError(n > 0 ? '❌ ভুল ইউজারনেম বা পাসওয়ার্ড (আর ' + n + ' বার চেষ্টা করা যাবে)' : lockMsg(lockLeftSec('login')));
+    try {      // ডায়াগনস্টিক: কেন মিলছে না সেটা বোঝার জন্য (স্ক্রিনশট পাঠানোর জন্য)
+        const found = !!acc, nEmp = (appData.employees || []).length;
+        const cs = (typeof CS !== 'undefined' && CS) ? (CS.needKey ? 'কোড-বদল' : (CS.err ? 'ত্রুটি:' + CS.err : (CS.last ? 'সিঙ্ক-ঠিক' : 'সিঙ্ক-হয়নি'))) : 'ক্লাউড-নেই';
+        const d = document.createElement('div'); d.setAttribute('data-nt', ''); d.style.cssText = 'font-size:11px;opacity:.85;margin-top:6px;font-weight:600';
+        d.textContent = 'ℹ️ ইউজার ' + (found ? 'পাওয়া গেছে (পাসওয়ার্ড মেলেনি)' : 'পাওয়া যায়নি') + ' · স্টাফ ' + nEmp + ' · ইউজারনেম ' + username.length + ' অক্ষর · পাসওয়ার্ড ' + password.length + ' অক্ষর · ' + cs + (appData.setupDone ? '' : ' · সেটআপ-হয়নি');
+        errBox.appendChild(d);
+    } catch (e) {}
     document.getElementById('loginPass').value = '';
 }
 
