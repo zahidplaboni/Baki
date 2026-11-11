@@ -1761,3 +1761,32 @@ html[data-theme="bd"] #page-reports .page-hero,html[data-theme="bd"] #page-setti
 html[data-theme="bd"] #page-reports .page-hero::after,html[data-theme="bd"] #page-settings .page-hero::after{background-image:var(--bdHillW);opacity:.38}
 html[data-theme="bd"] #page-reports .page-hero-title,html[data-theme="bd"] #page-settings .page-hero-title{color:#fff!important;text-shadow:none}
 html[data-theme="bd"] #page-reports .page-hero-sub,html[data-theme="bd"] #page-settings .page-hero-sub{color:#ffeef0!important;text-shadow:none}
+
+/* ===== থিম: সফট ৩ডি (neo) — নরম উঁচু-নিচু কার্ড, চকচকে ৩ডি বাটন, গাঢ় নীল-বেগুনি ব্যানার ===== */
+html[data-theme="neo"]{--primary:#4338ca;--primary-dark:#2e2a8a;--primary-light:#eceffa;--slate-50:#eef0f7;--slate-100:#e6e9f3;--slate-200:#d5dae9;--neoBg:#e9ecf4;--neoSh:#cbd1e2;--neoHi:#ffffff}
+html[data-theme="neo"] body{background:var(--neoBg)!important}
+html[data-theme="neo"] .app-bar,html[data-theme="neo"] .vw-top{background:linear-gradient(135deg,#1b1740,#2d2a6e 55%,#3b2a7a)!important;box-shadow:0 6px 18px rgba(27,23,64,.35)}
+html[data-theme="neo"] .date-strip{background:linear-gradient(135deg,#2f7a76,#3b4a9a 55%,#5a3aa8)!important;border-radius:22px!important;box-shadow:0 8px 18px rgba(59,74,154,.35),inset 0 1px 0 rgba(255,255,255,.25)!important}
+html[data-theme="neo"] .login-screen,html[data-theme="neo"] .setup-screen{background:linear-gradient(160deg,#1b1740 0%,#2d2a6e 55%,#3a6f7a 100%)!important}
+html[data-theme="neo"] .page-hero{background:var(--neoBg)!important;border:none!important;border-radius:26px!important;box-shadow:9px 9px 20px var(--neoSh),-9px -9px 20px var(--neoHi)!important}
+html[data-theme="neo"] .page-hero-title{color:#1e1b4b!important}
+html[data-theme="neo"] .user-menu-head{background:var(--neoBg)!important}
+html[data-theme="neo"] .customer-card,html[data-theme="neo"] .stat-card,html[data-theme="neo"] .report-card,html[data-theme="neo"] .stk-card,html[data-theme="neo"] .vw-card{background:var(--neoBg)!important;border:none!important;border-radius:24px!important;box-shadow:8px 8px 18px var(--neoSh),-8px -8px 18px var(--neoHi)!important}
+html[data-theme="neo"] .bottom-nav{background:var(--neoBg)!important;border-top:none!important;border-radius:26px 26px 0 0;box-shadow:0 -8px 20px var(--neoSh),0 -2px 0 var(--neoHi)!important}
+html[data-theme="neo"] .nav-btn.active{color:#4338ca}
+html[data-theme="neo"] input,html[data-theme="neo"] select,html[data-theme="neo"] textarea,html[data-theme="neo"] .home-toolbar .search-wrapper{background:linear-gradient(180deg,#e2e6f1,#eef0f8)!important;border:none!important;border-radius:18px!important;box-shadow:inset 4px 4px 9px var(--neoSh),inset -4px -4px 9px var(--neoHi)!important;color:#1e1b4b}
+html[data-theme="neo"] input:focus,html[data-theme="neo"] select:focus,html[data-theme="neo"] textarea:focus{box-shadow:inset 4px 4px 9px var(--neoSh),inset -4px -4px 9px var(--neoHi),0 0 0 3px rgba(67,56,202,.25)!important}
+html[data-theme="neo"] .login-screen input{background:#fff!important}
+/* চকচকে ৩ডি সবুজ বাটন (নিচে গাঢ় কিনারা) */
+html[data-theme="neo"] .login-btn,html[data-theme="neo"] .modal-btn.confirm,html[data-theme="neo"] .btn-primary,html[data-theme="neo"] .cc-pay-btn{background:linear-gradient(180deg,#86c79c 0%,#5aa073 55%,#4d9066 100%)!important;color:#fff!important;border:none!important;border-radius:22px!important;border-bottom:5px solid #2f5d3d!important;box-shadow:0 8px 14px rgba(47,93,61,.35),inset 0 2px 0 rgba(255,255,255,.55)!important;text-shadow:0 1px 2px rgba(0,60,30,.45);font-weight:800}
+html[data-theme="neo"] .login-btn:active,html[data-theme="neo"] .modal-btn.confirm:active,html[data-theme="neo"] .btn-primary:active,html[data-theme="neo"] .cc-pay-btn:active{transform:translateY(3px);border-bottom-width:2px!important}
+html[data-theme="neo"] .modal-btn.cancel{background:var(--neoBg)!important;border:none!important;border-radius:22px!important;color:#475569!important;box-shadow:5px 5px 11px var(--neoSh),-5px -5px 11px var(--neoHi)!important}
+html[data-theme="neo"] .modal-card{background:var(--neoBg)!important;border-radius:28px!important;box-shadow:0 20px 50px rgba(27,23,64,.35)!important}
+/* সেটিংসের আইকন: নরম উঁচু গোল */
+html[data-theme="neo"] .settings-list .sr-icon{border-radius:50%!important;background:linear-gradient(145deg,#f7f8fd,#dfe3f0)!important;border:none!important;box-shadow:5px 5px 11px var(--neoSh),-5px -5px 11px var(--neoHi)!important}
+html[data-theme="neo"] .settings-list .settings-row{background:var(--neoBg)!important}
+html[data-theme="neo"] .sr-arrow{color:#6366f1}
+/* চকচকে গোল ছবি-ঘর */
+html[data-theme="neo"] .dev-avatar,html[data-theme="neo"] .cc-avatar,html[data-theme="neo"] .emp-avatar,html[data-theme="neo"] #umAvatar{background:radial-gradient(circle at 35% 28%,#8ec5ff,#3b82f6 55%,#1d3f9a)!important;color:#fff!important;border:3px solid #fff!important;box-shadow:0 8px 0 #bcc4da,0 12px 18px rgba(30,40,100,.3),inset 0 3px 6px rgba(255,255,255,.5)!important}
+html[data-theme="neo"] .th-opt.on{border-color:#4338ca;box-shadow:0 0 0 3px rgba(67,56,202,.22)}
+html[data-theme="neo"] .th-opt .th-ck{background:#4338ca}
