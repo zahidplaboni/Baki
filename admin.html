@@ -114,6 +114,7 @@ async function sendNotice(clear){const body=$('nt_b').value.trim(),ttl=$('nt_t')
  const id=String(Date.now());const f=clear?{notice:{stringValue:''},noticeTitle:{stringValue:''},noticeId:{integerValue:'0'}}:{notice:{stringValue:body},noticeTitle:{stringValue:ttl},noticeId:{integerValue:id}};
  try{await fs(':commit',{method:'POST',body:JSON.stringify({writes:ids.map(x=>({update:{name:docName(x),fields:f},updateMask:{fieldPaths:Object.keys(f)},currentDocument:{exists:true}}))})});
   let pr=null;if(!clear)pr=await pushTo(ROWS.filter(r=>ids.includes(r.id)),ttl,body,id);
+  if(!clear){loadSA();$('sa_st').innerHTML+='<br>🕒 শেষ পুশ: '+(pr===null?'চেষ্টা হয়নি (ওপরে চাবি সেভ নেই)':pr.err?'❌ '+esc(pr.err):'✅ '+pr.ok+' গেছে, '+pr.fail+' ব্যর্থ, '+pr.none+' জনের ফোন নিবন্ধিত নয়')}
   say(clear?'🧹 মুছেছে':'✅ '+ids.length+' জনের জন্য নোটিশ জমা হয়েছে'+(pr?(pr.err?' · ⚠️ পুশ হয়নি: '+pr.err:' · ⚡ পুশ: '+pr.ok+' জনকে গেছে'+(pr.fail?', '+pr.fail+' ব্যর্থ':'')+(pr.none?', '+pr.none+' জনের ফোন এখনো নিবন্ধিত নয় (অ্যাপ খুললে হবে)':'')):''));if(!clear){$('nt_b').value='';$('nt_t').value=''}load()}catch(e){say('❌ '+e.message,1)}}
 async function newLic(){const email=$('ne').value.trim().toLowerCase(),pw=$('np').value,n=parseInt($('nd').value,10);
  if(!/^\S+@\S+\.\S+$/.test(email))return say('❌ সঠিক ইমেইল দিন',1);if(pw.length<6)return say('❌ পাসওয়ার্ড কমপক্ষে ৬ অক্ষর',1);if(!(n>0))return say('❌ দিন লিখুন',1);
