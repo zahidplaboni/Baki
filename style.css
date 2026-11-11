@@ -1733,3 +1733,15 @@ html[data-theme="bd"] .dev-card::before{content:"";display:block;height:128px;ma
 html[data-theme="bd"] .dev-ribbon{z-index:3}
 html[data-theme="bd"] .dev-avatar{width:96px;height:96px;margin:-48px auto 8px;position:relative;z-index:2;border:4px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.35)}
 html[data-theme="bd"] .dev-name{color:#06432f}html[data-theme="bd"] .dev-addr{color:#456}
+
+/* নোটিশ পপআপ */
+#noticeModal{position:fixed;inset:0;z-index:100001;background:rgba(10,25,40,.62);align-items:center;justify-content:center;padding:20px}
+.nt-card{background:#fff;color:#222;border-radius:22px;padding:22px 20px;max-width:360px;width:100%;text-align:center;box-shadow:0 10px 40px #0007;border-top:6px solid #f59e0b}
+.nt-ic{font-size:44px}.nt-card h3{margin:4px 0 8px;color:#1a3a5c;font-size:20px}
+.nt-card p{color:#333;font-size:16px;line-height:1.55;margin:6px 0 14px;white-space:pre-wrap;text-align:left;max-height:50vh;overflow:auto}
+html[data-theme=midnight] #noticeModal{filter:invert(1) hue-rotate(180deg)}
+html[data-theme="bd"] .nt-card{border-top-color:#f42a41}
+html[data-theme="bd"] .nt-card .lk-btn{background:linear-gradient(90deg,#d6332f,#2d6a4e)}
+/* বাংলাদেশ থিম: লাল→সবুজ (পতাকার) বোতাম */
+html[data-theme="bd"] .cc-toggle-btn{background:linear-gradient(90deg,#d6332f 0%,#9b4a39 45%,#2d6a4e 100%)!important;color:#fff!important;border:0!important;border-bottom:4px solid #1c4a36!important;border-radius:14px!important;box-shadow:0 6px 12px rgba(28,74,54,.3),inset 0 2px 0 rgba(255,255,255,.35)!important}
+html[data-theme="bd"] .cc-toggle-btn:active{transform:translateY(3px);border-bottom-width:1px!important}

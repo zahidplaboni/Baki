@@ -17,6 +17,13 @@ button{background:#1a3a5c;color:#fff;border:0;font-weight:700;cursor:pointer;mar
  <div class="card"><div class="top"><b>➕ নতুন লাইসেন্স</b><button class="o" onclick="logout()">বের হই</button></div>
   <input id="ne" type="email" placeholder="ক্রেতার ইমেইল"><input id="np" type="text" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)">
   <div class="row"><span>মেয়াদ</span><input id="nd" class="days" type="number" value="31"><span>দিন</span><button class="g" onclick="newLic()">তৈরি করুন</button></div></div>
+ <div class="card"><b>📢 নোটিশ পাঠান</b>
+  <input id="nt_t" type="text" placeholder="শিরোনাম (ঐচ্ছিক), যেমন: মেয়াদের কথা">
+  <textarea id="nt_b" rows="3" placeholder="নোটিশের লেখা…" style="width:100%;font:inherit;padding:10px;border-radius:10px;border:1px solid #bcc7d4;margin:4px 0"></textarea>
+  <div class="row"><select id="nt_to" onchange="ntTo()" style="font:inherit;padding:10px;border-radius:10px;border:1px solid #bcc7d4"><option value="all">সবাইকে</option><option value="soon">মেয়াদ ৫ দিনের মধ্যে শেষ (বা শেষ হয়ে গেছে)</option><option value="one">একজনকে</option></select>
+  <select id="nt_one" style="display:none;font:inherit;padding:10px;border-radius:10px;border:1px solid #bcc7d4"></select></div>
+  <div class="row"><button class="g" onclick="sendNotice(false)">📤 পাঠান</button><button class="o" onclick="sendNotice(true)">🧹 পুরনো নোটিশ মুছুন</button></div>
+  <div class="hint">ক্রেতার অ্যাপ খোলা থাকলে ১-২ মিনিটের মধ্যে, বন্ধ থাকলে খোলামাত্র পপআপ আসবে। একজন একবারই দেখবে।</div></div>
  <div class="top"><b id="cnt"></b><button class="o" onclick="load()">🔄 নতুন করে আনুন</button></div>
  <div id="list"></div>
 </div>
@@ -41,13 +48,14 @@ const dmy=ms=>{const d=new Date(ms);return String(d.getDate()).padStart(2,'0')+'
 const ago=ts=>{if(!ts)return 'কখনো না';const m=Math.floor((Date.now()-Date.parse(ts))/60000);if(m<2)return 'এইমাত্র';if(m<60)return m+' মিনিট আগে';const h=Math.floor(m/60);if(h<24)return h+' ঘণ্টা আগে';return Math.floor(h/24)+' দিন আগে'};
 let ROWS=[];
 async function load(){try{const j=await fs(':runQuery',{method:'POST',body:JSON.stringify({structuredQuery:{from:[{collectionId:'licenses'}],limit:500}})});
- ROWS=j.filter(x=>x.document).map(x=>{const f=x.document.fields||{};return{id:x.document.name.split('/').pop(),email:val(f.email)||'(ইমেইল অজানা)',shop:val(f.shop)||'',docs:val(f.docs),seen:val(f.lastSeen),exp:val(f.expiry)||0,locked:!!val(f.locked),msg:val(f.msg)||''}});
- ROWS.sort((a,b)=>(a.exp||9e15)-(b.exp||9e15));render()}catch(e){say('❌ '+(/PERMISSION/.test(e.message)?'এই অ্যাকাউন্টের অনুমতি নেই — Firestore রুলে অ্যাডমিন UID বসান':e.message),1)}}
+ ROWS=j.filter(x=>x.document).map(x=>{const f=x.document.fields||{};return{id:x.document.name.split('/').pop(),email:val(f.email)||'(ইমেইল অজানা)',shop:val(f.shop)||'',docs:val(f.docs),seen:val(f.lastSeen),exp:val(f.expiry)||0,locked:!!val(f.locked),msg:val(f.msg)||'',nt:val(f.notice)||'',nid:val(f.noticeId)||0}});
+ ROWS.sort((a,b)=>(a.exp||9e15)-(b.exp||9e15));render();fillNt()}catch(e){say('❌ '+(/PERMISSION/.test(e.message)?'এই অ্যাকাউন্টের অনুমতি নেই — Firestore রুলে অ্যাডমিন UID বসান':e.message),1)}}
 function render(){$('cnt').textContent=ROWS.length+' টি লাইসেন্স';$('list').innerHTML=ROWS.map(r=>{const left=r.exp?Math.ceil((r.exp-Date.now())/DAY):null;
  let pill,txt;if(r.locked){pill='off';txt='🔒 লক করা'}else if(left!==null&&left<=0){pill='bad';txt='❌ মেয়াদ শেষ'}else if(left!==null&&left<=5){pill='warn';txt='⚠️ '+left+' দিন বাকি'}else{pill='ok';txt=left===null?'✅ মেয়াদহীন':'✅ '+left+' দিন বাকি'}
  return `<div class="card"><div class="top"><span class="em">${esc(r.email)}</span><span class="pill ${pill}">${txt}</span></div>
  <div class="sm">${r.shop?'🏪 '+esc(r.shop)+' · ':''}মেয়াদ: ${r.exp?dmy(r.exp):'নেই'} · শেষ সিঙ্ক: ${ago(r.seen)}${r.docs!=null?' · ডেটা: '+r.docs+' টি':''}</div>
  ${r.msg?'<div class="sm">📝 '+esc(r.msg)+'</div>':''}
+ ${r.nt?'<div class="sm">📢 শেষ নোটিশ: '+esc(r.nt.slice(0,60))+(r.nt.length>60?'…':'')+'</div>':''}
  <div class="sec"><div class="st">📆 দিন দিয়ে মেয়াদ দিন (টাকা পেলে এটা)</div>
   <div class="row"><input class="days" id="d_${r.id}" type="number" value="31"><span>দিন</span></div>
   <div class="row"><button class="g" onclick="addDays('${r.id}',0)">আজ থেকে গোনা শুরু</button><button onclick="addDays('${r.id}',1)">বর্তমান মেয়াদের সাথে যোগ</button></div>
@@ -69,6 +77,17 @@ async function lock(id,on){if(on&&!confirm('এখনই লক করবেন?
 async function delLic(id){const r=R(id);if(!confirm('"'+r.email+'" তালিকা থেকে মুছবেন?\n\nসতর্কতা: Firebase Authentication-এ এই ইউজার এখনো থাকলে মেয়াদের নিয়ম উঠে যাবে, সে সীমাহীন চালাতে পারবে। আগে Authentication থেকেও মুছুন বা এখানে লক রাখুন।'))return;
  try{await fs('/licenses/'+id,{method:'DELETE'});say('🗑️ তালিকা থেকে মুছেছে');load()}catch(e){say('❌ '+e.message,1)}}
 async function note(id){const t=prompt('লক স্ক্রিনে যে বার্তা দেখাবে (খালি রাখলে সাধারণ বার্তা):',R(id).msg);if(t===null)return;try{await setFields(id,{msg:{stringValue:t.trim()}});say('✅ বার্তা সেভ');load()}catch(e){say('❌ '+e.message,1)}}
+function fillNt(){const o=$('nt_one'),v=o.value;o.innerHTML=ROWS.map(r=>'<option value="'+r.id+'">'+esc(r.email)+'</option>').join('');if(v)o.value=v}
+function ntTo(){$('nt_one').style.display=$('nt_to').value==='one'?'':'none'}
+async function sendNotice(clear){const body=$('nt_b').value.trim(),ttl=$('nt_t').value.trim();
+ if(!clear&&!body)return say('❌ নোটিশের লেখা লিখুন',1);
+ const to=$('nt_to').value;let ids;
+ if(to==='all')ids=ROWS.map(r=>r.id);else if(to==='soon')ids=ROWS.filter(r=>r.exp&&(r.exp-Date.now())<=5*DAY).map(r=>r.id);else ids=[$('nt_one').value].filter(Boolean);
+ if(!ids.length)return say('❌ এই ভাগে কেউ নেই',1);
+ if(!confirm((clear?'পুরনো নোটিশ মুছবেন? ':'নোটিশ পাঠাবেন? ')+ids.length+' জনের জন্য।'))return;
+ const id=String(Date.now());const f=clear?{notice:{stringValue:''},noticeTitle:{stringValue:''},noticeId:{integerValue:'0'}}:{notice:{stringValue:body},noticeTitle:{stringValue:ttl},noticeId:{integerValue:id}};
+ try{await fs(':commit',{method:'POST',body:JSON.stringify({writes:ids.map(x=>({update:{name:docName(x),fields:f},updateMask:{fieldPaths:Object.keys(f)},currentDocument:{exists:true}}))})});
+  say(clear?'🧹 মুছেছে':'✅ '+ids.length+' জনের জন্য নোটিশ পাঠানো হয়েছে');if(!clear){$('nt_b').value='';$('nt_t').value=''}load()}catch(e){say('❌ '+e.message,1)}}
 async function newLic(){const email=$('ne').value.trim().toLowerCase(),pw=$('np').value,n=parseInt($('nd').value,10);
  if(!/^\S+@\S+\.\S+$/.test(email))return say('❌ সঠিক ইমেইল দিন',1);if(pw.length<6)return say('❌ পাসওয়ার্ড কমপক্ষে ৬ অক্ষর',1);if(!(n>0))return say('❌ দিন লিখুন',1);
  try{let j;try{j=await auth('signUp',{email,password:pw,returnSecureToken:false})}catch(e){if(!/EMAIL_EXISTS/.test(e.message))throw e;j=await auth('signInWithPassword',{email,password:pw,returnSecureToken:false})}
