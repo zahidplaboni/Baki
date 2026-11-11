@@ -1779,7 +1779,7 @@ html[data-theme="midnight"] .nav-btn.active .nav-icon::before{background:#fbbf24
 html[data-theme="ocean"] .nav-icon::before{background:linear-gradient(135deg,#7dd3e8,#38bdf8)}
 html[data-theme="ocean"] .nav-btn.active .nav-icon::before{background:linear-gradient(135deg,#0891b2,#2dd4bf);filter:drop-shadow(0 5px 4px rgba(8,145,178,.4))}
 /* গ্লাস: বেগুনি-গোলাপি লাইন */
-html[data-theme="glass"] .nav-icon::before{background:linear-gradient(135deg,#c4b5fd,#f0abfc)}
+html[data-theme="glass"] .nav-icon::before{background:linear-gradient(135deg,#a78bfa,#e879f9)}
 html[data-theme="glass"] .nav-btn.active .nav-icon::before{background:linear-gradient(135deg,#7c3aed,#db2777);filter:drop-shadow(0 4px 4px rgba(124,58,237,.35))}
 /* সানসেট: কমলা-হলুদ ডুও */
 html[data-theme="sunset"] .nav-icon::before{background:linear-gradient(135deg,#fdba74,#fbbf24)}
@@ -1818,3 +1818,30 @@ html[data-theme="clay"] .user-menu-head{background:#ffe0cf!important}
 html[data-theme="clay"] .dev-avatar,html[data-theme="clay"] .cc-avatar,html[data-theme="clay"] .emp-avatar,html[data-theme="clay"] #umAvatar{background:linear-gradient(180deg,#14958a,#0f766e)!important;color:#fff!important;border:3px solid #fff!important;border-bottom:6px solid #0a4f4a!important;box-shadow:0 8px 12px rgba(10,79,74,.3)!important}
 html[data-theme="clay"] .th-opt.on{border-color:#ff7a45;box-shadow:0 0 0 3px rgba(255,122,69,.25)}
 html[data-theme="clay"] .th-opt .th-ck{background:#ff7a45}
+
+/* ===== ডেভেলপার কার্ডের ব্যানার (সব থিমে; বাংলাদেশের নিজস্ব ব্যানার আছে) ===== */
+.dev-card{padding-top:0}
+.dev-card::before{content:"";display:block;height:96px;margin:0 -16px;background:radial-gradient(circle at 86% 32%,rgba(255,255,255,.38) 0 20px,transparent 21px),radial-gradient(circle at 10% 85%,rgba(255,255,255,.22) 0 36px,transparent 37px),radial-gradient(circle at 58% 118%,rgba(255,255,255,.28) 0 46px,transparent 47px),var(--devG,linear-gradient(135deg,#4f46e5,#7c3aed 55%,#ec4899))}
+.dev-avatar{width:84px;height:84px;margin:-42px auto 8px;position:relative;z-index:2;border:4px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.28)}
+.dev-ribbon{z-index:3}
+html[data-theme="midnight"] .dev-card::before{filter:invert(1) hue-rotate(180deg);--devG:linear-gradient(135deg,#1e1b4b,#4338ca 60%,#7c3aed)}
+html[data-theme="ocean"] .dev-card::before{--devG:linear-gradient(135deg,#0c4a6e,#0891b2 55%,#2dd4bf)}
+html[data-theme="glass"] .dev-card::before{--devG:linear-gradient(135deg,#7c3aed,#c026d3 55%,#fb7185)}
+html[data-theme="sunset"] .dev-card::before{--devG:linear-gradient(135deg,#be123c,#ea580c 55%,#fbbf24)}
+html[data-theme="clay"] .dev-card::before{--devG:linear-gradient(135deg,#0f766e,#14958a 55%,#ffb48a)}
+html[data-theme="clay"] .dev-avatar{width:84px!important;height:84px!important}
+html[data-theme="bd"] .dev-card::before{height:128px}
+
+/* ===== নেভিগেশন: প্রতিটি থিমের নিজস্ব ধাঁচের ৩ডি টাইল ===== */
+/* ওশান: গোল চকচকে বুদবুদ */
+html[data-theme="ocean"] .nav-icon{width:42px!important;height:42px!important;border-radius:50%;background:radial-gradient(circle at 32% 24%,#8fe6f7,#0891b2 58%,#0a5a78);box-shadow:0 6px 9px rgba(8,145,178,.4),inset 0 2px 3px rgba(255,255,255,.7);display:flex!important;align-items:center;justify-content:center;opacity:.88;transition:transform .2s,box-shadow .2s}
+html[data-theme="ocean"] .nav-icon::before,html[data-theme="ocean"] .nav-btn.active .nav-icon::before{background:#fff!important;filter:drop-shadow(0 1px 1px rgba(0,60,90,.5))!important;margin:0;width:22px;height:22px;transform:none}
+html[data-theme="ocean"] .nav-btn.active .nav-icon{opacity:1;transform:translateY(-4px) scale(1.08);box-shadow:0 0 0 3px #bdf0f9,0 10px 14px rgba(8,145,178,.45),inset 0 2px 3px rgba(255,255,255,.7)}
+/* গ্লাস: তুষার-কাচের গোলাকার বর্গ */
+html[data-theme="glass"] .nav-icon{width:42px!important;height:42px!important;border-radius:15px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.95);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 6px 12px rgba(124,58,237,.18),inset 0 1px 0 #fff;display:flex!important;align-items:center;justify-content:center}
+html[data-theme="glass"] .nav-icon::before,html[data-theme="glass"] .nav-btn.active .nav-icon::before{margin:0;width:22px;height:22px;transform:none}
+html[data-theme="glass"] .nav-btn.active .nav-icon{background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(233,213,255,.85))!important;box-shadow:0 10px 18px rgba(124,58,237,.38),inset 0 1px 0 #fff!important;transform:translateY(-4px)}
+/* সানসেট: উজ্জ্বল কমলা ক্যাপসুল */
+html[data-theme="sunset"] .nav-icon{width:50px!important;height:32px!important;border-radius:16px;background:linear-gradient(180deg,#ffb066,#f0661a);border-bottom:4px solid #b8420c;box-shadow:0 5px 9px rgba(194,65,12,.35),inset 0 2px 0 rgba(255,255,255,.55);display:flex!important;align-items:center;justify-content:center;opacity:.86;transition:transform .2s}
+html[data-theme="sunset"] .nav-icon::before,html[data-theme="sunset"] .nav-btn.active .nav-icon::before{background:#fff!important;filter:drop-shadow(0 1px 1px rgba(120,40,0,.5))!important;margin:0;width:20px;height:20px;transform:none}
+html[data-theme="sunset"] .nav-btn.active .nav-icon{opacity:1;transform:translateY(-4px) scale(1.1);box-shadow:0 0 14px #fbbf24,0 9px 12px rgba(194,65,12,.4),inset 0 2px 0 rgba(255,255,255,.6);background:linear-gradient(180deg,#ffc27a,#ea580c)}
