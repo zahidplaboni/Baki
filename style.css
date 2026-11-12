@@ -1855,3 +1855,10 @@ html[data-theme="sunset"] .nav-btn.active .nav-icon{opacity:1;transform:translat
 .on-edit{flex:1}
 .on-empty{text-align:center;color:#94a3b8;padding:14px;font-size:13px}
 .on-hint{font-size:11px;color:#94a3b8;text-align:center;margin-top:6px}
+
+/* স্টাফ ব্লক */
+.emp-item.blocked{opacity:.75;background:#fef2f2}
+.emp-item.blocked .emp-avatar{filter:grayscale(1)}
+.blk-badge{background:#fee2e2;color:#b91c1c;border-radius:8px;padding:1px 7px;font-size:11px;font-weight:800}
+.emp-blk{background:#fff1f2!important;color:#be123c!important}
+.emp-blk.on{background:#dcfce7!important;color:#15803d!important}
