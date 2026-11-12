@@ -70,7 +70,7 @@ function render(){$('cnt').textContent=ROWS.length+' টি লাইসেন�
   <div class="row"><input type="date" id="t_${r.id}" style="width:auto" onchange="showDate('${r.id}')"><button class="o" onclick="setDate('${r.id}')">এই তারিখ সেট করুন</button></div>
   <div class="hint" id="td_${r.id}">তারিখ বাছুন, তারপর বোতাম চাপুন। ওই তারিখের রাত ১১:৫৯ পর্যন্ত চলবে।</div></div>
  <div class="sec"><div class="st">🔒 লক ও বার্তা</div>
-  <div class="row">${r.locked?`<button class="g" onclick="lock('${r.id}',false)">🔓 খুলে দিন</button>`:`<button class="r" onclick="lock('${r.id}',true)">🔒 এখনই লক</button>`}<button class="o" onclick="note('${r.id}')">📝 বার্তা</button><button class="o" style="color:#c62828" onclick="delLic('${r.id}')">🗑️ তালিকা থেকে মুছুন</button></div></div>
+  <div class="row">${r.locked?`<button class="g" onclick="lock('${r.id}',false)">🔓 খুলে দিন</button>`:`<button class="r" onclick="lock('${r.id}',true)">🔒 এখনই লক</button>`}<button class="o" onclick="note('${r.id}')">📝 বার্তা</button><button class="o" onclick="setPw('${r.id}')">🔑 পাসওয়ার্ড বদলান</button><button class="o" style="color:#c62828" onclick="delLic('${r.id}')">🗑️ তালিকা থেকে মুছুন</button></div></div>
 </div></div>`}).join('')}
 const R=id=>ROWS.find(r=>r.id===id);
 async function addDays(id,keep){const n=parseInt($('d_'+id).value,10);if(!(n>0))return say('❌ দিন লিখুন',1);const r=R(id);const base=keep&&r.exp>Date.now()?r.exp:Date.now();
@@ -87,17 +87,20 @@ function fillNt(){const o=$('nt_one'),v=o.value;o.innerHTML=ROWS.map(r=>'<option
 
 let SA=null,ACC=null;
 function loadSA(){try{SA=JSON.parse(localStorage.getItem('bkSA'))}catch(e){SA=null}$('sa_st').innerHTML=SA&&SA.private_key?'✅ চালু আছে ('+esc(SA.client_email||'')+')':'⏸️ বন্ধ — পুশ ছাড়া শুধু আগের নিয়মে (অ্যাপ খুললে / ১৫ মিনিটে) নোটিশ যাবে'}
-function saveSA(){try{const j=JSON.parse($('sa_j').value);if(!j.private_key||!j.client_email||!j.project_id)throw 0;localStorage.setItem('bkSA',JSON.stringify(j));$('sa_j').value='';ACC=null;loadSA();say('✅ সেভ হয়েছে')}catch(e){say('❌ এটা সঠিক service-account JSON নয়',1)}}
-function delSA(){localStorage.removeItem('bkSA');ACC=null;loadSA();say('মুছেছে')}
+function saveSA(){try{const j=JSON.parse($('sa_j').value);if(!j.private_key||!j.client_email||!j.project_id)throw 0;localStorage.setItem('bkSA',JSON.stringify(j));$('sa_j').value='';Object.keys(ACCS).forEach(k=>delete ACCS[k]);loadSA();say('✅ সেভ হয়েছে')}catch(e){say('❌ এটা সঠিক service-account JSON নয়',1)}}
+function delSA(){localStorage.removeItem('bkSA');Object.keys(ACCS).forEach(k=>delete ACCS[k]);loadSA();say('মুছেছে')}
 const b64u=b=>btoa(String.fromCharCode(...new Uint8Array(b))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 const b64s=t=>b64u(new TextEncoder().encode(t));
-async function accTok(){if(ACC&&ACC.exp>Date.now()+60000)return ACC.t;
- const now=Math.floor(Date.now()/1000),h=b64s(JSON.stringify({alg:'RS256',typ:'JWT'})),c=b64s(JSON.stringify({iss:SA.client_email,scope:'https://www.googleapis.com/auth/firebase.messaging',aud:'https://oauth2.googleapis.com/token',iat:now,exp:now+3000}));
+const ACCS={};
+async function accTok(sc){sc=sc||'https://www.googleapis.com/auth/firebase.messaging';const a=ACCS[sc];if(a&&a.exp>Date.now()+60000)return a.t;
+ const now=Math.floor(Date.now()/1000),h=b64s(JSON.stringify({alg:'RS256',typ:'JWT'})),c=b64s(JSON.stringify({iss:SA.client_email,scope:sc,aud:'https://oauth2.googleapis.com/token',iat:now,exp:now+3000}));
  const pem=SA.private_key.replace(/-----[A-Z ]+-----/g,'').replace(/\s+/g,''),raw=Uint8Array.from(atob(pem),x=>x.charCodeAt(0));
  const key=await crypto.subtle.importKey('pkcs8',raw,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['sign']);
  const sig=await crypto.subtle.sign('RSASSA-PKCS1-v1_5',key,new TextEncoder().encode(h+'.'+c));
  const r=await fetch('https://oauth2.googleapis.com/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type='+encodeURIComponent('urn:ietf:params:oauth:grant-type:jwt-bearer')+'&assertion='+h+'.'+c+'.'+b64u(sig)});
- const j=await r.json();if(!j.access_token)throw new Error(j.error_description||j.error||'টোকেন পাওয়া যায়নি');ACC={t:j.access_token,exp:Date.now()+(j.expires_in||3000)*1000};return ACC.t}
+ const j=await r.json();if(!j.access_token)throw new Error(j.error_description||j.error||'টোকেন পাওয়া যায়নি');ACCS[sc]={t:j.access_token,exp:Date.now()+(j.expires_in||3000)*1000};return ACCS[sc].t}
+async function setPw(id){const r=R(id);if(!SA||!SA.private_key)return say('❌ আগে নিচে service-account JSON সেভ করুন',1);const p=prompt('🔑 '+r.email+' এর নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর):');if(!p)return;if(p.length<6)return say('❌ কমপক্ষে ৬ অক্ষর',1);if(!confirm(r.email+' এর পাসওয়ার্ড বদলাবেন? পুরনো পাসওয়ার্ডে আর ঢোকা যাবে না।'))return;
+ try{const t=await accTok('https://www.googleapis.com/auth/identitytoolkit');const x=await fetch('https://identitytoolkit.googleapis.com/v1/projects/'+SA.project_id+'/accounts:update',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+t},body:JSON.stringify({localId:id,password:p})});const j=await x.json().catch(()=>({}));if(!x.ok)throw new Error((j.error&&j.error.message)||('HTTP '+x.status));say('✅ পাসওয়ার্ড বদলেছে। নতুন পাসওয়ার্ড: '+p)}catch(e){say('❌ '+(/PERMISSION|403/.test(e.message)?'অনুমতি নেই — service-account-এ Firebase Authentication Admin ভূমিকা লাগবে':e.message),1)}}
 async function pushTo(rows,title,body,nid){if(!SA||!SA.private_key)return null;let ok=0,fail=0,none=0;
  try{const t=await accTok();
   for(const r of rows){if(!r.fcm){none++;continue}
