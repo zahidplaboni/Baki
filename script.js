@@ -9,7 +9,8 @@ const I18N_RULES = [
     [/^(\d+)\s*জনের$/, '$1 customer(s)'],
     [/^(\d+)\s*জন$/, '$1 customers']
 ];
-Object.assign(EN_DICT, {"আইটেম অনুযায়ী কে নিয়েছে":"Who took which item","আইটেম খুঁজুন…":"Search item…"});
+Object.assign(EN_DICT, {"আইটেম অনুযায়ী এখন কে বাকি":"Who owes which item now","আইটেম খুঁজুন…":"Search item…"});
+Object.assign(EN_DICT, {"এই আইটেমের বাকি":"Due for these items","জমা: শুধু এই আইটেমে ভাগ করা অংশ":"Payments: only the part allocated to these items"});
 Object.assign(EN_DICT, {"গ্রামবাংলা":"Village","সুন্দরবন":"Sundarbans","ঈদ রাত":"Eid Night","ঢাকা রিকশা":"Dhaka Rickshaw","🚫 ব্লক":"🚫 Block","✅ আনব্লক":"✅ Unblock","⛔ ব্লক":"⛔ Blocked","⛔ আপনার অ্যাকাউন্ট বন্ধ করা হয়েছে। মালিকের সাথে যোগাযোগ করুন।":"⛔ Your account has been disabled. Please contact the owner.","ক্লে ৩ডি":"Clay 3D","📝 আমার নোট":"📝 My notes","নতুন নোট লিখুন…":"Write a new note…","➕ যোগ করুন":"➕ Add","কোনো নোট নেই":"No notes yet","🔒 শুধু মালিক দেখতে পাবেন। খুলতে: তারিখের জায়গায় ডবল ট্যাপ / ডবল ক্লিক।":"🔒 Only the owner can see this. To open: double-tap / double-click the date area.","এই নোট মুছে ফেলবেন?":"Delete this note?","নোটিশ":"Notice","📢 নোটিশ":"📢 Notice","ঠিক আছে, বুঝেছি":"OK, got it","লাইসেন্সের মেয়াদ শেষ":"License expired","লাইসেন্স বন্ধ আছে":"License is locked","পেমেন্ট করে যোগাযোগ করুন, সঙ্গে সঙ্গে চালু হয়ে যাবে।":"Please pay and get in touch — it will be unlocked right away.","এই লাইসেন্সটি বন্ধ করা হয়েছে। যোগাযোগ করুন।":"This license has been locked. Please get in touch.","🔄 আবার যাচাই করুন":"🔄 Check again","⏳ লাইসেন্সের মেয়াদ আজ শেষ হবে":"⏳ License expires today","আপনার ডেটা নিরাপদ আছে — মুছে যায়নি।":"Your data is safe — nothing was deleted.","লাইসেন্স লগইন":"License login","🔑 অ্যাপ চালু করতে আপনাকে দেওয়া ইমেইল ও পাসওয়ার্ড দিন। এটা শুধু একবার লাগবে।":"🔑 Enter the email and password you were given to activate the app. Needed only once.","📧 ইমেইল:":"📧 Email:","🚀 চালু করুন":"🚀 Activate","☁️ স্টাফ বা সরবরাহকারী? দোকান কোড দিয়ে যুক্ত হন":"☁️ Staff or supplier? Join with the shop code","⏳ যাচাই হচ্ছে…":"⏳ Verifying…","❌ ইমেইল বা পাসওয়ার্ড ভুল":"❌ Wrong email or password","❌ এই লাইসেন্স বন্ধ করা আছে":"❌ This license is disabled","❌ ইমেইল ও পাসওয়ার্ড দিন":"❌ Enter email and password","📧 কোডের বদলে ইমেইল ও পাসওয়ার্ড দিয়ে যুক্ত হব":"📧 Join with email and password instead of the code","🔑 ইমেইলের বদলে দোকান কোড দিয়ে যুক্ত হব":"🔑 Join with the shop code instead of email","ইমেইল:":"Email:","🔑 লাইসেন্স ইমেইল দেখুন":"🔑 Show license email","ব্যাকআপ ও রিস্টোর":"Backup & restore","💾 ব্যাকআপ ও রিস্টোর":"💾 Backup & restore","ডেটা সেভ করুন অথবা ফাইল থেকে ফিরিয়ে আনুন":"Save your data or restore it from a file","বাতিল":"Cancel","এই কাস্টমারের কোনো আইটেমে বাকি নেই — ভাগ করার কিছু নেই":"This customer has no item due — nothing to assign","ভাগ বদলান":"Change split","📊 এই সময়ে বাকির হিসাব":"📊 Dues summary for this period","মোট বাকি বেড়েছে":"Total due increased","মোট বাকি কমেছে":"Total due decreased","🏷️ ছাড় (ডিসকাউন্ট) — ঐচ্ছিক:":"🏷️ Discount — optional:","ছাড়":"Discount","🏷️ ছাড়":"🏷️ Discount","🏷️ ছাড়:":"🏷️ Discount:","ছাড় দিলে বাকি কমবে, কিন্তু জমার টাকায় ধরা হবে না":"Discount reduces the due but is not counted as money received","❌ জমা + ছাড় বাকির চেয়ে বেশি হয়ে গেছে":"❌ Payment + discount is more than the due","মোট ছাড়":"Total discount","মোট ছাড় (ডিসকাউন্ট)":"Total discounts given","ডেভেলপারের পরিচয়":"Developer","জাহিদুল ইসলাম (ছিদ্দিক)":"ZAHIDUL ISLAM (CIDDIQ)","নোয়াখালী, চাপরাশিরহাট ৩৮১১":"Noakhali, ChaprashirHat 3811","বাংলাদেশ":"Bangladesh","যেমন: সিদ্দিক":"e.g. Ciddiq","যেমন: সাজ্জাদ":"e.g. Sajjad","যেমন: জাহিদুল":"e.g. Zahidul","যেমন: সামিরা স্টোর":"e.g. Samira Store","যেমন: zahidul":"e.g. zahidul","যেমন: শারমিন":"e.g. Sharmin","থিম ও রং": "Theme & colors", "ডিফল্ট": "Default", "মিডনাইট": "Midnight", "ওশান": "Ocean", "গ্লাস": "Glass", "সানসেট": "Sunset", "পছন্দের রং বেছে নিন। শুধু এই ফোনে/ব্রাউজারে বদলাবে।": "Pick your colors. Applies only on this phone/browser.", "নতুন কাস্টমার": "New customer", "নতুন কাস্টমার যোগ করুন এবং হিসাব শুরু করুন": "Add a new customer and start the account", "কাস্টমারের নাম": "Customer's name", "হোয়াটসঅ্যাপ নম্বর (কোডসহ)": "WhatsApp number (with country code)", "কাস্টমার যোগ করুন": "Add customer", "আইটেম ম্যানেজ": "Manage items", "নতুন আইটেমের নাম": "New item name", "হিসাবের ধরন": "Account type", "সংখ্যা × দাম": "Quantity × price", "যেমন কার্টুন, পিস": "e.g. carton, piece", "ফ্রি": "Free", "পরিমাণ+টাকা": "Quantity + amount", "শুধু টাকা": "Amount only", "রিচার্জ": "Recharge", "একক (শব্দ)": "Unit (word)", "— কেস/কার্টুন/পিস/প্যাকেট। বেছে নিন": "— case / carton / piece / packet. Choose one", "এই আইটেমের স্টক রাখুন": "Keep stock for this item", "কম হলে সতর্কতা": "Low-stock alert", "— এই সংখ্যা বা এর কমে লাল দেখাবে (ঐচ্ছিক)": "— shows red at or below this number (optional)", "ডিফল্ট দাম": "Default price", "— প্রতি এক একক (পিস/প্যাকেট) এর দাম (ঐচ্ছিক)": "— price per unit (piece/packet) (optional)", "কত দিন পর মনে করাবে": "Remind after how many days", "— ঐচ্ছিক। যেমন রিচার্জে ২৯": "— optional. e.g. 29 for recharge", "নতুন আইটেম যোগ করুন": "Add new item", "বর্তমান আইটেম তালিকা": "Current item list", "টাকা": "Amount", "যেমন: করিম আলী": "e.g. Karim Ali", "যেমন: 88018XXXXXXXX": "e.g. 88018XXXXXXXX", "যেমন: চাল, ডাল, পানি...": "e.g. rice, lentils, water...", "নিজে লিখুন (যেমন: ডজন)": "Type your own (e.g. dozen)", "যেমন: ৫": "e.g. 5", "যেমন: ১০": "e.g. 10", "যেমন: ২৯": "e.g. 29", "নগদ": "Cash", "বাকি": "Due", "জমা": "Payment", "পরিবর্তন": "Change", "ডিলিট": "Delete", "হিস্টোরি": "History", "নোট": "Note", "নোট (শুধু মালিক)": "Note (owner only)", "আছে": "Yes", "তারিখ": "Date", "বিবরণ": "Details", "কোনো বিল নেই": "No bills", "সব পরিশোধিত": "All paid", "পরিশোধিত": "Paid", "মোট বিল": "Total bill", "মোট জমা": "Total paid", "টাকা জমা নিন": "Collect payment", "আজকে কী নিলো যোগ করুন": "Add what they took today", "পরিমাণ": "Quantity", "দাম/পিস": "Price/pc", "মোট টাকা": "Total amount", "সেভ করুন": "Save", "যোগ করেছেন": "Added by", "বর্তমান বাকি": "Current due", "আগের": "Previous", "এন্ট্রি করেছিলেন": "Entered by", "স্টকে আছে": "In stock", "কোনো কাস্টমার নেই": "No customers", "ক্যালকুলেটর": "Calculator", "লিখলে পুরো বাকি টাকা অটো জমা হবে": "Type p to auto-fill the full due amount", "জমার পরিমাণ": "Payment amount", "বাতিল": "Cancel", "জমা দিন": "Submit payment", "টাকা লিখুন বা p লিখুন": "Enter amount or type p", "পুরো কিবোর্ড চালু করুন": "Show full keyboard", "হিসাব এডিট করুন": "Edit entry", "নতুন বিবরণ": "New details", "নতুন টাকা": "New amount", "নাম ও নম্বর পরিবর্তন": "Change name & number", "নাম": "Name", "ফোন নম্বর": "Phone number", "কাস্টমার নোট (শুধু মালিক)": "Customer note (owner only)", "কাস্টমার": "Customer", "সম্পর্কে যা মনে রাখতে চান লিখুন": "— write what you want to remember.", "এই নোট শুধু মালিকের দেখার জন্য": "This note is for the owner only", "মুছুন": "Clear", "যেমন: বাড়ি ৫ নম্বর রোডে...": "e.g. House on Road 5...", "নিশ্চিত করুন": "Please confirm", "হ্যাঁ, ডিলিট করুন": "Yes, delete", "লেনদেনের পাসওয়ার্ড দিন": "Enter transaction password", "এই পাসওয়ার্ড মালিক ও স্টাফ উভয়ের কাছে থাকবে": "Both owner and staff will have this password", "নিরাপত্তার স্বার্থে পাসওয়ার্ড দিন": "Enter your password for security", "ওকে": "OK", "বিক্রি এন্ট্রি নিশ্চিত করুন": "Confirm sale entry", "হিসাব এডিট করতে পাসওয়ার্ড দিন": "Enter password to edit", "সঠিক পাসওয়ার্ড দিলে এডিট স্ক্রিন আসবে": "The edit screen opens after the correct password", "টাকা জমা নিশ্চিত করুন": "Confirm payment", "হিসাব ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete", "জমা ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete payment", "সঠিক পাসওয়ার্ড দিলে ডিলিটের নিশ্চিতকরণ আসবে": "Delete confirmation appears after the correct password", "এই হিসাবটি ডিলিট করবেন": "Delete this entry", "এই জমার রেকর্ড ডিলিট করবেন": "Delete this payment record", "কাস্টমারের ছবি দিন": "Add customer's photo", "ক্যামেরা দিয়ে তুলুন": "Take with camera", "এখনই ছবি উঠান": "Take a photo now", "গ্যালারি থেকে বাছুন": "Choose from gallery", "ফোনে সেভ করা ছবি": "A photo saved on the phone", "বন্ধ করুন": "Close", "কাস্টমারকে জানাবেন": "Notify the customer", "এই কাস্টমারের ফোন নম্বর নেই বা খুব ছোট। পাঠালে WhatsApp-এ নিজে কাস্টমার বেছে নিতে হবে।": "This customer's phone number is missing or too short. You'll need to pick the customer yourself in WhatsApp.", "এখন না": "Not now", "পাঠান": "Send", "আবার কেনার সময় হয়েছে": "due to buy again", "রিচার্জ অ্যাপ বাছুন": "Choose recharge app", "বাছা মুছুন": "Clear choice", "বন্ধ": "Close", "অ্যাপের নাম খুঁজুন": "Search app name", "আজকের লেনদেন": "Today's transactions", "শেষ ৭ দিনের লেনদেন": "Last 7 days transactions", "শেষ ১৫ দিনের লেনদেন": "Last 15 days transactions", "শেষ ৩০ দিনের লেনদেন": "Last 30 days transactions", "একটি তারিখ নির্বাচন করুন": "Select a date", "🔒 দোকানের তথ্য শুধু মালিক পরিবর্তন করতে পারবেন।": "🔒 Only the owner can change shop details.", "আইটেমের নাম লিখুন!": "Enter the item name!", "❌ এই আইটেম আগে থেকেই আছে!": "❌ This item already exists!", "স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "Enter the stock unit (e.g. piece, packet)", "একক হলো শব্দ, সংখ্যা নয়।": "The unit is a word, not a number.", "যেমন: পিস, প্যাকেট, কার্টুন।": "e.g. piece, packet, carton.", "📦 এই আইটেমের স্টক চালু আছে।": "📦 Stock is on for this item.", "আগে ✏️ চেপে স্টক বন্ধ করুন, তারপর ডিলিট করুন।": "First press ✏️ and turn stock off, then delete.", "❌ স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "❌ Enter the stock unit (e.g. piece, packet)", "❌ একক হলো শব্দ, সংখ্যা নয় (যেমন: পিস, প্যাকেট, কার্টুন)": "❌ The unit is a word, not a number (e.g. piece, packet, carton)", "স্টক বন্ধ করলে আগের হিসাব মুছবে না, আবার চালু করলে ফিরে আসবে।": "Turning stock off keeps the old records; they return when you turn it on again.", "স্টক বন্ধ করলে আগের হিসাব মুছবে না।": "Turning stock off keeps the old records.", "✅ কাস্টমার যোগ হয়েছে!": "✅ Customer added!", "সঠিক টাকা লিখুন": "Enter a valid amount", "পরিমাণ লিখুন": "Enter the quantity", "সঠিক তথ্য দিন": "Enter valid details", "তারিখ নির্বাচন করুন": "Select a date", "❌ এই কাস্টমারের কোনো বাকি নেই!": "❌ This customer has no due!", "সঠিক পরিমাণ লিখুন": "Enter a valid quantity", "নাম খালি রাখা যাবে না": "Name cannot be empty", "সঠিক ফোন নম্বর লিখুন": "Enter a valid phone number", "🔒 নাম আর বদলানো যাবে না": "🔒 The name cannot be changed any more", "তবুও সেভ করবেন?": "Save anyway?"});
 Object.assign(EN_DICT, {"⚠️ দেরি":"⚠️ Late","🕒 চলছে":"🕒 Ongoing","✅ ভালো":"✅ Good","🆕 নতুন":"🆕 New","এখনো লেনদেন নেই":"No entries yet","শেষ লেনদেন: ":"Last entry: ","▲ বন্ধ করুন":"▲ Close"});
 Object.assign(EN_DICT, {"📧 ইমেইল লাইসেন্সে নিন":"📧 Move to email license","📧 লাইসেন্সের ইমেইল:":"📧 License email:","🔑 লাইসেন্সের পাসওয়ার্ড:":"🔑 License password:","⏳ রূপান্তর হচ্ছে…":"⏳ Converting…","আপনার সব ডেটা নতুন ইমেইল-লাইসেন্স দোকানে তোলা হবে। আগের দোকান কোড আর কাজ করবে না। এগিয়ে যাবেন?":"All your data will be moved to the new email-license shop. The old shop code will stop working. Continue?","✅ হয়ে গেছে! এখন এই ইমেইল ও পাসওয়ার্ড দিয়েই স্টাফ ও মাইকেল যুক্ত হবে।":"✅ Done! Staff and Michael can now join with this email and password.","এই ইমেইলের দোকানে আগে থেকেই ডেটা আছে — থামানো হলো":"This email shop already has data — stopped"});
@@ -144,6 +145,7 @@ I18N_RULES.push(
     [/^- বাকি আছে: (\d+) জন.*$/, '- Still owe: $1 customer(s)'],
     [/^💰 (.*)কে দিতে হবে:$/, '💰 To pay $1:'],
     [/^- বিক্রি (\S+) (\S+) × (\S+) = (\S+) টাকা$/, '- Sold $1 $2 × $3 = $4 Tk'],
+    [/^জমা \((.+)\)$/, 'Payment ($1)'],
     [/^- আদায় হয়েছে (\S+) (\S+) × (\S+) = (\S+) টাকা$/, '- Collected $1 $2 × $3 = $4 Tk'],
     [/^🔹 এখন বাকি: (\S+) টাকা$/, '🔹 Due now: $1 Tk'],
     [/^⏳ আদায় বাকি (\S+) (\S+) — আদায় হলে আরও (\S+) টাকা$/, '⏳ Pending collection $1 $2 — another $3 Tk once collected'],
@@ -3498,45 +3500,62 @@ function clearItemSel() { ITEM_SEL.clear(); ITEM_OPEN.clear(); renderItemFinder(
 function toggleItemRows(cid) { if (ITEM_OPEN.has(cid)) ITEM_OPEN.delete(cid); else ITEM_OPEN.add(cid); renderItemFinder(); }
 function openCustFromReport(cid, ev) {
     if (ev) ev.stopPropagation();
-    const c = appData.customers.find(x => x.id === cid); if (!c) return;
+    const c = appData.customers.find(x => (x.id || x.name) === cid); if (!c) return;
+    cid = c.id || c.name;
     switchPage('home');
     SEARCH_PIN = cid; OPEN_CUS.add(cid);
     const si = document.getElementById('searchBar'); if (si) { si.value = c.name; searchClearVis(); }
     filterCustomers();
     setTimeout(() => { window.scrollTo(0, 0); const w = document.getElementById('cw-' + cid); if (w) w.scrollIntoView({ block: 'start', behavior: 'smooth' }); }, 80);
 }
+// আইটেম ধরে "এখন কে কত বাকি": বিক্রির বাকি অংশ − ওই আইটেমে ভাগ করা জমা; কাস্টমারের পুরো বাকি মিটে গেলে ০
+function itemDueMap(name) {
+    const by = {}, tot = {};
+    viewerRows(name).forEach(r => {
+        if (!(r.due > 0)) return;
+        const k = r.c.id || r.c.name;
+        if (!(k in tot)) tot[k] = Math.max(0, Calc.totals(r.c).due);
+        if (!(tot[k] > 0)) return;
+        (by[k] = by[k] || { c: r.c, due: 0, rows: [], old: '' }).rows.push(r);
+        by[k].due += r.due;
+    });
+    Object.keys(by).forEach(k => { by[k].due = Calc.r2(Math.min(by[k].due, tot[k])); by[k].cap = tot[k]; });
+    return by;
+}
 function renderItemFinder() {
     const chipsEl = document.getElementById('ifdChips'), resEl = document.getElementById('itemResults');
     if (!chipsEl || !resEl) return;
     const en = LANG === 'en', m = itemEntries();
-    const all = Object.keys(m).sort((a, b) => m[b].length - m[a].length || a.localeCompare(b));
+    const all = Object.keys(m);
+    const dm = {}; all.forEach(n => { dm[n] = itemDueMap(n); });
+    all.sort((a, b) => Object.keys(dm[b]).length - Object.keys(dm[a]).length || a.localeCompare(b));
     [...ITEM_SEL].forEach(n => { if (!m[n]) ITEM_SEL.delete(n); });
     ITEM_NAMES = all;
     const q = ITEM_Q.trim().toLowerCase();
     if (!all.length) { chipsEl.innerHTML = '<div class="if-empty">' + (en ? 'No sales yet' : 'এখনো কোনো বিক্রি নেই') + '</div>'; resEl.innerHTML = ''; return; }
     chipsEl.innerHTML = all.map((n, i) => (!q || n.toLowerCase().includes(q) || ITEM_SEL.has(n)) ?
-        `<button class="if-chip${ITEM_SEL.has(n) ? ' on' : ''}" onclick="toggleItemSel(${i})">${ITEM_SEL.has(n) ? '✔ ' : ''}${escapeHtml(n)} <em>${m[n].length}</em></button>` : '').join('');
-    if (!ITEM_SEL.size) { resEl.innerHTML = '<div class="if-hint">' + (en ? 'Tick one or more items to see who took them' : 'এক বা একাধিক আইটেমে টিক দিন, কে কে নিয়েছে দেখাবে') + '</div>'; return; }
+        `<button class="if-chip${ITEM_SEL.has(n) ? ' on' : ''}${Object.keys(dm[n]).length ? '' : ' zero'}" onclick="toggleItemSel(${i})">${ITEM_SEL.has(n) ? '✔ ' : ''}${escapeHtml(n)} <em>${Object.keys(dm[n]).length}</em></button>` : '').join('');
+    if (!ITEM_SEL.size) { resEl.innerHTML = '<div class="if-hint">' + (en ? 'Tick one or more items to see who still owes' : 'এক বা একাধিক আইটেমে টিক দিন, এখন কে কে বাকি আছে দেখাবে') + '<br><small>' + (en ? 'The number on each item = customers who owe it now' : 'আইটেমের পাশের সংখ্যা = এখন যতজন বাকি আছে') + '</small></div>'; return; }
     const by = {};
-    ITEM_SEL.forEach(n => m[n].forEach(e => {
-        const g = by[e.c.id] = by[e.c.id] || { c: e.c, n: 0, amt: 0, last: '', rows: [] };
-        g.n++; g.amt += Number(e.t.amt) || 0; g.rows.push(e.t);
-        if (String(e.t.dt || '') > g.last) g.last = String(e.t.dt || '');
+    ITEM_SEL.forEach(n => Object.values(dm[n]).forEach(g => {
+        const k = g.c.id || g.c.name, o = by[k] = by[k] || { c: g.c, due: 0, rows: [], cap: g.cap };
+        o.due += g.due; g.rows.forEach(r => o.rows.push(Object.assign({ item: n }, r)));
     }));
-    const groups = Object.values(by).sort((a, b) => (b.last > a.last ? 1 : b.last < a.last ? -1 : b.n - a.n));
-    const totalN = groups.reduce((s, g) => s + g.n, 0), totalAmt = groups.reduce((s, g) => s + g.amt, 0);
+    Object.values(by).forEach(o => { o.due = Calc.r2(Math.min(o.due, o.cap)); o.old = o.rows.reduce((a, r) => (!a || (r.dt && r.dt < a)) ? r.dt : a, ''); });
+    const groups = Object.values(by).filter(g => g.due > 0).sort((a, b) => b.due - a.due);
+    const total = Calc.r2(groups.reduce((s, g) => s + g.due, 0));
     const names = [...ITEM_SEL].map(escapeHtml).join(', ');
-    resEl.innerHTML = `<div class="if-res"><div class="if-rh"><span>✔ ${names} — ${groups.length} ${en ? 'customers' : 'জন নিয়েছে'}</span><button onclick="clearItemSel()">${en ? 'Clear' : 'মুছুন'}</button></div>
-        <div class="if-sum">${en ? 'Total' : 'মোট'} ${totalN} ${en ? 'entries' : 'বার'} • ${Calc.r2(totalAmt)} ৳</div>` +
-        groups.map(g => {
-            const open = ITEM_OPEN.has(g.c.id);
-            g.rows.sort((a, b) => String(b.dt || '').localeCompare(String(a.dt || '')));
+    resEl.innerHTML = `<div class="if-res"><div class="if-rh"><span>✔ ${names}</span><button onclick="clearItemSel()">${en ? 'Clear' : 'মুছুন'}</button></div>
+        <div class="if-sum"><b>${groups.length}</b> ${en ? 'customers owe now' : 'জন এখন বাকি আছে'} • ${en ? 'Total due' : 'মোট বাকি'} <b style="color:#dc2626">${total} ৳</b></div>` +
+        (groups.length ? groups.map(g => {
+            const ck = String(g.c.id || g.c.name).replace(/'/g, "\\'"), open = ITEM_OPEN.has(g.c.id || g.c.name);
+            g.rows.sort((a, b) => String(a.dt || '').localeCompare(String(b.dt || '')));
             const multi = ITEM_SEL.size > 1;
-            const det = open ? `<div class="if-det">${g.rows.map(t => `<div><span>${escapeHtml(String(t.dt || ''))}</span><span>${escapeHtml(multi || t.qty ? txLabel(t).text : '')}</span><span>${Calc.r2(Number(t.amt) || 0)} ৳ • ${t.pay === 'cash' ? (en ? '💵 Cash' : '💵 নগদ') : (en ? '📒 Due' : '📒 বাকি')}</span></div>`).join('')}</div>` : '';
-            return `<div class="if-row" onclick="toggleItemRows('${g.c.id}')"><div class="cav sm">${avatarHtml(g.c)}</div>
-                <div class="if-mid"><div class="if-name" onclick="openCustFromReport('${g.c.id}', event)">${escapeHtml(g.c.name)} <i>↗</i></div><small>${en ? 'Last: ' : 'শেষ: '}${escapeHtml(g.last || '-')}</small></div>
-                <b>${g.n} ${en ? 'times' : 'বার'}<small>${Calc.r2(g.amt)} ৳</small></b><span class="if-go">${open ? '▾' : '›'}</span></div>${det}`;
-        }).join('') + '</div>';
+            const det = open ? `<div class="if-det">${g.rows.map(r => `<div><span>${escapeHtml(String(r.dt || ''))}</span><span>${multi ? escapeHtml(r.item) + ' ' : ''}${r.qty ? Calc.r2(r.qty) + ' ' : ''}</span><span>${Calc.r2(r.due)} ৳${r.due < r.amt - 0.001 ? ' <small>(' + (en ? 'of ' : 'মোট ') + Calc.r2(r.amt) + ')</small>' : ''}</span></div>`).join('')}</div>` : '';
+            return `<div class="if-row" onclick="toggleItemRows('${ck}')"><div class="cav sm">${avatarHtml(g.c)}</div>
+                <div class="if-mid"><div class="if-name" onclick="openCustFromReport('${ck}', event)">${escapeHtml(g.c.name)} <i>↗</i></div><small>${en ? 'Since: ' : 'কবে থেকে: '}${escapeHtml(g.old || '-')}</small></div>
+                <b style="color:#dc2626">${g.due} ৳</b><span class="if-go">${open ? '▾' : '›'}</span></div>${det}`;
+        }).join('') : '<div class="if-hint">' + (en ? '🎉 Nobody owes this item now' : '🎉 এই আইটেমে এখন কেউ বাকি নেই') + '</div>') + '</div>';
 }
 
 function renderReports() {
@@ -3728,10 +3747,17 @@ function buildBlock(c, o) {
         let text = txLabel(t).text + (h ? ' (হিস্টোরি)' : '');
         rows.push({ dt: t.dt, text, kind: Calc.isCash(t) ? 'cash' : 'baki', amt: String(t.amt), n: Calc.num(t.amt) });
     };
-    const addPay = p => { if (inRange(p.dt)) rows.push({ dt: p.dt, text: p.disc ? 'ছাড়' : 'জমা', kind: 'pay', amt: '−' + p.amt, n: 0 }); };
+    const addPay = p => {
+        if (!inRange(p.dt)) return;
+        if (o.payments) { rows.push({ dt: p.dt, text: p.disc ? 'ছাড়' : 'জমা', kind: 'pay', amt: '−' + p.amt, n: Calc.num(p.amt), pk: p.disc ? 'disc' : 'pay' }); return; }
+        // নির্দিষ্ট পণ্য বাছা হলে: শুধু ওই পণ্যে ভাগ করে দেওয়া জমা দেখাই
+        const al = (p.alloc || []).filter(x => o.names && o.names.has(x.item));
+        const a = al.reduce((t, x) => t + Calc.num(x.amt), 0);
+        if (a > 0) rows.push({ dt: p.dt, text: 'জমা (' + [...new Set(al.map(x => x.item))].join(', ') + ')', kind: 'pay', amt: '−' + fmtNum(a), n: a, pk: 'alloc' });
+    };
     (c.tx || []).forEach(t => addTx(t, false));
     if (o.hist) (c.history || []).forEach(h => (h.tx || []).forEach(t => addTx(t, true)));
-    if (o.payments) {
+    if (o.payments || o.names) {
         (c.payment || []).forEach(addPay);
         if (o.hist) (c.history || []).forEach(h => (h.payment || []).forEach(addPay));
     }
@@ -3765,17 +3791,19 @@ function docForAll(o) {
         if (o.onlyDue && T.due <= 0) return;
         const rows = buildBlock(c, { names: new Set(picked.map(i => i.name)), hist: o.hist, from: o.from, to: o.to, payments: allSel });
         if (!rows.some(r => r.kind !== 'pay')) return;          // এই পণ্য নেয়নি — বাদ
-        let baki = 0, cash = 0;
-        rows.forEach(r => { if (r.kind === 'baki') baki += r.n; else if (r.kind === 'cash') cash += r.n; });
-        baki = Calc.r2(baki); cash = Calc.r2(cash); G.baki = Calc.r2(G.baki + baki); G.cash = Calc.r2(G.cash + cash); if (T.due > 0) G.due = Calc.r2(G.due + T.due);
+        let baki = 0, cash = 0, paidS = 0;
+        rows.forEach(r => { if (r.kind === 'baki') baki += r.n; else if (r.kind === 'cash') cash += r.n; else if (r.pk === 'pay' || r.pk === 'alloc') paidS += r.n; });
+        baki = Calc.r2(baki); cash = Calc.r2(cash); paidS = Calc.r2(paidS); G.paid = Calc.r2((G.paid || 0) + paidS); G.baki = Calc.r2(G.baki + baki); G.cash = Calc.r2(G.cash + cash); if (T.due > 0) G.due = Calc.r2(G.due + T.due);
         blocks.push({ name: c.name, phone: c.phone, due: T.due > 0 ? 'মোট বাকি: ' + fmtNum(T.due) + ' টাকা' : 'পরিশোধিত', dueBad: T.due > 0, rows,
-            foot: [{ l: 'বাকি-বিল', v: fmtNum(baki) + ' টাকা' }, { l: 'নগদ', v: fmtNum(cash) + ' টাকা', c: '#166534' }] });
+            foot: [{ l: 'বাকি-বিল', v: fmtNum(baki) + ' টাকা' }, ...(paidS > 0 ? [{ l: 'জমা', v: fmtNum(paidS) + ' টাকা', c: '#16a34a' }] : []), { l: 'নগদ', v: fmtNum(cash) + ' টাকা', c: '#166534' },
+                ...(!allSel ? [{ l: 'এই আইটেমের বাকি', v: fmtNum(Math.max(0, Calc.r2(baki - paidS))) + ' টাকা', c: '#dc2626', b: 1 }] : [])] });
     });
     const filt = [allSel ? 'সব পণ্য' : 'পণ্য: ' + picked.map(i => i.name).join(', ')];
     if (o.from || o.to) filt.push('তারিখ: ' + (o.from || '…') + ' থেকে ' + (o.to || '…'));
     if (o.hist) filt.push('হিস্টোরিসহ');
     if (o.onlyDue) filt.push('শুধু বাকি আছে যাদের');
-    const summary = [{ l: 'মোট কাস্টমার', v: blocks.length + ' জন' }, { l: 'বাকি-বিল', v: fmtNum(G.baki) + ' টাকা' }, { l: 'নগদ', v: fmtNum(G.cash) + ' টাকা', c: '#166534' }];
+    if (!allSel) filt.push('জমা: শুধু এই আইটেমে ভাগ করা অংশ');
+    const summary = [{ l: 'মোট কাস্টমার', v: blocks.length + ' জন' }, { l: 'বাকি-বিল', v: fmtNum(G.baki) + ' টাকা' }, ...((G.paid || 0) > 0 ? [{ l: 'জমা', v: fmtNum(G.paid) + ' টাকা', c: '#16a34a' }] : []), { l: 'নগদ', v: fmtNum(G.cash) + ' টাকা', c: '#166534' }];
     if (allSel) summary.push({ l: 'মোট বাকি', v: fmtNum(G.due) + ' টাকা', c: '#dc2626', b: 1 });
     return { header: docHeader('সব কাস্টমারের হিসাব', filt.join(' · ')), blocks, summary, single: false };
 }

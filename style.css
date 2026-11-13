@@ -2037,3 +2037,5 @@ html[data-theme="dhaka"] .th-opt .th-ck{background:#e11d48}
 .who-row .cav{width:54px;height:54px}
 
 .sup-row.sup-pend{color:#b45309;font-size:12.5px}.sup-row.sup-pend b{color:#b45309}
+
+.if-chip.zero{opacity:.55}.if-sum b{font-size:13px}.if-hint small{display:block;margin-top:4px;opacity:.8}
