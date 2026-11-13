@@ -2035,3 +2035,5 @@ html[data-theme="dhaka"] .th-opt .th-ck{background:#e11d48}
 .cav img{width:100%;height:100%;object-fit:cover}
 .who-row{display:flex;align-items:center;gap:12px;background:#f8fafc;border-radius:14px;padding:10px;text-align:left}
 .who-row .cav{width:54px;height:54px}
+
+.sup-row.sup-pend{color:#b45309;font-size:12.5px}.sup-row.sup-pend b{color:#b45309}

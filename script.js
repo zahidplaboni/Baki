@@ -88,6 +88,8 @@ I18N_RULES.push(
     [/^💸 (.+)কে টাকা দিলাম$/, '💸 I paid $1'],
     [/^\(প্রতি (\S+) (\S+) ৳\)$/, (m, u, n) => '(per ' + (I18N_UNITS[u] || u) + ': ' + n + ' ৳)'],
     [/^বিক্রি হয়েছে (\S+) (\S+) × (\S+)$/, 'Sold $1 $2 × $3'],
+    [/^আদায় হয়েছে (\S+) (\S+) × (\S+)$/, 'Collected $1 $2 × $3'],
+    [/^⏳ আদায় বাকি (\S+) (\S+) — আদায় হলে$/, '⏳ Pending collection $1 $2 — when collected'],
     [/^তোলা (\S+) · বিক্রি (\S+) · আছে (\S+) (\S+)$/, 'In $1 · Sold $2 · Left $3 $4'],
     [/^মোট বিক্রি \((.+)\)$/, 'Total sold ($1)']
 );
@@ -142,6 +144,9 @@ I18N_RULES.push(
     [/^- বাকি আছে: (\d+) জন.*$/, '- Still owe: $1 customer(s)'],
     [/^💰 (.*)কে দিতে হবে:$/, '💰 To pay $1:'],
     [/^- বিক্রি (\S+) (\S+) × (\S+) = (\S+) টাকা$/, '- Sold $1 $2 × $3 = $4 Tk'],
+    [/^- আদায় হয়েছে (\S+) (\S+) × (\S+) = (\S+) টাকা$/, '- Collected $1 $2 × $3 = $4 Tk'],
+    [/^🔹 এখন বাকি: (\S+) টাকা$/, '🔹 Due now: $1 Tk'],
+    [/^⏳ আদায় বাকি (\S+) (\S+) — আদায় হলে আরও (\S+) টাকা$/, '⏳ Pending collection $1 $2 — another $3 Tk once collected'],
     [/^🔹 বাকি: (\S+) টাকা$/, '🔹 Due: $1 Tk'],
     [/^· (\d{4}-\d\d-\d\d): (\S+) টাকা$/, '· $1: $2 Tk'],
     [/^(\S+) পৃষ্ঠা$/, 'Page $1'],
@@ -4090,24 +4095,31 @@ function supPriceAt(it, dt) {
 }
 // দাম অনুযায়ী ভাগ: [{price, qty}] (তারিখ ধরে, একই দাম একসাথে)
 function supSegs(it) {
-    const seg = {}, order = [];
-    const add = t => {
-        if (!t || t.tp !== it.name) return;
-        const q = Calc.num(t.qty); if (!(q > 0)) return;
-        const p = supPriceAt(it, t.dt);
-        if (!(p in seg)) { seg[p] = 0; order.push(p); }
-        seg[p] += q;
-    };
-    (appData.customers || []).forEach(c => { (c.tx || []).forEach(add); (c.history || []).forEach(hh => (hh.tx || []).forEach(add)); });
-    return order.map(p => ({ price: p, qty: Calc.r2(seg[p]) }));
+    // আদায়-ভিত্তিক: যতটা মালের টাকা কাস্টমারের কাছ থেকে উঠেছে (cq), শুধু ততটার দাম সরবরাহকারীর পাওনা
+    const seg = {}, order = [], dueOf = {};
+    viewerRows(it.name).forEach(r => {
+        const q = Calc.num(r.qty); if (!(q > 0)) return;
+        let cq = q;
+        if (!r.cash && !r.hist) {
+            const k = r.c.id || r.c.name;
+            if (!(k in dueOf)) dueOf[k] = Calc.totals(r.c).due;
+            if (dueOf[k] > 0) cq = r.amt > 0 ? q * Math.max(0, r.amt - r.due) / r.amt : q;   // কাস্টমারের পুরো বাকি মিটে গেলে সবটাই আদায়
+        }
+        const p = supPriceAt(it, r.dt);
+        if (!(p in seg)) { seg[p] = { q: 0, c: 0 }; order.push(p); }
+        seg[p].q += q; seg[p].c += cq;
+    });
+    return order.map(p => ({ price: p, qty: Calc.r2(seg[p].q), cq: Calc.r2(seg[p].c) }));
 }
 function supInfo(it, s, entries) {
     const price = Calc.num(it.supPrice);
     const pays = entries.filter(e => e.kind === 'supPay' && e.item === it.name);
     const paid = Calc.r2(pays.reduce((a, e) => a + Calc.num(e.amt), 0));
     const segs = price > 0 ? supSegs(it) : [];
-    const owed = Calc.r2(segs.reduce((a, x) => a + x.qty * x.price, 0));
-    return { price, pays, paid, owed, segs, due: Calc.r2(owed - paid) };
+    const owed = Calc.r2(segs.reduce((a, x) => a + x.cq * x.price, 0));
+    const pend = Calc.r2(segs.reduce((a, x) => a + (x.qty - x.cq) * x.price, 0));
+    const pendQty = Calc.r2(segs.reduce((a, x) => a + (x.qty - x.cq), 0));
+    return { price, pays, paid, owed, pend, pendQty, segs, due: Calc.r2(owed - paid) };
 }
 function supCardHtml(it, s, entries) {
     const q = escapeHtml(it.name).replace(/'/g, "\\'");
@@ -4121,7 +4133,8 @@ function supCardHtml(it, s, entries) {
         `<div class="sup-row"><span>${nm}কে দিয়েছেন</span><b style="color:#16a34a">${v.paid} ৳</b></div>` +
         pays + rep + `<button class="sup-btn" onclick="openSupPay('${escapeHtml(it.name).replace(/'/g, "\\'")}')">💸 ${nm}কে টাকা দিলাম</button></div>`;
     return `<div class="sup-box"><div class="sup-head">🤝 ${nm} <small>(প্রতি ${u} ${v.price} ৳)</small></div>` +
-        (v.segs.length > 1 ? v.segs.map(x => `<div class="sup-row"><span>বিক্রি হয়েছে ${x.qty} ${u} × ${x.price}</span><b>${Calc.r2(x.qty * x.price)} ৳</b></div>`).join('') : `<div class="sup-row"><span>বিক্রি হয়েছে ${s.sold} ${u} × ${v.price}</span><b>${v.owed} ৳</b></div>`) +
+        (v.segs.length > 1 ? v.segs.map(x => `<div class="sup-row"><span>আদায় হয়েছে ${x.cq} ${u} × ${x.price}</span><b>${Calc.r2(x.cq * x.price)} ৳</b></div>`).join('') : `<div class="sup-row"><span>আদায় হয়েছে ${v.segs.length ? v.segs[0].cq : 0} ${u} × ${v.price}</span><b>${v.owed} ৳</b></div>`) +
+        (v.pendQty > 0 ? `<div class="sup-row sup-pend"><span>⏳ আদায় বাকি ${v.pendQty} ${u} — আদায় হলে</span><b>+${v.pend} ৳</b></div>` : '') +
         `<div class="sup-row"><span>${nm}কে দিয়েছেন</span><b style="color:#16a34a">${v.paid} ৳</b></div>` +
         `<div class="sup-row sup-due"><span>${v.due >= 0 ? nm + 'কে আর দিতে হবে' : nm + ' বেশি পেয়েছেন'}</span><b>${Math.abs(v.due)} ৳</b></div>` +
         pays + rep + `<button class="sup-btn" onclick="openSupPay('${escapeHtml(it.name).replace(/'/g, "\\'")}')">💸 ${nm}কে টাকা দিলাম</button></div>`;
@@ -4151,11 +4164,11 @@ function supBlock(it) {
     m += `🛒 বিক্রি হয়েছে: ${s.sold} ${u}\n- 💵 নগদে: ${s.soldCash} ${u}\n- 📒 বাকিতে: ${s.soldBaki} ${u}\n📦 এখন আছে: ${s.remaining} ${u}\n\n`;
     m += `👥 কাস্টমার:\n- নগদে নিয়েছে: ${nCash} জন (${n2(cashAmt)} টাকা)\n- বাকিতে নিয়ে টাকা দিয়েছে: ${nBakiPaid} জন\n- বাকি আছে: ${nBakiPend} জন (${n2(bakiPend)} টাকা)\n🔹 এ পর্যন্ত আদায়: ${n2(cashAmt + bakiColl)} টাকা\n`;
     if (price > 0) {
-        const sg = supSegs(it), owed = n2(sg.reduce((a, x) => a + x.qty * x.price, 0));
-        m += `\n💰 ${sup}কে দিতে হবে:\n` + (sg.length > 1 ? sg.map(x => `- বিক্রি ${x.qty} ${u} × ${x.price} = ${n2(x.qty * x.price)} টাকা`).join('\n') + '\n' : `- বিক্রি ${s.sold} ${u} × ${price} = ${owed} টাকা\n`) + `- এ পর্যন্ত দিয়েছি: ${paid} টাকা\n🔹 বাকি: ${n2(owed - paid)} টাকা`;
+        const sg = supSegs(it), owed = n2(sg.reduce((a, x) => a + x.cq * x.price, 0)), pend = n2(sg.reduce((a, x) => a + (x.qty - x.cq) * x.price, 0)), pq = n2(sg.reduce((a, x) => a + (x.qty - x.cq), 0));
+        m += `\n💰 ${sup}কে দিতে হবে:\n` + (sg.length > 1 ? sg.map(x => `- আদায় হয়েছে ${x.cq} ${u} × ${x.price} = ${n2(x.cq * x.price)} টাকা`).join('\n') + '\n' : `- আদায় হয়েছে ${sg.length ? sg[0].cq : 0} ${u} × ${price} = ${owed} টাকা\n`) + `- এ পর্যন্ত দিয়েছি: ${paid} টাকা\n🔹 এখন বাকি: ${n2(owed - paid)} টাকা` + (pq > 0 ? `\n⏳ আদায় বাকি ${pq} ${u} — আদায় হলে আরও ${pend} টাকা` : '');
         if (pays.length) m += '\n' + pays.sort((a, b) => (a.dt || '') < (b.dt || '') ? -1 : 1).map(e => `  · ${e.dt}: ${Calc.r2(e.amt)} টাকা`).join('\n');
     }
-    return { text: m, due: price > 0 ? n2(supSegs(it).reduce((a, x) => a + x.qty * x.price, 0) - paid) : null };
+    return { text: m, due: price > 0 ? n2(supSegs(it).reduce((a, x) => a + x.cq * x.price, 0) - paid) : null };
 }
 function supReportText(items) { return docGen(() => supReportText0(items)); }
 function supReportText0(items) {
