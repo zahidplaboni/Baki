@@ -2004,3 +2004,34 @@ html[data-theme="dhaka"] input:focus,html[data-theme="dhaka"] select:focus{borde
 html[data-theme="dhaka"] .th-opt.on{border-color:#e11d48;box-shadow:0 0 0 3px #e11d4833}
 html[data-theme="dhaka"] .th-opt .th-ck{background:#e11d48}
 @media (prefers-reduced-motion:reduce){html[data-theme="gram"] .nav-btn.active .nav-icon::before,html[data-theme="sundor"] .nav-btn.active .nav-icon::before,html[data-theme="eid"] .nav-btn.active .nav-icon::before,html[data-theme="dhaka"] .nav-btn.active .nav-icon::before{animation:none!important}}
+
+/* ---- রিপোর্ট: ছোট ৪ কার্ড + আইটেম খোঁজা + কাস্টমার ছবি ---- */
+#repGrid{grid-template-columns:repeat(4,1fr);gap:6px}
+#repGrid .report-card{padding:8px 2px;border-radius:12px}
+#repGrid .rc-icon{width:30px;height:30px;font-size:16px;margin:0 auto 4px;border-radius:9px}
+#repGrid .rc-value{font-size:14px;white-space:nowrap}
+#repGrid #repTotalDue{font-size:12px}
+#repGrid .rc-label{font-size:9px;margin-top:1px;line-height:1.2}
+.if-search{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #cbd5e1;border-radius:12px;padding:8px 10px;margin-bottom:10px}
+.if-search input{border:0!important;outline:0;flex:1;font-size:14px;background:transparent!important;padding:0!important;box-shadow:none!important}
+.if-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.if-chip{border:1.5px solid #cbd5e1;border-radius:20px;padding:6px 10px;font-size:12.5px;font-weight:700;background:#fff;color:#334155;cursor:pointer;font-family:inherit}
+.if-chip em{font-style:normal;background:#eef2ff;color:#4338ca;border-radius:10px;padding:0 6px;font-size:10.5px;margin-left:3px}
+.if-chip.on{background:var(--primary);border-color:var(--primary);color:#fff}.if-chip.on em{background:rgba(255,255,255,.25);color:#fff}
+.if-hint,.if-empty{text-align:center;color:#64748b;font-size:12px;padding:10px}
+.if-res{background:#fff;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.07);overflow:hidden}
+.if-rh{padding:9px 12px;background:var(--primary-light);font-size:12.5px;font-weight:800;color:var(--primary);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.if-rh button{border:0;background:#fff;color:var(--primary);border-radius:10px;padding:3px 10px;font-size:11px;font-weight:800;font-family:inherit;cursor:pointer}
+.if-sum{padding:6px 12px;font-size:11.5px;color:#64748b;font-weight:700;border-bottom:1px solid #eef0f6}
+.if-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-top:1px solid #eef0f6;cursor:pointer}
+.if-mid{min-width:0;flex:1}.if-name{font-size:14px;font-weight:800;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.if-name i{font-style:normal;color:var(--primary);font-size:12px}
+.if-mid small{font-size:10.5px;color:#64748b}
+.if-row b{text-align:right;font-size:13px;color:var(--primary);flex-shrink:0}.if-row b small{display:block;color:#64748b;font-weight:600}
+.if-go{color:#94a3b8;font-size:16px}
+.if-det{background:#fff7ed;border-top:1px dashed #fdba74;padding:6px 12px 8px 58px;font-size:11px;color:#7c2d12}
+.if-det div{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+.cav{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.25);display:flex}
+.cav.sm{width:38px;height:38px}
+.cav img{width:100%;height:100%;object-fit:cover}
+.who-row{display:flex;align-items:center;gap:12px;background:#f8fafc;border-radius:14px;padding:10px;text-align:left}
+.who-row .cav{width:54px;height:54px}

@@ -385,12 +385,18 @@
                 <p class="page-hero-sub">আপনার ব্যবসার সারসংক্ষেপ</p>
             </div>
             <div class="section">
-                <div class="report-grid">
+                <div class="report-grid" id="repGrid">
                     <div class="report-card"><div class="rc-icon si-blue">👥</div><div class="rc-value" id="repTotalCust">০</div><div class="rc-label">মোট কাস্টমার</div></div>
                     <div class="report-card"><div class="rc-icon si-red">💰</div><div class="rc-value red" id="repTotalDue">৳ ০</div><div class="rc-label">সর্বমোট বাকি</div></div>
                     <div class="report-card"><div class="rc-icon si-green">✅</div><div class="rc-value green" id="repPaidCust">০</div><div class="rc-label">বাকি মিটিয়েছে</div></div>
                     <div class="report-card"><div class="rc-icon si-orange">⏳</div><div class="rc-value orange" id="repDueCust">০</div><div class="rc-label">বাকি আছে</div></div>
                 </div>
+            </div>
+            <div class="section" id="itemFinderSec">
+                <div class="section-title"><span class="st-icon">📦</span> আইটেম অনুযায়ী কে নিয়েছে</div>
+                <div class="if-search"><span>🔍</span><input type="text" id="itemSearch" placeholder="আইটেম খুঁজুন…" oninput="ITEM_Q=this.value;renderItemFinder()" autocomplete="off"></div>
+                <div class="if-chips" id="ifdChips"></div>
+                <div id="itemResults"></div>
             </div>
             <div class="section" id="repSalesSection" style="display:none">
                 <div class="section-title"><span class="st-icon">💵</span> বিক্রির হিসাব</div>
