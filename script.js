@@ -2952,11 +2952,26 @@ function openPaymentModal(cusIdx) {
     openModal('paymentModal');
     setTimeout(() => p.focus(), 200);
 }
+// ছাড়ের রেকর্ডে আইটেম ট্যাগ নেই: একই তারিখে আইটেমে ভাগ করা জমা থাকলে ছাড়টা সেই আইটেমের সাথেই ধরা হয়
+function itemAllocAmt(c, name) {
+    const pays = c.payment || []; let sum = 0;
+    const used = new Set();
+    pays.forEach(p => (p.alloc || []).forEach(a => { if (a.item === name) sum += Calc.num(a.amt); }));
+    pays.forEach(p => {
+        if (!p || !p.disc) return;
+        const sib = pays.find(q => q && !q.disc && q.dt === p.dt && q.alloc && q.alloc.length && !used.has(q));
+        if (!sib) return;
+        used.add(sib);
+        const top = sib.alloc.reduce((a, b) => Calc.num(b.amt) > Calc.num(a.amt) ? b : a);
+        if (top.item === name) sum += Calc.num(p.amt);
+    });
+    return sum;
+}
 // কাস্টমারের কোনো আইটেমের বাকি কত (বাকির মোট − এই আইটেমে ভাগ করে দেওয়া পেমেন্ট)
 function itemBakiOut(c, name) {
     let total = 0, alloc = 0;
     (c.tx || []).forEach(t => { if (t && t.tp === name && !Calc.isCash(t)) total += Calc.num(t.amt); });
-    (c.payment || []).forEach(p => (p.alloc || []).forEach(a => { if (a.item === name) alloc += Calc.num(a.amt); }));
+    alloc = itemAllocAmt(c, name);
     return Math.max(0, Calc.r2(total - alloc));
 }
 // রেঞ্জ সেট করা আইটেমগুলোর মধ্যে যেগুলো এই টাকার সাথে মেলে
@@ -5609,7 +5624,7 @@ function viewerRows(name) {
         const cur = (c.tx || []).filter(t => t && t.tp === name).map(t => ({ t, hist: false }));
         const old = (c.history || []).reduce((a, hh) => a.concat((hh.tx || []).filter(t => t && t.tp === name)), []).map(t => ({ t, hist: true }));
         // এই আইটেমে ভাগ করে দেওয়া পেমেন্ট, পুরনো বাকি থেকে আগে কাটা হয়
-        let left = 0; (c.payment || []).forEach(p => (p.alloc || []).forEach(a => { if (a.item === name) left += Calc.num(a.amt); }));
+        let left = itemAllocAmt(c, name);
         cur.sort((a, b) => ((a.t.dt || '') < (b.t.dt || '') ? -1 : 1));
         cur.forEach(x => {
             const amt = Calc.num(x.t.amt), cash = Calc.isCash(x.t); let due = 0;
