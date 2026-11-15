@@ -10,6 +10,8 @@ const I18N_RULES = [
     [/^(\d+)\s*জন$/, '$1 customers']
 ];
 Object.assign(EN_DICT, {"ইংরেজি নাম":"English name","— যারা বাংলা পড়েন না, তারা এটাই দেখবেন (ঐচ্ছিক)":"— shown to those who don't read Bengali (optional)","আদায় হয়েছে":"Collected","আদায় বাকি":"Still to collect","আইটেম অনুযায়ী এখন কে বাকি":"Who owes which item now","আইটেম খুঁজুন…":"Search item…"});
+Object.assign(EN_DICT, {"বারকোড": "Barcode", "— স্ক্যান করলে বিক্রির সময় আইটেম ও দাম নিজে বসবে (ঐচ্ছিক)": "— scan it while selling and the item and price fill in by themselves (optional)", "বারকোড নম্বর": "Barcode number", "স্ক্যান": "Scan", "বারকোড স্ক্যান": "Barcode scan", "বারকোডটা ফ্রেমের ভিতরে ধরুন": "Hold the barcode inside the frame", "লাইট": "Light", "অথবা বারকোড নম্বর লিখুন": "Or type the barcode number", "ঠিক আছে": "OK", "এই ডিভাইসে ক্যামেরা চালু করা যাচ্ছে না — নিচে নম্বর লিখুন": "Camera can't be started here — type the number below", "ক্যামেরার অনুমতি পাওয়া যায়নি — নিচে নম্বর লিখুন": "Camera permission not granted — type the number below", "বারকোড নম্বর লিখুন": "Enter the barcode number", "নতুন বারকোড": "New barcode", "এই বারকোড কোনো আইটেমে নেই। কোন আইটেমের বারকোড এটা?": "This barcode isn't linked to any item. Which item is it?", "বারকোড যুক্ত করুন": "Link barcode", "এই বারকোড কোনো আইটেমে যুক্ত নেই। মালিককে বলুন আইটেমে বারকোড যোগ করতে।": "This barcode isn't linked to any item. Ask the owner to add it to the item.", "এই বারকোড কোনো আইটেমে যুক্ত নেই, আর বারকোড ছাড়া কোনো আইটেমও নেই।": "This barcode isn't linked to any item, and there is no item without a barcode."});
+I18N_RULES.push([/^❌ এই বারকোড আগে থেকেই "(.+)" আইটেমে আছে$/, '❌ This barcode is already on the item "$1"']);
 Object.assign(EN_DICT, {"এই আইটেমের বাকি":"Due for these items","জমা: শুধু এই আইটেমে ভাগ করা অংশ":"Payments: only the part allocated to these items"});
 Object.assign(EN_DICT, {"গ্রামবাংলা":"Village","সুন্দরবন":"Sundarbans","ঈদ রাত":"Eid Night","ঢাকা রিকশা":"Dhaka Rickshaw","🚫 ব্লক":"🚫 Block","✅ আনব্লক":"✅ Unblock","⛔ ব্লক":"⛔ Blocked","⛔ আপনার অ্যাকাউন্ট বন্ধ করা হয়েছে। মালিকের সাথে যোগাযোগ করুন।":"⛔ Your account has been disabled. Please contact the owner.","ক্লে ৩ডি":"Clay 3D","📝 আমার নোট":"📝 My notes","নতুন নোট লিখুন…":"Write a new note…","➕ যোগ করুন":"➕ Add","কোনো নোট নেই":"No notes yet","🔒 শুধু মালিক দেখতে পাবেন। খুলতে: তারিখের জায়গায় ডবল ট্যাপ / ডবল ক্লিক।":"🔒 Only the owner can see this. To open: double-tap / double-click the date area.","এই নোট মুছে ফেলবেন?":"Delete this note?","নোটিশ":"Notice","📢 নোটিশ":"📢 Notice","ঠিক আছে, বুঝেছি":"OK, got it","লাইসেন্সের মেয়াদ শেষ":"License expired","লাইসেন্স বন্ধ আছে":"License is locked","পেমেন্ট করে যোগাযোগ করুন, সঙ্গে সঙ্গে চালু হয়ে যাবে।":"Please pay and get in touch — it will be unlocked right away.","এই লাইসেন্সটি বন্ধ করা হয়েছে। যোগাযোগ করুন।":"This license has been locked. Please get in touch.","🔄 আবার যাচাই করুন":"🔄 Check again","⏳ লাইসেন্সের মেয়াদ আজ শেষ হবে":"⏳ License expires today","আপনার ডেটা নিরাপদ আছে — মুছে যায়নি।":"Your data is safe — nothing was deleted.","লাইসেন্স লগইন":"License login","🔑 অ্যাপ চালু করতে আপনাকে দেওয়া ইমেইল ও পাসওয়ার্ড দিন। এটা শুধু একবার লাগবে।":"🔑 Enter the email and password you were given to activate the app. Needed only once.","📧 ইমেইল:":"📧 Email:","🚀 চালু করুন":"🚀 Activate","☁️ স্টাফ বা সরবরাহকারী? দোকান কোড দিয়ে যুক্ত হন":"☁️ Staff or supplier? Join with the shop code","⏳ যাচাই হচ্ছে…":"⏳ Verifying…","❌ ইমেইল বা পাসওয়ার্ড ভুল":"❌ Wrong email or password","❌ এই লাইসেন্স বন্ধ করা আছে":"❌ This license is disabled","❌ ইমেইল ও পাসওয়ার্ড দিন":"❌ Enter email and password","📧 কোডের বদলে ইমেইল ও পাসওয়ার্ড দিয়ে যুক্ত হব":"📧 Join with email and password instead of the code","🔑 ইমেইলের বদলে দোকান কোড দিয়ে যুক্ত হব":"🔑 Join with the shop code instead of email","ইমেইল:":"Email:","🔑 লাইসেন্স ইমেইল দেখুন":"🔑 Show license email","ব্যাকআপ ও রিস্টোর":"Backup & restore","💾 ব্যাকআপ ও রিস্টোর":"💾 Backup & restore","ডেটা সেভ করুন অথবা ফাইল থেকে ফিরিয়ে আনুন":"Save your data or restore it from a file","বাতিল":"Cancel","এই কাস্টমারের কোনো আইটেমে বাকি নেই — ভাগ করার কিছু নেই":"This customer has no item due — nothing to assign","ভাগ বদলান":"Change split","📊 এই সময়ে বাকির হিসাব":"📊 Dues summary for this period","মোট বাকি বেড়েছে":"Total due increased","মোট বাকি কমেছে":"Total due decreased","🏷️ ছাড় (ডিসকাউন্ট) — ঐচ্ছিক:":"🏷️ Discount — optional:","ছাড়":"Discount","🏷️ ছাড়":"🏷️ Discount","🏷️ ছাড়:":"🏷️ Discount:","ছাড় দিলে বাকি কমবে, কিন্তু জমার টাকায় ধরা হবে না":"Discount reduces the due but is not counted as money received","❌ জমা + ছাড় বাকির চেয়ে বেশি হয়ে গেছে":"❌ Payment + discount is more than the due","মোট ছাড়":"Total discount","মোট ছাড় (ডিসকাউন্ট)":"Total discounts given","ডেভেলপারের পরিচয়":"Developer","জাহিদুল ইসলাম (ছিদ্দিক)":"ZAHIDUL ISLAM (CIDDIQ)","নোয়াখালী, চাপরাশিরহাট ৩৮১১":"Noakhali, ChaprashirHat 3811","বাংলাদেশ":"Bangladesh","যেমন: সিদ্দিক":"e.g. Ciddiq","যেমন: সাজ্জাদ":"e.g. Sajjad","যেমন: জাহিদুল":"e.g. Zahidul","যেমন: সামিরা স্টোর":"e.g. Samira Store","যেমন: zahidul":"e.g. zahidul","যেমন: শারমিন":"e.g. Sharmin","থিম ও রং": "Theme & colors", "ডিফল্ট": "Default", "মিডনাইট": "Midnight", "ওশান": "Ocean", "গ্লাস": "Glass", "সানসেট": "Sunset", "পছন্দের রং বেছে নিন। শুধু এই ফোনে/ব্রাউজারে বদলাবে।": "Pick your colors. Applies only on this phone/browser.", "নতুন কাস্টমার": "New customer", "নতুন কাস্টমার যোগ করুন এবং হিসাব শুরু করুন": "Add a new customer and start the account", "কাস্টমারের নাম": "Customer's name", "হোয়াটসঅ্যাপ নম্বর (কোডসহ)": "WhatsApp number (with country code)", "কাস্টমার যোগ করুন": "Add customer", "আইটেম ম্যানেজ": "Manage items", "নতুন আইটেমের নাম": "New item name", "হিসাবের ধরন": "Account type", "সংখ্যা × দাম": "Quantity × price", "যেমন কার্টুন, পিস": "e.g. carton, piece", "ফ্রি": "Free", "পরিমাণ+টাকা": "Quantity + amount", "শুধু টাকা": "Amount only", "রিচার্জ": "Recharge", "একক (শব্দ)": "Unit (word)", "— কেস/কার্টুন/পিস/প্যাকেট। বেছে নিন": "— case / carton / piece / packet. Choose one", "এই আইটেমের স্টক রাখুন": "Keep stock for this item", "কম হলে সতর্কতা": "Low-stock alert", "— এই সংখ্যা বা এর কমে লাল দেখাবে (ঐচ্ছিক)": "— shows red at or below this number (optional)", "ডিফল্ট দাম": "Default price", "— প্রতি এক একক (পিস/প্যাকেট) এর দাম (ঐচ্ছিক)": "— price per unit (piece/packet) (optional)", "কত দিন পর মনে করাবে": "Remind after how many days", "— ঐচ্ছিক। যেমন রিচার্জে ২৯": "— optional. e.g. 29 for recharge", "নতুন আইটেম যোগ করুন": "Add new item", "বর্তমান আইটেম তালিকা": "Current item list", "টাকা": "Amount", "যেমন: করিম আলী": "e.g. Karim Ali", "যেমন: 88018XXXXXXXX": "e.g. 88018XXXXXXXX", "যেমন: চাল, ডাল, পানি...": "e.g. rice, lentils, water...", "নিজে লিখুন (যেমন: ডজন)": "Type your own (e.g. dozen)", "যেমন: ৫": "e.g. 5", "যেমন: ১০": "e.g. 10", "যেমন: ২৯": "e.g. 29", "নগদ": "Cash", "বাকি": "Due", "জমা": "Payment", "পরিবর্তন": "Change", "ডিলিট": "Delete", "হিস্টোরি": "History", "নোট": "Note", "নোট (শুধু মালিক)": "Note (owner only)", "আছে": "Yes", "তারিখ": "Date", "বিবরণ": "Details", "কোনো বিল নেই": "No bills", "সব পরিশোধিত": "All paid", "পরিশোধিত": "Paid", "মোট বিল": "Total bill", "মোট জমা": "Total paid", "টাকা জমা নিন": "Collect payment", "আজকে কী নিলো যোগ করুন": "Add what they took today", "পরিমাণ": "Quantity", "দাম/পিস": "Price/pc", "মোট টাকা": "Total amount", "সেভ করুন": "Save", "যোগ করেছেন": "Added by", "বর্তমান বাকি": "Current due", "আগের": "Previous", "এন্ট্রি করেছিলেন": "Entered by", "স্টকে আছে": "In stock", "কোনো কাস্টমার নেই": "No customers", "ক্যালকুলেটর": "Calculator", "লিখলে পুরো বাকি টাকা অটো জমা হবে": "Type p to auto-fill the full due amount", "জমার পরিমাণ": "Payment amount", "বাতিল": "Cancel", "জমা দিন": "Submit payment", "টাকা লিখুন বা p লিখুন": "Enter amount or type p", "পুরো কিবোর্ড চালু করুন": "Show full keyboard", "হিসাব এডিট করুন": "Edit entry", "নতুন বিবরণ": "New details", "নতুন টাকা": "New amount", "নাম ও নম্বর পরিবর্তন": "Change name & number", "নাম": "Name", "ফোন নম্বর": "Phone number", "কাস্টমার নোট (শুধু মালিক)": "Customer note (owner only)", "কাস্টমার": "Customer", "সম্পর্কে যা মনে রাখতে চান লিখুন": "— write what you want to remember.", "এই নোট শুধু মালিকের দেখার জন্য": "This note is for the owner only", "মুছুন": "Clear", "যেমন: বাড়ি ৫ নম্বর রোডে...": "e.g. House on Road 5...", "নিশ্চিত করুন": "Please confirm", "হ্যাঁ, ডিলিট করুন": "Yes, delete", "লেনদেনের পাসওয়ার্ড দিন": "Enter transaction password", "এই পাসওয়ার্ড মালিক ও স্টাফ উভয়ের কাছে থাকবে": "Both owner and staff will have this password", "নিরাপত্তার স্বার্থে পাসওয়ার্ড দিন": "Enter your password for security", "ওকে": "OK", "বিক্রি এন্ট্রি নিশ্চিত করুন": "Confirm sale entry", "হিসাব এডিট করতে পাসওয়ার্ড দিন": "Enter password to edit", "সঠিক পাসওয়ার্ড দিলে এডিট স্ক্রিন আসবে": "The edit screen opens after the correct password", "টাকা জমা নিশ্চিত করুন": "Confirm payment", "হিসাব ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete", "জমা ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete payment", "সঠিক পাসওয়ার্ড দিলে ডিলিটের নিশ্চিতকরণ আসবে": "Delete confirmation appears after the correct password", "এই হিসাবটি ডিলিট করবেন": "Delete this entry", "এই জমার রেকর্ড ডিলিট করবেন": "Delete this payment record", "কাস্টমারের ছবি দিন": "Add customer's photo", "ক্যামেরা দিয়ে তুলুন": "Take with camera", "এখনই ছবি উঠান": "Take a photo now", "গ্যালারি থেকে বাছুন": "Choose from gallery", "ফোনে সেভ করা ছবি": "A photo saved on the phone", "বন্ধ করুন": "Close", "কাস্টমারকে জানাবেন": "Notify the customer", "এই কাস্টমারের ফোন নম্বর নেই বা খুব ছোট। পাঠালে WhatsApp-এ নিজে কাস্টমার বেছে নিতে হবে।": "This customer's phone number is missing or too short. You'll need to pick the customer yourself in WhatsApp.", "এখন না": "Not now", "পাঠান": "Send", "আবার কেনার সময় হয়েছে": "due to buy again", "রিচার্জ অ্যাপ বাছুন": "Choose recharge app", "বাছা মুছুন": "Clear choice", "বন্ধ": "Close", "অ্যাপের নাম খুঁজুন": "Search app name", "আজকের লেনদেন": "Today's transactions", "শেষ ৭ দিনের লেনদেন": "Last 7 days transactions", "শেষ ১৫ দিনের লেনদেন": "Last 15 days transactions", "শেষ ৩০ দিনের লেনদেন": "Last 30 days transactions", "একটি তারিখ নির্বাচন করুন": "Select a date", "🔒 দোকানের তথ্য শুধু মালিক পরিবর্তন করতে পারবেন।": "🔒 Only the owner can change shop details.", "আইটেমের নাম লিখুন!": "Enter the item name!", "❌ এই আইটেম আগে থেকেই আছে!": "❌ This item already exists!", "স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "Enter the stock unit (e.g. piece, packet)", "একক হলো শব্দ, সংখ্যা নয়।": "The unit is a word, not a number.", "যেমন: পিস, প্যাকেট, কার্টুন।": "e.g. piece, packet, carton.", "📦 এই আইটেমের স্টক চালু আছে।": "📦 Stock is on for this item.", "আগে ✏️ চেপে স্টক বন্ধ করুন, তারপর ডিলিট করুন।": "First press ✏️ and turn stock off, then delete.", "❌ স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "❌ Enter the stock unit (e.g. piece, packet)", "❌ একক হলো শব্দ, সংখ্যা নয় (যেমন: পিস, প্যাকেট, কার্টুন)": "❌ The unit is a word, not a number (e.g. piece, packet, carton)", "স্টক বন্ধ করলে আগের হিসাব মুছবে না, আবার চালু করলে ফিরে আসবে।": "Turning stock off keeps the old records; they return when you turn it on again.", "স্টক বন্ধ করলে আগের হিসাব মুছবে না।": "Turning stock off keeps the old records.", "✅ কাস্টমার যোগ হয়েছে!": "✅ Customer added!", "সঠিক টাকা লিখুন": "Enter a valid amount", "পরিমাণ লিখুন": "Enter the quantity", "সঠিক তথ্য দিন": "Enter valid details", "তারিখ নির্বাচন করুন": "Select a date", "❌ এই কাস্টমারের কোনো বাকি নেই!": "❌ This customer has no due!", "সঠিক পরিমাণ লিখুন": "Enter a valid quantity", "নাম খালি রাখা যাবে না": "Name cannot be empty", "সঠিক ফোন নম্বর লিখুন": "Enter a valid phone number", "🔒 নাম আর বদলানো যাবে না": "🔒 The name cannot be changed any more", "তবুও সেভ করবেন?": "Save anyway?"});
 Object.assign(EN_DICT, {"⚠️ দেরি":"⚠️ Late","🕒 চলছে":"🕒 Ongoing","✅ ভালো":"✅ Good","🆕 নতুন":"🆕 New","এখনো লেনদেন নেই":"No entries yet","শেষ লেনদেন: ":"Last entry: ","▲ বন্ধ করুন":"▲ Close"});
@@ -2259,6 +2261,7 @@ function syncItemBox() {
     const chk = document.getElementById('newItemStock');
     box.style.display = (isOwner() && selectedType !== 'money') ? 'block' : 'none';
     document.getElementById('itemRemindBox').style.display = isOwner() ? 'block' : 'none';
+    { const bb = document.getElementById('itemBcBox'); if (bb) bb.style.display = isOwner() ? 'block' : 'none'; }
     if (selectedType === 'money') chk.checked = false;
     document.getElementById('newItemStockFields').style.display = chk.checked ? 'block' : 'none';
     document.getElementById('newItemRateWrap').style.display = selectedType === 'carton' ? 'block' : 'none';
@@ -2323,12 +2326,20 @@ function addNewItem() {
         item.unit = unit;
     }
     if (stockOn) { item.stock = true; if (low > 0) item.low = low; }
+    if (owner) {
+        const bc = bcClean(document.getElementById('newItemBc').value);
+        if (bc) {
+            const dup = itemByBarcode(bc);
+            if (dup) return alert('❌ এই বারকোড আগে থেকেই "' + dup.name + '" আইটেমে আছে');
+            item.barcode = bc;
+        }
+    }
     appData.itemList.push(item);
     save();
 
     input.value = '';
     document.getElementById('newItemEn').value = ''; ICON_SEL.newItem = ''; ICON_AUTO.newItem = true; itemSugShow('newItem'); iconRender('newItem'); { const h = document.getElementById('newItemIconHint'); if (h) h.textContent = ''; }
-    ['newItemRate', 'newItemLow', 'newItemRemind'].forEach(id => { document.getElementById(id).value = ''; });
+    ['newItemRate', 'newItemLow', 'newItemRemind', 'newItemBc'].forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
     unitSelFill('newItem', '');
     document.getElementById('newItemStock').checked = false;
     syncItemBox();
@@ -2372,6 +2383,7 @@ function openItemEdit(i) {
     document.getElementById('editItemSupFrom').value = todayLocal();
     document.getElementById('editItemSupHist').textContent = (it.supHist && it.supHist.length > 1) ? '🕘 ' + (LANG === 'en' ? 'Price history: ' : 'দামের ইতিহাস: ') + it.supHist.map(x => (x.from || (LANG === 'en' ? 'start' : 'শুরু')) + ' → ' + x.price).join(' | ') : '';
     document.getElementById('editItemEn').value = it.en || '';
+    document.getElementById('editItemBc').value = it.barcode || '';
     { const nmEl = document.getElementById('editItemName'); const em = (it.name.match(/[\p{Extended_Pictographic}]/u) || [''])[0]; const clean = it.name.replace(EMOJI_EDGE, '').trim();
       nmEl.value = (!it.icon && em && clean) ? clean : it.name; }
     ICON_SEL.editItem = it.icon || ((it.name.replace(EMOJI_EDGE, '').trim() && it.name !== it.name.replace(EMOJI_EDGE, '').trim()) ? (it.name.match(/[\p{Extended_Pictographic}]/u) || [''])[0] : ''); ICON_AUTO.editItem = false; iconRender('editItem'); { const h = document.getElementById('editItemIconHint'); if (h) h.textContent = ''; }
@@ -2425,8 +2437,11 @@ function saveItemEdit() {
     const newName = (document.getElementById('editItemName').value || '').trim().slice(0, 40);
     if (!newName) return showErr('❌ নাম লিখুন');
     if (newName !== it.name && appData.itemList.some(x => x !== it && x.name === newName)) return showErr('❌ এই নামে আরেকটা আইটেম আছে');
+    const bcE = bcClean(document.getElementById('editItemBc').value);
+    if (bcE) { const dup = itemByBarcode(bcE, it); if (dup) return showErr('❌ এই বারকোড আগে থেকেই "' + dup.name + '" আইটেমে আছে'); }
     if (newName !== it.name) itemRenameAll(it.name, newName);
     const enE = (document.getElementById('editItemEn').value || '').trim().slice(0, 40);
+    if (bcE) it.barcode = bcE; else delete it.barcode;
     if (enE) it.en = enE; else delete it.en;
     if (ICON_SEL.editItem) it.icon = ICON_SEL.editItem; else delete it.icon;
     if (remind > 0) it.remind = remind; else delete it.remind;
@@ -2645,6 +2660,7 @@ function customerCardHtml(cus, idx) {
             <button class="cc-toggle-btn" onclick="toggleAddBox(event, ${idx})">➕ আজকে কী নিলো যোগ করুন</button>
 
             <div class="add-box" id="add-box-${idx}" onclick="event.stopPropagation()">
+                ${(isOwner() || (appData.itemList || []).some(i => i.barcode)) ? `<button type="button" class="scan-btn" onclick="scanForCustomer(${idx})">📷 বারকোড স্ক্যান</button>` : ''}
                 <select id="tp-${idx}" onchange="onProductChange(${idx})">${optionsHtml}</select>
                 <div class="row-inputs">
                     <input type="number" id="qty-${idx}" inputmode="numeric" placeholder="পরিমাণ" style="display:none;" oninput="autoCalculate(${idx})">
@@ -5657,3 +5673,234 @@ function renderViewer() {
 
 // স্টক পেজ নতুন করে আঁকলে সিঙ্ক-আইকনের অবস্থাও ঠিক করে দেয়
 (function () { const _rs = renderStock; renderStock = function () { const r = _rs.apply(this, arguments); try { updateSyncDot(); } catch (e) {} return r; }; })();
+
+
+// ================= 📷 বারকোড স্ক্যান =================
+// ক্যামেরায় BarcodeDetector থাকলে সেটা, না থাকলে নিজস্ব EAN-13 / EAN-8 / UPC-A পাঠক
+function bcClean(s) { return String(s || '').replace(/[^0-9A-Za-z\-]/g, '').slice(0, 40); }
+function bcNorm(s) { const d = String(s || '').replace(/[^0-9A-Za-z]/g, '').toUpperCase(); return /^\d+$/.test(d) ? d.replace(/^0+/, '') : d; }
+function itemByBarcode(code, except) {
+    const n = bcNorm(code); if (!n) return null;
+    return (appData.itemList || []).find(it => it !== except && it.barcode && bcNorm(it.barcode) === n) || null;
+}
+const BC_W = [[3, 2, 1, 1], [2, 2, 2, 1], [2, 1, 2, 2], [1, 4, 1, 1], [1, 1, 3, 2], [1, 2, 3, 1], [1, 1, 1, 4], [1, 3, 1, 2], [1, 2, 1, 3], [3, 1, 1, 2]];
+const BC_PAR = ['LLLLLL', 'LLGLGG', 'LLGGLG', 'LLGGGL', 'LGLLGG', 'LGGLLG', 'LGGGLL', 'LGLGLG', 'LGLGGL', 'LGGLGL'];
+// ৪টা রান থেকে একটা অঙ্ক: {d, g} (g = G-কোড), না মিললে null
+function bcDigit(r, i, allowG) {
+    const t = r[i] + r[i + 1] + r[i + 2] + r[i + 3];
+    if (!(t > 3)) return null;
+    const k = 7 / t; let best = null, bestE = 1e9;
+    for (let d = 0; d < 10; d++) {
+        for (let g = 0; g < (allowG ? 2 : 1); g++) {
+            const p = g ? BC_W[d].slice().reverse() : BC_W[d];
+            let e = 0, mx = 0;
+            for (let j = 0; j < 4; j++) { const x = Math.abs(r[i + j] * k - p[j]); e += x; if (x > mx) mx = x; }
+            if (mx <= 0.9 && e < bestE) { bestE = e; best = { d: d, g: !!g }; }
+        }
+    }
+    return (best && bestE < 3.0) ? best : null;
+}
+function bcGuardOk(r, i, n, u) { for (let j = 0; j < n; j++) { const x = r[i + j]; if (x < u * 0.5 || x > u * 1.7) return false; } return true; }
+function bcCheck(digs, n) {   // শেষ অঙ্ক চেক-ডিজিট
+    let s = 0;
+    for (let i = 0; i < n - 1; i++) s += digs[i] * (((n - 1 - i) % 2 === 1) ? 3 : 1);
+    return (10 - s % 10) % 10 === digs[n - 1];
+}
+// একটা সারির (ধূসর মান) রান-লেংথ থেকে বারকোড
+function bcDecodeRuns(r, firstBlack) {
+    const N = r.length;
+    for (let i = firstBlack ? 0 : 1; i + 42 < N; i += 2) {
+        if (i < 1) continue;
+        const u = (r[i] + r[i + 1] + r[i + 2]) / 3;
+        if (u < 1 || !bcGuardOk(r, i, 3, u) || r[i - 1] < u * 2) continue;
+        // EAN-13 / UPC-A
+        if (i + 58 < N) {
+            const left = []; let par = '', ok = true;
+            for (let k = 0; k < 6 && ok; k++) { const x = bcDigit(r, i + 3 + 4 * k, true); if (!x) ok = false; else { left.push(x.d); par += x.g ? 'G' : 'L'; } }
+            const first = ok ? BC_PAR.indexOf(par) : -1;
+            if (ok && first >= 0 && bcGuardOk(r, i + 27, 5, u)) {
+                const right = []; let ok2 = true;
+                for (let k = 0; k < 6 && ok2; k++) { const x = bcDigit(r, i + 32 + 4 * k, false); if (!x) ok2 = false; else right.push(x.d); }
+                if (ok2 && bcGuardOk(r, i + 56, 3, u)) {
+                    const digs = [first].concat(left, right);
+                    if (bcCheck(digs, 13)) return digs.join('');
+                }
+            }
+        }
+        // EAN-8
+        {
+            const left = []; let ok = true;
+            for (let k = 0; k < 4 && ok; k++) { const x = bcDigit(r, i + 3 + 4 * k, false); if (!x) ok = false; else left.push(x.d); }
+            if (ok && bcGuardOk(r, i + 19, 5, u)) {
+                const right = []; let ok2 = true;
+                for (let k = 0; k < 4 && ok2; k++) { const x = bcDigit(r, i + 24 + 4 * k, false); if (!x) ok2 = false; else right.push(x.d); }
+                if (ok2 && bcGuardOk(r, i + 40, 3, u)) {
+                    const digs = left.concat(right);
+                    if (bcCheck(digs, 8)) return digs.join('');
+                }
+            }
+        }
+    }
+    return null;
+}
+function bcRowToRuns(g) {
+    const n = g.length, w = Math.max(15, (n / 8) | 0), pre = new Float64Array(n + 1);
+    for (let i = 0; i < n; i++) pre[i + 1] = pre[i] + g[i];
+    const bits = new Uint8Array(n);
+    for (let i = 0; i < n; i++) {
+        const a = Math.max(0, i - w), b = Math.min(n, i + w + 1), m = (pre[b] - pre[a]) / (b - a);
+        bits[i] = g[i] < m * 0.96 ? 1 : 0;       // 1 = কালো
+    }
+    const r = []; let cur = bits[0], len = 0, firstBlack = cur === 1;
+    for (let i = 0; i < n; i++) { if (bits[i] === cur) len++; else { r.push(len); cur = bits[i]; len = 1; } }
+    r.push(len);
+    return { r: r, firstBlack: firstBlack };
+}
+function bcDecodeGray(g) {
+    let x = bcRowToRuns(g), c = bcDecodeRuns(x.r, x.firstBlack);
+    if (c) return c;
+    const rev = Array.prototype.slice.call(g).reverse();     // উল্টো করে ধরা বারকোড
+    x = bcRowToRuns(rev); return bcDecodeRuns(x.r, x.firstBlack);
+}
+// RGBA ছবি থেকে (মাঝের অংশের অনেকগুলো সারি পরীক্ষা করে)
+function bcDecodeImage(d, w, h) {
+    const g = new Float32Array(w), step = Math.max(2, Math.round(h / 40));
+    const rows = []; for (let y = Math.round(h * 0.15); y < h * 0.85; y += step) rows.push(y);
+    rows.sort((a, b) => Math.abs(a - h / 2) - Math.abs(b - h / 2));
+    for (const y of rows) {
+        const o = y * w * 4;
+        for (let x = 0; x < w; x++) { const p = o + x * 4; g[x] = (d[p] * 77 + d[p + 1] * 151 + d[p + 2] * 28) >> 8; }
+        const c = bcDecodeGray(g); if (c) return c;
+    }
+    return null;
+}
+
+// ---- ক্যামেরা পর্দা ----
+let SCAN = null;
+function bcToast(msg) {
+    let t = document.getElementById('bcToast');
+    if (!t) { t = document.createElement('div'); t.id = 'bcToast'; document.body.appendChild(t); }
+    t.textContent = msg; t.className = 'bc-toast show';
+    clearTimeout(t.__t); t.__t = setTimeout(() => { t.className = 'bc-toast'; }, 2600);
+}
+function openScanner(onCode) {
+    closeScanner();
+    const ov = document.createElement('div'); ov.id = 'scanOv'; ov.className = 'scan-ov';
+    ov.innerHTML = '<div class="scan-top"><span>📷 বারকোড স্ক্যান</span><button type="button" onclick="closeScanner()">✖</button></div>' +
+        '<div class="scan-view"><video id="scanVid" playsinline muted autoplay></video><div class="scan-frame"><i></i></div></div>' +
+        '<div class="scan-msg" id="scanMsg">বারকোডটা ফ্রেমের ভিতরে ধরুন</div>' +
+        '<button type="button" class="scan-torch" id="scanTorch" style="display:none" onclick="scanTorch()">🔦 লাইট</button>' +
+        '<div class="scan-man"><input type="text" id="scanMan" inputmode="numeric" placeholder="অথবা বারকোড নম্বর লিখুন"><button type="button" onclick="scanManual()">ঠিক আছে</button></div>';
+    document.body.appendChild(ov);
+    SCAN = { cb: onCode, stream: null, timer: null, torch: false, busy: false };
+    scanStart();
+}
+function scanMsg(t) { const m = document.getElementById('scanMsg'); if (m) m.textContent = t; }
+function scanManual() {
+    const v = bcClean((document.getElementById('scanMan') || {}).value);
+    if (!v) return scanMsg('বারকোড নম্বর লিখুন');
+    scanDone(v);
+}
+function scanDone(code) {
+    if (!SCAN) return;
+    const cb = SCAN.cb; closeScanner();
+    try { if (navigator.vibrate) navigator.vibrate(60); } catch (e) {}
+    cb(code);
+}
+function closeScanner() {
+    if (SCAN) {
+        clearTimeout(SCAN.timer);
+        try { if (SCAN.stream) SCAN.stream.getTracks().forEach(t => t.stop()); } catch (e) {}
+    }
+    SCAN = null;
+    const ov = document.getElementById('scanOv'); if (ov) ov.remove();
+}
+function scanTorch() {
+    if (!SCAN || !SCAN.stream) return;
+    SCAN.torch = !SCAN.torch;
+    try { SCAN.stream.getVideoTracks()[0].applyConstraints({ advanced: [{ torch: SCAN.torch }] }).catch(() => {}); } catch (e) {}
+}
+async function scanStart() {
+    const me = SCAN, vid = document.getElementById('scanVid');
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return scanMsg('এই ডিভাইসে ক্যামেরা চালু করা যাচ্ছে না — নিচে নম্বর লিখুন');
+    let stream;
+    try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } } });
+    } catch (e) { return scanMsg('ক্যামেরার অনুমতি পাওয়া যায়নি — নিচে নম্বর লিখুন'); }
+    if (SCAN !== me) { stream.getTracks().forEach(t => t.stop()); return; }
+    me.stream = stream; vid.srcObject = stream;
+    try { await vid.play(); } catch (e) {}
+    try {
+        const tr = stream.getVideoTracks()[0], cap = tr.getCapabilities ? tr.getCapabilities() : {};
+        if (cap.focusMode && cap.focusMode.indexOf('continuous') >= 0) tr.applyConstraints({ advanced: [{ focusMode: 'continuous' }] }).catch(() => {});
+        if (cap.torch) document.getElementById('scanTorch').style.display = 'block';
+    } catch (e) {}
+    let det = null;
+    try { if ('BarcodeDetector' in window) det = new BarcodeDetector({ formats: ['ean_13', 'ean_8', 'upc_a', 'upc_e', 'code_128', 'code_39'] }); } catch (e) { det = null; }
+    const cv = document.createElement('canvas'), cx = cv.getContext('2d', { willReadFrequently: true });
+    const tick = async () => {
+        if (SCAN !== me) return;
+        if (vid.readyState >= 2 && vid.videoWidth) {
+            try {
+                let code = null;
+                if (det) { const r = await det.detect(vid); if (r && r.length) code = r[0].rawValue; }
+                if (!code) {
+                    const w = Math.min(800, vid.videoWidth), h = Math.round(vid.videoHeight * w / vid.videoWidth);
+                    cv.width = w; cv.height = h; cx.drawImage(vid, 0, 0, w, h);
+                    code = bcDecodeImage(cx.getImageData(0, 0, w, h).data, w, h);
+                }
+                if (code && SCAN === me) return scanDone(code);
+            } catch (e) {}
+        }
+        me.timer = setTimeout(tick, 120);
+    };
+    tick();
+}
+// আইটেম ফর্মের ঘরে স্ক্যান করা বারকোড বসানো
+function scanInto(inputId) {
+    openScanner(code => {
+        const el = document.getElementById(inputId); if (!el) return;
+        const c = bcClean(code); el.value = c;
+        const cur = inputId === 'editItemBc' ? appData.itemList[editingItemIdx] : null;
+        const dup = itemByBarcode(c, cur);
+        if (dup) alert('❌ এই বারকোড আগে থেকেই "' + dup.name + '" আইটেমে আছে');
+        else bcToast('✅ ' + c);
+    });
+}
+// কাস্টমারের কার্ডে স্ক্যান: আইটেম + দাম নিজে বসে, আবার স্ক্যানে পরিমাণ ১ করে বাড়ে
+function scanForCustomer(idx) { openScanner(code => applyScanToCustomer(idx, code)); }
+function applyScanToCustomer(idx, code) {
+    const it = itemByBarcode(code);
+    if (!it) return bcUnknown(idx, code);
+    const sel = document.getElementById('tp-' + idx); if (!sel) return;
+    const same = sel.value === it.name;
+    const q = document.getElementById('qty-' + idx), a = document.getElementById('amt-' + idx);
+    const prev = same && q ? Calc.num(q.value) : 0;
+    if (!same) { sel.value = it.name; onProductChange(idx); }
+    const type = getItemByName(it.name).type;
+    if (type === 'carton' || type === 'free') { q.value = prev > 0 ? Calc.r2(prev + 1) : 1; autoCalculate(idx); }
+    const u = it.unit ? ' ' + it.unit : '';
+    let msg = '✅ ' + it.name;
+    if (type === 'carton') msg += ' × ' + q.value + u + ' = ' + a.value + ' ৳';
+    else if (type === 'free') { msg += ' × ' + q.value + u; try { a.focus(); } catch (e) {} }
+    else { try { a.focus(); } catch (e) {} }
+    bcToast(msg);
+}
+// বারকোড কোনো আইটেমে নেই: মালিক চাইলে এখনই যুক্ত করতে পারে
+function bcUnknown(idx, code) {
+    if (!isOwner()) return alert('এই বারকোড কোনো আইটেমে যুক্ত নেই। মালিককে বলুন আইটেমে বারকোড যোগ করতে।');
+    const free = (appData.itemList || []).filter(i => !i.barcode);
+    if (!free.length) return alert('এই বারকোড কোনো আইটেমে যুক্ত নেই, আর বারকোড ছাড়া কোনো আইটেমও নেই।');
+    const ov = document.createElement('div'); ov.id = 'bcLink'; ov.className = 'scan-ov bc-link';
+    ov.innerHTML = '<div class="bc-link-card"><h4>📷 নতুন বারকোড</h4><div class="bc-code">' + escapeHtml(bcClean(code)) + '</div><p>এই বারকোড কোনো আইটেমে নেই। কোন আইটেমের বারকোড এটা?</p>' +
+        '<select id="bcLinkSel">' + free.map(i => '<option value="' + escapeHtml(i.name) + '">' + escapeHtml(i.name) + '</option>').join('') + '</select>' +
+        '<button type="button" class="bc-ok" id="bcLinkOk">✅ বারকোড যুক্ত করুন</button><button type="button" class="bc-no" id="bcLinkNo">বাতিল</button></div>';
+    document.body.appendChild(ov);
+    document.getElementById('bcLinkNo').onclick = () => ov.remove();
+    document.getElementById('bcLinkOk').onclick = () => {
+        const it = free.find(i => i.name === document.getElementById('bcLinkSel').value);
+        ov.remove(); if (!it) return;
+        it.barcode = bcClean(code); save();
+        applyScanToCustomer(idx, code);
+    };
+}
