@@ -2044,7 +2044,7 @@ html[data-theme="dhaka"] .th-opt .th-ck{background:#e11d48}
 .bc-row{display:flex;gap:8px}.bc-row input{flex:1;min-width:0}
 .bc-btn,.scan-btn{border:0;border-radius:12px;background:#4f46e5;color:#fff;font-weight:800;padding:10px 14px;font-family:inherit;font-size:14px}
 .scan-btn{width:100%;margin-bottom:8px}
-.scan-ov{position:fixed;inset:0;z-index:100000;background:#0b0f19;display:flex;flex-direction:column;color:#fff}
+.scan-ov{position:fixed;inset:0;z-index:1000010;background:#0b0f19;display:flex;flex-direction:column;color:#fff}
 .scan-top{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;font-weight:800;font-size:17px}
 .scan-top button{background:#ffffff22;color:#fff;border:0;border-radius:50%;width:38px;height:38px;font-size:16px}
 .scan-view{position:relative;flex:1;min-height:0;background:#000;overflow:hidden}
@@ -2057,7 +2057,7 @@ html[data-theme="dhaka"] .th-opt .th-ck{background:#e11d48}
 .scan-man{display:flex;gap:8px;padding:8px 14px calc(14px + env(safe-area-inset-bottom))}
 .scan-man input{flex:1;min-width:0;border-radius:12px;border:0;padding:12px;font-size:15px;font-family:inherit}
 .scan-man button{border:0;border-radius:12px;background:#16a34a;color:#fff;font-weight:800;padding:0 18px;font-family:inherit}
-.bc-toast{position:fixed;left:50%;top:84px;transform:translate(-50%,-14px);background:#14532d;color:#fff;padding:11px 18px;border-radius:14px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:100001;max-width:88%;text-align:center}
+.bc-toast{position:fixed;left:50%;top:84px;transform:translate(-50%,-14px);background:#14532d;color:#fff;padding:11px 18px;border-radius:14px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:1000020;max-width:88%;text-align:center}
 .bc-toast.show{opacity:1;transform:translate(-50%,0)}
 .bc-link{align-items:center;justify-content:center;background:#000a}
 .bc-link-card{background:#fff;color:#1e293b;border-radius:20px;padding:18px;width:min(88%,360px)}
@@ -2065,3 +2065,35 @@ html[data-theme="dhaka"] .th-opt .th-ck{background:#e11d48}
 .bc-link-card select{width:100%;margin:6px 0 12px;padding:11px;border-radius:12px;border:1px solid #cbd5e1;font-family:inherit;font-size:15px}
 .bc-link-card .bc-ok{width:100%;border:0;border-radius:12px;background:#4f46e5;color:#fff;font-weight:800;padding:12px;font-family:inherit}
 .bc-link-card .bc-no{width:100%;border:0;background:none;color:#64748b;padding:10px;font-family:inherit;margin-top:4px}
+
+.bc-ic{width:1.25em;height:1.25em;vertical-align:-.25em;display:inline-block}
+.scan-btn,.bc-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.scan-btn .bc-ic{width:1.5em;height:1.5em}
+.app-bar-left{cursor:pointer;-webkit-user-select:none;user-select:none}
+
+/* ---- সংস্করণ কার্ড: ছোট (কমপ্যাক্ট) + প্রতিটা থিমের নিজস্ব ডিজাইন ---- */
+.about-card{display:grid!important;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;text-align:left!important;padding:12px 16px!important;border-radius:16px!important}
+.about-logo{grid-row:1/4;width:46px!important;height:46px!important;font-size:24px!important;margin:0!important}
+.about-title{font-size:16px!important;margin:0!important;line-height:1.2}
+.about-version{margin:2px 0 0!important;justify-self:start;font-size:10px!important;padding:2px 9px!important}
+.about-desc{font-size:11px!important;margin-top:3px}
+/* ডিফল্ট: নরম বুদবুদ + ঝিলিমিলি */
+html:not([data-theme]) .about-card,html[data-theme="default"] .about-card{background:radial-gradient(circle at 90% 20%,rgba(255,255,255,.28) 0 18px,transparent 19px),radial-gradient(circle at 78% 85%,rgba(255,255,255,.18) 0 26px,transparent 27px),radial-gradient(circle at 96% 70%,rgba(244,114,182,.5) 0 12px,transparent 13px),linear-gradient(135deg,#4f46e5,#7c3aed 60%,#c026d3)!important;box-shadow:0 8px 18px rgba(99,102,241,.35)}
+html:not([data-theme]) .about-logo,html[data-theme="default"] .about-logo{animation:aboutBob 3.2s ease-in-out infinite}
+@keyframes aboutBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+/* ক্লে: নরম মাটির ৩ডি */
+html[data-theme="clay"] .about-card{background:linear-gradient(135deg,#ff8a5b,#f2566b)!important;border-radius:24px!important;border-bottom:6px solid #b8324a!important;box-shadow:0 10px 16px rgba(184,50,74,.3),inset 0 2px 0 rgba(255,255,255,.5)!important}
+html[data-theme="clay"] .about-logo{background:#ffe0cf!important;border:0!important;border-bottom:4px solid #e8a98a!important;box-shadow:inset 0 2px 0 #fff8!important;border-radius:16px!important}
+html[data-theme="clay"] .about-version{background:#b8324a55!important}
+/* ছবির থিম: নিজস্ব দৃশ্য */
+html[data-theme="gram"] .about-card{background:linear-gradient(90deg,rgba(6,12,24,.5),rgba(6,12,24,.22) 42%,rgba(6,12,24,0) 62%),var(--scn) right center/cover no-repeat,linear-gradient(135deg,#15803d,#0e7490)!important;box-shadow:0 6px 16px #15803d44}
+html[data-theme="sundor"] .about-card{background:linear-gradient(90deg,rgba(6,12,24,.5),rgba(6,12,24,.22) 42%,rgba(6,12,24,0) 62%),var(--scn) right center/cover no-repeat,linear-gradient(135deg,#0b3d2e,#14715a)!important;box-shadow:0 6px 16px #0f766e44}
+html[data-theme="eid"] .about-card{background:linear-gradient(90deg,rgba(6,12,24,.5),rgba(6,12,24,.22) 42%,rgba(6,12,24,0) 62%),var(--scn) right center/cover no-repeat,linear-gradient(135deg,#171a3d,#2a2468)!important;box-shadow:0 6px 16px #4338ca44}
+html[data-theme="dhaka"] .about-card{background:linear-gradient(90deg,rgba(6,12,24,.5),rgba(6,12,24,.22) 42%,rgba(6,12,24,0) 62%),var(--scn) right center/cover no-repeat,linear-gradient(135deg,#7c3aed,#e11d48)!important;box-shadow:0 6px 16px #e11d4844}
+html[data-theme="gram"] .about-logo{background:#fde68a55!important;box-shadow:0 0 0 2px #fde68a88}
+html[data-theme="sundor"] .about-logo{background:#34d39922!important;box-shadow:0 0 14px #34d39988}
+html[data-theme="eid"] .about-logo{background:#fbbf2422!important;box-shadow:0 0 16px #fbbf2499}
+html[data-theme="dhaka"] .about-logo{background:#fde04755!important;box-shadow:0 0 0 2px #fde047aa}
+
+html[data-theme="gram"] .about-desc,html[data-theme="sundor"] .about-desc,html[data-theme="eid"] .about-desc,html[data-theme="dhaka"] .about-desc{display:none}
+html[data-theme="gram"] .about-card,html[data-theme="sundor"] .about-card,html[data-theme="eid"] .about-card,html[data-theme="dhaka"] .about-card{min-height:76px;background-position:left top,right 30%!important}
