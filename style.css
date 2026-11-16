@@ -2171,3 +2171,23 @@ html[data-theme="puffy"] .settings-row[onclick*="secGo('password')"] .sr-icon{--
 html[data-theme="puffy"] .settings-row[onclick*="secGo('txpin')"] .sr-icon{--pfi:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M18 8h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zM9 6a3 3 0 0 1 6 0v2H9V6z'/></svg>")}
 html[data-theme="puffy"] .settings-row[onclick*="secGo('recovery')"] .sr-icon{--pfi:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2L4 5v6c0 5 3.4 9.700 8 11 4.600-1.300 8-6 8-11V5l-8-3z'/></svg>")}
 html[data-theme="puffy"] .settings-list .settings-row:nth-child(n) .sr-icon{background:transparent!important;box-shadow:none!important}
+
+/* কার্যকলাপের লগ ফিল্টার */
+.lg-filters { padding: 8px 16px 0; }
+.lg-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.lg-chip { border: 1.5px solid #e2e8f0; background: #fff; border-radius: 999px; padding: 5px 11px; font-size: 12px; font-weight: 800; font-family: inherit; color: var(--slate-700); cursor: pointer; }
+.lg-chip em { font-style: normal; background: #eef2ff; color: #4338ca; border-radius: 8px; padding: 0 6px; margin-left: 2px; font-size: 11px; }
+.lg-chip.on { background: #4f46e5; color: #fff; border-color: #4f46e5; }
+.lg-chip.on em { background: rgba(255,255,255,.25); color: #fff; }
+.lg-row { display: flex; gap: 6px; margin-top: 8px; }
+.lg-user, .lg-q { flex: 1; min-width: 0; padding: 7px 10px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: inherit; font-size: 12px; background: #fff; }
+.dl-item.lg-add { border-color: #bbf7d0; } .dl-item.lg-add .dl-top { color: #15803d; }
+.dl-item.lg-edit { border-color: #fde68a; } .dl-item.lg-edit .dl-top { color: #b45309; }
+
+/* ক্লাউড ব্যাকআপ */
+.bk-c{background:#e0f2fe}
+.cb-status{font-weight:800;font-size:13px;text-align:center;padding:8px;border-radius:12px;background:#f1f5f9;color:var(--slate-700)}
+.cb-h{font-weight:900;font-size:13px;margin:10px 0 6px}
+.cb-item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:14px;margin-bottom:8px;background:#fff}
+.cb-item b{display:block;font-size:13px}.cb-item small{color:#64748b;font-weight:600}
+.cb-item button{border:0;border-radius:10px;padding:7px 12px;background:#4f46e5;color:#fff;font-weight:800;font-family:inherit;cursor:pointer;font-size:12px}

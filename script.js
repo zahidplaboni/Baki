@@ -15,6 +15,8 @@ Object.assign(EN_DICT, {"বারকোড": "Barcode", "— স্ক্যা
 I18N_RULES.push([/^❌ এই বারকোড আগে থেকেই "(.+)" আইটেমে আছে$/, '❌ This barcode is already on the item "$1"']);
 Object.assign(EN_DICT, {"পাস্টেল ক্লে":"Pastel Clay"});
 Object.assign(EN_DICT, {"এই আইটেমের বাকি":"Due for these items","জমা: শুধু এই আইটেমে ভাগ করা অংশ":"Payments: only the part allocated to these items"});
+Object.assign(EN_DICT, {"☁️ ক্লাউড ব্যাকআপ":"☁️ Cloud backup","প্রতি সপ্তাহে নিজে নিজে ক্লাউডে কপি হয়, শেষ ৪টা থাকে":"Copied to the cloud by itself every week; the last 4 are kept","☁️ এখনই ক্লাউডে ব্যাকআপ নিন":"☁️ Back up to the cloud now","ক্লাউডে জমা কপি:":"Copies in the cloud:","নিজে নিজে সপ্তাহে একবার ব্যাকআপ হয় (অ্যাপ খোলা থাকলে/খুললে)।":"Backs up by itself once a week (when the app is opened)."});
+Object.assign(EN_DICT, {"📋 কার্যকলাপের লগ (শুধু মালিক)":"📋 Activity log (owner only)","কার্যকলাপের লগ":"Activity log","কে, কখন, কী এন্ট্রি, এডিট বা ডিলিট করল (শুধু মালিক)":"Who added, edited or deleted what and when (owner only)","🔒 কার্যকলাপের লগ শুধু মালিক দেখতে পারেন।":"🔒 Only the owner can see the activity log."});
 Object.assign(EN_DICT, {"গ্রামবাংলা":"Village","সুন্দরবন":"Sundarbans","ঈদ রাত":"Eid Night","ঢাকা রিকশা":"Dhaka Rickshaw","🚫 ব্লক":"🚫 Block","✅ আনব্লক":"✅ Unblock","⛔ ব্লক":"⛔ Blocked","⛔ আপনার অ্যাকাউন্ট বন্ধ করা হয়েছে। মালিকের সাথে যোগাযোগ করুন।":"⛔ Your account has been disabled. Please contact the owner.","ক্লে ৩ডি":"Clay 3D","📝 আমার নোট":"📝 My notes","নতুন নোট লিখুন…":"Write a new note…","➕ যোগ করুন":"➕ Add","কোনো নোট নেই":"No notes yet","🔒 শুধু মালিক দেখতে পাবেন। খুলতে: তারিখের জায়গায় ডবল ট্যাপ / ডবল ক্লিক।":"🔒 Only the owner can see this. To open: double-tap / double-click the date area.","এই নোট মুছে ফেলবেন?":"Delete this note?","নোটিশ":"Notice","📢 নোটিশ":"📢 Notice","ঠিক আছে, বুঝেছি":"OK, got it","লাইসেন্সের মেয়াদ শেষ":"License expired","লাইসেন্স বন্ধ আছে":"License is locked","পেমেন্ট করে যোগাযোগ করুন, সঙ্গে সঙ্গে চালু হয়ে যাবে।":"Please pay and get in touch — it will be unlocked right away.","এই লাইসেন্সটি বন্ধ করা হয়েছে। যোগাযোগ করুন।":"This license has been locked. Please get in touch.","🔄 আবার যাচাই করুন":"🔄 Check again","⏳ লাইসেন্সের মেয়াদ আজ শেষ হবে":"⏳ License expires today","আপনার ডেটা নিরাপদ আছে — মুছে যায়নি।":"Your data is safe — nothing was deleted.","লাইসেন্স লগইন":"License login","🔑 অ্যাপ চালু করতে আপনাকে দেওয়া ইমেইল ও পাসওয়ার্ড দিন। এটা শুধু একবার লাগবে।":"🔑 Enter the email and password you were given to activate the app. Needed only once.","📧 ইমেইল:":"📧 Email:","🚀 চালু করুন":"🚀 Activate","☁️ স্টাফ বা সরবরাহকারী? দোকান কোড দিয়ে যুক্ত হন":"☁️ Staff or supplier? Join with the shop code","⏳ যাচাই হচ্ছে…":"⏳ Verifying…","❌ ইমেইল বা পাসওয়ার্ড ভুল":"❌ Wrong email or password","❌ এই লাইসেন্স বন্ধ করা আছে":"❌ This license is disabled","❌ ইমেইল ও পাসওয়ার্ড দিন":"❌ Enter email and password","📧 কোডের বদলে ইমেইল ও পাসওয়ার্ড দিয়ে যুক্ত হব":"📧 Join with email and password instead of the code","🔑 ইমেইলের বদলে দোকান কোড দিয়ে যুক্ত হব":"🔑 Join with the shop code instead of email","ইমেইল:":"Email:","🔑 লাইসেন্স ইমেইল দেখুন":"🔑 Show license email","ব্যাকআপ ও রিস্টোর":"Backup & restore","💾 ব্যাকআপ ও রিস্টোর":"💾 Backup & restore","ডেটা সেভ করুন অথবা ফাইল থেকে ফিরিয়ে আনুন":"Save your data or restore it from a file","বাতিল":"Cancel","এই কাস্টমারের কোনো আইটেমে বাকি নেই — ভাগ করার কিছু নেই":"This customer has no item due — nothing to assign","ভাগ বদলান":"Change split","📊 এই সময়ে বাকির হিসাব":"📊 Dues summary for this period","মোট বাকি বেড়েছে":"Total due increased","মোট বাকি কমেছে":"Total due decreased","🏷️ ছাড় (ডিসকাউন্ট) — ঐচ্ছিক:":"🏷️ Discount — optional:","ছাড়":"Discount","🏷️ ছাড়":"🏷️ Discount","🏷️ ছাড়:":"🏷️ Discount:","ছাড় দিলে বাকি কমবে, কিন্তু জমার টাকায় ধরা হবে না":"Discount reduces the due but is not counted as money received","❌ জমা + ছাড় বাকির চেয়ে বেশি হয়ে গেছে":"❌ Payment + discount is more than the due","মোট ছাড়":"Total discount","মোট ছাড় (ডিসকাউন্ট)":"Total discounts given","ডেভেলপারের পরিচয়":"Developer","জাহিদুল ইসলাম (ছিদ্দিক)":"ZAHIDUL ISLAM (CIDDIQ)","নোয়াখালী, চাপরাশিরহাট ৩৮১১":"Noakhali, ChaprashirHat 3811","বাংলাদেশ":"Bangladesh","যেমন: সিদ্দিক":"e.g. Ciddiq","যেমন: সাজ্জাদ":"e.g. Sajjad","যেমন: জাহিদুল":"e.g. Zahidul","যেমন: সামিরা স্টোর":"e.g. Samira Store","যেমন: zahidul":"e.g. zahidul","যেমন: শারমিন":"e.g. Sharmin","থিম ও রং": "Theme & colors", "ডিফল্ট": "Default", "মিডনাইট": "Midnight", "ওশান": "Ocean", "গ্লাস": "Glass", "সানসেট": "Sunset", "পছন্দের রং বেছে নিন। শুধু এই ফোনে/ব্রাউজারে বদলাবে।": "Pick your colors. Applies only on this phone/browser.", "নতুন কাস্টমার": "New customer", "নতুন কাস্টমার যোগ করুন এবং হিসাব শুরু করুন": "Add a new customer and start the account", "কাস্টমারের নাম": "Customer's name", "হোয়াটসঅ্যাপ নম্বর (কোডসহ)": "WhatsApp number (with country code)", "কাস্টমার যোগ করুন": "Add customer", "আইটেম ম্যানেজ": "Manage items", "নতুন আইটেমের নাম": "New item name", "হিসাবের ধরন": "Account type", "সংখ্যা × দাম": "Quantity × price", "যেমন কার্টুন, পিস": "e.g. carton, piece", "ফ্রি": "Free", "পরিমাণ+টাকা": "Quantity + amount", "শুধু টাকা": "Amount only", "রিচার্জ": "Recharge", "একক (শব্দ)": "Unit (word)", "— কেস/কার্টুন/পিস/প্যাকেট। বেছে নিন": "— case / carton / piece / packet. Choose one", "এই আইটেমের স্টক রাখুন": "Keep stock for this item", "কম হলে সতর্কতা": "Low-stock alert", "— এই সংখ্যা বা এর কমে লাল দেখাবে (ঐচ্ছিক)": "— shows red at or below this number (optional)", "ডিফল্ট দাম": "Default price", "— প্রতি এক একক (পিস/প্যাকেট) এর দাম (ঐচ্ছিক)": "— price per unit (piece/packet) (optional)", "কত দিন পর মনে করাবে": "Remind after how many days", "— ঐচ্ছিক। যেমন রিচার্জে ২৯": "— optional. e.g. 29 for recharge", "নতুন আইটেম যোগ করুন": "Add new item", "বর্তমান আইটেম তালিকা": "Current item list", "টাকা": "Amount", "যেমন: করিম আলী": "e.g. Karim Ali", "যেমন: 88018XXXXXXXX": "e.g. 88018XXXXXXXX", "যেমন: চাল, ডাল, পানি...": "e.g. rice, lentils, water...", "নিজে লিখুন (যেমন: ডজন)": "Type your own (e.g. dozen)", "যেমন: ৫": "e.g. 5", "যেমন: ১০": "e.g. 10", "যেমন: ২৯": "e.g. 29", "নগদ": "Cash", "বাকি": "Due", "জমা": "Payment", "পরিবর্তন": "Change", "ডিলিট": "Delete", "হিস্টোরি": "History", "নোট": "Note", "নোট (শুধু মালিক)": "Note (owner only)", "আছে": "Yes", "তারিখ": "Date", "বিবরণ": "Details", "কোনো বিল নেই": "No bills", "সব পরিশোধিত": "All paid", "পরিশোধিত": "Paid", "মোট বিল": "Total bill", "মোট জমা": "Total paid", "টাকা জমা নিন": "Collect payment", "আজকে কী নিলো যোগ করুন": "Add what they took today", "পরিমাণ": "Quantity", "দাম/পিস": "Price/pc", "মোট টাকা": "Total amount", "সেভ করুন": "Save", "যোগ করেছেন": "Added by", "বর্তমান বাকি": "Current due", "আগের": "Previous", "এন্ট্রি করেছিলেন": "Entered by", "স্টকে আছে": "In stock", "কোনো কাস্টমার নেই": "No customers", "ক্যালকুলেটর": "Calculator", "লিখলে পুরো বাকি টাকা অটো জমা হবে": "Type p to auto-fill the full due amount", "জমার পরিমাণ": "Payment amount", "বাতিল": "Cancel", "জমা দিন": "Submit payment", "টাকা লিখুন বা p লিখুন": "Enter amount or type p", "পুরো কিবোর্ড চালু করুন": "Show full keyboard", "হিসাব এডিট করুন": "Edit entry", "নতুন বিবরণ": "New details", "নতুন টাকা": "New amount", "নাম ও নম্বর পরিবর্তন": "Change name & number", "নাম": "Name", "ফোন নম্বর": "Phone number", "কাস্টমার নোট (শুধু মালিক)": "Customer note (owner only)", "কাস্টমার": "Customer", "সম্পর্কে যা মনে রাখতে চান লিখুন": "— write what you want to remember.", "এই নোট শুধু মালিকের দেখার জন্য": "This note is for the owner only", "মুছুন": "Clear", "যেমন: বাড়ি ৫ নম্বর রোডে...": "e.g. House on Road 5...", "নিশ্চিত করুন": "Please confirm", "হ্যাঁ, ডিলিট করুন": "Yes, delete", "লেনদেনের পাসওয়ার্ড দিন": "Enter transaction password", "এই পাসওয়ার্ড মালিক ও স্টাফ উভয়ের কাছে থাকবে": "Both owner and staff will have this password", "নিরাপত্তার স্বার্থে পাসওয়ার্ড দিন": "Enter your password for security", "ওকে": "OK", "বিক্রি এন্ট্রি নিশ্চিত করুন": "Confirm sale entry", "হিসাব এডিট করতে পাসওয়ার্ড দিন": "Enter password to edit", "সঠিক পাসওয়ার্ড দিলে এডিট স্ক্রিন আসবে": "The edit screen opens after the correct password", "টাকা জমা নিশ্চিত করুন": "Confirm payment", "হিসাব ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete", "জমা ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete payment", "সঠিক পাসওয়ার্ড দিলে ডিলিটের নিশ্চিতকরণ আসবে": "Delete confirmation appears after the correct password", "এই হিসাবটি ডিলিট করবেন": "Delete this entry", "এই জমার রেকর্ড ডিলিট করবেন": "Delete this payment record", "কাস্টমারের ছবি দিন": "Add customer's photo", "ক্যামেরা দিয়ে তুলুন": "Take with camera", "এখনই ছবি উঠান": "Take a photo now", "গ্যালারি থেকে বাছুন": "Choose from gallery", "ফোনে সেভ করা ছবি": "A photo saved on the phone", "বন্ধ করুন": "Close", "কাস্টমারকে জানাবেন": "Notify the customer", "এই কাস্টমারের ফোন নম্বর নেই বা খুব ছোট। পাঠালে WhatsApp-এ নিজে কাস্টমার বেছে নিতে হবে।": "This customer's phone number is missing or too short. You'll need to pick the customer yourself in WhatsApp.", "এখন না": "Not now", "পাঠান": "Send", "আবার কেনার সময় হয়েছে": "due to buy again", "রিচার্জ অ্যাপ বাছুন": "Choose recharge app", "বাছা মুছুন": "Clear choice", "বন্ধ": "Close", "অ্যাপের নাম খুঁজুন": "Search app name", "আজকের লেনদেন": "Today's transactions", "শেষ ৭ দিনের লেনদেন": "Last 7 days transactions", "শেষ ১৫ দিনের লেনদেন": "Last 15 days transactions", "শেষ ৩০ দিনের লেনদেন": "Last 30 days transactions", "একটি তারিখ নির্বাচন করুন": "Select a date", "🔒 দোকানের তথ্য শুধু মালিক পরিবর্তন করতে পারবেন।": "🔒 Only the owner can change shop details.", "আইটেমের নাম লিখুন!": "Enter the item name!", "❌ এই আইটেম আগে থেকেই আছে!": "❌ This item already exists!", "স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "Enter the stock unit (e.g. piece, packet)", "একক হলো শব্দ, সংখ্যা নয়।": "The unit is a word, not a number.", "যেমন: পিস, প্যাকেট, কার্টুন।": "e.g. piece, packet, carton.", "📦 এই আইটেমের স্টক চালু আছে।": "📦 Stock is on for this item.", "আগে ✏️ চেপে স্টক বন্ধ করুন, তারপর ডিলিট করুন।": "First press ✏️ and turn stock off, then delete.", "❌ স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "❌ Enter the stock unit (e.g. piece, packet)", "❌ একক হলো শব্দ, সংখ্যা নয় (যেমন: পিস, প্যাকেট, কার্টুন)": "❌ The unit is a word, not a number (e.g. piece, packet, carton)", "স্টক বন্ধ করলে আগের হিসাব মুছবে না, আবার চালু করলে ফিরে আসবে।": "Turning stock off keeps the old records; they return when you turn it on again.", "স্টক বন্ধ করলে আগের হিসাব মুছবে না।": "Turning stock off keeps the old records.", "✅ কাস্টমার যোগ হয়েছে!": "✅ Customer added!", "সঠিক টাকা লিখুন": "Enter a valid amount", "পরিমাণ লিখুন": "Enter the quantity", "সঠিক তথ্য দিন": "Enter valid details", "তারিখ নির্বাচন করুন": "Select a date", "❌ এই কাস্টমারের কোনো বাকি নেই!": "❌ This customer has no due!", "সঠিক পরিমাণ লিখুন": "Enter a valid quantity", "নাম খালি রাখা যাবে না": "Name cannot be empty", "সঠিক ফোন নম্বর লিখুন": "Enter a valid phone number", "🔒 নাম আর বদলানো যাবে না": "🔒 The name cannot be changed any more", "তবুও সেভ করবেন?": "Save anyway?"});
 Object.assign(EN_DICT, {"⚠️ দেরি":"⚠️ Late","🕒 চলছে":"🕒 Ongoing","✅ ভালো":"✅ Good","🆕 নতুন":"🆕 New","এখনো লেনদেন নেই":"No entries yet","শেষ লেনদেন: ":"Last entry: ","▲ বন্ধ করুন":"▲ Close"});
 Object.assign(EN_DICT, {"📧 ইমেইল লাইসেন্সে নিন":"📧 Move to email license","📧 লাইসেন্সের ইমেইল:":"📧 License email:","🔑 লাইসেন্সের পাসওয়ার্ড:":"🔑 License password:","⏳ রূপান্তর হচ্ছে…":"⏳ Converting…","আপনার সব ডেটা নতুন ইমেইল-লাইসেন্স দোকানে তোলা হবে। আগের দোকান কোড আর কাজ করবে না। এগিয়ে যাবেন?":"All your data will be moved to the new email-license shop. The old shop code will stop working. Continue?","✅ হয়ে গেছে! এখন এই ইমেইল ও পাসওয়ার্ড দিয়েই স্টাফ ও মাইকেল যুক্ত হবে।":"✅ Done! Staff and Michael can now join with this email and password.","এই ইমেইলের দোকানে আগে থেকেই ডেটা আছে — থামানো হলো":"This email shop already has data — stopped"});
@@ -999,7 +1001,7 @@ function applyTheme(id) {
     const g = document.getElementById('themeGrid');
     if (g) g.querySelectorAll('.th-opt').forEach(el => el.classList.toggle('on', el.dataset.id === id));
 }
-function openBackupModal() { openModal('backupModal'); }
+function openBackupModal() { const o = document.getElementById('bkCloudOpt'); if (o) o.style.display = (isOwner() && CS) ? '' : 'none'; openModal('backupModal'); }
 function openThemeModal() {
     const g = document.getElementById('themeGrid'); if (!g) return;
     const cur = themeNow();
@@ -1161,6 +1163,7 @@ function openMainApp() {
     fpRefreshRow();
     setTimeout(bulkResume, 700);
     setTimeout(backupRemind, 1200);
+    setTimeout(cbAuto, 9000);
 }
 
 function updateUserAvatar() {
@@ -2496,7 +2499,7 @@ function refreshAllProductDropdowns() {
 // ================== 9. কাস্টমার কার্ড ==================
 function onAddCustomer(e) {
     e.preventDefault();
-    appData.customers.push({
+    const _newCus = {
         id: uid(),
         name: document.getElementById('cName').value.trim(),
         phone: document.getElementById('cPhone').value.replace(/[^0-9]/g, ''),
@@ -2508,7 +2511,9 @@ function onAddCustomer(e) {
         createdBy: currentUser.name,
         createdByRole: currentUser.role,
         createdAt: now()
-    });
+    };
+    appData.customers.push(_newCus);
+    logAct('add', 'customer', _newCus, { phone: _newCus.phone });
     save();
     this.reset();
     show();
@@ -2884,6 +2889,7 @@ function addT(idx) {
             });
             const _cus = appData.customers[idx], _t = _cus.tx[_cus.tx.length - 1];
             const _tot = getCustomerTotals(_cus);
+            logAct('add', 'tx', _cus, { item: _t.tp, qty: _t.qty, amt: _t.amt, pay: Calc.isCash(_t) ? 'cash' : 'baki', dt: _t.dt });
             save();
             filterCustomers();
             renderReports();
@@ -2918,6 +2924,7 @@ function saveEditTx() {
     if (!newTp || !newAmt || newAmt <= 0) return alert('সঠিক তথ্য দিন');
 
     const t = appData.customers[currentEditCusIdx].tx[currentEditTxIdx];
+    logAct('edit', 'tx', appData.customers[currentEditCusIdx], { item: newTp, amt: newAmt, oldItem: t.tp, oldAmt: t.amt, qty: t.qty, dt: t.dt, origBy: t.byName || '' });
     t.oldTp = t.tp;
     t.oldAmt = t.amt;
     t.tp = newTp;
@@ -3083,6 +3090,7 @@ function payAllocConfirm() {
         const p = appData.customers[P.idx].payment[P.edit.pIdx];
         const al = P.sel.map(i => ({ item: P.sug[i].name, amt: P.sug[i].alloc }));
         if (al.length) p.alloc = al; else delete p.alloc;
+        logAct('edit', 'alloc', appData.customers[P.idx], { amt: p.amt, dt: p.dt, items: al.map(x => x.item).join(', ') });
         closeModal('payAllocModal'); save(); filterCustomers(); renderReports();
         return;
     }
@@ -3123,6 +3131,7 @@ function payFinish(payCusIdx, amt, dt, alloc, disc) {
                 if (alloc && alloc.length) rec.alloc = alloc;
                 if (amt > 0) appData.customers[payCusIdx].payment.push(rec);
                 if (disc > 0) appData.customers[payCusIdx].payment.push({ id: uid(), dt: dt, amt: disc, disc: true, byName: currentUser.name, byRole: currentUser.role, byId: currentUser.id, at: now() });
+                logAct('add', 'payment', appData.customers[payCusIdx], { amt: amt, disc: disc, dt: dt });
                 const _pc = appData.customers[payCusIdx];
                 const _pLast = { dt: dt, amt: amt, disc: disc }, _pTot = getCustomerTotals(_pc);
                 const _pm = () => waEntryMessage(_pc, 'pay', _pLast, _pTot);
@@ -3177,6 +3186,7 @@ function saveEditPhone() {
     if (!c) return;
     const p = document.getElementById('editPhoneInput').value.replace(/[^0-9]/g, '');
     const name = document.getElementById('editNameInput').value.trim();
+    const _oldName = c.name, _oldPhone = c.phone;
     if (!name) return alert('নাম খালি রাখা যাবে না');
     if (!p) return alert('সঠিক ফোন নম্বর লিখুন');
     if (name !== c.name) {
@@ -3185,6 +3195,7 @@ function saveEditPhone() {
         c.name = name;
         c.nameChanges = (c.nameChanges || 0) + 1;
     }
+    if (name !== _oldName || p !== _oldPhone) logAct('edit', 'customer', c, { oldName: _oldName, oldPhone: _oldPhone, phone: p });
     c.phone = p;
     save();
     closeModal('editPhoneModal');
@@ -4286,6 +4297,7 @@ function saveSupPay() {
     const name = supPayItem, it = itemOf(name);
     requestTransactionPin('🔐 সরবরাহকারীকে টাকা', `💸 ${(it && it.supName) || ''} — ${amt} টাকা`, function() {
         appData.stock.entries.push({ id: uid(), kind: 'supPay', item: name, dt: dt, qty: 0, amt: amt, at: now(), byName: currentUser.name, byRole: currentUser.role, byId: currentUser.id });
+        logAct('add', 'supPay', null, { item: name, amt: amt, dt: dt });
         save(); closeModal('supPayModal'); renderStock();
     });
 }
@@ -4300,6 +4312,7 @@ function addStock() {
     if (!dt) return alert('তারিখ নির্বাচন করুন');
     requestTransactionPin('🔐 মাল তোলা নিশ্চিত করুন', `📦 ${name} +${q} ${item.unit || ''}`, function() {
         appData.stock.entries.push({ id: uid(), item: name, dt: dt, qty: q, at: now(), byName: currentUser.name, byRole: currentUser.role, byId: currentUser.id });
+        logAct('add', 'stock', null, { item: name, qty: q, dt: dt });
         save();
         renderStock();
     });
@@ -4316,13 +4329,22 @@ function delStockEntry(id) {
 }
 
 // ================== 12. ডিলিট লগ — কে, কখন, কী ডিলিট করল (শুধু মালিক দেখেন) ==================
-function logDelete(kind, cus, extra) {
+function logAct(act, kind, cus, extra) {
+    if (!currentUser || !Array.isArray(appData.deleteLog)) return;
     appData.deleteLog.push(Object.assign({
-        id: uid(), at: now(), kind: kind,
+        id: uid(), at: now(), act: act, kind: kind,
         byName: currentUser.name, byRole: currentUser.role, byId: currentUser.id,
         customerId: cus ? (cus.id || null) : null, customerName: cus ? cus.name : ''
     }, extra || {}));
-    if (appData.deleteLog.length > 500) appData.deleteLog.splice(0, appData.deleteLog.length - 500);
+    if (appData.deleteLog.length > 1000) appData.deleteLog.splice(0, appData.deleteLog.length - 1000);
+}
+function logDelete(kind, cus, extra) {
+    appData.deleteLog.push(Object.assign({
+        id: uid(), at: now(), act: 'del', kind: kind,
+        byName: currentUser.name, byRole: currentUser.role, byId: currentUser.id,
+        customerId: cus ? (cus.id || null) : null, customerName: cus ? cus.name : ''
+    }, extra || {}));
+    if (appData.deleteLog.length > 1000) appData.deleteLog.splice(0, appData.deleteLog.length - 1000);
 }
 
 function fmtTime(iso) {
@@ -4331,10 +4353,33 @@ function fmtTime(iso) {
 }
 
 function logText(e) {
-    if (e.kind === 'tx') return 'বিল: ' + txLabel({ tp: e.item, qty: e.qty }).text + ' — ' + e.amt + ' ৳ (' + (e.pay === 'cash' ? '💵 নগদ' : '📒 বাকি') + ') · তারিখ ' + e.dt;
+    const en = LANG === 'en', act = e.act || 'del';
+    const cash = e.pay === 'cash' ? (en ? '💵 Cash' : '💵 নগদ') : (en ? '📒 Credit' : '📒 বাকি'), on = en ? ' · date ' : ' · তারিখ ';
+    const u = it => unitOf(it || STOCK_ITEM) || (en ? 'carton' : 'কার্টুন');
+    if (act === 'add') {
+        if (e.kind === 'customer') return en ? 'New customer added' : 'নতুন কাস্টমার যোগ করেছে';
+        if (e.kind === 'tx') return (en ? 'Entry: ' : 'এন্ট্রি: ') + txLabel({ tp: e.item, qty: e.qty }).text + ' — ' + e.amt + ' ৳ (' + cash + ')' + on + e.dt;
+        if (e.kind === 'payment') return (en ? 'Payment: ' : 'জমা নিয়েছে: ') + (e.amt > 0 ? e.amt + ' ৳' : '') + (e.disc > 0 ? (e.amt > 0 ? ' + ' : '') + (en ? 'discount ' : 'ছাড় ') + e.disc + ' ৳' : '') + on + e.dt;
+        if (e.kind === 'supPay') return (en ? 'Paid supplier: ' : 'সরবরাহকারীকে টাকা দিয়েছে: ') + (e.item || '') + ' — ' + e.amt + ' ৳' + on + e.dt;
+        if (e.kind === 'stock') return (en ? 'Stock in: ' : 'মাল তুলেছে: ') + (e.item || STOCK_ITEM) + ' ' + e.qty + ' ' + u(e.item) + on + e.dt;
+    }
+    if (act === 'edit') {
+        if (e.kind === 'tx') return (en ? 'Edited entry: ' : 'এডিট করেছে: ') + (e.oldItem || '') + ' ' + e.oldAmt + ' ৳ → ' + (e.item || '') + ' ' + e.amt + ' ৳' + on + e.dt;
+        if (e.kind === 'customer') return (en ? 'Changed customer details: ' : 'নাম/নম্বর বদলেছে: ') + (e.oldName !== undefined ? e.oldName + ' (' + (e.oldPhone || '-') + ') → ' + (e.customerName || '') + ' (' + (e.phone || '-') + ')' : '');
+        if (e.kind === 'alloc') return (en ? 'Changed payment split: ' : 'জমার আইটেম ভাগ বদলেছে: ') + (e.items || '-') + ' · ' + e.amt + ' ৳' + on + e.dt;
+    }
+    if (en) {
+        if (e.kind === 'tx') return 'Entry deleted: ' + txLabel({ tp: e.item, qty: e.qty }).text + ' — ' + e.amt + ' ৳ (' + cash + ')' + on + e.dt;
+        if (e.kind === 'payment') return 'Payment deleted: ' + e.amt + ' ৳' + on + e.dt;
+        if (e.kind === 'supPay') return 'Supplier payment deleted: ' + (e.item || '') + ' — ' + e.amt + ' ৳' + on + e.dt;
+        if (e.kind === 'stock') return 'Stock-in deleted: ' + (e.item || STOCK_ITEM) + ' ' + e.qty + ' ' + u(e.item) + on + e.dt;
+        if (e.kind === 'customer') return 'Whole customer account (due was ' + e.due + ' ৳, ' + e.txCount + ' bills)';
+        return '';
+    }
+    if (e.kind === 'tx') return 'বিল: ' + txLabel({ tp: e.item, qty: e.qty }).text + ' — ' + e.amt + ' ৳ (' + cash + ') · তারিখ ' + e.dt;
     if (e.kind === 'payment') return 'জমা: ' + e.amt + ' ৳ · তারিখ ' + e.dt;
     if (e.kind === 'supPay') return 'সরবরাহকারীকে দেওয়া টাকা: ' + (e.item || '') + ' — ' + e.amt + ' ৳ · তারিখ ' + e.dt;
-    if (e.kind === 'stock') return 'স্টকে মাল তোলা: ' + (e.item || STOCK_ITEM) + ' ' + e.qty + ' ' + (unitOf(e.item || STOCK_ITEM) || 'কার্টুন') + ' · তারিখ ' + e.dt;
+    if (e.kind === 'stock') return 'স্টকে মাল তোলা: ' + (e.item || STOCK_ITEM) + ' ' + e.qty + ' ' + u(e.item) + ' · তারিখ ' + e.dt;
     if (e.kind === 'customer') return 'পুরো কাস্টমার অ্যাকাউন্ট (বাকি ছিল ' + e.due + ' ৳, ' + e.txCount + 'টি বিল)';
     return '';
 }
@@ -4350,30 +4395,51 @@ function setLogKeep() {
     appData.logKeepDays = +document.getElementById('dlKeep').value || 0;
     save();
     purgeOldLogs();
-    openDeleteLog();
+    renderActLog();
 }
+let LOG_F = { act: 'all', user: '', q: '' };
+function logSetF(k, v) { LOG_F[k] = v; renderActLog(); }
 function openDeleteLog() {
-    if (!isOwner()) return alert('🔒 ডিলিট লগ শুধু মালিক দেখতে পারেন।');
+    if (!isOwner()) return alert('🔒 কার্যকলাপের লগ শুধু মালিক দেখতে পারেন।');
     purgeOldLogs();
     document.getElementById('dlKeep').value = String(appData.logKeepDays || 0);
-    const log = appData.deleteLog.slice().reverse();
-    let h = '';
-    if (!log.length) h = '<p style="text-align:center;color:#64748b;padding:20px;font-style:italic">এখনো কিছু ডিলিট হয়নি।<br><small>(এই ফিচার চালুর আগের ডিলিটের রেকর্ড নেই)</small></p>';
-    log.forEach(e => {
-        const role = e.byRole === 'owner' ? 'মালিক' : 'স্টাফ';
-        const target = (e.kind === 'stock' || e.kind === 'supPay') ? 'স্টক' : escapeHtml(e.customerName || '—');
-        h += `<div class="dl-item"><div class="dl-top"><span>🗑️ ${escapeHtml(e.byName || '—')}<span class="dl-who">${role}</span></span><span class="dl-time">${escapeHtml(fmtTime(e.at))}</span></div>` +
-            `<div class="dl-body"><b>${target}</b> — ${escapeHtml(logText(e))}` +
-            (e.origBy ? `<br><span style="color:#64748b">এন্ট্রি করেছিলেন: ${escapeHtml(e.origBy)}</span>` : '') + '</div></div>';
-    });
-    document.getElementById('deleteLogBody').innerHTML = h;
+    LOG_F = { act: 'all', user: '', q: '' };
+    renderActLog();
     openModal('deleteLogModal');
+}
+function renderActLog() {
+    const en = LANG === 'en', all = appData.deleteLog.slice().reverse();
+    const users = [...new Set(all.map(e => e.byName).filter(Boolean))];
+    const cnt = a => all.filter(e => a === 'all' || (e.act || 'del') === a).length;
+    const chips = [['all', en ? 'All' : 'সব'], ['add', '➕ ' + (en ? 'Entries' : 'এন্ট্রি')], ['edit', '✏️ ' + (en ? 'Edits' : 'এডিট')], ['del', '🗑️ ' + (en ? 'Deletes' : 'ডিলিট')]]
+        .map(([k, l]) => `<button class="lg-chip${LOG_F.act === k ? ' on' : ''}" onclick="logSetF('act','${k}')">${l} <em>${cnt(k)}</em></button>`).join('');
+    const sel = `<select class="lg-user" onchange="logSetF('user',this.value)"><option value="">${en ? '👤 All users' : '👤 সব ইউজার'}</option>` + users.map(n => `<option value="${escapeHtml(n)}"${LOG_F.user === n ? ' selected' : ''}>${escapeHtml(n)}</option>`).join('') + '</select>';
+    const q = LOG_F.q.trim().toLowerCase();
+    const log = all.filter(e => (LOG_F.act === 'all' || (e.act || 'del') === LOG_F.act) && (!LOG_F.user || e.byName === LOG_F.user) && (!q || String(e.customerName || '').toLowerCase().includes(q)));
+    document.getElementById('logFilters').innerHTML = `<div class="lg-chips">${chips}</div><div class="lg-row">${sel}<input class="lg-q" placeholder="${en ? '🔍 Customer name' : '🔍 কাস্টমারের নাম'}" value="${escapeHtml(LOG_F.q)}" oninput="LOG_F.q=this.value;renderActLogList()"></div>`;
+    renderActLogList(log);
+}
+function renderActLogList(pre) {
+    const en = LANG === 'en', q = LOG_F.q.trim().toLowerCase();
+    const log = pre || appData.deleteLog.slice().reverse().filter(e => (LOG_F.act === 'all' || (e.act || 'del') === LOG_F.act) && (!LOG_F.user || e.byName === LOG_F.user) && (!q || String(e.customerName || '').toLowerCase().includes(q)));
+    let h = '';
+    if (!log.length) h = '<p style="text-align:center;color:#64748b;padding:20px;font-style:italic">' + (en ? 'Nothing here yet.' : 'এখানে কিছু নেই।') + '<br><small>' + (en ? '(Actions before this feature have no record, except deletes)' : '(এই ফিচার চালুর আগের কাজের রেকর্ড নেই, শুধু ডিলিটের আছে)') + '</small></p>';
+    log.slice(0, 300).forEach(e => {
+        const act = e.act || 'del', ic = act === 'add' ? '➕' : act === 'edit' ? '✏️' : '🗑️';
+        const role = e.byRole === 'owner' ? (en ? 'Owner' : 'মালিক') : (en ? 'Staff' : 'স্টাফ');
+        const target = (e.kind === 'stock' || e.kind === 'supPay') ? (en ? 'Stock' : 'স্টক') : escapeHtml(e.customerName || '—');
+        h += `<div class="dl-item lg-${act}"><div class="dl-top"><span>${ic} ${escapeHtml(e.byName || '—')}<span class="dl-who">${role}</span></span><span class="dl-time">${escapeHtml(fmtTime(e.at))}</span></div>` +
+            `<div class="dl-body"><b>${target}</b> — ${escapeHtml(logText(e))}` +
+            (e.origBy ? `<br><span style="color:#64748b">${en ? 'Originally entered by: ' : 'এন্ট্রি করেছিলেন: '}${escapeHtml(e.origBy)}</span>` : '') + '</div></div>';
+    });
+    if (log.length > 300) h += '<p style="text-align:center;color:#64748b;font-size:12px">' + (en ? 'Showing the latest 300' : 'সর্বশেষ ৩০০টি দেখানো হচ্ছে — ফিল্টার ব্যবহার করুন') + '</p>';
+    document.getElementById('deleteLogBody').innerHTML = h;
 }
 
 // কাস্টমার কার্ডে (শুধু মালিক) সর্বশেষ ৩টি ডিলিট দেখানো
 function deleteNoteHtml(cus) {
     if (!isOwner() || !cus.id) return '';
-    const items = appData.deleteLog.filter(e => e.customerId === cus.id && (e.kind === 'tx' || e.kind === 'payment'));
+    const items = appData.deleteLog.filter(e => e.customerId === cus.id && (!e.act || e.act === 'del') && (e.kind === 'tx' || e.kind === 'payment'));
     if (!items.length) return '';
     let h = `🗑️ <b>ডিলিট হয়েছে (${items.length}টি):</b>`;
     items.slice(-3).reverse().forEach(e => {
@@ -5550,6 +5616,120 @@ function telHref(phone) {
     const d = bnToEn(String(phone || '')).replace(/[^0-9+]/g, '');
     if (!d) return '#';
     return 'tel:' + ((d[0] === '0' || d[0] === '+') ? '' : '+') + d;
+}
+
+
+// ================== ☁️ ক্লাউড অটো ব্যাকআপ (মালিক, সপ্তাহে একবার; শেষ ৪টা থাকে) ==================
+// ক্লাউড সিঙ্ক চালু থাকলে: অ্যাপ খোলার সময় ৭ দিন পার হলে পুরো ডেটার একটা কপি shops/{uid}/backups-এ জমা হয়।
+// বড় হলে ছোট ছোট টুকরো (chunk) করে রাখা হয়, কারণ Firestore-এর একটা ডকুমেন্ট ১ MB-এর বেশি হয় না।
+const CB_DAYS = 7, CB_KEEP = 4, CB_CHUNK = 250000;
+let cbBusy = false;
+function cbOn() { return !!(CS && !CS.needKey && isOwner()); }
+function cbStamp(d) { const p = n => String(n).padStart(2, '0'); return d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds()); }
+function cbStampText(t) {
+    const d = new Date(+t.slice(0, 4), +t.slice(4, 6) - 1, +t.slice(6, 8), +t.slice(8, 10), +t.slice(10, 12));
+    try { return d.toLocaleString(LANG === 'en' ? 'en-GB' : 'bn-BD', { day: 'numeric', month: 'long', hour: 'numeric', minute: '2-digit' }); } catch (e) { return t; }
+}
+function cbBase() { return 'projects/' + FB.projectId + '/databases/(default)/documents/shops/' + CS.uid + '/backups/'; }
+function cbSplit(json) {
+    const out = []; let i = 0;
+    while (i < json.length) {
+        let e = Math.min(json.length, i + CB_CHUNK);
+        const ch = json.charCodeAt(e - 1);
+        if (e < json.length && ch >= 0xD800 && ch <= 0xDBFF) e--;      // ইমোজি মাঝখানে কাটা যাবে না
+        out.push(json.slice(i, e)); i = e;
+    }
+    return out;
+}
+async function cbList() {
+    const q = { from: [{ collectionId: 'backups' }], select: { fields: [{ fieldPath: 't' }, { fieldPath: 'i' }, { fieldPath: 'n' }] }, orderBy: [{ field: { fieldPath: 't' }, direction: 'ASCENDING' }] };
+    const res = await fsPost(fsBase() + '/shops/' + CS.uid + ':runQuery', { structuredQuery: q });
+    const by = {};
+    (res || []).forEach(r => {
+        if (!r.document) return;
+        const f = r.document.fields || {}, t = f.t && f.t.stringValue; if (!t) return;
+        const o = by[t] = by[t] || { t: t, n: 0, names: [] };
+        o.n = Math.max(o.n, +((f.n && f.n.integerValue) || 0)); o.names.push(r.document.name);
+    });
+    return Object.values(by).sort((a, b) => (a.t < b.t ? -1 : 1));
+}
+async function cbRun(manual) {
+    if (!cbOn() || cbBusy) return false;
+    cbBusy = true; cbUi();
+    try {
+        await getToken();
+        const mk = d => JSON.stringify({ app: 'baki-khata', exportedAt: now(), exportedBy: currentUser.name, auto: !manual, data: d });
+        let json = mk(appData);
+        if (json.length > 5000000) json = mk(Object.assign({}, appData, { customers: appData.customers.map(c => Object.assign({}, c, { photo: null })) }));   // খুব বড় হলে ছবি বাদ
+        const t = cbStamp(new Date()), chunks = cbSplit(json);
+        for (let i = 0; i < chunks.length; i += 6) {
+            await fsPost(fsBase() + ':commit', { writes: chunks.slice(i, i + 6).map((ch, k) => ({ update: {
+                name: cbBase() + t + '_' + String(i + k).padStart(3, '0'),
+                fields: { t: { stringValue: t }, i: { integerValue: String(i + k) }, n: { integerValue: String(chunks.length) }, d: { stringValue: ch } } } })) });
+        }
+        const list = await cbList();
+        const old = list.filter(x => x.t !== t);
+        const full = old.filter(x => x.names.length >= x.n);
+        const drop = old.filter(x => x.names.length < x.n).concat(full.slice(0, Math.max(0, full.length - (CB_KEEP - 1))));   // আধা-লেখা কপি + ৪টার বেশি হলে পুরোনো
+        const dels = []; drop.forEach(x => x.names.forEach(n => dels.push({ delete: n })));
+        for (let i = 0; i < dels.length; i += 100) await fsPost(fsBase() + ':commit', { writes: dels.slice(i, i + 100) });
+        try { localStorage.setItem('bkAuto', String(Date.now())); localStorage.setItem('bkLastBackup', String(Date.now())); } catch (e) {}
+        updateBackupWarn();
+        cbBusy = false; cbUi(); return true;
+    } catch (e) {
+        cbBusy = false; cbUi(cloudErr ? cloudErr(e) : String(e)); return false;
+    }
+}
+function cbAuto() {
+    if (!cbOn() || cbBusy) return;
+    let last = 0; try { last = Number(localStorage.getItem('bkAuto')) || 0; } catch (e) {}
+    if (Date.now() - last < CB_DAYS * 86400000) return;
+    try { localStorage.setItem('bkAuto', String(Date.now() - (CB_DAYS * 86400000 - 3600000))); } catch (e) {}   // ব্যর্থ হলে ১ ঘণ্টা পর আবার চেষ্টা
+    cbRun(false);
+}
+document.addEventListener('visibilitychange', () => { if (!document.hidden) setTimeout(cbAuto, 4000); });
+async function cbOpen() {
+    if (!isOwner()) return showEmployeeLockedMsg();
+    if (!CS) return alert(LANG === 'en' ? '☁️ Turn on Cloud sync first (Settings → Cloud sync).' : '☁️ আগে ক্লাউড সিঙ্ক চালু করুন (সেটিংস → ক্লাউড সিঙ্ক)।');
+    closeModal('backupModal');
+    openModal('cloudBkModal'); cbUi(); cbRefresh();
+}
+function cbUi(err) {
+    const el = document.getElementById('cbStatus'); if (!el) return;
+    const en = LANG === 'en'; let last = 0; try { last = Number(localStorage.getItem('bkAuto')) || 0; } catch (e) {}
+    const days = last ? Math.floor((Date.now() - last) / 86400000) : -1;
+    el.innerHTML = cbBusy ? (en ? '⏳ Backing up…' : '⏳ ব্যাকআপ হচ্ছে…') :
+        err ? '⚠️ ' + escapeHtml(err) :
+        last ? (en ? '✅ Last backup: ' + (days <= 0 ? 'today' : days + ' day(s) ago') : '✅ শেষ ব্যাকআপ: ' + (days <= 0 ? 'আজ' : days + ' দিন আগে')) : (en ? 'No cloud backup yet' : 'এখনো ক্লাউড ব্যাকআপ হয়নি');
+    const b = document.getElementById('cbNowBtn'); if (b) b.disabled = cbBusy;
+}
+async function cbRefresh() {
+    const box = document.getElementById('cbList'), en = LANG === 'en'; if (!box) return;
+    box.innerHTML = '<p class="pdf-note" style="text-align:center">' + (en ? 'Loading…' : 'লোড হচ্ছে…') + '</p>';
+    try {
+        await getToken();
+        const list = (await cbList()).filter(x => x.names.length >= x.n).reverse();
+        box.innerHTML = list.length ? list.map(x => `<div class="cb-item"><div><b>${escapeHtml(cbStampText(x.t))}</b></div><button onclick="cbRestore('${x.t}')">${en ? 'Restore' : 'ফিরিয়ে আনুন'}</button></div>`).join('')
+            : '<p class="pdf-note" style="text-align:center">' + (en ? 'No backups yet. Press the button above.' : 'কোনো কপি নেই। উপরের বাটন চাপুন।') + '</p>';
+    } catch (e) { box.innerHTML = '<p class="pdf-note" style="text-align:center;color:#dc2626">⚠️ ' + escapeHtml(cloudErr(e)) + '</p>'; }
+}
+async function cbNow() { await cbRun(true); cbRefresh(); }
+async function cbRestore(t) {
+    const en = LANG === 'en';
+    if (!confirm(en ? 'Restore this backup? The data on this phone (and the cloud) will be replaced by this copy.' : 'এই কপি ফিরিয়ে আনবেন? এই ফোনের (আর ক্লাউডের) এখনকার ডেটা এই কপি দিয়ে বদলে যাবে।')) return;
+    try {
+        await getToken();
+        const q = { from: [{ collectionId: 'backups' }], where: { fieldFilter: { field: { fieldPath: 't' }, op: 'EQUAL', value: { stringValue: t } } } };
+        const res = await fsPost(fsBase() + '/shops/' + CS.uid + ':runQuery', { structuredQuery: q });
+        const parts = (res || []).filter(r => r.document).map(r => ({ i: +r.document.fields.i.integerValue, n: +r.document.fields.n.integerValue, d: r.document.fields.d.stringValue })).sort((a, b) => a.i - b.i);
+        if (!parts.length || parts.length < parts[0].n) throw new Error(en ? 'Backup is incomplete' : 'কপিটা অসম্পূর্ণ');
+        const parsed = JSON.parse(parts.map(p => p.d).join('')), incoming = parsed.data || parsed;
+        if (!incoming || !incoming.owner) throw new Error(en ? 'Invalid backup' : 'কপিটা ঠিক নেই');
+        appData = normalizeData(incoming);
+        save();
+        alert(en ? '✅ Data restored!\n\nPlease log in again for security.' : '✅ ডাটা রিস্টোর হয়েছে!\n\nনিরাপত্তার জন্য আবার লগইন করুন।');
+        location.reload();
+    } catch (e) { alert('❌ ' + ((e && e.message) || e)); }
 }
 
 // ---------- 💾 ব্যাকআপ রিমাইন্ডার (মালিককে, দিনে একবার) ----------

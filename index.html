@@ -439,7 +439,7 @@
                     <div class="settings-row" onclick="openBackupModal()"><div class="sr-icon si-backup">💾</div><div class="sr-body"><div class="sr-title">ব্যাকআপ ও রিস্টোর</div><div class="sr-sub">ডেটা সেভ করুন অথবা ফাইল থেকে ফিরিয়ে আনুন</div></div><div class="sr-arrow">›</div></div>
                     <div class="settings-row" onclick="handleSetting('employees')"><div class="sr-icon si-emp">👥</div><div class="sr-body"><div class="sr-title">স্টাফ ম্যানেজমেন্ট</div><div class="sr-sub">নতুন স্টাফ যোগ করুন / ডিলিট করুন</div></div><div class="sr-arrow">›</div></div>
                     <div class="settings-row" onclick="openSecurityMenu()"><div class="sr-icon si-pass">🔑</div><div class="sr-body"><div class="sr-title">পাসওয়ার্ড ও নিরাপত্তা</div><div class="sr-sub">পাসওয়ার্ড, লেনদেনের পাসওয়ার্ড, ফিঙ্গারপ্রিন্ট, সিকিউরিটি প্রশ্ন</div></div><div class="sr-arrow">›</div></div>
-                    <div class="settings-row" onclick="handleSetting('deletelog')"><div class="sr-icon si-pass">🗑️</div><div class="sr-body"><div class="sr-title">ডিলিট লগ</div><div class="sr-sub">কে, কখন, কী ডিলিট করেছে (শুধু মালিক)</div></div><div class="sr-arrow">›</div></div>
+                    <div class="settings-row" onclick="handleSetting('deletelog')"><div class="sr-icon si-pass">📋</div><div class="sr-body"><div class="sr-title">কার্যকলাপের লগ</div><div class="sr-sub">কে, কখন, কী এন্ট্রি, এডিট বা ডিলিট করল (শুধু মালিক)</div></div><div class="sr-arrow">›</div></div>
                     <div class="settings-row" onclick="handleSetting('pdfreport')"><div class="sr-icon si-backup">📄</div><div class="sr-body"><div class="sr-title">সব হিসাব PDF</div><div class="sr-sub">সব কাস্টমারের হিসাব এক PDF-এ, পণ্য বেছে (শুধু মালিক)</div></div><div class="sr-arrow">›</div></div>
                     <div class="settings-row" onclick="handleSetting('notice')"><div class="sr-icon si-backup">📢</div><div class="sr-body"><div class="sr-title">স্টাফকে নোটিশ</div><div class="sr-sub">নোটিশ লিখুন — স্টাফের হোম পেজে দেখাবে (শুধু মালিক)</div></div><div class="sr-arrow">›</div></div>
                     <div class="settings-row" onclick="handleSetting('walert')"><div class="sr-icon si-restore">💬</div><div class="sr-body"><div class="sr-title">এন্ট্রির পর WhatsApp বার্তা</div><div class="sr-sub" id="waRowSub">শুধু মালিক</div></div><div class="sr-arrow">›</div></div>
@@ -936,6 +936,7 @@
         <div class="modal-header"><h4>💾 ব্যাকআপ ও রিস্টোর</h4></div>
         <div class="modal-body">
             <div class="bk-opt" onclick="closeModal('backupModal');handleSetting('backup')"><div class="bk-ic bk-a">📥</div><div><div class="bk-t">ব্যাকআপ নিন</div><div class="bk-s">ডেটা JSON ফাইলে সেভ করুন</div></div></div>
+            <div class="bk-opt" id="bkCloudOpt" style="display:none" onclick="cbOpen()"><div class="bk-ic bk-c">☁️</div><div><div class="bk-t">☁️ ক্লাউড ব্যাকআপ</div><div class="bk-s">প্রতি সপ্তাহে নিজে নিজে ক্লাউডে কপি হয়, শেষ ৪টা থাকে</div></div></div>
             <div class="bk-opt" onclick="closeModal('backupModal');handleSetting('restore')"><div class="bk-ic bk-b">📤</div><div><div class="bk-t">রিস্টোর করুন</div><div class="bk-s">ব্যাকআপ ফাইল থেকে ডেটা ফিরিয়ে আনুন</div></div></div>
         </div>
         <div class="modal-footer"><div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('backupModal')">বন্ধ করুন</button></div></div>
@@ -1355,7 +1356,8 @@
 
 <div class="modal-overlay" id="deleteLogModal">
     <div class="modal-card">
-        <div class="modal-header"><h4>🗑️ ডিলিট লগ (শুধু মালিক)</h4></div>
+        <div class="modal-header"><h4>📋 কার্যকলাপের লগ (শুধু মালিক)</h4></div>
+        <div id="logFilters" class="lg-filters"></div>
         <div class="dl-keep"><label for="dlKeep">🧹 পুরোনো লগ নিজে মুছুক:</label>
             <select id="dlKeep" onchange="setLogKeep()"><option value="0">কখনো না</option><option value="7">৭ দিন পর</option><option value="15">১৫ দিন পর</option><option value="30">৩০ দিন পর</option></select></div>
         <div class="modal-body" id="deleteLogBody"></div>
@@ -1364,6 +1366,20 @@
                 <button class="modal-btn cancel" onclick="closeModal('deleteLogModal')">বন্ধ করুন</button>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="cloudBkModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>☁️ ক্লাউড ব্যাকআপ</h4></div>
+        <div class="modal-body">
+            <div id="cbStatus" class="cb-status"></div>
+            <button class="modal-btn confirm" id="cbNowBtn" onclick="cbNow()" style="width:100%;margin:8px 0">☁️ এখনই ক্লাউডে ব্যাকআপ নিন</button>
+            <p class="pdf-note">নিজে নিজে সপ্তাহে একবার ব্যাকআপ হয় (অ্যাপ খোলা থাকলে/খুললে)।</p>
+            <div class="cb-h">ক্লাউডে জমা কপি:</div>
+            <div id="cbList"></div>
+        </div>
+        <div class="modal-footer"><div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('cloudBkModal')">বন্ধ করুন</button></div></div>
     </div>
 </div>
 
