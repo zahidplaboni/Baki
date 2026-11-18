@@ -92,6 +92,14 @@ I18N_RULES.push(
     [/^⚠️ (\S+) টাকা কম আছে — .*$/, '⚠️ $1 Tk short — check for an expense or a wrong entry'],
     [/^(.+)কে দিয়েছেন$/, 'Paid to $1'],
     [/^(.+)কে আর দিতে হবে$/, 'Still to pay $1'],
+    [/^(💵 )?\*জমা নেওয়া হয়েছে\*$/, '$1*Payment received*'],
+    [/^🏷️ \*ছাড় দেওয়া হয়েছে\*$/, '🏷️ *Discount given*'],
+    [/^💵 \*নগদে নেওয়া হয়েছে \(বাকি নয়\)\*$/, '💵 *Taken in cash (not on credit)*'],
+    [/^\*বাকিতে দেওয়া হয়েছে\*$/, '*Given on credit*'],
+    [/^টাকা — (\S+)$/, 'Amount — $1 Tk'],
+    [/^ছাড় — (\S+)$/, 'Discount — $1 Tk'],
+    [/^তারিখ — (.+)$/, 'Date — $1'],
+    [/^🔹 আপনার মোট বাকি এখন: \*(\S+) টাকা\*$/, '🔹 Your total due now: *$1 Tk*'],
     [/💲 (\S+) ৳\/(\S+)/g, (m, n, u) => '💲 ' + n + ' ৳/' + (I18N_UNITS[u] || u)],
     [/💡 এই কাস্টমারকে শেষবার দিয়েছিলেন: (\S+) ৳\/(\S+) \(ডিফল্ট (\S+)\)/, (m, n, u, d) => '💡 Last price for this customer: ' + n + ' ৳/' + (I18N_UNITS[u] || u) + ' (default ' + d + ')'],
     [/^⚠️ দাম বসানো নেই — (.+)কে কত দিতে হবে অ্যাপ বের করতে পারছে না$/, '⚠️ No price set — the app cannot work out how much to pay $1'],
@@ -5234,20 +5242,30 @@ console.log('✅ বাকি খাতা v11.0 লোড হয়েছে');
 
 // ---------- এন্ট্রির পর WhatsApp বার্তা ----------
 function waEntryMessage(cus, kind, e, totals) { return docGen(() => waEntryMessage0(cus, kind, e, totals)); }
+// তারিখ: "18 নভেম্বর" (ইংরেজি সংখ্যা; ISO তারিখ 2026-11-18 লিখলে WhatsApp লিংক বানায়, তাই মাসের নামসহ)
+const WA_MON_BN = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+const WA_MON_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function waDate(dt) {
+    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(dt || '');
+    if (!m) return dt || '';
+    const mon = (LANG === 'en' ? WA_MON_EN : WA_MON_BN)[+m[2] - 1], yr = +m[1] !== new Date().getFullYear() ? ' ' + m[1] : '';
+    return (+m[3]) + ' ' + mon + yr;
+}
 function waEntryMessage0(cus, kind, e, totals) {
     const shop = appData.shop.name ? `\n🏪 ${appData.shop.name}` : '';
+    const dl = 'তারিখ — ' + waDate(e.dt);
     let body;
     if (kind === 'pay') {
-        body = e.disc > 0 && e.amt > 0 ? `💵 ${e.dt} তারিখে ${e.amt} টাকা জমা নেওয়া হয়েছে এবং ${e.disc} টাকা ছাড় দেওয়া হয়েছে।`
-            : e.disc > 0 ? `🏷️ ${e.dt} তারিখে ${e.disc} টাকা ছাড় দেওয়া হয়েছে।`
-            : `💵 ${e.dt} তারিখে ${e.amt} টাকা জমা নেওয়া হয়েছে।`;
-    } else if (Calc.isCash(e)) {
-        body = `💵 ${e.dt} তারিখে ${txLabel(e).text} — ${e.amt} টাকা নগদে নেওয়া হয়েছে (বাকি নয়)।`;
+        body = e.disc > 0 && e.amt > 0 ? `💵 *জমা নেওয়া হয়েছে*\nটাকা — ${e.amt}\nছাড় — ${e.disc}\n${dl}`
+            : e.disc > 0 ? `🏷️ *ছাড় দেওয়া হয়েছে*\nছাড় — ${e.disc}\n${dl}`
+            : `💵 *জমা নেওয়া হয়েছে*\nটাকা — ${e.amt}\n${dl}`;
     } else {
-        body = `📋 ${e.dt} তারিখে ${txLabel(e).text} — ${e.amt} টাকা বাকিতে দেওয়া হয়েছে।`;
+        const it = txLabel(e), un = unitOf(e.tp);
+        const item = (e.qty && it.text.indexOf(' (') > 0) ? e.tp + ' — ' + e.qty + ' ' + (un || 'কার্টুন') : e.tp;
+        body = (Calc.isCash(e) ? '💵 *নগদে নেওয়া হয়েছে (বাকি নয়)*' : '*বাকিতে দেওয়া হয়েছে*') + `\n${item}\nটাকা — ${e.amt}\n${dl}`;
     }
-    const due = totals.due > 0 ? `🔹 আপনার মোট বাকি এখন: ${totals.due} টাকা।` : '✅ আপনার কোনো বাকি নেই।';
-    return `${shop ? shop.trim() + '\n' : ''}\nপ্রিয় ${cus.name},\n${body}\n${due}\n\n🔴 *হিসাবে ভুল থাকলে আজই জানান।*\n🔴 *পরে কোনো সংশোধন করা হবে না।*`;
+    const due = totals.due > 0 ? `🔹 আপনার মোট বাকি এখন: *${totals.due} টাকা*` : '✅ আপনার কোনো বাকি নেই।';
+    return `${shop ? shop.trim() + '\n' : ''}\nপ্রিয় ${cus.name},\n${body}\n\n${due}\n\n🔴 *হিসাবে ভুল থাকলে আজই জানান।*\n🔴 *পরে কোনো সংশোধন করা হবে না।*`
 }
 let _waBuild = null, _waCus = null;
 function waAskShow(msg, lang) {
