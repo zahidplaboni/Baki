@@ -15,6 +15,7 @@ Object.assign(EN_DICT, {"বারকোড": "Barcode", "— স্ক্যা
 I18N_RULES.push([/^❌ এই বারকোড আগে থেকেই "(.+)" আইটেমে আছে$/, '❌ This barcode is already on the item "$1"']);
 Object.assign(EN_DICT, {"পাস্টেল ক্লে":"Pastel Clay"});
 Object.assign(EN_DICT, {"এই আইটেমের বাকি":"Due for these items","জমা: শুধু এই আইটেমে ভাগ করা অংশ":"Payments: only the part allocated to these items"});
+Object.assign(EN_DICT, {"✏️ দাম বসান":"✏️ Set price"});
 Object.assign(EN_DICT, {"☁️ ক্লাউড ব্যাকআপ":"☁️ Cloud backup","প্রতি সপ্তাহে নিজে নিজে ক্লাউডে কপি হয়, শেষ ৪টা থাকে":"Copied to the cloud by itself every week; the last 4 are kept","☁️ এখনই ক্লাউডে ব্যাকআপ নিন":"☁️ Back up to the cloud now","ক্লাউডে জমা কপি:":"Copies in the cloud:","নিজে নিজে সপ্তাহে একবার ব্যাকআপ হয় (অ্যাপ খোলা থাকলে/খুললে)।":"Backs up by itself once a week (when the app is opened)."});
 Object.assign(EN_DICT, {"📋 কার্যকলাপের লগ (শুধু মালিক)":"📋 Activity log (owner only)","কার্যকলাপের লগ":"Activity log","কে, কখন, কী এন্ট্রি, এডিট বা ডিলিট করল (শুধু মালিক)":"Who added, edited or deleted what and when (owner only)","🔒 কার্যকলাপের লগ শুধু মালিক দেখতে পারেন।":"🔒 Only the owner can see the activity log."});
 Object.assign(EN_DICT, {"গ্রামবাংলা":"Village","সুন্দরবন":"Sundarbans","ঈদ রাত":"Eid Night","ঢাকা রিকশা":"Dhaka Rickshaw","🚫 ব্লক":"🚫 Block","✅ আনব্লক":"✅ Unblock","⛔ ব্লক":"⛔ Blocked","⛔ আপনার অ্যাকাউন্ট বন্ধ করা হয়েছে। মালিকের সাথে যোগাযোগ করুন।":"⛔ Your account has been disabled. Please contact the owner.","ক্লে ৩ডি":"Clay 3D","📝 আমার নোট":"📝 My notes","নতুন নোট লিখুন…":"Write a new note…","➕ যোগ করুন":"➕ Add","কোনো নোট নেই":"No notes yet","🔒 শুধু মালিক দেখতে পাবেন। খুলতে: তারিখের জায়গায় ডবল ট্যাপ / ডবল ক্লিক।":"🔒 Only the owner can see this. To open: double-tap / double-click the date area.","এই নোট মুছে ফেলবেন?":"Delete this note?","নোটিশ":"Notice","📢 নোটিশ":"📢 Notice","ঠিক আছে, বুঝেছি":"OK, got it","লাইসেন্সের মেয়াদ শেষ":"License expired","লাইসেন্স বন্ধ আছে":"License is locked","পেমেন্ট করে যোগাযোগ করুন, সঙ্গে সঙ্গে চালু হয়ে যাবে।":"Please pay and get in touch — it will be unlocked right away.","এই লাইসেন্সটি বন্ধ করা হয়েছে। যোগাযোগ করুন।":"This license has been locked. Please get in touch.","🔄 আবার যাচাই করুন":"🔄 Check again","⏳ লাইসেন্সের মেয়াদ আজ শেষ হবে":"⏳ License expires today","আপনার ডেটা নিরাপদ আছে — মুছে যায়নি।":"Your data is safe — nothing was deleted.","লাইসেন্স লগইন":"License login","🔑 অ্যাপ চালু করতে আপনাকে দেওয়া ইমেইল ও পাসওয়ার্ড দিন। এটা শুধু একবার লাগবে।":"🔑 Enter the email and password you were given to activate the app. Needed only once.","📧 ইমেইল:":"📧 Email:","🚀 চালু করুন":"🚀 Activate","☁️ স্টাফ বা সরবরাহকারী? দোকান কোড দিয়ে যুক্ত হন":"☁️ Staff or supplier? Join with the shop code","⏳ যাচাই হচ্ছে…":"⏳ Verifying…","❌ ইমেইল বা পাসওয়ার্ড ভুল":"❌ Wrong email or password","❌ এই লাইসেন্স বন্ধ করা আছে":"❌ This license is disabled","❌ ইমেইল ও পাসওয়ার্ড দিন":"❌ Enter email and password","📧 কোডের বদলে ইমেইল ও পাসওয়ার্ড দিয়ে যুক্ত হব":"📧 Join with email and password instead of the code","🔑 ইমেইলের বদলে দোকান কোড দিয়ে যুক্ত হব":"🔑 Join with the shop code instead of email","ইমেইল:":"Email:","🔑 লাইসেন্স ইমেইল দেখুন":"🔑 Show license email","ব্যাকআপ ও রিস্টোর":"Backup & restore","💾 ব্যাকআপ ও রিস্টোর":"💾 Backup & restore","ডেটা সেভ করুন অথবা ফাইল থেকে ফিরিয়ে আনুন":"Save your data or restore it from a file","বাতিল":"Cancel","এই কাস্টমারের কোনো আইটেমে বাকি নেই — ভাগ করার কিছু নেই":"This customer has no item due — nothing to assign","ভাগ বদলান":"Change split","📊 এই সময়ে বাকির হিসাব":"📊 Dues summary for this period","মোট বাকি বেড়েছে":"Total due increased","মোট বাকি কমেছে":"Total due decreased","🏷️ ছাড় (ডিসকাউন্ট) — ঐচ্ছিক:":"🏷️ Discount — optional:","ছাড়":"Discount","🏷️ ছাড়":"🏷️ Discount","🏷️ ছাড়:":"🏷️ Discount:","ছাড় দিলে বাকি কমবে, কিন্তু জমার টাকায় ধরা হবে না":"Discount reduces the due but is not counted as money received","❌ জমা + ছাড় বাকির চেয়ে বেশি হয়ে গেছে":"❌ Payment + discount is more than the due","মোট ছাড়":"Total discount","মোট ছাড় (ডিসকাউন্ট)":"Total discounts given","ডেভেলপারের পরিচয়":"Developer","জাহিদুল ইসলাম (ছিদ্দিক)":"ZAHIDUL ISLAM (CIDDIQ)","নোয়াখালী, চাপরাশিরহাট ৩৮১১":"Noakhali, ChaprashirHat 3811","বাংলাদেশ":"Bangladesh","যেমন: সিদ্দিক":"e.g. Ciddiq","যেমন: সাজ্জাদ":"e.g. Sajjad","যেমন: জাহিদুল":"e.g. Zahidul","যেমন: সামিরা স্টোর":"e.g. Samira Store","যেমন: zahidul":"e.g. zahidul","যেমন: শারমিন":"e.g. Sharmin","থিম ও রং": "Theme & colors", "ডিফল্ট": "Default", "মিডনাইট": "Midnight", "ওশান": "Ocean", "গ্লাস": "Glass", "সানসেট": "Sunset", "পছন্দের রং বেছে নিন। শুধু এই ফোনে/ব্রাউজারে বদলাবে।": "Pick your colors. Applies only on this phone/browser.", "নতুন কাস্টমার": "New customer", "নতুন কাস্টমার যোগ করুন এবং হিসাব শুরু করুন": "Add a new customer and start the account", "কাস্টমারের নাম": "Customer's name", "হোয়াটসঅ্যাপ নম্বর (কোডসহ)": "WhatsApp number (with country code)", "কাস্টমার যোগ করুন": "Add customer", "আইটেম ম্যানেজ": "Manage items", "নতুন আইটেমের নাম": "New item name", "হিসাবের ধরন": "Account type", "সংখ্যা × দাম": "Quantity × price", "যেমন কার্টুন, পিস": "e.g. carton, piece", "ফ্রি": "Free", "পরিমাণ+টাকা": "Quantity + amount", "শুধু টাকা": "Amount only", "রিচার্জ": "Recharge", "একক (শব্দ)": "Unit (word)", "— কেস/কার্টুন/পিস/প্যাকেট। বেছে নিন": "— case / carton / piece / packet. Choose one", "এই আইটেমের স্টক রাখুন": "Keep stock for this item", "কম হলে সতর্কতা": "Low-stock alert", "— এই সংখ্যা বা এর কমে লাল দেখাবে (ঐচ্ছিক)": "— shows red at or below this number (optional)", "ডিফল্ট দাম": "Default price", "— প্রতি এক একক (পিস/প্যাকেট) এর দাম (ঐচ্ছিক)": "— price per unit (piece/packet) (optional)", "কত দিন পর মনে করাবে": "Remind after how many days", "— ঐচ্ছিক। যেমন রিচার্জে ২৯": "— optional. e.g. 29 for recharge", "নতুন আইটেম যোগ করুন": "Add new item", "বর্তমান আইটেম তালিকা": "Current item list", "টাকা": "Amount", "যেমন: করিম আলী": "e.g. Karim Ali", "যেমন: 88018XXXXXXXX": "e.g. 88018XXXXXXXX", "যেমন: চাল, ডাল, পানি...": "e.g. rice, lentils, water...", "নিজে লিখুন (যেমন: ডজন)": "Type your own (e.g. dozen)", "যেমন: ৫": "e.g. 5", "যেমন: ১০": "e.g. 10", "যেমন: ২৯": "e.g. 29", "নগদ": "Cash", "বাকি": "Due", "জমা": "Payment", "পরিবর্তন": "Change", "ডিলিট": "Delete", "হিস্টোরি": "History", "নোট": "Note", "নোট (শুধু মালিক)": "Note (owner only)", "আছে": "Yes", "তারিখ": "Date", "বিবরণ": "Details", "কোনো বিল নেই": "No bills", "সব পরিশোধিত": "All paid", "পরিশোধিত": "Paid", "মোট বিল": "Total bill", "মোট জমা": "Total paid", "টাকা জমা নিন": "Collect payment", "আজকে কী নিলো যোগ করুন": "Add what they took today", "পরিমাণ": "Quantity", "দাম/পিস": "Price/pc", "মোট টাকা": "Total amount", "সেভ করুন": "Save", "যোগ করেছেন": "Added by", "বর্তমান বাকি": "Current due", "আগের": "Previous", "এন্ট্রি করেছিলেন": "Entered by", "স্টকে আছে": "In stock", "কোনো কাস্টমার নেই": "No customers", "ক্যালকুলেটর": "Calculator", "লিখলে পুরো বাকি টাকা অটো জমা হবে": "Type p to auto-fill the full due amount", "জমার পরিমাণ": "Payment amount", "বাতিল": "Cancel", "জমা দিন": "Submit payment", "টাকা লিখুন বা p লিখুন": "Enter amount or type p", "পুরো কিবোর্ড চালু করুন": "Show full keyboard", "হিসাব এডিট করুন": "Edit entry", "নতুন বিবরণ": "New details", "নতুন টাকা": "New amount", "নাম ও নম্বর পরিবর্তন": "Change name & number", "নাম": "Name", "ফোন নম্বর": "Phone number", "কাস্টমার নোট (শুধু মালিক)": "Customer note (owner only)", "কাস্টমার": "Customer", "সম্পর্কে যা মনে রাখতে চান লিখুন": "— write what you want to remember.", "এই নোট শুধু মালিকের দেখার জন্য": "This note is for the owner only", "মুছুন": "Clear", "যেমন: বাড়ি ৫ নম্বর রোডে...": "e.g. House on Road 5...", "নিশ্চিত করুন": "Please confirm", "হ্যাঁ, ডিলিট করুন": "Yes, delete", "লেনদেনের পাসওয়ার্ড দিন": "Enter transaction password", "এই পাসওয়ার্ড মালিক ও স্টাফ উভয়ের কাছে থাকবে": "Both owner and staff will have this password", "নিরাপত্তার স্বার্থে পাসওয়ার্ড দিন": "Enter your password for security", "ওকে": "OK", "বিক্রি এন্ট্রি নিশ্চিত করুন": "Confirm sale entry", "হিসাব এডিট করতে পাসওয়ার্ড দিন": "Enter password to edit", "সঠিক পাসওয়ার্ড দিলে এডিট স্ক্রিন আসবে": "The edit screen opens after the correct password", "টাকা জমা নিশ্চিত করুন": "Confirm payment", "হিসাব ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete", "জমা ডিলিট করতে পাসওয়ার্ড দিন": "Enter password to delete payment", "সঠিক পাসওয়ার্ড দিলে ডিলিটের নিশ্চিতকরণ আসবে": "Delete confirmation appears after the correct password", "এই হিসাবটি ডিলিট করবেন": "Delete this entry", "এই জমার রেকর্ড ডিলিট করবেন": "Delete this payment record", "কাস্টমারের ছবি দিন": "Add customer's photo", "ক্যামেরা দিয়ে তুলুন": "Take with camera", "এখনই ছবি উঠান": "Take a photo now", "গ্যালারি থেকে বাছুন": "Choose from gallery", "ফোনে সেভ করা ছবি": "A photo saved on the phone", "বন্ধ করুন": "Close", "কাস্টমারকে জানাবেন": "Notify the customer", "এই কাস্টমারের ফোন নম্বর নেই বা খুব ছোট। পাঠালে WhatsApp-এ নিজে কাস্টমার বেছে নিতে হবে।": "This customer's phone number is missing or too short. You'll need to pick the customer yourself in WhatsApp.", "এখন না": "Not now", "পাঠান": "Send", "আবার কেনার সময় হয়েছে": "due to buy again", "রিচার্জ অ্যাপ বাছুন": "Choose recharge app", "বাছা মুছুন": "Clear choice", "বন্ধ": "Close", "অ্যাপের নাম খুঁজুন": "Search app name", "আজকের লেনদেন": "Today's transactions", "শেষ ৭ দিনের লেনদেন": "Last 7 days transactions", "শেষ ১৫ দিনের লেনদেন": "Last 15 days transactions", "শেষ ৩০ দিনের লেনদেন": "Last 30 days transactions", "একটি তারিখ নির্বাচন করুন": "Select a date", "🔒 দোকানের তথ্য শুধু মালিক পরিবর্তন করতে পারবেন।": "🔒 Only the owner can change shop details.", "আইটেমের নাম লিখুন!": "Enter the item name!", "❌ এই আইটেম আগে থেকেই আছে!": "❌ This item already exists!", "স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "Enter the stock unit (e.g. piece, packet)", "একক হলো শব্দ, সংখ্যা নয়।": "The unit is a word, not a number.", "যেমন: পিস, প্যাকেট, কার্টুন।": "e.g. piece, packet, carton.", "📦 এই আইটেমের স্টক চালু আছে।": "📦 Stock is on for this item.", "আগে ✏️ চেপে স্টক বন্ধ করুন, তারপর ডিলিট করুন।": "First press ✏️ and turn stock off, then delete.", "❌ স্টকের একক লিখুন (যেমন: পিস, প্যাকেট)": "❌ Enter the stock unit (e.g. piece, packet)", "❌ একক হলো শব্দ, সংখ্যা নয় (যেমন: পিস, প্যাকেট, কার্টুন)": "❌ The unit is a word, not a number (e.g. piece, packet, carton)", "স্টক বন্ধ করলে আগের হিসাব মুছবে না, আবার চালু করলে ফিরে আসবে।": "Turning stock off keeps the old records; they return when you turn it on again.", "স্টক বন্ধ করলে আগের হিসাব মুছবে না।": "Turning stock off keeps the old records.", "✅ কাস্টমার যোগ হয়েছে!": "✅ Customer added!", "সঠিক টাকা লিখুন": "Enter a valid amount", "পরিমাণ লিখুন": "Enter the quantity", "সঠিক তথ্য দিন": "Enter valid details", "তারিখ নির্বাচন করুন": "Select a date", "❌ এই কাস্টমারের কোনো বাকি নেই!": "❌ This customer has no due!", "সঠিক পরিমাণ লিখুন": "Enter a valid quantity", "নাম খালি রাখা যাবে না": "Name cannot be empty", "সঠিক ফোন নম্বর লিখুন": "Enter a valid phone number", "🔒 নাম আর বদলানো যাবে না": "🔒 The name cannot be changed any more", "তবুও সেভ করবেন?": "Save anyway?"});
@@ -91,6 +92,9 @@ I18N_RULES.push(
     [/^⚠️ (\S+) টাকা কম আছে — .*$/, '⚠️ $1 Tk short — check for an expense or a wrong entry'],
     [/^(.+)কে দিয়েছেন$/, 'Paid to $1'],
     [/^(.+)কে আর দিতে হবে$/, 'Still to pay $1'],
+    [/💲 (\S+) ৳\/(\S+)/g, (m, n, u) => '💲 ' + n + ' ৳/' + (I18N_UNITS[u] || u)],
+    [/💡 এই কাস্টমারকে শেষবার দিয়েছিলেন: (\S+) ৳\/(\S+) \(ডিফল্ট (\S+)\)/, (m, n, u, d) => '💡 Last price for this customer: ' + n + ' ৳/' + (I18N_UNITS[u] || u) + ' (default ' + d + ')'],
+    [/^⚠️ দাম বসানো নেই — (.+)কে কত দিতে হবে অ্যাপ বের করতে পারছে না$/, '⚠️ No price set — the app cannot work out how much to pay $1'],
     [/^(.+) বেশি পেয়েছেন$/, '$1 has received extra'],
     [/^💸 (.+)কে টাকা দিলাম$/, '💸 I paid $1'],
     [/^\(প্রতি (\S+) (\S+) ৳\)$/, (m, u, n) => '(per ' + (I18N_UNITS[u] || u) + ': ' + n + ' ৳)'],
@@ -848,7 +852,19 @@ function txLabel(t) {
         if (it.type === 'carton') text += ` (${t.qty} ${unit || 'কার্টুন'})`;
         else if (it.type === 'free') text += ` (${t.qty} ${unit || 'পরিমাণ'})`;
     }
-    return { icon: itemIconOf(it), text };
+    let rate = '';
+    if (t.qty && it.type === 'carton' && Calc.num(t.qty) > 0 && Calc.num(t.amt) > 0) rate = Calc.r2(Calc.num(t.amt) / Calc.num(t.qty)) + ' ৳/' + (unit || 'কার্টুন');
+    return { icon: itemIconOf(it), text, rate };
+}
+// এই কাস্টমারকে এই আইটেম শেষবার কত দামে (প্রতি একক) দেওয়া হয়েছিল — আগের এন্ট্রির টাকা ÷ সংখ্যা থেকে বের হয়
+function lastRateFor(cus, name) {
+    let best = null;
+    const all = (cus.tx || []).concat((cus.history || []).reduce((a, h) => a.concat(h.tx || []), []));
+    all.forEach(t => {
+        if (!t || t.tp !== name || !(Calc.num(t.qty) > 0) || !(Calc.num(t.amt) > 0)) return;
+        if (!best || (t.dt || '') >= (best.dt || '')) best = t;
+    });
+    return best ? Calc.r2(Calc.num(best.amt) / Calc.num(best.qty)) : 0;
 }
 
 function avatarColor(name) {
@@ -2372,7 +2388,7 @@ function deleteItem(i) {
 }
 
 // ---- বিদ্যমান আইটেমের স্টক-সেটিংস (✏️) ----
-function openItemEdit(i) {
+function openItemEdit(i, toSup) {
     if (!isOwner()) return showEmployeeLockedMsg();
     const it = appData.itemList[i];
     if (!it) return;
@@ -2397,6 +2413,7 @@ function openItemEdit(i) {
     document.getElementById('editItemError').style.display = 'none';
     syncItemEdit();
     openModal('itemEditModal');
+    if (toSup) setTimeout(() => { const f = document.getElementById('editItemSupPrice'); if (f) { f.scrollIntoView({ block: 'center' }); try { f.focus({ preventScroll: true }); } catch (e) {} } }, 250);
 }
 function syncItemEdit() {
     const it = appData.itemList[editingItemIdx];
@@ -2558,7 +2575,7 @@ function customerCardHtml(cus, idx) {
             ? `<span class="edit-note">✏️ ${escapeHtml(t.editedByName)} পরিবর্তন: ${escapeHtml(t.oldAmt)}→${escapeHtml(t.amt)} ৳</span>` : '';
         rows += `<tr${cash ? ' class="cash-row"' : ''}>
             <td>${escapeHtml(t.dt)}</td>
-            <td>${lb.icon} ${escapeHtml(lb.text)} ${byTag}${payTag}${editLine}</td>
+            <td>${lb.icon} ${escapeHtml(lb.text)} ${lb.rate ? `<span class="by-tag rate-tag">💲 ${escapeHtml(lb.rate)}</span>` : ''}${byTag}${payTag}${editLine}</td>
             <td>${escapeHtml(t.amt)} ৳
                 <button class="action-btn" onclick="editTx(${idx}, ${tIdx})">✏️</button>
                 <button class="action-btn" onclick="delTx(${idx}, ${tIdx})">❌</button>
@@ -2675,6 +2692,7 @@ function customerCardHtml(cus, idx) {
                     <input type="number" id="rate-${idx}" inputmode="numeric" placeholder="দাম/পিস" style="display:none;" oninput="autoCalculate(${idx})">
                     <input type="number" id="amt-${idx}" inputmode="numeric" placeholder="মোট টাকা">
                 </div>
+                <div class="rate-hint" id="rh-${idx}" style="display:none"></div>
                 <input type="date" id="dt-${idx}" value="${todayLocal()}">
                 <div class="stk-hint" id="stk-${idx}" style="display:none"></div>
                 <div class="paytype-row" data-pt="baki">
@@ -2776,7 +2794,13 @@ function onProductChange(idx) {
     if (itInfo.type === 'carton') {
         q.style.display = 'block'; q.placeholder = unit ? unit + ' সংখ্যা' : 'কার্টুন সংখ্যা';
         r.style.display = 'block'; r.placeholder = unit ? 'দাম/' + unit : 'দাম/পিস';
-        if (Calc.num(item && item.rate) > 0) r.value = item.rate;
+        const defR = Calc.num(item && item.rate), lastR = lastRateFor(appData.customers[idx], sel.value);
+        if (lastR > 0) r.value = lastR; else if (defR > 0) r.value = defR;
+        const rh = document.getElementById(`rh-${idx}`);
+        if (rh) {
+            if (lastR > 0 && defR > 0 && lastR !== defR) { rh.style.display = 'block'; rh.textContent = (LANG === 'en' ? '💡 Last price for this customer: ' : '💡 এই কাস্টমারকে শেষবার দিয়েছিলেন: ') + lastR + ' ৳/' + (unit || 'কার্টুন') + (LANG === 'en' ? ' (default ' : ' (ডিফল্ট ') + defR + ')'; }
+            else rh.style.display = 'none';
+        }
         a.readOnly = true; a.style.background = '#f1f5f9';
     } else if (itInfo.type === 'free') {
         q.style.display = 'block'; q.placeholder = unit ? unit + ' সংখ্যা' : 'পরিমাণ';
@@ -3395,7 +3419,7 @@ function renderHistory(idx) {
                 const lb = txLabel(t);
                 const byTag = t.byName ? ` <span class="by-tag">👤 ${escapeHtml(t.byName)}</span>` : '';
                 const payTag = Calc.isCash(t) ? ' <span class="by-tag cash-tag">💵 নগদ</span>' : ' <span class="by-tag baki-tag">📒 বাকি</span>';
-                html += `<tr><td>${escapeHtml(t.dt)}</td><td>${lb.icon} ${escapeHtml(lb.text)}${byTag}${payTag}</td><td>${escapeHtml(t.amt)} ৳</td></tr>`;
+                html += `<tr><td>${escapeHtml(t.dt)}</td><td>${lb.icon} ${escapeHtml(lb.text)}${lb.rate ? ` <span class="by-tag rate-tag">💲 ${escapeHtml(lb.rate)}</span>` : ''}${byTag}${payTag}</td><td>${escapeHtml(t.amt)} ৳</td></tr>`;
             });
             (h.payment || []).forEach(p => {
                 const byTag = p.byName ? ` <span class="by-tag">👤 ${escapeHtml(p.byName)}</span>` : '';
@@ -4203,6 +4227,7 @@ function supCardHtml(it, s, entries) {
     const pays = v.pays.slice().sort((a, b) => (b.dt || '') < (a.dt || '') ? -1 : 1).map(e =>
         `<div class="sup-pay"><span>${escapeHtml(e.dt || '')} · 👤 ${escapeHtml(e.byName || '—')}</span><b>${Calc.r2(e.amt)} ৳</b><button onclick="delStockEntry('${escapeHtml(e.id)}')">✖</button></div>`).join('');
     if (noPrice) return `<div class="sup-box"><div class="sup-head">🤝 ${nm}</div>` +
+        `<div class="sup-warn"><span>⚠️ দাম বসানো নেই — ${nm}কে কত দিতে হবে অ্যাপ বের করতে পারছে না</span><button onclick="openItemEdit(${appData.itemList.findIndex(x => x.name === it.name)}, true)">✏️ দাম বসান</button></div>` +
         `<div class="sup-row"><span>${nm}কে দিয়েছেন</span><b style="color:#16a34a">${v.paid} ৳</b></div>` +
         pays + rep + `<button class="sup-btn" onclick="openSupPay('${escapeHtml(it.name).replace(/'/g, "\\'")}')">💸 ${nm}কে টাকা দিলাম</button></div>`;
     return `<div class="sup-box"><div class="sup-head">🤝 ${nm} <small>(প্রতি ${u} ${v.price} ৳)</small></div>` +

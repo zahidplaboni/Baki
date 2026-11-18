@@ -2198,3 +2198,11 @@ html[data-theme="puffy"] .home-toolbar .filter-toggle-btn{width:40px;height:40px
 /* সব থিম: হোমের সার্চ বক্সের ভিতরের লেখার ঘর বাইরের বক্সের সাথে এক লাইনে — আলাদা বক্স বা মার্জিন নয় */
 html .home-toolbar .search-wrapper .search-box{margin:0!important;background:transparent!important;box-shadow:none!important;border:0!important;height:100%!important;align-self:stretch;min-width:0}
 html .if-search input{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;margin:0!important}
+
+/* সরবরাহকারীর দাম বসানো নেই — সতর্কতা */
+.sup-warn{display:flex;flex-direction:column;gap:8px;background:#fffbeb;border:1.5px dashed #f59e0b;border-radius:12px;padding:10px 12px;margin:8px 0;font-size:12.5px;font-weight:700;color:#92400e;line-height:1.5}
+.sup-warn button{align-self:flex-start;border:0;border-radius:10px;padding:7px 14px;background:#f59e0b;color:#fff;font-weight:800;font-family:inherit;font-size:13px;cursor:pointer}
+
+/* কাস্টমারের দাম: কার্ডে প্রতি-একক দাম ও ফর্মের হিন্ট */
+.rate-tag{background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc}
+.rate-hint{margin:6px 2px 0;font-size:12px;font-weight:800;color:#0e7490;background:#ecfeff;border:1.5px dashed #67e8f9;border-radius:10px;padding:6px 10px}
