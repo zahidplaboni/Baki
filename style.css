@@ -2195,3 +2195,6 @@ html[data-theme="puffy"] .settings-list .settings-row:nth-child(n) .sr-icon{back
 html[data-theme="puffy"] .home-toolbar .search-wrapper{height:54px;padding:0 6px 0 0;align-items:center}
 html[data-theme="puffy"] .home-toolbar .search-wrapper .search-box{background:transparent!important;box-shadow:none!important;border:0!important;border-radius:20px!important;margin:0!important;height:100%!important;align-self:stretch;min-width:0}
 html[data-theme="puffy"] .home-toolbar .filter-toggle-btn{width:40px;height:40px;border-radius:50%}
+/* সব থিম: হোমের সার্চ বক্সের ভিতরের লেখার ঘর বাইরের বক্সের সাথে এক লাইনে — আলাদা বক্স বা মার্জিন নয় */
+html .home-toolbar .search-wrapper .search-box{margin:0!important;background:transparent!important;box-shadow:none!important;border:0!important;height:100%!important;align-self:stretch;min-width:0}
+html .if-search input{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;margin:0!important}
