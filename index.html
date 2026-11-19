@@ -270,6 +270,7 @@
             </div>
 
             <div id="noticeBox" style="display:none"></div>
+            <div id="suspBox" style="display:none"></div>
             <div class="remind-bar" id="remindBar" style="display:none" onclick="openRemindList()">
                 <span>🔔 <b id="remindCount">০ জনের</b> আবার কেনার সময় হয়েছে</span><span class="rb-arrow">দেখুন ›</span>
             </div>
@@ -1328,6 +1329,20 @@
     </div>
 </div>
 
+<div class="modal-overlay" id="staffPermModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4 id="spTitle">🧑‍💼 কাজের অনুমতি</h4></div>
+        <div class="modal-body">
+            <label class="pk"><input type="checkbox" id="spEdit"> ✏️ এডিট করতে পারবে</label>
+            <label class="pk"><input type="checkbox" id="spDel"> ❌ ডিলিট করতে পারবে</label>
+            <label class="pk"><input type="checkbox" id="spDisc"> 🏷️ ছাড় দিতে পারবে</label>
+        </div>
+        <div class="modal-footer"><div class="modal-actions">
+            <button class="modal-btn cancel" onclick="closeModal('staffPermModal')">বাতিল</button>
+            <button class="modal-btn confirm" onclick="saveStaffPerm()">✅ সেভ করুন</button>
+        </div></div>
+    </div>
+</div>
 <div class="modal-overlay" id="viewerPermModal">
     <div class="modal-card">
         <div class="modal-header"><h4 id="vpTitle">👁️ দেখার অনুমতি</h4></div>
