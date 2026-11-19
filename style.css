@@ -2206,3 +2206,22 @@ html .if-search input{background:transparent!important;border:0!important;box-sh
 /* কাস্টমারের দাম: কার্ডে প্রতি-একক দাম ও ফর্মের হিন্ট */
 .rate-tag{background:#ecfeff;color:#0e7490;border:1px solid #a5f3fc}
 .rate-hint{margin:6px 2px 0;font-size:12px;font-weight:800;color:#0e7490;background:#ecfeff;border:1.5px dashed #67e8f9;border-radius:10px;padding:6px 10px}
+
+/* লেখার আকার: পুরো অ্যাপ জুম; উপরের বার জুম হয় না (ঘড়ির সাথে ঠেকে যায়) */
+html{zoom:var(--fz,1)}
+.app-bar{zoom:calc(1 / var(--fz,1))}
+.fz-wrap{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.fz-opt{display:flex;align-items:center;gap:14px;border:2px solid #e2e8f0;border-radius:16px;background:#fff;padding:10px 16px;font-family:inherit;cursor:pointer;color:var(--slate-800,#1e293b);text-align:left}
+.fz-opt.lk{justify-content:center;padding:12px}
+.fz-opt span{min-width:34px;text-align:center;line-height:1}
+.fz-opt b{font-size:15px}
+.fz-opt.on{border-color:#4f46e5;background:#eef2ff;color:#3730a3}
+.wn-l{display:block;font-weight:800;font-size:13px;margin:10px 0 4px}
+.wn-c{display:flex;gap:8px;align-items:flex-start;font-size:13px;font-weight:700;margin:10px 0}
+.wn-c input{margin-top:3px}
+#wnHead,#wnTail{width:100%;box-sizing:border-box;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:12px;font-family:inherit;font-size:14px}
+.wn-prev{white-space:pre-wrap;background:#dcf8c6;border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.55;color:#111;max-height:240px;overflow:auto}
+html[data-theme="puffy"] .settings-row[onclick*="'fontsize'"] .sr-icon{--pfi:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 4v3h5v12h3V7h5V4H9zm-6 8h3v7h3v-7h3V9H3v3z'/></svg>")}
+html[data-theme="puffy"] .settings-row[onclick*="'wanote'"] .sr-icon{--pfi:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M3 17.250V21h3.750L17.810 9.940l-3.750-3.750L3 17.250zM20.710 7.040a1 1 0 0 0 0-1.410l-2.340-2.340a1 1 0 0 0-1.410 0l-1.830 1.830 3.750 3.750 1.830-1.830z'/></svg>")}
+html[data-theme="puffy"] .settings-row[onclick*="secGo('autolock')"] .sr-icon{--pfi:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 1a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm1 10h-5V6h2v3h3v2zM9 21h6v2H9z'/></svg>")}
+.wn-c input[type=checkbox]{width:auto!important;flex:none;margin:3px 0 0}
