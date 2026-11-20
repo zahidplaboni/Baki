@@ -18,6 +18,10 @@ button{background:#1a3a5c;color:#fff;border:0;font-weight:700;cursor:pointer;mar
   <input id="ne" type="email" placeholder="ক্রেতার ইমেইল"><input id="np" type="text" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)">
   <div class="row"><span>মেয়াদ</span><input id="nd" class="days" type="number" value="31"><span>দিন</span><button class="g" onclick="newLic()">তৈরি করুন</button></div></div>
 
+ <div class="card"><b>📞 ডেভেলপার যোগাযোগ নম্বর</b>
+  <div class="hint">এখানে নম্বর বদলালে সব ক্রেতার ফোনে (অ্যাপ খুললেই, নতুন আপডেট ছাড়াই) "ডেভেলপারের পরিচয়" আর লক স্ক্রিনে নতুন নম্বর দেখাবে। +দেশের কোড দিয়ে লিখুন, যেমন: +60174417194</div>
+  <input id="dp_n" type="text" placeholder="+60174417194">
+  <div class="row"><button class="g" onclick="saveDevPhone()">💾 সেভ করুন</button><span class="sm" id="dp_cur"></span></div></div>
  <div class="card"><b>⚡ তাৎক্ষণিক পুশ (অ্যাপ বন্ধ থাকলেও সাথে সাথে)</b>
   <div class="sm" id="sa_st" style="margin:6px 0"></div>
   <textarea id="sa_j" rows="3" placeholder="Firebase থেকে নামানো service-account JSON ফাইলের পুরো লেখা এখানে পেস্ট করুন" style="width:100%;font:12px monospace;padding:10px;border-radius:10px;border:1px solid #bcc7d4;margin:4px 0"></textarea>
@@ -48,7 +52,7 @@ async function commit(w){return fs(':commit',{method:'POST',body:JSON.stringify(
 async function setFields(id,fields){return commit({update:{name:docName(id),fields},updateMask:{fieldPaths:Object.keys(fields)},currentDocument:{exists:true}})}
 async function doLogin(){try{const j=await auth('signInWithPassword',{email:$('ae').value.trim(),password:$('ap').value,returnSecureToken:true});A={idToken:j.idToken,refresh:j.refreshToken,uid:j.localId,exp:Date.now()+(+j.expiresIn||3600)*1000};sv();enter()}catch(e){say('❌ '+(/INVALID|NOT_FOUND/.test(e.message)?'ইমেইল বা পাসওয়ার্ড ভুল':e.message),1)}}
 function logout(){A=null;try{sessionStorage.removeItem('bkAdm')}catch(e){}$('app').style.display='none';$('login').style.display='block';$('ap').value=''}
-function enter(){$('login').style.display='none';$('app').style.display='block';load()}
+function enter(){$('login').style.display='none';$('app').style.display='block';load();loadDevPhone()}
 const val=f=>f?(f.stringValue!=null?f.stringValue:f.integerValue!=null?+f.integerValue:f.booleanValue!=null?f.booleanValue:f.timestampValue||null):null;
 const dmy=ms=>{const d=new Date(ms);return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear()};
 const ago=ts=>{if(!ts)return 'কখনো না';const m=Math.floor((Date.now()-Date.parse(ts))/60000);if(m<2)return 'এইমাত্র';if(m<60)return m+' মিনিট আগে';const h=Math.floor(m/60);if(h<24)return h+' ঘণ্টা আগে';return Math.floor(h/24)+' দিন আগে'};
@@ -125,6 +129,10 @@ async function newLic(){const email=$('ne').value.trim().toLowerCase(),pw=$('np'
   const uid=j.localId;await commit({update:{name:docName(uid),fields:{email:{stringValue:email},expiry:{integerValue:String(Date.now()+n*DAY)},locked:{booleanValue:false},createdAt:{integerValue:String(Date.now())}}}});
   say('✅ তৈরি হয়েছে। ক্রেতাকে ইমেইল ও পাসওয়ার্ড পাঠান।');$('ne').value='';$('np').value='';load()}
  catch(e){say('❌ '+(/EMAIL_EXISTS|INVALID_LOGIN/.test(e.message)?'এই ইমেইল আগে থেকেই আছে (পাসওয়ার্ড মেলেনি)':/WEAK/.test(e.message)?'পাসওয়ার্ড দুর্বল':e.message),1)}}
+const cfgDoc=()=>'projects/'+FB.projectId+'/databases/(default)/documents/config/public';
+async function loadDevPhone(){try{const j=await fs('/config/public');const p=val(j.fields&&j.fields.devPhone);$('dp_cur').textContent=p?'বর্তমান: '+p:'এখনো সেট করা হয়নি (অ্যাপে ডিফল্ট নম্বর দেখাচ্ছে)';if(p)$('dp_n').value=p}catch(e){$('dp_cur').textContent=''}}
+async function saveDevPhone(){const p=$('dp_n').value.trim();if(!/^\+?\d{6,15}$/.test(p))return say('❌ সঠিক নম্বর লিখুন, যেমন +60174417194',1);
+ try{await commit({update:{name:cfgDoc(),fields:{devPhone:{stringValue:p}}},updateMask:{fieldPaths:['devPhone']}});say('✅ নম্বর সেভ হয়েছে, সবার অ্যাপে এখন থেকে এটাই দেখাবে');loadDevPhone()}catch(e){say('❌ '+e.message,1)}}
 loadSA();
 try{const s=JSON.parse(sessionStorage.getItem('bkAdm'));if(s&&s.refresh){A=s;enter()}}catch(e){}
 </script></body></html>
