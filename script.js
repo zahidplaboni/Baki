@@ -5005,7 +5005,7 @@ async function syncNow(manual) {
     if (csBusy) { csAgain = true; return; }
     csBusy = true; cloudUpdateText();
     try {
-        if (CS.lic) { await licCheck(); if (licState().locked) { csBusy = false; cloudUpdateText(); return; } }
+        if (CS.lic) { await licCheck(manual === true); if (licState().locked) { csBusy = false; cloudUpdateText(); return; } }
         await cloudPull(manual === true);
         await cloudPush();
         CS.last = Date.now(); CS.err = '';
