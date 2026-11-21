@@ -218,9 +218,15 @@
                     </div>
                 </div>
             </div>
-            <button class="user-btn" id="userBtn" onclick="toggleUserMenu(event)" title="প্রোফাইল">
-                <span id="userInitial">?</span>
-            </button>
+            <div class="user-slot">
+                <button class="user-btn" id="userBtn" onclick="toggleUserMenu(event)" title="প্রোফাইল">
+                    <span id="userInitial">?</span>
+                </button>
+                <div class="lic-badge" id="licBadge" style="display:none" onclick="openMyLicense()">
+                    <span class="lic-badge-num" id="licBadgeNum">30</span>
+                    <span class="lic-badge-lbl">দিন</span>
+                </div>
+            </div>
             <div class="user-menu" id="userMenu">
                 <div class="user-menu-head">
                     <div class="um-avatar" id="umAvatar">?</div>
@@ -1418,6 +1424,14 @@
         <div class="modal-header"><h4>⏱️ অটো-লক</h4></div>
         <div class="modal-body"><p class="pdf-note">ব্যবহার না হলে অ্যাপ নিজে লক হবে, আবার পাসওয়ার্ড/ফিঙ্গারপ্রিন্ট লাগবে। সব ফোনে চলবে।</p><div id="lockOpts" class="fz-wrap"></div></div>
         <div class="modal-footer"><div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('autoLockModal')">বন্ধ করুন</button></div></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="myLicModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>🔑 আমার লাইসেন্স</h4></div>
+        <div class="modal-body" id="myLicBody"></div>
+        <div class="modal-footer"><div class="modal-actions"><button class="modal-btn cancel" onclick="closeModal('myLicModal')">বন্ধ করুন</button></div></div>
     </div>
 </div>
 

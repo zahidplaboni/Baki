@@ -283,6 +283,15 @@ body { background: #f1f5f9; color: #0f172a; overflow-x: hidden; }
 }
 .user-menu-item.danger .um-icon { background: #fee2e2; }
 
+/* লাইসেন্স মেয়াদ ব্যাজ (প্রোফাইল ফটোর ঠিক নিচে) */
+.user-slot { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; }
+.lic-badge { display: none; align-items: center; gap: 2px; background: #e0f2fe; color: #0369a1; border-radius: 9px; padding: 1px 6px; font-weight: 800; font-size: 10px; cursor: pointer; line-height: 1.5; border: 1px solid #bae6fd; white-space: nowrap; }
+.lic-badge-num { font-size: 11px; }
+.lic-badge-lbl { font-size: 9px; }
+.lic-badge.warn { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+.lic-badge.danger { background: #fee2e2; color: #b91c1c; border-color: #fecaca; animation: licBlink 1s step-start infinite; }
+@keyframes licBlink { 50% { opacity: .35; } }
+
 /* FLIP CLOCK */
 .flip-clock-outer { background: linear-gradient(90deg, #ec4899 0%, #3b82f6 100%); padding: 2px; border-radius: 22px; flex-shrink: 0; }
 .flip-clock-inner { background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 4px 6px; display: flex; align-items: center; gap: 2px; }
@@ -1635,8 +1644,6 @@ html[data-theme="midnight"] .login-screen input,html[data-theme="midnight"] .set
 .lk-btn{display:block;width:100%;box-sizing:border-box;margin-top:10px;padding:13px;border:0;border-radius:12px;background:#1e7f4f;color:#fff;font-size:16px;font-weight:700;text-decoration:none;font-family:inherit}
 .lk-btn.alt{background:#e8eef5;color:#1a3a5c}
 html[data-theme=midnight] #lockScreen{filter:invert(1) hue-rotate(180deg)}
-#licBar{position:fixed;top:0;left:0;right:0;z-index:9000;background:#ffb020;color:#4a2c00;text-align:center;padding:6px 10px;font-size:14px;font-weight:700}
-html[data-theme=midnight] #licBar{filter:invert(1) hue-rotate(180deg)}
 
 /* ===== থিম: বাংলাদেশ (পতাকার সবুজ ও লাল + মানচিত্র) ===== */
 html[data-theme="bd"]{--primary:#006a4e;--primary-dark:#004d38;--primary-light:#e8f6ef;--slate-50:#f3faf6;--slate-100:#e3f1ea;--slate-200:#cfe6da}
