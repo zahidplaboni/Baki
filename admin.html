@@ -26,23 +26,31 @@ button{background:#1a3a5c;color:#fff;border:0;font-weight:700;cursor:pointer;mar
 .tab{flex:1;text-align:center;padding:8px 6px;border-radius:10px;background:#fff;font-weight:700;font-size:12px;color:#667;border:1.5px solid #dde4ec;cursor:pointer;white-space:nowrap}
 .tab.on{background:#1a3a5c;color:#fff;border-color:#1a3a5c}
 .cnt{font-size:12px;color:#667;margin:4px 2px 8px}
+.modal-ov{position:fixed;inset:0;background:#0008;z-index:50;display:none;justify-content:center;overflow:auto;padding:14px 0}
+.modal-ov.show{display:flex}
+.modal-box{width:100%;max-width:760px;padding:0 14px;height:fit-content}
+.gear{background:#e6e9ee;color:#1a3a5c;font-size:18px;padding:8px 12px;line-height:1}
 </style></head><body>
-<h1>🔑 লাইসেন্স কন্ট্রোল</h1><div id="msg"></div>
+<div class="top" style="margin-bottom:8px"><h1 style="margin:0">🔑 লাইসেন্স কন্ট্রোল</h1><button class="gear" onclick="openSettings()" title="সেটিংস">⚙️</button></div>
+<div id="msg"></div>
 <div id="login" class="card"><b>অ্যাডমিন লগইন</b><input id="ae" type="email" placeholder="অ্যাডমিন ইমেইল" autocomplete="username"><input id="ap" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password"><button onclick="doLogin()">প্রবেশ</button></div>
 <div id="app" style="display:none">
  <div class="card"><div class="top"><b>➕ নতুন লাইসেন্স</b><button class="o" onclick="logout()">বের হই</button></div>
   <input id="ne" type="email" placeholder="ক্রেতার ইমেইল"><input id="np" type="text" placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)">
   <div class="row"><span>মেয়াদ</span><input id="nd" class="days" type="number" value="31"><span>দিন</span><button class="g" onclick="newLic()">তৈরি করুন</button></div></div>
 
- <div class="card"><b>📞 ডেভেলপার যোগাযোগ নম্বর</b>
-  <div class="hint">এখানে নম্বর বদলালে সব ক্রেতার ফোনে (অ্যাপ খুললেই, নতুন আপডেট ছাড়াই) "ডেভেলপারের পরিচয়" আর লক স্ক্রিনে নতুন নম্বর দেখাবে। +দেশের কোড দিয়ে লিখুন, যেমন: +60174417194</div>
-  <input id="dp_n" type="text" placeholder="+60174417194">
-  <div class="row"><button class="g" onclick="saveDevPhone()">💾 সেভ করুন</button><span class="sm" id="dp_cur"></span></div></div>
- <div class="card"><b>⚡ তাৎক্ষণিক পুশ (অ্যাপ বন্ধ থাকলেও সাথে সাথে)</b>
-  <div class="sm" id="sa_st" style="margin:6px 0"></div>
-  <textarea id="sa_j" rows="3" placeholder="Firebase থেকে নামানো service-account JSON ফাইলের পুরো লেখা এখানে পেস্ট করুন" style="width:100%;font:12px monospace;padding:10px;border-radius:10px;border:1px solid #bcc7d4;margin:4px 0"></textarea>
-  <div class="row"><button class="g" onclick="saveSA()">💾 এই ব্রাউজারে সেভ করুন</button><button class="o" onclick="delSA()">মুছুন</button></div>
-  <div class="hint">⚠️ এই ফাইল গোপন চাবি — কাউকে দেবেন না, GitHub-এ আপলোড করবেন না। এটা শুধু এই ব্রাউজারে থাকে, কোথাও পাঠানো হয় না (শুধু Google-এর সার্ভারে পুশ পাঠাতে ব্যবহৃত হয়)।</div></div>
+ <div id="setModal" class="modal-ov" onclick="if(event.target===this)closeSettings()"><div class="modal-box">
+  <div class="top" style="margin:4px 0 8px"><b style="color:#fff;font-size:16px">⚙️ সেটিংস</b><button class="o" onclick="closeSettings()">✕ বন্ধ করুন</button></div>
+  <div class="card"><b>📞 ডেভেলপার যোগাযোগ নম্বর</b>
+   <div class="hint">এখানে নম্বর বদলালে সব ক্রেতার ফোনে (অ্যাপ খুললেই, নতুন আপডেট ছাড়াই) "ডেভেলপারের পরিচয়" আর লক স্ক্রিনে নতুন নম্বর দেখাবে। +দেশের কোড দিয়ে লিখুন, যেমন: +60174417194</div>
+   <input id="dp_n" type="text" placeholder="+60174417194">
+   <div class="row"><button class="g" onclick="saveDevPhone()">💾 সেভ করুন</button><span class="sm" id="dp_cur"></span></div></div>
+  <div class="card"><b>⚡ তাৎক্ষণিক পুশ (অ্যাপ বন্ধ থাকলেও সাথে সাথে)</b>
+   <div class="sm" id="sa_st" style="margin:6px 0"></div>
+   <textarea id="sa_j" rows="3" placeholder="Firebase থেকে নামানো service-account JSON ফাইলের পুরো লেখা এখানে পেস্ট করুন" style="width:100%;font:12px monospace;padding:10px;border-radius:10px;border:1px solid #bcc7d4;margin:4px 0"></textarea>
+   <div class="row"><button class="g" onclick="saveSA()">💾 এই ব্রাউজারে সেভ করুন</button><button class="o" onclick="delSA()">মুছুন</button></div>
+   <div class="hint">⚠️ এই ফাইল গোপন চাবি — কাউকে দেবেন না, GitHub-এ আপলোড করবেন না। এটা শুধু এই ব্রাউজারে থাকে, কোথাও পাঠানো হয় না (শুধু Google-এর সার্ভারে পুশ পাঠাতে ব্যবহৃত হয়)।</div></div>
+ </div></div>
  <div class="card"><b>📢 নোটিশ পাঠান</b>
   <input id="nt_t" type="text" placeholder="শিরোনাম (ঐচ্ছিক), যেমন: মেয়াদের কথা">
   <textarea id="nt_b" rows="3" placeholder="নোটিশের লেখা…" style="width:100%;font:inherit;padding:10px;border-radius:10px;border:1px solid #bcc7d4;margin:4px 0"></textarea>
@@ -173,6 +181,8 @@ const cfgDoc=()=>'projects/'+FB.projectId+'/databases/(default)/documents/config
 async function loadDevPhone(){try{const j=await fs('/config/public');const p=val(j.fields&&j.fields.devPhone);$('dp_cur').textContent=p?'বর্তমান: '+p:'এখনো সেট করা হয়নি (অ্যাপে ডিফল্ট নম্বর দেখাচ্ছে)';if(p)$('dp_n').value=p}catch(e){$('dp_cur').textContent=''}}
 async function saveDevPhone(){const p=$('dp_n').value.trim();if(!/^\+?\d{6,15}$/.test(p))return say('❌ সঠিক নম্বর লিখুন, যেমন +60174417194',1);
  try{await commit({update:{name:cfgDoc(),fields:{devPhone:{stringValue:p}}},updateMask:{fieldPaths:['devPhone']}});say('✅ নম্বর সেভ হয়েছে, সবার অ্যাপে এখন থেকে এটাই দেখাবে');loadDevPhone()}catch(e){say('❌ '+e.message,1)}}
+function openSettings(){$('setModal').classList.add('show')}
+function closeSettings(){$('setModal').classList.remove('show')}
 loadSA();
 try{const s=JSON.parse(sessionStorage.getItem('bkAdm'));if(s&&s.refresh){A=s;enter()}}catch(e){}
 </script></body></html>
