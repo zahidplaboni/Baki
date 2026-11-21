@@ -10,6 +10,22 @@ button{background:#1a3a5c;color:#fff;border:0;font-weight:700;cursor:pointer;mar
 .ok{background:#1e7f4f}.warn{background:#e08a00}.bad{background:#c62828}.off{background:#7a8794}
 #msg{padding:10px;border-radius:10px;margin-bottom:10px;display:none;font-weight:700}.m1{background:#e1f5e9;color:#176a40}.m2{background:#fde8e8;color:#a00}
 .days{width:80px;display:inline-block}.sec{border:1.5px solid #dbe4ee;border-radius:12px;padding:10px;margin-top:10px;background:#f8fafc}.st{font-weight:800;color:#1a3a5c;margin-bottom:6px;font-size:14px}.hint{font-size:12px;color:#566;margin-top:4px}
+.search{position:sticky;top:0;background:#eef2f7;padding:8px 0;z-index:5}
+.lic-card{padding:4px 10px}
+.lic-row{display:flex;align-items:center;gap:10px;padding:10px 4px;cursor:pointer}
+.lic-row:active{background:#f3f6fa}
+.lic-av{width:38px;height:38px;border-radius:50%;background:#dbe4ee;display:flex;align-items:center;justify-content:center;font-weight:800;color:#1a3a5c;flex:none;font-size:16px}
+.lic-mid{flex:1;min-width:0}
+.lic-em{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lic-sm{font-size:12px;color:#667;margin-top:2px}
+.lic-chev{color:#9aa7b4;font-size:18px;flex:none;transition:transform .15s}
+.lic-row.open .lic-chev{transform:rotate(90deg)}
+.lic-detail{display:none;border-top:1px solid #edf0f4;padding-top:4px;margin-top:0;padding-bottom:6px}
+.lic-detail.open{display:block}
+.tabs{display:flex;gap:6px;margin-bottom:10px;overflow:auto}
+.tab{flex:1;text-align:center;padding:8px 6px;border-radius:10px;background:#fff;font-weight:700;font-size:12px;color:#667;border:1.5px solid #dde4ec;cursor:pointer;white-space:nowrap}
+.tab.on{background:#1a3a5c;color:#fff;border-color:#1a3a5c}
+.cnt{font-size:12px;color:#667;margin:4px 2px 8px}
 </style></head><body>
 <h1>🔑 লাইসেন্স কন্ট্রোল</h1><div id="msg"></div>
 <div id="login" class="card"><b>অ্যাডমিন লগইন</b><input id="ae" type="email" placeholder="অ্যাডমিন ইমেইল" autocomplete="username"><input id="ap" type="password" placeholder="পাসওয়ার্ড" autocomplete="current-password"><button onclick="doLogin()">প্রবেশ</button></div>
@@ -34,6 +50,8 @@ button{background:#1a3a5c;color:#fff;border:0;font-weight:700;cursor:pointer;mar
   <select id="nt_one" style="display:none;font:inherit;padding:10px;border-radius:10px;border:1px solid #bcc7d4"></select></div>
   <div class="row"><button class="g" onclick="sendNotice(false)">📤 পাঠান</button><button class="o" onclick="sendNotice(true)">🧹 পুরনো নোটিশ মুছুন</button></div>
   <div class="hint">পুশ চালু থাকলে (ওপরের ঘর) ফোন বন্ধ/অ্যাপ বন্ধ থাকলেও সাথে সাথে নোটিফিকেশন যায়। না থাকলে অ্যাপ খুললে বা ১৫ মিনিটে পৌঁছায়। একজন একবারই দেখবে।</div></div>
+ <div class="search"><input id="q" type="text" placeholder="🔍 ইমেইল বা দোকানের নাম খুঁজুন..." oninput="render()"></div>
+ <div class="tabs" id="tabs"></div>
  <div class="top"><b id="cnt"></b><button class="o" onclick="load()">🔄 নতুন করে আনুন</button></div>
  <div id="list"></div>
 </div>
@@ -60,12 +78,34 @@ let ROWS=[];
 async function load(){try{const j=await fs(':runQuery',{method:'POST',body:JSON.stringify({structuredQuery:{from:[{collectionId:'licenses'}],limit:500}})});
  ROWS=j.filter(x=>x.document).map(x=>{const f=x.document.fields||{};return{id:x.document.name.split('/').pop(),email:val(f.email)||'(ইমেইল অজানা)',shop:val(f.shop)||'',docs:val(f.docs),seen:val(f.lastSeen),exp:val(f.expiry)||0,locked:!!val(f.locked),msg:val(f.msg)||'',fcm:val(f.fcm)||'',nt:val(f.notice)||'',nid:val(f.noticeId)||0}});
  ROWS.sort((a,b)=>(a.exp||9e15)-(b.exp||9e15));render();fillNt()}catch(e){say('❌ '+(/PERMISSION/.test(e.message)?'এই অ্যাকাউন্টের অনুমতি নেই — Firestore রুলে অ্যাডমিন UID বসান':e.message),1)}}
-function render(){$('cnt').textContent=ROWS.length+' টি লাইসেন্স';$('list').innerHTML=ROWS.map(r=>{const left=r.exp?Math.ceil((r.exp-Date.now())/DAY):null;
- let pill,txt;if(r.locked){pill='off';txt='🔒 লক করা'}else if(left!==null&&left<=0){pill='bad';txt='❌ মেয়াদ শেষ'}else if(left!==null&&left<=5){pill='warn';txt='⚠️ '+left+' দিন বাকি'}else{pill='ok';txt=left===null?'✅ মেয়াদহীন':'✅ '+left+' দিন বাকি'}
- return `<div class="card"><div class="top"><span class="em">${esc(r.email)}</span><span class="pill ${pill}">${txt}</span></div>
- <div class="sm">${r.shop?'🏪 '+esc(r.shop)+' · ':''}মেয়াদ: ${r.exp?dmy(r.exp):'নেই'} · শেষ সিঙ্ক: ${ago(r.seen)}${r.docs!=null?' · ডেটা: '+r.docs+' টি':''}</div>
+function rStatus(r){const left=r.exp?Math.ceil((r.exp-Date.now())/DAY):null;
+ if(r.locked)return{pill:'off',txt:'🔒 লক করা',k:'lock'};
+ if(left!==null&&left<=0)return{pill:'bad',txt:'❌ মেয়াদ শেষ',k:'exp'};
+ if(left!==null&&left<=5)return{pill:'warn',txt:'⚠️ '+left+' দিন বাকি',k:'soon'};
+ return{pill:'ok',txt:left===null?'✅ মেয়াদহীন':'✅ '+left+' দিন বাকি',k:'ok'}}
+const OPEN=new Set();let TAB='all';
+function toggleRow(id){OPEN.has(id)?OPEN.delete(id):OPEN.add(id);render()}
+function setTab(k){TAB=k;render()}
+function render(){
+ const q=($('q')&&$('q').value||'').trim().toLowerCase();
+ const withSt=ROWS.map(r=>Object.assign({},r,{st:rStatus(r)}));
+ const tabDefs=[['all','সবাই',()=>true],['soon','⚠️ শীঘ্রই শেষ',r=>r.st.k==='soon'],['exp','❌ মেয়াদোত্তীর্ণ',r=>r.st.k==='exp'],['lock','🔒 লক',r=>r.st.k==='lock']];
+ $('tabs').innerHTML=tabDefs.map(([k,n,f])=>`<div class="tab${TAB===k?' on':''}" onclick="setTab('${k}')">${n} (${withSt.filter(f).length})</div>`).join('');
+ let rows=withSt.filter(tabDefs.find(t=>t[0]===TAB)[2]);
+ if(q)rows=rows.filter(r=>r.email.toLowerCase().includes(q)||r.shop.toLowerCase().includes(q));
+ $('cnt').textContent=rows.length+' / '+ROWS.length+' টি লাইসেন্স দেখানো হচ্ছে';
+ $('list').innerHTML=rows.map(r=>{const o=OPEN.has(r.id);
+ return `<div class="card lic-card">
+ <div class="lic-row${o?' open':''}" onclick="toggleRow('${r.id}')">
+  <div class="lic-av">${esc((r.shop||r.email||'?')[0]).toUpperCase()}</div>
+  <div class="lic-mid"><div class="lic-em">${esc(r.email)}</div><div class="lic-sm">${r.shop?'🏪 '+esc(r.shop)+' · ':''}${r.exp?dmy(r.exp):'মেয়াদ নেই'} · সিঙ্ক ${ago(r.seen)}</div></div>
+  <span class="pill ${r.st.pill}">${r.st.txt}</span>
+  <span class="lic-chev">›</span>
+ </div>
+ <div class="lic-detail${o?' open':''}">
  ${r.msg?'<div class="sm">📝 '+esc(r.msg)+'</div>':''}
  ${r.nt?'<div class="sm">📢 শেষ নোটিশ: '+esc(r.nt.slice(0,60))+(r.nt.length>60?'…':'')+'</div>':''}
+ ${r.docs!=null?'<div class="sm">💾 ডেটা: '+r.docs+' টি</div>':''}
  <div class="sec"><div class="st">📆 দিন দিয়ে মেয়াদ দিন (টাকা পেলে এটা)</div>
   <div class="row"><input class="days" id="d_${r.id}" type="number" value="31"><span>দিন</span></div>
   <div class="row"><button class="g" onclick="addDays('${r.id}',0)">আজ থেকে গোনা শুরু</button><button onclick="addDays('${r.id}',1)">বর্তমান মেয়াদের সাথে যোগ</button></div>
@@ -75,7 +115,7 @@ function render(){$('cnt').textContent=ROWS.length+' টি লাইসেন�
   <div class="hint" id="td_${r.id}">তারিখ বাছুন, তারপর বোতাম চাপুন। ওই তারিখের রাত ১১:৫৯ পর্যন্ত চলবে।</div></div>
  <div class="sec"><div class="st">🔒 লক ও বার্তা</div>
   <div class="row">${r.locked?`<button class="g" onclick="lock('${r.id}',false)">🔓 খুলে দিন</button>`:`<button class="r" onclick="lock('${r.id}',true)">🔒 এখনই লক</button>`}<button class="o" onclick="note('${r.id}')">📝 বার্তা</button><button class="o" onclick="setPw('${r.id}')">🔑 পাসওয়ার্ড বদলান</button><button class="o" style="color:#c62828" onclick="delLic('${r.id}')">🗑️ তালিকা থেকে মুছুন</button></div></div>
-</div></div>`}).join('')}
+ </div></div>`}).join('')||'<div class="hint" style="padding:10px">কেউ পাওয়া যায়নি</div>'}
 const R=id=>ROWS.find(r=>r.id===id);
 async function addDays(id,keep){const n=parseInt($('d_'+id).value,10);if(!(n>0))return say('❌ দিন লিখুন',1);const r=R(id);const base=keep&&r.exp>Date.now()?r.exp:Date.now();
  try{await setFields(id,{expiry:{integerValue:String(base+n*DAY)},locked:{booleanValue:false}});say('✅ মেয়াদ '+dmy(base+n*DAY)+' পর্যন্ত, লক খোলা');load()}catch(e){say('❌ '+e.message,1)}}
