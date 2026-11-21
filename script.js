@@ -5408,10 +5408,10 @@ function waEntryMessage0(cus, kind, e, totals) {
     let body, before = null;
     if (kind === 'pay') {
         before = Calc.r2(Calc.num(totals.due) + Calc.num(e.amt) + Calc.num(e.disc));
-        const bl = before > 0 ? `আগের বাকি ছিল — ${before}\n` : '';
-        body = e.disc > 0 && e.amt > 0 ? `💵 *জমা নেওয়া হয়েছে*\n${bl}টাকা — ${e.amt}\nছাড় — ${e.disc}\n${dl}`
-            : e.disc > 0 ? `🏷️ *ছাড় দেওয়া হয়েছে*\n${bl}ছাড় — ${e.disc}\n${dl}`
-            : `💵 *জমা নেওয়া হয়েছে*\n${bl}টাকা — ${e.amt}\n${dl}`;
+        const bl = before > 0 ? `আপনার আগের বাকি ছিল ${before} টাকা।\n` : '';
+        body = e.disc > 0 && e.amt > 0 ? `*টাকা জমা নেওয়া হয়েছে*\n\n${bl}আজ আপনি ${e.amt} টাকা জমা দিয়েছেন এবং ${e.disc} টাকা ছাড় পেয়েছেন।\n${dl}`
+            : e.disc > 0 ? `🏷️ *ছাড় দেওয়া হয়েছে*\n\n${bl}আজ আপনাকে ${e.disc} টাকা ছাড় দেওয়া হয়েছে।\n${dl}`
+            : `*টাকা জমা নেওয়া হয়েছে*\n\n${bl}আজ আপনি ${e.amt} টাকা জমা দিয়েছেন।\n${dl}`;
     } else {
         const it = txLabel(e), un = unitOf(e.tp);
         const item = (e.qty && it.text.indexOf(' (') > 0) ? e.tp + ' — ' + e.qty + ' ' + (un || 'কার্টুন') : e.tp;
