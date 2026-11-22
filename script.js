@@ -847,6 +847,13 @@ function formatDateBn(dateStr) {
     const d = new Date(dateStr);
     return d.toLocaleDateString(LANG === 'en' ? 'en-GB' : 'bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
 }
+// এন্ট্রির সময়: t.at (পুরো টাইমস্ট্যাম্প) থেকে ছোট্ট "৮:৪২ PM" বের করি — পুরনো এন্ট্রিতে at না থাকলে খালি ফেরত
+function entryTimeStr(t) {
+    if (!t || !t.at) return '';
+    const d = new Date(t.at);
+    if (isNaN(d)) return '';
+    return d.toLocaleTimeString(LANG === 'en' ? 'en-GB' : 'bn-BD', { hour: 'numeric', minute: '2-digit' });
+}
 function formatMonthBn(dateStr) {
     const d = new Date(dateStr);
     return d.toLocaleDateString(LANG === 'en' ? 'en-GB' : 'bn-BD', { year: 'numeric', month: 'long' });
@@ -2640,7 +2647,7 @@ function customerCardHtml(cus, idx) {
         const editLine = t.editedByName
             ? `<span class="edit-note">✏️ ${escapeHtml(t.editedByName)} পরিবর্তন: ${escapeHtml(t.oldAmt)}→${escapeHtml(t.amt)} ৳</span>` : '';
         rows += `<tr${cash ? ' class="cash-row"' : ''}>
-            <td>${escapeHtml(t.dt)}</td>
+            <td>${escapeHtml(t.dt)}${entryTimeStr(t) ? `<br><span class="dt-time">${entryTimeStr(t)}</span>` : ''}</td>
             <td>${lb.icon} ${escapeHtml(lb.text)} ${lb.rate ? `<span class="by-tag rate-tag">💲 ${escapeHtml(lb.rate)}</span>` : ''}${byTag}${payTag}${editLine}</td>
             <td>${escapeHtml(t.amt)} ৳
                 ${empCan('edit') ? `<button class="action-btn" onclick="editTx(${idx}, ${tIdx})">✏️</button>` : ''}
@@ -2653,7 +2660,7 @@ function customerCardHtml(cus, idx) {
     (cus.payment || []).forEach((p, pIdx) => {
         const byTag = p.byName ? `<span class="by-tag">👤 ${escapeHtml(p.byName)}</span>` : '';
         payRows += `<tr class="pay-row">
-            <td>${escapeHtml(p.dt)}</td>
+            <td>${escapeHtml(p.dt)}${entryTimeStr(p) ? `<br><span class="dt-time">${entryTimeStr(p)}</span>` : ''}</td>
             <td>${p.disc ? '🏷️ ছাড়' : '💵 জমা'} ${byTag}${(p.alloc && p.alloc.length) ? `<span class="by-tag">🧩 ${p.alloc.map(a => escapeHtml(a.item)).join(', ')}</span>` : ''}</td>
             <td>${escapeHtml(p.amt)} ৳ ${(!p.disc && isOwner()) ? `<button class="action-btn" title="ভাগ বদলান" onclick="payAllocEdit(${idx}, ${pIdx})">🔀</button>` : ''}${empCan('del') ? `<button class="action-btn" onclick="delPayment(${idx}, ${pIdx})">❌</button>` : ''}</td>
         </tr>`;
@@ -3489,11 +3496,11 @@ function renderHistory(idx) {
                 const lb = txLabel(t);
                 const byTag = t.byName ? ` <span class="by-tag">👤 ${escapeHtml(t.byName)}</span>` : '';
                 const payTag = Calc.isCash(t) ? ' <span class="by-tag cash-tag">💵 নগদ</span>' : ' <span class="by-tag baki-tag">📒 বাকি</span>';
-                html += `<tr><td>${escapeHtml(t.dt)}</td><td>${lb.icon} ${escapeHtml(lb.text)}${lb.rate ? ` <span class="by-tag rate-tag">💲 ${escapeHtml(lb.rate)}</span>` : ''}${byTag}${payTag}</td><td>${escapeHtml(t.amt)} ৳</td></tr>`;
+                html += `<tr><td>${escapeHtml(t.dt)}${entryTimeStr(t) ? `<br><span class="dt-time">${entryTimeStr(t)}</span>` : ''}</td><td>${lb.icon} ${escapeHtml(lb.text)}${lb.rate ? ` <span class="by-tag rate-tag">💲 ${escapeHtml(lb.rate)}</span>` : ''}${byTag}${payTag}</td><td>${escapeHtml(t.amt)} ৳</td></tr>`;
             });
             (h.payment || []).forEach(p => {
                 const byTag = p.byName ? ` <span class="by-tag">👤 ${escapeHtml(p.byName)}</span>` : '';
-                html += `<tr class="hist-paid-row"><td>${escapeHtml(p.dt)}</td><td>${p.disc ? '🏷️ ছাড়' : '💵 জমা'}${byTag}</td><td>${escapeHtml(p.amt)} ৳</td></tr>`;
+                html += `<tr class="hist-paid-row"><td>${escapeHtml(p.dt)}${entryTimeStr(p) ? `<br><span class="dt-time">${entryTimeStr(p)}</span>` : ''}</td><td>${p.disc ? '🏷️ ছাড়' : '💵 জমা'}${byTag}</td><td>${escapeHtml(p.amt)} ৳</td></tr>`;
             });
         });
         html += `</tbody></table></div>`;
@@ -4339,8 +4346,10 @@ function supBlock(it) {
         const baki = txs.filter(t => !Calc.isCash(t)).reduce((a, t) => a + Calc.num(t.amt), 0);
         if (cash > 0) { cashAmt += cash; nCash++; }
         if (baki > 0) {
-            const due = Calc.totals(c).due;
-            if (due <= 0) { bakiColl += baki; nBakiPaid++; } else { bakiPend += Math.min(baki, due); bakiColl += Math.max(0, baki - due); nBakiPend++; }
+            // শুধু এই আইটেমের বাকিই দেখি (কাস্টমারের অন্য আইটেমে বাকি থাকলেও সেটা মিশিয়ে ফেলা হবে না,
+            // নাহলে এই আইটেমের পুরো টাকা শোধ হয়ে গেলেও কাস্টমারের অন্য বাকির কারণে "এখনো বাকি" দেখাতো)
+            const due = Calc.r2(custItemRows(c).filter(r => r.t.tp === name && !r.cash).reduce((a, r) => a + r.due, 0));
+            if (due <= 0.001) { bakiColl += baki; nBakiPaid++; } else { bakiPend += Math.min(baki, due); bakiColl += Math.max(0, baki - due); nBakiPend++; }
         }
     });
     const pays = appData.stock.entries.filter(e => e.item === name && e.kind === 'supPay');
