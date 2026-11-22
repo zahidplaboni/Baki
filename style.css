@@ -344,6 +344,8 @@ body { background: #f1f5f9; color: #0f172a; overflow-x: hidden; }
 .sync-dot.busy { background: #fef3c7; color: #b45309; animation: bkspin 1.2s linear infinite; }
 .sync-dot.bad { background: #fee2e2; color: #dc2626; }
 @keyframes bkspin { from { transform: translateY(-50%) rotate(0); } to { transform: translateY(-50%) rotate(360deg); } }
+@keyframes bkspinFlat { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+.hdr-act .sync-dot.busy { animation-name: bkspinFlat; }   /* হেডার-অ্যাকশনে থাকলে translateY(-50%) লাগবে না, নাহলে স্পিনের সময় উপরে উঠে যায় */
 .dl-keep { display: flex; align-items: center; gap: 8px; padding: 8px 16px 0; font-size: 12px; font-weight: 800; flex-wrap: wrap; }
 .dl-keep select { padding: 6px 10px; border: 1.5px solid #e2e8f0; border-radius: 10px; font-family: inherit; background: #fff; }
 
