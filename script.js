@@ -6073,20 +6073,40 @@ function openViewerApp() {
     if (typeof cloudInit === 'function' && window.CS) { try { syncNow(); } catch (e) {} }
 }
 function viewerAcc() { return appData.employees.find(e => e.id === currentUser.id) || null; }
+// কাস্টমারের সব বাকি-লেনদেনের row-level বাকি হিসাব একসাথে করি: প্রথমে প্রতিটা আইটেমে আলাদাভাবে
+// ভাগ করে দেওয়া পেমেন্ট সেই আইটেমের পুরনো বিল থেকে আগে কাটা হয়, এরপর বাকি (কোনো নির্দিষ্ট আইটেমে
+// ভাগ না করা/সাধারণ) টাকাটা সব আইটেম মিলিয়ে তারিখ অনুযায়ী (পুরনো আগে) কাটা হয়। এতে প্রতিটা
+// আইটেমের বাকি যোগ করলে ঠিক কাস্টমারের আসল মোট বাকির সমান হয় — আগে প্রতিটা আইটেম আলাদাভাবে
+// কাস্টমারের মোট বাকিতে ক্ল্যাম্প হতো বলে দুই জায়গায় দুই রকম সংখ্যা দেখা যেত।
+function custItemRows(c) {
+    const names = [...new Set((c.tx || []).filter(t => t && t.tp).map(t => t.tp))];
+    const left = {}; names.forEach(n => left[n] = itemAllocAmt(c, n));
+    const allocTotal = names.reduce((s, n) => s + left[n], 0);
+    const T = Calc.totals(c);
+    let pool = Calc.r2(Math.max(0, Calc.num(T.paid) + Calc.num(T.disc) - allocTotal));
+    const list = (c.tx || []).filter(t => t && t.tp).map(t => ({ t, amt: Calc.num(t.amt), dt: t.dt || '', cash: Calc.isCash(t) }));
+    list.sort((a, b) => (a.dt < b.dt ? -1 : a.dt > b.dt ? 1 : 0));
+    list.forEach(r => {
+        if (r.cash) { r.due = 0; return; }
+        const l = left[r.t.tp] || 0, cv = Math.min(l, r.amt);
+        left[r.t.tp] = l - cv; r.due = Calc.r2(r.amt - cv);
+    });
+    list.forEach(r => {
+        if (!r.cash && r.due > 0 && pool > 0) {
+            const cv = Math.min(pool, r.due);
+            r.due = Calc.r2(r.due - cv); pool = Calc.r2(pool - cv);
+        }
+    });
+    return list;
+}
 function viewerRows(name) {
     const rows = [];
     (appData.customers || []).forEach(c => {
-        const cur = (c.tx || []).filter(t => t && t.tp === name).map(t => ({ t, hist: false }));
-        const old = (c.history || []).reduce((a, hh) => a.concat((hh.tx || []).filter(t => t && t.tp === name)), []).map(t => ({ t, hist: true }));
-        // এই আইটেমে ভাগ করে দেওয়া পেমেন্ট, পুরনো বাকি থেকে আগে কাটা হয়
-        let left = itemAllocAmt(c, name);
-        cur.sort((a, b) => ((a.t.dt || '') < (b.t.dt || '') ? -1 : 1));
-        cur.forEach(x => {
-            const amt = Calc.num(x.t.amt), cash = Calc.isCash(x.t); let due = 0;
-            if (!cash) { const cv = Math.min(left, amt); left -= cv; due = Calc.r2(amt - cv); }
-            rows.push({ c: c, dt: x.t.dt || '', qty: Calc.num(x.t.qty) || 0, amt: amt, cash: cash, due: due, hist: false });
+        custItemRows(c).filter(r => r.t.tp === name).forEach(r => {
+            rows.push({ c: c, dt: r.dt, qty: Calc.num(r.t.qty) || 0, amt: r.amt, cash: r.cash, due: r.due, hist: false });
         });
-        old.forEach(x => rows.push({ c: c, dt: x.t.dt || '', qty: Calc.num(x.t.qty) || 0, amt: Calc.num(x.t.amt), cash: Calc.isCash(x.t), due: 0, hist: true }));
+        (c.history || []).reduce((a, hh) => a.concat((hh.tx || []).filter(t => t && t.tp === name)), [])
+            .forEach(t => rows.push({ c: c, dt: t.dt || '', qty: Calc.num(t.qty) || 0, amt: Calc.num(t.amt), cash: Calc.isCash(t), due: 0, hist: true }));
     });
     return rows.sort((a, b) => (a.dt < b.dt ? 1 : a.dt > b.dt ? -1 : 0));
 }
