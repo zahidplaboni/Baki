@@ -5426,8 +5426,13 @@ function waEntryMessage0(cus, kind, e, totals) {
         const it = txLabel(e), un = unitOf(e.tp);
         const item = (e.qty && it.text.indexOf(' (') > 0) ? e.tp + ' — ' + e.qty + ' ' + (un || 'কার্টুন') : e.tp;
         const cash = Calc.isCash(e);
-        const bl = !cash ? `আগের বাকি ছিল — ${Calc.r2(Calc.num(totals.due) - Calc.num(e.amt))}\n` : '';
-        body = (cash ? '💵 *নগদে নেওয়া হয়েছে (বাকি নয়)*' : '*বাকিতে দেওয়া হয়েছে*') + `\n${item}\n${bl}টাকা — ${e.amt}\n${dl}`;
+        const whenStr = waDate(e.dt) + (entryTimeStr(e) ? ', ' + entryTimeStr(e) : '');
+        if (cash) {
+            body = `💵 *নগদে নেওয়া হয়েছে (বাকি নয়)*\n${item}\nটাকা — ${e.amt}\n${dl}`;
+        } else {
+            const before = Calc.r2(Calc.num(totals.due) - Calc.num(e.amt));
+            body = `*বাকিতে দেওয়া হয়েছে*\n${item} — + ${e.amt} টাকা (${whenStr})\n\nআগের বাকি ছিল — ${before} টাকা`;
+        }
     }
     const due = totals.due > 0 ? `🔹 আপনার মোট বাকি এখন: *${totals.due} টাকা*` : '✅ আপনার কোনো বাকি নেই।';
     const wn = waNoteGet();
