@@ -3712,7 +3712,7 @@ function renderItemFinder() {
             const ck = String(g.c.id || g.c.name).replace(/'/g, "\\'"), open = ITEM_OPEN.has(g.c.id || g.c.name);
             g.rows.sort((a, b) => String(a.dt || '').localeCompare(String(b.dt || '')));
             const multi = ITEM_SEL.size > 1;
-            const det = open ? `<div class="if-det">${g.rows.map(r => `<div><span>${escapeHtml(String(r.dt || ''))}</span><span>${multi ? escapeHtml(r.item) + ' ' : ''}${r.qty ? Calc.r2(r.qty) + ' ' : ''}</span><span>${Calc.r2(r.due)} ৳${r.due < r.amt - 0.001 ? ' <small>(' + (en ? 'of ' : 'মোট ') + Calc.r2(r.amt) + ')</small>' : ''}</span></div>`).join('')}</div>` : '';
+            const det = open ? `<div class="if-det">${g.rows.map(r => `<div><span>${escapeHtml(String(r.dt || ''))}${entryTimeStr(r) ? ' <small class="dt-time">' + escapeHtml(entryTimeStr(r)) + '</small>' : ''}</span><span>${multi ? escapeHtml(r.item) + ' ' : ''}${r.qty ? Calc.r2(r.qty) + ' ' : ''}</span><span>${Calc.r2(r.due)} ৳${r.due < r.amt - 0.001 ? ' <small>(' + (en ? 'of ' : 'মোট ') + Calc.r2(r.amt) + ')</small>' : ''}</span></div>`).join('')}</div>` : '';
             return `<div class="if-row" onclick="toggleItemRows('${ck}')"><div class="cav sm">${avatarHtml(g.c)}</div>
                 <div class="if-mid"><div class="if-name" onclick="openCustFromReport('${ck}', event)">${escapeHtml(g.c.name)} <i>↗</i></div><small>${en ? 'Since: ' : 'কবে থেকে: '}${escapeHtml(g.old || '-')}</small></div>
                 <b style="color:#dc2626">${g.due} ৳</b><span class="if-go">${open ? '▾' : '›'}</span></div>${det}`;
@@ -3910,15 +3910,15 @@ function buildBlock(c, o) {
     const addTx = (t, h) => {
         if ((o.names && !o.names.has(t.tp)) || !inRange(t.dt)) return;
         let text = txLabel(t).text + (h ? ' (হিস্টোরি)' : '');
-        rows.push({ dt: t.dt, text, kind: Calc.isCash(t) ? 'cash' : 'baki', amt: String(t.amt), n: Calc.num(t.amt) });
+        rows.push({ dt: t.dt, at: t.at, text, kind: Calc.isCash(t) ? 'cash' : 'baki', amt: String(t.amt), n: Calc.num(t.amt) });
     };
     const addPay = p => {
         if (!inRange(p.dt)) return;
-        if (o.payments) { rows.push({ dt: p.dt, text: p.disc ? 'ছাড়' : 'জমা', kind: 'pay', amt: '−' + p.amt, n: Calc.num(p.amt), pk: p.disc ? 'disc' : 'pay' }); return; }
+        if (o.payments) { rows.push({ dt: p.dt, at: p.at, text: p.disc ? 'ছাড়' : 'জমা', kind: 'pay', amt: '−' + p.amt, n: Calc.num(p.amt), pk: p.disc ? 'disc' : 'pay' }); return; }
         // নির্দিষ্ট পণ্য বাছা হলে: শুধু ওই পণ্যে ভাগ করে দেওয়া জমা দেখাই
         const al = (p.alloc || []).filter(x => o.names && o.names.has(x.item));
         const a = al.reduce((t, x) => t + Calc.num(x.amt), 0);
-        if (a > 0) rows.push({ dt: p.dt, text: 'জমা (' + [...new Set(al.map(x => x.item))].join(', ') + ')', kind: 'pay', amt: '−' + fmtNum(a), n: a, pk: 'alloc' });
+        if (a > 0) rows.push({ dt: p.dt, at: p.at, text: 'জমা (' + [...new Set(al.map(x => x.item))].join(', ') + ')', kind: 'pay', amt: '−' + fmtNum(a), n: a, pk: 'alloc' });
     };
     (c.tx || []).forEach(t => addTx(t, false));
     if (o.hist) (c.history || []).forEach(h => (h.tx || []).forEach(t => addTx(t, true)));
@@ -4029,7 +4029,7 @@ function renderDocPages(doc) {
     }
 
     doc.blocks.forEach(b => {
-        b.rows.forEach(r => { r.lines = wrap(r.text, DESC_W, 24, false); r.h = r.lines.length * 32 + 16; });
+        b.rows.forEach(r => { r.lines = wrap(r.text, DESC_W, 24, false); r.timeStr = entryTimeStr(r); r.h = Math.max(r.lines.length * 32, r.timeStr ? 56 : 24) + 16; });
         const headH = 96 + 14 + 42, footH = b.foot.reduce((a, f) => a + (f.b ? 46 : 38), 56);
         const total = headH + (b.rows.reduce((a, r) => a + r.h, 0) || 44) + footH + 26;
         if (total <= LIM - M && y + total > LIM) newPage();       // পুরো কাস্টমার এক পাতায় ধরলে ভেঙে ভাগ করা হয় না
@@ -4057,6 +4057,7 @@ function renderDocPages(doc) {
             else if (zebra) { g.fillStyle = '#f8fafc'; g.fillRect(M, y, W - 2 * M, r.h); }
             const col = r.kind === 'pay' ? '#166534' : '#0f172a';
             text(r.dt, CX.date + 8, y + 30, 24, false, col);
+            if (r.timeStr) text(r.timeStr, CX.date + 8, y + 52, 18, false, '#94a3b8');
             r.lines.forEach((ln, i) => text(ln, CX.desc, y + 30 + i * 32, 24, false, col));
             text(r.kind === 'baki' ? 'বাকি' : r.kind === 'cash' ? 'নগদ' : '', CX.kind, y + 30, 22, true, r.kind === 'baki' ? '#b91c1c' : '#166534');
             text(r.amt, W - M - 8, y + 30, 24, true, col, 'right');
@@ -5413,7 +5414,7 @@ function waDate(dt) {
 }
 function waEntryMessage0(cus, kind, e, totals) {
     const shop = appData.shop.name ? `\n🏪 ${appData.shop.name}` : '';
-    const dl = 'তারিখ — ' + waDate(e.dt);
+    const dl = 'তারিখ — ' + waDate(e.dt) + (entryTimeStr(e) ? ', ' + entryTimeStr(e) : '');
     let body, before = null;
     if (kind === 'pay') {
         before = Calc.r2(Calc.num(totals.due) + Calc.num(e.amt) + Calc.num(e.disc));
@@ -6112,10 +6113,10 @@ function viewerRows(name) {
     const rows = [];
     (appData.customers || []).forEach(c => {
         custItemRows(c).filter(r => r.t.tp === name).forEach(r => {
-            rows.push({ c: c, dt: r.dt, qty: Calc.num(r.t.qty) || 0, amt: r.amt, cash: r.cash, due: r.due, hist: false });
+            rows.push({ c: c, dt: r.dt, at: r.t.at, qty: Calc.num(r.t.qty) || 0, amt: r.amt, cash: r.cash, due: r.due, hist: false });
         });
         (c.history || []).reduce((a, hh) => a.concat((hh.tx || []).filter(t => t && t.tp === name)), [])
-            .forEach(t => rows.push({ c: c, dt: t.dt || '', qty: Calc.num(t.qty) || 0, amt: Calc.num(t.amt), cash: Calc.isCash(t), due: 0, hist: true }));
+            .forEach(t => rows.push({ c: c, dt: t.dt || '', at: t.at, qty: Calc.num(t.qty) || 0, amt: Calc.num(t.amt), cash: Calc.isCash(t), due: 0, hist: true }));
     });
     return rows.sort((a, b) => (a.dt < b.dt ? 1 : a.dt > b.dt ? -1 : 0));
 }
