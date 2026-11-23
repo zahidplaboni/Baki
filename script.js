@@ -852,7 +852,8 @@ function entryTimeStr(t) {
     if (!t || !t.at) return '';
     const d = new Date(t.at);
     if (isNaN(d)) return '';
-    return d.toLocaleTimeString(LANG === 'en' ? 'en-GB' : 'bn-BD', { hour: 'numeric', minute: '2-digit' });
+    // bn-BD লোকেল AM/PM বড় হাতের অক্ষরে দেয়, en-GB দেয় ছোট হাতের — দুটো ভাষাতেই একই রকম দেখানোর জন্য uppercase করে দিই
+    return d.toLocaleTimeString(LANG === 'en' ? 'en-GB' : 'bn-BD', { hour: 'numeric', minute: '2-digit', hour12: true }).toUpperCase();
 }
 function formatMonthBn(dateStr) {
     const d = new Date(dateStr);
