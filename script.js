@@ -852,8 +852,8 @@ function entryTimeStr(t) {
     if (!t || !t.at) return '';
     const d = new Date(t.at);
     if (isNaN(d)) return '';
-    // bn-BD লোকেল AM/PM বড় হাতের অক্ষরে দেয়, en-GB দেয় ছোট হাতের — দুটো ভাষাতেই একই রকম দেখানোর জন্য uppercase করে দিই
-    return d.toLocaleTimeString(LANG === 'en' ? 'en-GB' : 'bn-BD', { hour: 'numeric', minute: '2-digit', hour12: true }).toUpperCase();
+    // তারিখের মতো সময়ের সংখ্যাও সবসময় ইংরেজি সংখ্যা-পদ্ধতিতে দেখাই (বাংলা মোডেও) — পুরো অ্যাপে তারিখ/টাকা সবসময় যেমন ইংরেজি অঙ্কে থাকে, সময়ও তাই এক সিস্টেমে মেলে
+    return d.toLocaleTimeString('en-GB', { hour: 'numeric', minute: '2-digit', hour12: true }).toUpperCase();
 }
 function formatMonthBn(dateStr) {
     const d = new Date(dateStr);
@@ -5432,7 +5432,7 @@ function waEntryMessage0(cus, kind, e, totals) {
             body = `💵 *নগদে নেওয়া হয়েছে (বাকি নয়)*\n${item}\nটাকা — ${e.amt}\n${dl}`;
         } else {
             const before = Calc.r2(Calc.num(totals.due) - Calc.num(e.amt));
-            body = `*বাকিতে দেওয়া হয়েছে*\n${item} — + ${e.amt} টাকা (${whenStr})\n\nআগের বাকি ছিল — ${before} টাকা`;
+            body = `*বাকিতে দেওয়া হয়েছে*\n${item}\n+ ${e.amt} টাকা\n${whenStr}\n\nআগের বাকি ছিল — ${before} টাকা`;
         }
     }
     const due = totals.due > 0 ? `🔹 আপনার মোট বাকি এখন: *${totals.due} টাকা*` : '✅ আপনার কোনো বাকি নেই।';
