@@ -740,6 +740,7 @@ function normalizeData(d) {
     if (!d.stock || !Array.isArray(d.stock.entries)) d.stock = { entries: [] };
     d.stock.entries.forEach(e => { if (!e.item) e.item = STOCK_ITEM; });
     if (!Array.isArray(d.deleteLog)) d.deleteLog = [];
+    if (!Array.isArray(d.trash)) d.trash = [];
     if (!Array.isArray(d.notices)) d.notices = [];
     // পুরনো ডেটা: আগে শুধু পানির স্টক ছিল, পানিকে প্রথম স্টক-আইটেম বানানো হয়
     d.itemList.forEach(it => {
@@ -2106,6 +2107,7 @@ function startMainApp() {
     renderReports();
     renderNotices();
     purgeOldLogs();
+    purgeOldTrash();
     updateSyncDot();
 }
 function updateClock() {
@@ -2718,7 +2720,13 @@ function customerCardHtml(cus, idx) {
     const addedValid = cus.createdAt && !isNaN(new Date(cus.createdAt));
     const addedByHtml = (owner && cus.createdBy)
         ? `<div class="cc-added">➕ যোগ করেছেন: <b>${escapeHtml(cus.createdBy)}</b>${cus.createdByRole === 'employee' ? ' (স্টাফ)' : ''}${addedValid ? ' · ' + formatDateBn(cus.createdAt) : ''}</div>` : '';
-    const deleteBtnHtml = owner ? `<button class="cc-delete" onclick="delC(${idx})">ডিলিট</button>` : '';
+    const deleteBtnHtml = owner ? `
+        <div class="cc-more-wrap">
+            <button class="cc-more-btn" onclick="toggleMoreMenu(event, ${idx})" title="আরও">⋮</button>
+            <div class="cc-more-menu" id="cc-more-${idx}">
+                <div class="cc-more-item danger" onclick="delC(${idx})"><span>🗑️</span> ডিলিট</div>
+            </div>
+        </div>` : '';
 
     return `
         <div class="customer-card ${isPaidFull ? 'paid-card' : ''}">
@@ -3358,6 +3366,10 @@ function delC(idx) {
             if (!c) return;
             logDelete('customer', c, { due: Calc.totals(c).due, txCount: (c.tx || []).length });
             appData.customers.splice(k, 1);
+            if (!Array.isArray(appData.trash)) appData.trash = [];
+            appData.trash.push(Object.assign({}, c, {
+                trashedAt: now(), trashedBy: currentUser.name, trashedById: currentUser.id
+            }));
             save(); filterCustomers(); renderReports();
         });
     });
@@ -3400,6 +3412,12 @@ function togglePhotoMenu(e, idx) {
     e.stopPropagation();
     document.querySelectorAll('.photo-menu').forEach(m => m.classList.remove('show'));
     const menu = document.getElementById(`photo-menu-${idx}`);
+    if (menu) menu.classList.toggle('show');
+}
+function toggleMoreMenu(e, idx) {
+    e.stopPropagation();
+    document.querySelectorAll('.cc-more-menu').forEach(m => { if (m.id !== `cc-more-${idx}`) m.classList.remove('show'); });
+    const menu = document.getElementById(`cc-more-${idx}`);
     if (menu) menu.classList.toggle('show');
 }
 function openPhotoUpload(idx) {
@@ -4596,6 +4614,79 @@ function deleteNoteHtml(cus) {
     h += '<br><span class="dn-more" onclick="openDeleteLog()">সব লগ দেখুন</span>';
     return `<div class="del-note">${h}</div>`;
 }
+
+// ================== 12b. ট্র্যাশ (সম্প্রতি ডিলিট করা) — ৩০ দিন পর নিজে থেকে স্থায়ীভাবে মুছে যায় ==================
+const TRASH_DAYS = 30;
+function purgeOldTrash() {
+    if (!Array.isArray(appData.trash) || !appData.trash.length) return;
+    const cut = Date.now() - TRASH_DAYS * 86400000, before = appData.trash.length;
+    appData.trash = appData.trash.filter(c => { const t = Date.parse(c.trashedAt); return isNaN(t) || t >= cut; });
+    if (appData.trash.length !== before) save();
+}
+function openTrashModal() {
+    if (!isOwner()) return alert('🔒 ট্র্যাশ শুধু মালিক দেখতে পারেন।');
+    purgeOldTrash();
+    renderTrashList();
+    openModal('trashModal');
+}
+function trashDaysLeft(c) {
+    const t = Date.parse(c.trashedAt);
+    if (isNaN(t)) return TRASH_DAYS;
+    const left = TRASH_DAYS - Math.floor((Date.now() - t) / 86400000);
+    return Math.max(0, left);
+}
+function renderTrashList() {
+    const box = document.getElementById('trashBody');
+    if (!box) return;
+    const list = (appData.trash || []).slice().reverse();
+    if (!list.length) {
+        box.innerHTML = '<p style="text-align:center;color:#64748b;padding:20px;font-style:italic">এখানে কিছু নেই।</p>';
+        return;
+    }
+    box.innerHTML = list.map(c => {
+        const due = Calc.totals(c).due;
+        return `<div class="trash-item">
+            <div class="ti-top">
+                <div class="ti-avatar">${escapeHtml(getInitial(c.name))}</div>
+                <div>
+                    <div class="ti-name">${escapeHtml(c.name)}</div>
+                    <div class="ti-meta">📞 ${escapeHtml(c.phone || '-')} · ডিলিট করেছেন ${escapeHtml(c.trashedBy || '—')}, ${escapeHtml(fmtTime(c.trashedAt))}</div>
+                </div>
+            </div>
+            <div class="ti-due">বাকি ছিল — ${due} টাকা</div>
+            <div class="ti-countdown">⏳ আর ${trashDaysLeft(c)} দিন পর স্থায়ীভাবে মুছে যাবে</div>
+            <div class="ti-actions">
+                <button class="ti-btn restore" onclick="restoreFromTrash('${c.id}')">↩️ ফিরিয়ে আনুন</button>
+                <button class="ti-btn perm" onclick="permDeleteTrash('${c.id}')">❌ স্থায়ী ডিলিট</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+function restoreFromTrash(cid) {
+    checkMyPassword(function() {
+        const k = appData.trash.findIndex(c => c.id === cid);
+        if (k < 0) return;
+        const c = appData.trash[k];
+        appData.trash.splice(k, 1);
+        const restored = Object.assign({}, c);
+        delete restored.trashedAt; delete restored.trashedBy; delete restored.trashedById;
+        appData.customers.push(restored);
+        logAct('add', 'customer', restored, { phone: restored.phone, note: 'ট্র্যাশ থেকে ফিরিয়ে আনা হয়েছে' });
+        save(); renderTrashList(); filterCustomers(); renderReports();
+        alert('✅ ফিরিয়ে আনা হয়েছে!');
+    });
+}
+function permDeleteTrash(cid) {
+    checkMyPassword(function() {
+        showConfirmDelete('এটা স্থায়ীভাবে ডিলিট করবেন? এরপর আর ফিরিয়ে আনা যাবে না।', function() {
+            const k = appData.trash.findIndex(c => c.id === cid);
+            if (k < 0) return;
+            appData.trash.splice(k, 1);
+            save(); renderTrashList();
+        });
+    });
+}
+
 // ================== 13. কিবোর্ড ফিক্স — সব ইনপুটে (পেজ, মডাল, লগইন, সেটআপ) ==================
 // - ফোনে কিবোর্ড ওপরে ভেসে ওঠে, তাই মডাল/লগইন/সেটআপকে দৃশ্যমান অংশের মাপে বসানো হয় (বাটন ঢাকা পড়ে না)
 // - ইনপুটে ট্যাপ করলে নিজে স্ক্রল হয়ে ইনপুটটা উপরের দিকে আসে
@@ -4686,6 +4777,9 @@ function onDocumentClick(e) {
     }
     if (!t.closest('.photo-menu') && !t.closest('.cc-photo-btn')) {
         document.querySelectorAll('.photo-menu').forEach(m => m.classList.remove('show'));
+    }
+    if (!t.closest('.cc-more-menu') && !t.closest('.cc-more-btn')) {
+        document.querySelectorAll('.cc-more-menu').forEach(m => m.classList.remove('show'));
     }
     if (!t.closest('.search-wrapper')) {
         const ac = document.getElementById('autocompleteList');

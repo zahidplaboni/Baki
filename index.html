@@ -2,7 +2,6 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0f172a">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1383,6 +1382,7 @@
 <div class="modal-overlay" id="deleteLogModal">
     <div class="modal-card">
         <div class="modal-header"><h4>📋 কার্যকলাপের লগ (শুধু মালিক)</h4></div>
+        <button type="button" class="trash-open-row" onclick="openTrashModal()">🗑️ সম্প্রতি ডিলিট করা (ট্র্যাশ) <span class="tr-arrow">›</span></button>
         <div id="logFilters" class="lg-filters"></div>
         <div class="dl-keep"><label for="dlKeep">🧹 পুরোনো লগ নিজে মুছুক:</label>
             <select id="dlKeep" onchange="setLogKeep()"><option value="0">কখনো না</option><option value="7">৭ দিন পর</option><option value="15">১৫ দিন পর</option><option value="30">৩০ দিন পর</option></select></div>
@@ -1390,6 +1390,19 @@
         <div class="modal-footer">
             <div class="modal-actions">
                 <button class="modal-btn cancel" onclick="closeModal('deleteLogModal')">বন্ধ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="trashModal">
+    <div class="modal-card">
+        <div class="modal-header"><h4>🗑️ সম্প্রতি ডিলিট করা</h4></div>
+        <p class="pdf-note">৩০ দিনের মধ্যে ফিরিয়ে আনতে পারবেন, এরপর স্থায়ীভাবে মুছে যাবে</p>
+        <div class="modal-body" id="trashBody"></div>
+        <div class="modal-footer">
+            <div class="modal-actions">
+                <button class="modal-btn cancel" onclick="closeModal('trashModal')">বন্ধ করুন</button>
             </div>
         </div>
     </div>
