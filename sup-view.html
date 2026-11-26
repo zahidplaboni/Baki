@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সাপ্লায়ার হিসাব · বাকি খাতা</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f1f5f9; font-family: "Noto Sans Bengali", "Segoe UI", sans-serif; color: #1e293b; padding: 16px 14px 40px; min-height: 100vh; }
+  .wrap { max-width: 460px; margin: 0 auto; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .brand { font-weight: 900; font-size: 15px; color: #4f46e5; }
+  .lang-btn { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 800; cursor: pointer; color: #475569; }
+  .hero { background: linear-gradient(135deg, #4f46e5, #6366f1); color: #fff; border-radius: 18px; padding: 18px; margin-bottom: 14px; box-shadow: 0 8px 20px rgba(79,70,229,.25); }
+  .hero .shop { font-size: 12px; opacity: .85; font-weight: 700; }
+  .hero .item { font-size: 20px; font-weight: 900; margin-top: 2px; }
+  .hero .sup { font-size: 13px; opacity: .9; margin-top: 4px; }
+  .card { background: #fff; border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: 0 3px 10px rgba(0,0,0,.05); }
+  .card h3 { margin: 0 0 10px; font-size: 13.5px; font-weight: 900; color: #334155; display: flex; align-items: center; gap: 6px; }
+  .row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 13.5px; border-bottom: 1px dashed #f1f5f9; }
+  .row:last-child { border-bottom: none; }
+  .row .k { color: #64748b; }
+  .row .v { font-weight: 800; color: #1e293b; }
+  .v.big { font-size: 16px; color: #4f46e5; }
+  .v.danger { color: #dc2626; }
+  .v.good { color: #16a34a; }
+  .foot { text-align: center; font-size: 11.5px; color: #94a3b8; margin-top: 10px; }
+  .refresh-btn { display: block; margin: 14px auto 0; background: #eef2ff; color: #4f46e5; border: none; border-radius: 12px; padding: 10px 20px; font-weight: 800; font-size: 13px; cursor: pointer; }
+  .state { text-align: center; padding: 60px 20px; color: #64748b; }
+  .state .em { font-size: 40px; margin-bottom: 10px; }
+  .skel { background: #e2e8f0; border-radius: 8px; height: 14px; margin: 6px 0; animation: pulse 1.2s infinite ease-in-out; }
+  @keyframes pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">📖 বাকি খাতা</div>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">English</button>
+  </div>
+  <div id="app">
+    <div class="card"><div class="skel" style="width:60%"></div><div class="skel" style="width:40%"></div><div class="skel" style="width:80%"></div></div>
+  </div>
+</div>
+<script>
+(function () {
+  const PROJECT_ID = 'baki-khata-6066d';
+  const qs = new URLSearchParams(location.search);
+  const shopId = qs.get('s'), linkId = qs.get('l');
+  let LANG = (localStorage.getItem('supViewLang') || 'bn');
+  let DATA = null, timer = null;
+
+  function t(bn, en) { return LANG === 'en' ? en : bn; }
+  function n2(x) { return (Math.round((x || 0) * 100) / 100); }
+  function fmtAgo(iso) {
+    const d = Date.parse(iso); if (isNaN(d)) return '';
+    const s = Math.max(0, Math.floor((Date.now() - d) / 1000));
+    if (s < 60) return t('এইমাত্র', 'just now');
+    if (s < 3600) return t(Math.floor(s / 60) + ' মিনিট আগে', Math.floor(s / 60) + ' min ago');
+    if (s < 86400) return t(Math.floor(s / 3600) + ' ঘণ্টা আগে', Math.floor(s / 3600) + ' hr ago');
+    return t(Math.floor(s / 86400) + ' দিন আগে', Math.floor(s / 86400) + ' days ago');
+  }
+
+  function parseFields(fields) {
+    const out = {};
+    Object.keys(fields || {}).forEach(k => {
+      const f = fields[k];
+      if ('doubleValue' in f) out[k] = parseFloat(f.doubleValue);
+      else if ('integerValue' in f) out[k] = parseInt(f.integerValue, 10);
+      else if ('stringValue' in f) out[k] = f.stringValue;
+      else out[k] = null;
+    });
+    return out;
+  }
+
+  function render() {
+    const el = document.getElementById('app');
+    document.getElementById('langBtn').textContent = t('English', 'বাংলা');
+    document.title = t('সাপ্লায়ার হিসাব · বাকি খাতা', 'Supplier report · Baki Khata');
+    if (!shopId || !linkId) {
+      el.innerHTML = `<div class="state"><div class="em">🔗</div><div>${t('লিংকটি সঠিক নয়।', 'This link is not valid.')}</div></div>`;
+      return;
+    }
+    if (DATA === 'notfound') {
+      el.innerHTML = `<div class="state"><div class="em">🚫</div><div>${t('এই লিংক আর সক্রিয় নেই। দোকান মালিকের সাথে যোগাযোগ করুন।', 'This link is no longer active. Please contact the shop owner.')}</div></div>`;
+      return;
+    }
+    if (DATA === 'error') {
+      el.innerHTML = `<div class="state"><div class="em">⚠️</div><div>${t('ডেটা আনতে সমস্যা হয়েছে। ইন্টারনেট চেক করুন।', 'Could not load data. Check your internet connection.')}</div><button class="refresh-btn" onclick="fetchData()">${t('আবার চেষ্টা করুন', 'Try again')}</button></div>`;
+      return;
+    }
+    if (!DATA) return;
+    const d = DATA;
+    const owed = n2(d.owed), paid = n2(d.paid), due = n2(d.due);
+    let html = `
+      <div class="hero">
+        <div class="shop">🏪 ${esc(d.shopName || '')}</div>
+        <div class="item">📦 ${esc(d.item || '')}</div>
+        <div class="sup">🤝 ${t('সরবরাহকারী', 'Supplier')}: ${esc(d.supName || '')}</div>
+      </div>
+
+      <div class="card">
+        <h3>📦 ${t('স্টক', 'Stock')}</h3>
+        <div class="row"><span class="k">${t('মোট পেয়েছি', 'Total received')}</span><span class="v">${d.received} ${esc(d.unit || '')}</span></div>
+        <div class="row"><span class="k">${t('বিক্রি হয়েছে (নগদে)', 'Sold (cash)')}</span><span class="v">${d.soldCash} ${esc(d.unit || '')}</span></div>
+        <div class="row"><span class="k">${t('বিক্রি হয়েছে (বাকিতে)', 'Sold (credit)')}</span><span class="v">${d.soldBaki} ${esc(d.unit || '')}</span></div>
+        <div class="row"><span class="k">${t('মোট বিক্রি', 'Total sold')}</span><span class="v big">${d.sold} ${esc(d.unit || '')}</span></div>
+        <div class="row"><span class="k">${t('এখন আছে', 'Remaining')}</span><span class="v">${d.remaining} ${esc(d.unit || '')}</span></div>
+      </div>
+
+      <div class="card">
+        <h3>👥 ${t('কাস্টমারের হিসাব', "Customers' account")}</h3>
+        <div class="row"><span class="k">${t('নগদে নিয়েছে', 'Paid cash')}</span><span class="v">${d.nCash} ${t('জন', 'people')} (${d.cashAmt} ৳)</span></div>
+        <div class="row"><span class="k">${t('বাকি নিয়ে শোধ করেছে', 'Credit, now settled')}</span><span class="v good">${d.nBakiPaid} ${t('জন', 'people')}</span></div>
+        <div class="row"><span class="k">${t('বাকি আছে', 'Still due')}</span><span class="v danger">${d.nBakiPend} ${t('জন', 'people')} (${d.bakiPend} ৳)</span></div>
+        <div class="row"><span class="k">${t('এ পর্যন্ত আদায়', 'Collected so far')}</span><span class="v big">${d.collected} ৳</span></div>
+      </div>
+
+      ${(owed > 0 || paid > 0) ? `
+      <div class="card">
+        <h3>💰 ${t('সরবরাহকারীর পাওনা', "Supplier's payment")}</h3>
+        <div class="row"><span class="k">${t('পাওনা হয়েছে', 'Amount owed')}</span><span class="v">${owed} ৳</span></div>
+        <div class="row"><span class="k">${t('এ পর্যন্ত পেয়েছি', 'Paid so far')}</span><span class="v good">${paid} ৳</span></div>
+        <div class="row"><span class="k">${t('এখন বাকি', 'Now due')}</span><span class="v danger big">${due} ৳</span></div>
+        ${d.pendingQty > 0 ? `<div class="row"><span class="k">${t('আদায় বাকি', 'Yet to be collected')}</span><span class="v">${d.pendingQty} ${esc(d.unit || '')} (+${d.pendingAmt} ৳)</span></div>` : ''}
+      </div>` : ''}
+
+      <div class="foot">🔄 ${t('সর্বশেষ হালনাগাদ', 'Last updated')}: ${fmtAgo(d.updatedAt)}</div>
+      <button class="refresh-btn" onclick="fetchData()">🔄 ${t('রিফ্রেশ করুন', 'Refresh')}</button>
+    `;
+    el.innerHTML = html;
+  }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+
+  window.toggleLang = function () { LANG = LANG === 'en' ? 'bn' : 'en'; try { localStorage.setItem('supViewLang', LANG); } catch (e) {} render(); };
+
+  window.fetchData = async function () {
+    if (!shopId || !linkId) { render(); return; }
+    try {
+      const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/shops/${encodeURIComponent(shopId)}/public/${encodeURIComponent(linkId)}`;
+      const r = await fetch(url);
+      if (r.status === 404) { DATA = 'notfound'; render(); return; }
+      if (!r.ok) { DATA = 'error'; render(); return; }
+      const j = await r.json();
+      DATA = parseFields(j.fields);
+      render();
+    } catch (e) { DATA = 'error'; render(); }
+  };
+
+  render();
+  fetchData();
+  timer = setInterval(fetchData, 25000);
+})();
+</script>
+</body>
+</html>
