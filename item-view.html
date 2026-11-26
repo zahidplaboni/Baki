@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>তদারকি হিসাব · বাকি খাতা</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #f1f5f9; font-family: "Noto Sans Bengali", "Segoe UI", sans-serif; color: #1e293b; padding: 16px 14px 40px; min-height: 100vh; }
+  .wrap { max-width: 460px; margin: 0 auto; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .brand { font-weight: 900; font-size: 15px; color: #4f46e5; }
+  .lang-btn { background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 800; cursor: pointer; color: #475569; }
+  .hero { background: linear-gradient(135deg, #ea580c, #c2410c); color: #fff; border-radius: 18px; padding: 18px; margin-bottom: 14px; box-shadow: 0 8px 20px rgba(194,65,12,.25); }
+  .hero .shop { font-size: 12px; opacity: .85; font-weight: 700; }
+  .hero .item { font-size: 20px; font-weight: 900; margin-top: 2px; }
+  .card { background: #fff; border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: 0 3px 10px rgba(0,0,0,.05); }
+  .card h3 { margin: 0 0 10px; font-size: 13.5px; font-weight: 900; color: #334155; display: flex; align-items: center; gap: 6px; }
+  .sum { display: flex; gap: 8px; margin-bottom: 8px; }
+  .sum > div { flex: 1; text-align: center; padding: 12px 6px; border-radius: 12px; background: #f8fafc; }
+  .sum b { display: block; font-size: 16px; }
+  .sum span { font-size: 10.5px; color: #64748b; }
+  .prow { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f1f5f9; }
+  .prow:last-child { border-bottom: none; }
+  .av { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #818cf8, #6366f1); color: #fff; font-weight: 900; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pnm { flex: 1; min-width: 0; }
+  .pnm b { display: block; font-size: 13.5px; }
+  .pnm small { color: #64748b; font-size: 11px; }
+  .ptag { font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 10px; white-space: nowrap; }
+  .ptag.due { background: #fee2e2; color: #b91c1c; }
+  .ptag.cash { background: #dcfce7; color: #15803d; }
+  .ptag.paid { background: #e0e7ff; color: #4338ca; }
+  .foot { text-align: center; font-size: 11.5px; color: #94a3b8; margin-top: 10px; }
+  .refresh-btn { display: block; margin: 14px auto 0; background: #fff7ed; color: #c2410c; border: none; border-radius: 12px; padding: 10px 20px; font-weight: 800; font-size: 13px; cursor: pointer; }
+  .state { text-align: center; padding: 60px 20px; color: #64748b; }
+  .state .em { font-size: 40px; margin-bottom: 10px; }
+  .pin-wrap { background: #fff; border-radius: 18px; padding: 28px 20px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .pin-wrap .em { font-size: 36px; margin-bottom: 10px; }
+  .pin-wrap h2 { font-size: 16px; margin: 0 0 16px; }
+  .pin-input { width: 160px; font-size: 24px; letter-spacing: 10px; text-align: center; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; margin: 0 auto 12px; display: block; }
+  .pin-btn { background: #ea580c; color: #fff; border: none; border-radius: 12px; padding: 11px 26px; font-weight: 800; font-size: 14px; cursor: pointer; }
+  .pin-err { color: #dc2626; font-size: 12.5px; margin-top: 10px; display: none; }
+  .skel { background: #e2e8f0; border-radius: 8px; height: 14px; margin: 6px 0; animation: pulse 1.2s infinite ease-in-out; }
+  @keyframes pulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">📖 বাকি খাতা</div>
+    <button class="lang-btn" id="langBtn" onclick="toggleLang()">English</button>
+  </div>
+  <div id="app">
+    <div class="card"><div class="skel" style="width:60%"></div><div class="skel" style="width:40%"></div><div class="skel" style="width:80%"></div></div>
+  </div>
+</div>
+<script>
+(function () {
+  const PROJECT_ID = 'baki-khata-6066d';
+  const qs = new URLSearchParams(location.search);
+  const shopId = qs.get('s'), linkId = qs.get('l');
+  let LANG = (localStorage.getItem('itemViewLang') || 'bn');
+  let DATA = null;
+  const verifiedKey = 'ivVerified_' + linkId;
+
+  function t(bn, en) { return LANG === 'en' ? en : bn; }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+  function fmtAgo(iso) {
+    const d = Date.parse(iso); if (isNaN(d)) return '';
+    const s = Math.max(0, Math.floor((Date.now() - d) / 1000));
+    if (s < 60) return t('এইমাত্র', 'just now');
+    if (s < 3600) return t(Math.floor(s / 60) + ' মিনিট আগে', Math.floor(s / 60) + ' min ago');
+    if (s < 86400) return t(Math.floor(s / 3600) + ' ঘণ্টা আগে', Math.floor(s / 3600) + ' hr ago');
+    return t(Math.floor(s / 86400) + ' দিন আগে', Math.floor(s / 86400) + ' days ago');
+  }
+  function initial(s) { return String(s || '?').trim().charAt(0).toUpperCase() || '?'; }
+
+  async function sha256Hex(str) {
+    try {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    } catch (e) {
+      let h = 0; for (let i = 0; i < str.length; i++) { h = (h * 31 + str.charCodeAt(i)) >>> 0; }
+      return 'fb' + h.toString(16);
+    }
+  }
+
+  function fromFsValue(v) {
+    if (!v) return null;
+    if ('doubleValue' in v) return parseFloat(v.doubleValue);
+    if ('integerValue' in v) return parseInt(v.integerValue, 10);
+    if ('stringValue' in v) return v.stringValue;
+    if ('booleanValue' in v) return v.booleanValue;
+    if ('nullValue' in v) return null;
+    if ('arrayValue' in v) return ((v.arrayValue.values) || []).map(fromFsValue);
+    if ('mapValue' in v) return parseFields(v.mapValue.fields || {});
+    return null;
+  }
+  function parseFields(fields) {
+    const out = {};
+    Object.keys(fields || {}).forEach(k => { out[k] = fromFsValue(fields[k]); });
+    return out;
+  }
+
+  function renderPinScreen(err) {
+    const el = document.getElementById('app');
+    document.getElementById('langBtn').textContent = t('English', 'বাংলা');
+    el.innerHTML = `
+      <div class="pin-wrap">
+        <div class="em">🔒</div>
+        <h2>${t('দেখতে হলে পিন দিন', 'Enter PIN to view')}</h2>
+        <input type="password" inputmode="numeric" maxlength="4" class="pin-input" id="pinBox" placeholder="••••">
+        <button class="pin-btn" onclick="checkPin()">${t('দেখুন', 'View')}</button>
+        <div class="pin-err" id="pinErr" style="${err ? 'display:block' : ''}">${t('ভুল পিন, আবার চেষ্টা করুন', 'Wrong PIN, try again')}</div>
+      </div>`;
+    const box = document.getElementById('pinBox');
+    box.focus();
+    box.addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
+  }
+
+  window.checkPin = async function () {
+    const box = document.getElementById('pinBox'), pin = (box.value || '').trim();
+    const hash = await sha256Hex(pin);
+    if (DATA && DATA.pinHash && hash === DATA.pinHash) {
+      try { sessionStorage.setItem(verifiedKey, '1'); } catch (e) {}
+      renderContent();
+    } else {
+      renderPinScreen(true);
+    }
+  };
+
+  function isVerified() { try { return sessionStorage.getItem(verifiedKey) === '1'; } catch (e) { return false; } }
+
+  function renderContent() {
+    const el = document.getElementById('app');
+    document.getElementById('langBtn').textContent = t('English', 'বাংলা');
+    const d = DATA;
+    const owed = d.owed || [], rows = d.rows || [];
+    let html = `
+      <div class="hero">
+        <div class="shop">🏪 ${esc(d.shopName || '')}</div>
+        <div class="item">📦 ${esc(d.item || '')}</div>
+      </div>
+      <div class="card">
+        <div class="sum">
+          <div><b>${d.q}${d.unit ? ' ' + esc(d.unit) : ''}</b><span>${t('মোট বিক্রি', 'Total sold')}</span></div>
+          <div><b style="color:#15803d">${d.qc}${d.unit ? ' ' + esc(d.unit) : ''}</b><span>${t('আদায় হয়েছে', 'Collected')}</span></div>
+          <div><b style="color:#b91c1c">${d.qb}${d.unit ? ' ' + esc(d.unit) : ''}</b><span>${t('আদায় বাকি', 'Still to collect')}</span></div>
+        </div>
+        <div class="sum">
+          <div><b>${d.tk} ৳</b><span>${t('মোট টাকা', 'Total amount')}</span></div>
+          <div><b style="color:#15803d">${d.got} ৳</b><span>${t('আদায় হয়েছে', 'Collected')}</span></div>
+          <div><b style="color:#b91c1c">${d.dueAmt} ৳</b><span>${t('আদায় বাকি', 'Still to collect')}</span></div>
+        </div>
+        ${d.remaining >= 0 ? `<div class="sum"><div><b>${d.remaining}${d.unit ? ' ' + esc(d.unit) : ''}</b><span>${t('এখন আছে', 'In stock now')}</span></div></div>` : ''}
+      </div>
+
+      ${owed.length ? `<div class="card"><h3>📒 ${t('যাদের কাছে বাকি আছে', 'Who still owes')}</h3>` + owed.map(o => `
+        <div class="prow">
+          <div class="av">${esc(initial(o.name))}</div>
+          <div class="pnm"><b>${esc(o.name)}</b><small>${o.phone ? '📞 <a href="tel:' + esc(String(o.phone).replace(/[^0-9+]/g, '')) + '" style="color:inherit">' + esc(o.phone) + '</a> · ' : ''}${o.days} ${t('দিন আগে থেকে', 'days ago')}</small></div>
+          <div class="ptag due">${o.due} ৳</div>
+        </div>`).join('') + `</div>` : ''}
+
+      <div class="card"><h3>🧾 ${t('কে কত নিয়েছে', 'Who took how much')}</h3>` + (rows.length ? rows.map(r => `
+        <div class="prow">
+          <div class="av">${esc(initial(r.name))}</div>
+          <div class="pnm"><b>${esc(r.name)}</b><small>${r.phone ? '📞 ' + esc(r.phone) + ' · ' : ''}${esc(r.dt)}</small></div>
+          <div style="text-align:right">
+            <div style="font-size:12.5px;font-weight:700">${r.qty ? r.qty + (d.unit ? ' ' + esc(d.unit) : '') : ''}</div>
+            <div class="ptag ${r.tag === 'cash' ? 'cash' : (r.tag === 'paid' ? 'paid' : 'due')}">${r.tag === 'cash' ? '💵 ' + t('নগদ', 'Cash') : (r.tag === 'paid' ? '✅ ' + t('শোধ', 'Paid') : '📒 ' + r.due + ' ৳')}</div>
+          </div>
+        </div>`).join('') : `<p style="text-align:center;color:#64748b;font-size:13px">${t('এখনো কোনো বিক্রি নেই', 'No sales yet')}</p>`) + `</div>
+
+      <div class="foot">🔄 ${t('সর্বশেষ হালনাগাদ', 'Last updated')}: ${fmtAgo(d.updatedAt)}</div>
+      <button class="refresh-btn" onclick="fetchData()">🔄 ${t('রিফ্রেশ করুন', 'Refresh')}</button>
+    `;
+    el.innerHTML = html;
+  }
+
+  function renderState(kind) {
+    const el = document.getElementById('app');
+    if (kind === 'invalid') el.innerHTML = `<div class="state"><div class="em">🔗</div><div>${t('লিংকটি সঠিক নয়।', 'This link is not valid.')}</div></div>`;
+    else if (kind === 'notfound') el.innerHTML = `<div class="state"><div class="em">🚫</div><div>${t('এই লিংক আর সক্রিয় নেই। দোকান মালিকের সাথে যোগাযোগ করুন।', 'This link is no longer active. Please contact the shop owner.')}</div></div>`;
+    else el.innerHTML = `<div class="state"><div class="em">⚠️</div><div>${t('ডেটা আনতে সমস্যা হয়েছে। ইন্টারনেট চেক করুন।', 'Could not load data. Check your internet connection.')}</div><button class="refresh-btn" onclick="fetchData()">${t('আবার চেষ্টা করুন', 'Try again')}</button></div>`;
+  }
+
+  window.toggleLang = function () {
+    LANG = LANG === 'en' ? 'bn' : 'en';
+    try { localStorage.setItem('itemViewLang', LANG); } catch (e) {}
+    if (DATA && DATA !== 'notfound' && DATA !== 'error') { isVerified() ? renderContent() : renderPinScreen(false); }
+    else document.getElementById('langBtn').textContent = t('English', 'বাংলা');
+  };
+
+  window.fetchData = async function () {
+    if (!shopId || !linkId) { renderState('invalid'); return; }
+    try {
+      const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/shops/${encodeURIComponent(shopId)}/public/${encodeURIComponent(linkId)}`;
+      const r = await fetch(url);
+      if (r.status === 404) { DATA = null; renderState('notfound'); return; }
+      if (!r.ok) { renderState('error'); return; }
+      const j = await r.json();
+      DATA = parseFields(j.fields);
+      if (isVerified()) renderContent(); else renderPinScreen(false);
+    } catch (e) { renderState('error'); }
+  };
+
+  fetchData();
+  setInterval(() => { if (isVerified()) fetchData(); }, 25000);
+})();
+</script>
+</body>
+</html>
