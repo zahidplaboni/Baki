@@ -1881,6 +1881,7 @@ function openViewerPerm(id) {
     document.getElementById('vpItems').innerHTML = permItemsHtml(e.viewItems || []);
     document.getElementById('vpPhone').checked = !!e.viewPhone;
     document.getElementById('vpErr').style.display = 'none';
+    renderVpLinkBox();
     closeModal('employeesListModal'); openModal('viewerPermModal');
 }
 function saveViewerPerm() {
@@ -2488,7 +2489,6 @@ function openItemEdit(i, toSup) {
     itemSugShow('editItem');
     document.getElementById('editItemError').style.display = 'none';
     syncItemEdit();
-    renderSupLinkBox();
     openModal('itemEditModal');
     if (toSup) setTimeout(() => { const f = document.getElementById('editItemSupPrice'); if (f) { f.scrollIntoView({ block: 'center' }); try { f.focus({ preventScroll: true }); } catch (e) {} } }, 250);
 }
@@ -2590,8 +2590,8 @@ function refreshAllProductDropdowns() {
     });
 }
 
-// ---- 🔗 সাপ্লায়ার লিংক (লগইন ছাড়াই দেখার জন্য শেয়ারেবল লিংক) ----
-const SUP_VIEW_URL = 'https://zahidplaboni.github.io/Baki/sup-view.html';
+// ---- 🔗 তদারকি (ভিউয়ার) লিংক — লগইন ছাড়াই, পিন দিয়ে সুরক্ষিত, তদারকি ইউজারের অনুমতি অনুযায়ী দেখায় ----
+const STAFF_VIEW_URL = 'https://zahidplaboni.github.io/Baki/item-view.html';
 function genPubToken() {
     const chars = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
     let out = '';
@@ -2603,108 +2603,137 @@ function genPubToken() {
     }
     return out;
 }
-function supLinkUrl(it) { return (CS && CS.uid && it.pubLink) ? (SUP_VIEW_URL + '?s=' + encodeURIComponent(CS.uid) + '&l=' + encodeURIComponent(it.pubLink)) : ''; }
-function renderSupLinkBox() {
-    const box = document.getElementById('supLinkBox'), row = document.getElementById('supLinkRow');
-    const it = appData.itemList[editingItemIdx];
-    if (!box || !row || !it) return;
-    if (!it.supName) { box.style.display = 'none'; return; }
-    box.style.display = 'block';
-    if (!CS || !CS.uid) { row.innerHTML = '<p style="color:#b91c1c;font-size:12px;margin:0">☁️ এই ফিচার ব্যবহার করতে ক্লাউড সিঙ্ক (একাধিক ডিভাইস) চালু থাকতে হবে।</p>'; return; }
-    if (it.pubLink) {
-        row.innerHTML = `
-            <input type="text" readonly value="${escapeHtml(supLinkUrl(it))}" style="width:100%;font-size:11px;padding:8px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;box-sizing:border-box" onclick="this.select()">
-            <div style="display:flex;gap:6px">
-                <button type="button" class="modal-btn confirm" style="flex:1;padding:8px;font-size:12px" onclick="copySupLink()">📋 কপি</button>
-                <button type="button" class="modal-btn confirm" style="flex:1;padding:8px;font-size:12px" onclick="shareSupLink()">💬 শেয়ার</button>
-                <button type="button" class="modal-btn cancel" style="flex:1;padding:8px;font-size:12px;color:#b91c1c" onclick="revokeSupLink()">🗑️ বন্ধ</button>
-            </div>`;
-    } else {
-        row.innerHTML = '<button type="button" class="modal-btn confirm" style="width:100%" onclick="createSupLink()">🔗 লিংক তৈরি করুন</button>';
+function toFsValue(v) {
+    if (v === null || v === undefined) return { nullValue: null };
+    if (typeof v === 'number') return isFinite(v) ? { doubleValue: v } : { doubleValue: 0 };
+    if (typeof v === 'boolean') return { booleanValue: v };
+    if (Array.isArray(v)) return { arrayValue: { values: v.map(toFsValue) } };
+    if (typeof v === 'object') return { mapValue: { fields: toFsFields(v) } };
+    return { stringValue: String(v) };
+}
+function toFsFields(obj) { const out = {}; Object.keys(obj).forEach(k => { out[k] = toFsValue(obj[k]); }); return out; }
+async function sha256Hex(str) {
+    try {
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    } catch (e) {
+        let h = 0; for (let i = 0; i < str.length; i++) { h = (h * 31 + str.charCodeAt(i)) >>> 0; }
+        return 'fb' + h.toString(16);
     }
-}
-function createSupLink() {
-    const it = appData.itemList[editingItemIdx]; if (!it) return;
-    it.pubLink = genPubToken();
-    save();
-    pushSupLinkSnapshot(it);
-    renderSupLinkBox();
-}
-function revokeSupLink() {
-    const it = appData.itemList[editingItemIdx]; if (!it || !it.pubLink) return;
-    showConfirmDelete('এই লিংক বন্ধ করবেন? পুরনো লিংকে আর কেউ ঢুকতে পারবে না।', function() {
-        const oldLink = it.pubLink;
-        delete it.pubLink;
-        save();
-        deleteSupLinkDoc(oldLink);
-        renderSupLinkBox();
-    });
-}
-function copySupLink() {
-    const it = appData.itemList[editingItemIdx]; if (!it || !it.pubLink) return;
-    const url = supLinkUrl(it);
-    const ok = () => alert('✅ কপি হয়েছে!');
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(ok).catch(() => copyFallback(url, ok));
-    else copyFallback(url, ok);
 }
 function copyFallback(text, cb) {
     const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select();
     try { document.execCommand('copy'); } catch (e) {}
     t.remove(); if (cb) cb();
 }
-function shareSupLink() {
-    const it = appData.itemList[editingItemIdx]; if (!it || !it.pubLink) return;
-    const msg = `🔗 ${it.name} এর হালনাগাদ হিসাব দেখতে এই লিংকে চাপ দিন:\n${supLinkUrl(it)}`;
+function staffLinkUrl(emp) { return (CS && CS.uid && emp.viewLink) ? (STAFF_VIEW_URL + '?s=' + encodeURIComponent(CS.uid) + '&l=' + encodeURIComponent(emp.viewLink)) : ''; }
+function renderVpLinkBox() {
+    const box = document.getElementById('vpLinkBox'), row = document.getElementById('vpLinkRow');
+    const e = appData.employees.find(x => x.id === vpEmpId);
+    if (!box || !row || !e) return;
+    box.style.display = 'block';
+    if (!CS || !CS.uid) { row.innerHTML = '<p style="color:#b91c1c;font-size:12px;margin:0">☁️ এই ফিচার ব্যবহার করতে ক্লাউড সিঙ্ক (একাধিক ডিভাইস) চালু থাকতে হবে।</p>'; return; }
+    if (e.viewLink) {
+        row.innerHTML = `
+            <input type="text" readonly value="${escapeHtml(staffLinkUrl(e))}" style="width:100%;font-size:11px;padding:8px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;box-sizing:border-box" onclick="this.select()">
+            <div style="display:flex;gap:6px">
+                <button type="button" class="modal-btn confirm" style="flex:1;padding:8px;font-size:12px" onclick="copyStaffLink()">📋 কপি</button>
+                <button type="button" class="modal-btn confirm" style="flex:1;padding:8px;font-size:12px" onclick="shareStaffLink()">💬 শেয়ার</button>
+                <button type="button" class="modal-btn cancel" style="flex:1;padding:8px;font-size:12px;color:#b91c1c" onclick="revokeStaffLink()">🗑️ বন্ধ</button>
+            </div>`;
+    } else {
+        row.innerHTML = `
+            <input type="text" id="vpLinkPinInput" maxlength="4" inputmode="numeric" placeholder="৪ ডিজিটের পিন দিন (যেমন: 2580)" style="width:100%;font-size:14px;padding:9px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;box-sizing:border-box;text-align:center;letter-spacing:4px">
+            <button type="button" class="modal-btn confirm" style="width:100%" onclick="createStaffLink()">🔗 লিংক তৈরি করুন</button>`;
+    }
+}
+async function createStaffLink() {
+    const e = appData.employees.find(x => x.id === vpEmpId); if (!e) return;
+    const pinEl = document.getElementById('vpLinkPinInput'), pin = (pinEl && pinEl.value || '').trim();
+    if (!/^\d{4}$/.test(pin)) return alert('৪ ডিজিটের পিন দিন (শুধু সংখ্যা, ৪ অঙ্ক)');
+    e.viewLink = genPubToken();
+    e.viewPinHash = await sha256Hex(pin);
+    save();
+    pushStaffLinkSnapshot(e);
+    renderVpLinkBox();
+}
+function revokeStaffLink() {
+    const e = appData.employees.find(x => x.id === vpEmpId); if (!e || !e.viewLink) return;
+    showConfirmDelete('এই তদারকি লিংক বন্ধ করবেন? পুরনো লিংকে আর কেউ ঢুকতে পারবে না।', function () {
+        const oldLink = e.viewLink;
+        delete e.viewLink; delete e.viewPinHash;
+        save();
+        deleteStaffLinkDoc(oldLink);
+        renderVpLinkBox();
+    });
+}
+function copyStaffLink() {
+    const e = appData.employees.find(x => x.id === vpEmpId); if (!e || !e.viewLink) return;
+    const url = staffLinkUrl(e), ok = () => alert('✅ কপি হয়েছে!');
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(ok).catch(() => copyFallback(url, ok));
+    else copyFallback(url, ok);
+}
+function shareStaffLink() {
+    const e = appData.employees.find(x => x.id === vpEmpId); if (!e || !e.viewLink) return;
+    const msg = `🔗 হালনাগাদ হিসাব দেখতে এই লিংকে চাপ দিন (পিন জানা থাকতে হবে):\n${staffLinkUrl(e)}`;
     window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
 }
-function supLinkData(it) {
-    const name = it.name, u = it.unit || '', price = Calc.num(it.supPrice), n2 = Calc.r2;
-    const s = Calc.stockInfo(appData, name);
-    let cashAmt = 0, bakiColl = 0, bakiPend = 0, nCash = 0, nBakiPaid = 0, nBakiPend = 0;
-    (appData.customers || []).forEach(c => {
-        const txs = (c.tx || []).concat((c.history || []).reduce((a, h) => a.concat(h.tx || []), [])).filter(t => t && t.tp === name);
-        if (!txs.length) return;
-        const cash = txs.filter(Calc.isCash).reduce((a, t) => a + Calc.num(t.amt), 0);
-        const baki = txs.filter(t => !Calc.isCash(t)).reduce((a, t) => a + Calc.num(t.amt), 0);
-        if (cash > 0) { cashAmt += cash; nCash++; }
-        if (baki > 0) {
-            const due = Calc.r2(custItemRows(c).filter(r => r.t.tp === name && !r.cash).reduce((a, r) => a + r.due, 0));
-            if (due <= 0.001) { bakiColl += baki; nBakiPaid++; } else { bakiPend += Math.min(baki, due); bakiColl += Math.max(0, baki - due); nBakiPend++; }
+// একটা আইটেমের জন্য তদারকি-লিংকে পাঠানো সারাংশ (renderViewer() এর মতোই হিসাব, কিন্তু প্লেইন অবজেক্টে)
+function staffLinkItemData(name) {
+    const it = (appData.itemList || []).find(i => i.name === name), u = (it && it.unit) || '';
+    const rows = viewerRows(name);
+    let q = 0, qc = 0, tk = 0; const dueOf = {};
+    rows.forEach(r => {
+        q += r.qty; tk += r.amt;
+        let cq = r.qty;
+        if (!r.cash && !r.hist) {
+            const k = r.c.id || r.c.name;
+            if (!(k in dueOf)) dueOf[k] = Calc.totals(r.c).due;
+            if (dueOf[k] > 0) cq = r.amt > 0 ? r.qty * Math.max(0, r.amt - r.due) / r.amt : r.qty;
         }
+        qc += cq;
     });
-    const pays = appData.stock.entries.filter(e => e.item === name && e.kind === 'supPay');
-    const paid = n2(pays.reduce((a, e) => a + Calc.num(e.amt), 0));
-    let owed = 0, due = 0, pq = 0, pend = 0;
-    if (price > 0) {
-        const sg = supSegs(it);
-        owed = n2(sg.reduce((a, x) => a + x.cq * x.price, 0));
-        pend = n2(sg.reduce((a, x) => a + (x.qty - x.cq) * x.price, 0));
-        pq = n2(sg.reduce((a, x) => a + (x.qty - x.cq), 0));
-        due = n2(owed - paid);
-    }
+    const dm = itemDueMap(name);
+    const owed = Object.values(dm).map(g => ({ c: g.c, due: g.due, old: g.rows.reduce((a, r) => (!a || (r.dt && r.dt < a)) ? r.dt : a, '') })).filter(o => o.due > 0).sort((a, b) => b.due - a.due);
+    let dueAmt = Calc.r2(owed.reduce((a, o) => a + o.due, 0));
+    const qb = Math.max(0, q - qc), got = Calc.r2(Math.max(0, tk - dueAmt));
+    const stockObj = it && it.stock ? Calc.stockInfo(appData, name) : null;
+    const owedList = owed.map(o => ({
+        name: o.c.name || '', phone: o.c.phone || '',
+        days: o.old ? Math.max(0, Math.floor((Date.now() - new Date(o.old + 'T00:00:00').getTime()) / 864e5)) : 0,
+        due: Calc.r2(o.due)
+    }));
+    const rowsList = rows.slice(0, 80).map(r => ({
+        name: r.c.name || '', phone: r.c.phone || '', dt: r.dt || '', qty: Calc.r2(r.qty),
+        tag: r.cash ? 'cash' : (r.hist || r.due <= 0 ? 'paid' : 'due'), due: Calc.r2(r.due || 0)
+    }));
+    return { name: name, unit: u, q: Calc.r2(q), qc: Calc.r2(qc), qb: Calc.r2(qb), tk: Calc.r2(tk), got: got, dueAmt: dueAmt, remaining: stockObj ? stockObj.remaining : -1, owed: owedList, rows: rowsList };
+}
+// পুরো তদারকি-লিংকের ডেটা: ওই স্টাফকে যে যে পণ্য দেখার অনুমতি দেওয়া আছে সবগুলোই (ট্যাব আকারে), ফোন নম্বর শুধু অনুমতি থাকলে
+function staffLinkData(emp) {
+    const allowed = (emp.viewItems || []).filter(n => (appData.itemList || []).some(i => i.name === n));
+    const items = allowed.map(staffLinkItemData);
     return {
-        shopName: (appData.shop && appData.shop.name) || '', item: name, unit: u, supName: it.supName || '',
-        received: n2(s.received), sold: n2(s.sold), soldCash: n2(s.soldCash), soldBaki: n2(s.soldBaki), remaining: n2(s.remaining),
-        nCash, cashAmt: n2(cashAmt), nBakiPaid, nBakiPend, bakiPend: n2(bakiPend), collected: n2(cashAmt + bakiColl),
-        owed, paid, due, pendingQty: pq, pendingAmt: pend, updatedAt: now()
+        kind: 'staffview', shopName: (appData.shop && appData.shop.name) || '', viewerName: emp.name || '',
+        showPhone: !!emp.viewPhone, items: items, updatedAt: now()
     };
 }
-function supLinkDocPath(linkId) { return 'projects/' + FB.projectId + '/databases/(default)/documents/shops/' + CS.uid + '/public/' + linkId; }
-async function pushSupLinkSnapshot(it) {
-    if (!CS || !CS.uid || !it.pubLink) return;
+function staffLinkDocPath(linkId) { return 'projects/' + FB.projectId + '/databases/(default)/documents/shops/' + CS.uid + '/public/' + linkId; }
+async function pushStaffLinkSnapshot(emp) {
+    if (!CS || !CS.uid || !emp.viewLink) return;
     try {
-        const d = supLinkData(it), fields = {};
-        Object.keys(d).forEach(k => { const v = d[k]; fields[k] = (typeof v === 'number') ? { doubleValue: v } : { stringValue: String(v == null ? '' : v) }; });
-        await fsPost(fsBase() + ':commit', { writes: [{ update: { name: supLinkDocPath(it.pubLink), fields } }] });
+        const d = staffLinkData(emp); d.pinHash = emp.viewPinHash || '';
+        const fields = toFsFields(d);
+        await fsPost(fsBase() + ':commit', { writes: [{ update: { name: staffLinkDocPath(emp.viewLink), fields } }] });
     } catch (e) { /* নীরবে ব্যর্থ — পরের sync এ আবার চেষ্টা হবে */ }
 }
-async function deleteSupLinkDoc(linkId) {
+async function deleteStaffLinkDoc(linkId) {
     if (!CS || !CS.uid || !linkId) return;
-    try { await fsPost(fsBase() + ':commit', { writes: [{ delete: supLinkDocPath(linkId) }] }); } catch (e) {}
+    try { await fsPost(fsBase() + ':commit', { writes: [{ delete: staffLinkDocPath(linkId) }] }); } catch (e) {}
 }
-function pushAllSupLinks() {
+function pushAllStaffLinks() {
     if (!CS || !CS.uid) return;
-    (appData.itemList || []).filter(x => x && x.pubLink).forEach(x => pushSupLinkSnapshot(x));
+    (appData.employees || []).forEach(e => { if (e && e.viewer && e.viewLink) pushStaffLinkSnapshot(e); });
 }
 
 // ================== 9. কাস্টমার কার্ড ==================
@@ -5231,7 +5260,7 @@ async function syncNow(manual) {
         if (CS.lic) { await licCheck(manual === true); if (licState().locked) { csBusy = false; cloudUpdateText(); return; } }
         await cloudPull(manual === true);
         await cloudPush();
-        pushAllSupLinks();
+        pushAllStaffLinks();
         CS.last = Date.now(); CS.err = '';
     } catch (e) {
         const m = cloudErr(e);

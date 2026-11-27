@@ -14,6 +14,9 @@
   .hero { background: linear-gradient(135deg, #ea580c, #c2410c); color: #fff; border-radius: 18px; padding: 18px; margin-bottom: 14px; box-shadow: 0 8px 20px rgba(194,65,12,.25); }
   .hero .shop { font-size: 12px; opacity: .85; font-weight: 700; }
   .hero .item { font-size: 20px; font-weight: 900; margin-top: 2px; }
+  .tabs { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 2px; }
+  .tabs span { flex-shrink: 0; background: #fff; border: 1px solid #e2e8f0; color: #475569; font-size: 12.5px; font-weight: 800; padding: 7px 14px; border-radius: 20px; cursor: pointer; white-space: nowrap; }
+  .tabs span.on { background: #4f46e5; border-color: #4f46e5; color: #fff; }
   .card { background: #fff; border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: 0 3px 10px rgba(0,0,0,.05); }
   .card h3 { margin: 0 0 10px; font-size: 13.5px; font-weight: 900; color: #334155; display: flex; align-items: center; gap: 6px; }
   .sum { display: flex; gap: 8px; margin-bottom: 8px; }
@@ -61,6 +64,7 @@
   const shopId = qs.get('s'), linkId = qs.get('l');
   let LANG = (localStorage.getItem('itemViewLang') || 'bn');
   let DATA = null;
+  let TAB = null;
   const verifiedKey = 'ivVerified_' + linkId;
 
   function t(bn, en) { return LANG === 'en' ? en : bn; }
@@ -131,43 +135,57 @@
 
   function isVerified() { try { return sessionStorage.getItem(verifiedKey) === '1'; } catch (e) { return false; } }
 
+  window.pickTab = function (name) { TAB = name; renderContent(); };
+
   function renderContent() {
     const el = document.getElementById('app');
     document.getElementById('langBtn').textContent = t('English', 'বাংলা');
     const d = DATA;
-    const owed = d.owed || [], rows = d.rows || [];
+    const items = d.items || [];
+    if (!items.length) {
+      el.innerHTML = `
+        <div class="hero"><div class="shop">🏪 ${esc(d.shopName || '')}</div><div class="item">👁️ ${esc(d.viewerName || '')}</div></div>
+        <div class="card"><p style="text-align:center;color:#64748b">${t('এখনো কোনো পণ্য দেখার অনুমতি দেওয়া হয়নি।', 'No product access has been given yet.')}</p></div>
+        <div class="foot">🔄 ${t('সর্বশেষ হালনাগাদ', 'Last updated')}: ${fmtAgo(d.updatedAt)}</div>
+        <button class="refresh-btn" onclick="fetchData()">🔄 ${t('রিফ্রেশ করুন', 'Refresh')}</button>`;
+      return;
+    }
+    if (!TAB || !items.some(it => it.name === TAB)) TAB = items[0].name;
+    const it = items.find(x => x.name === TAB);
+    const owed = it.owed || [], rows = it.rows || [], showPh = !!d.showPhone;
     let html = `
       <div class="hero">
         <div class="shop">🏪 ${esc(d.shopName || '')}</div>
-        <div class="item">📦 ${esc(d.item || '')}</div>
+        <div class="item">👁️ ${esc(d.viewerName || '')}</div>
       </div>
+      <div class="tabs">${items.map(x => `<span class="${x.name === TAB ? 'on' : ''}" onclick="pickTab('${esc(x.name).replace(/'/g, "\\'")}')">${esc(x.name)}</span>`).join('')}</div>
       <div class="card">
         <div class="sum">
-          <div><b>${d.q}${d.unit ? ' ' + esc(d.unit) : ''}</b><span>${t('মোট বিক্রি', 'Total sold')}</span></div>
-          <div><b style="color:#15803d">${d.qc}${d.unit ? ' ' + esc(d.unit) : ''}</b><span>${t('আদায় হয়েছে', 'Collected')}</span></div>
-          <div><b style="color:#b91c1c">${d.qb}${d.unit ? ' ' + esc(d.unit) : ''}</b><span>${t('আদায় বাকি', 'Still to collect')}</span></div>
+          <div><b>${it.q}${it.unit ? ' ' + esc(it.unit) : ''}</b><span>${t('মোট বিক্রি', 'Total sold')}</span></div>
+          <div><b style="color:#15803d">${it.qc}${it.unit ? ' ' + esc(it.unit) : ''}</b><span>${t('আদায় হয়েছে', 'Collected')}</span></div>
+          <div><b style="color:#b91c1c">${it.qb}${it.unit ? ' ' + esc(it.unit) : ''}</b><span>${t('আদায় বাকি', 'Still to collect')}</span></div>
         </div>
         <div class="sum">
-          <div><b>${d.tk} ৳</b><span>${t('মোট টাকা', 'Total amount')}</span></div>
-          <div><b style="color:#15803d">${d.got} ৳</b><span>${t('আদায় হয়েছে', 'Collected')}</span></div>
-          <div><b style="color:#b91c1c">${d.dueAmt} ৳</b><span>${t('আদায় বাকি', 'Still to collect')}</span></div>
+          <div><b>${it.tk} ৳</b><span>${t('মোট টাকা', 'Total amount')}</span></div>
+          <div><b style="color:#15803d">${it.got} ৳</b><span>${t('আদায় হয়েছে', 'Collected')}</span></div>
+          <div><b style="color:#b91c1c">${it.dueAmt} ৳</b><span>${t('আদায় বাকি', 'Still to collect')}</span></div>
         </div>
-        ${d.remaining >= 0 ? `<div class="sum"><div><b>${d.remaining}${d.unit ? ' ' + esc(d.unit) : ''}</b><span>${t('এখন আছে', 'In stock now')}</span></div></div>` : ''}
+        ${it.remaining >= 0 ? `<div class="sum"><div><b>${it.remaining}${it.unit ? ' ' + esc(it.unit) : ''}</b><span>${t('এখন আছে', 'In stock now')}</span></div></div>` : ''}
       </div>
 
       ${owed.length ? `<div class="card"><h3>📒 ${t('যাদের কাছে বাকি আছে', 'Who still owes')}</h3>` + owed.map(o => `
         <div class="prow">
           <div class="av">${esc(initial(o.name))}</div>
-          <div class="pnm"><b>${esc(o.name)}</b><small>${o.phone ? '📞 <a href="tel:' + esc(String(o.phone).replace(/[^0-9+]/g, '')) + '" style="color:inherit">' + esc(o.phone) + '</a> · ' : ''}${o.days} ${t('দিন আগে থেকে', 'days ago')}</small></div>
+          <div class="pnm"><b>${esc(o.name)}</b><small>${showPh && o.phone ? '📞 <a href="tel:' + esc(String(o.phone).replace(/[^0-9+]/g, '')) + '" style="color:inherit">' + esc(o.phone) + '</a> · ' : ''}${o.days} ${t('দিন আগে থেকে', 'days ago')}</small></div>
           <div class="ptag due">${o.due} ৳</div>
         </div>`).join('') + `</div>` : ''}
 
       <div class="card"><h3>🧾 ${t('কে কত নিয়েছে', 'Who took how much')}</h3>` + (rows.length ? rows.map(r => `
         <div class="prow">
           <div class="av">${esc(initial(r.name))}</div>
-          <div class="pnm"><b>${esc(r.name)}</b><small>${r.phone ? '📞 ' + esc(r.phone) + ' · ' : ''}${esc(r.dt)}</small></div>
+          <div class="pnm"><b>${esc(r.name)}</b><small>${showPh && r.phone ? '📞 ' + esc(r.phone) + ' · ' : ''}${esc(r.dt)}</small></div>
           <div style="text-align:right">
-            <div style="font-size:12.5px;font-weight:700">${r.qty ? r.qty + (d.unit ? ' ' + esc(d.unit) : '') : ''}</div>
+            <div style="font-size:12.5px;font-weight:700">${r.qty ? r.qty + (it.unit ? ' ' + esc(it.unit) : '') : ''}</div>
             <div class="ptag ${r.tag === 'cash' ? 'cash' : (r.tag === 'paid' ? 'paid' : 'due')}">${r.tag === 'cash' ? '💵 ' + t('নগদ', 'Cash') : (r.tag === 'paid' ? '✅ ' + t('শোধ', 'Paid') : '📒 ' + r.due + ' ৳')}</div>
           </div>
         </div>`).join('') : `<p style="text-align:center;color:#64748b;font-size:13px">${t('এখনো কোনো বিক্রি নেই', 'No sales yet')}</p>`) + `</div>
