@@ -1886,6 +1886,7 @@ function openViewerPerm(id) {
     document.getElementById('vpTitle').textContent = '👁️ ' + e.name + ' — দেখার অনুমতি';
     document.getElementById('vpItems').innerHTML = permItemsHtml(e.viewItems || []);
     document.getElementById('vpPhone').checked = !!e.viewPhone;
+    document.getElementById('vpPhoto').checked = e.viewPhoto !== false;
     document.getElementById('vpErr').style.display = 'none';
     renderVpLinkBox();
     closeModal('employeesListModal'); openModal('viewerPermModal');
@@ -1894,8 +1895,9 @@ function saveViewerPerm() {
     const e = appData.employees.find(x => x.id === vpEmpId); if (!e) return;
     const items = [...document.querySelectorAll('#vpItems .vp-chk:checked')].map(c => c.value);
     if (!items.length) { const er = document.getElementById('vpErr'); er.textContent = '❌ অন্তত একটা পণ্য বাছুন'; er.style.display = 'block'; return; }
-    e.viewItems = items; e.viewPhone = document.getElementById('vpPhone').checked;
+    e.viewItems = items; e.viewPhone = document.getElementById('vpPhone').checked; e.viewPhoto = document.getElementById('vpPhoto').checked;
     save(); closeModal('viewerPermModal'); openEmployeesList();
+    if (e.viewLink) pushStaffLinkSnapshot(e);
 }
 function openAddEmployeeModal() {
     if (!isOwner()) return;
@@ -2117,6 +2119,7 @@ function startMainApp() {
     purgeOldLogs();
     purgeOldTrash();
     updateSyncDot();
+    setTimeout(backfillPhotoThumbs, 3000);
 }
 function updateClock() {
     const nowD = new Date();
@@ -2740,12 +2743,12 @@ function staffLinkItemData(name) {
     const qb = Math.max(0, q - qc), got = Calc.r2(Math.max(0, tk - dueAmt));
     const stockObj = it && it.stock ? Calc.stockInfo(appData, name) : null;
     const owedList = owed.map(o => ({
-        name: o.c.name || '', phone: o.c.phone || '',
+        name: o.c.name || '', phone: o.c.phone || '', photo: o.c.photoThumb || '',
         days: o.old ? Math.max(0, Math.floor((Date.now() - new Date(o.old + 'T00:00:00').getTime()) / 864e5)) : 0,
         due: Calc.r2(o.due)
     }));
     const rowsList = rows.slice(0, 80).map(r => ({
-        name: r.c.name || '', phone: r.c.phone || '', dt: r.dt || '', qty: Calc.r2(r.qty),
+        name: r.c.name || '', phone: r.c.phone || '', photo: r.c.photoThumb || '', dt: r.dt || '', qty: Calc.r2(r.qty),
         tag: r.cash ? 'cash' : (r.hist || r.due <= 0 ? 'paid' : 'due'), due: Calc.r2(r.due || 0)
     }));
     return { name: name, en: (it && it.en) || '', unit: u, q: Calc.r2(q), qc: Calc.r2(qc), qb: Calc.r2(qb), tk: Calc.r2(tk), got: got, dueAmt: dueAmt, remaining: stockObj ? stockObj.remaining : -1, owed: owedList, rows: rowsList };
@@ -2756,7 +2759,7 @@ function staffLinkData(emp) {
     const items = allowed.map(staffLinkItemData);
     return {
         kind: 'staffview', shopName: (appData.shop && appData.shop.name) || '', viewerName: emp.name || '',
-        showPhone: !!emp.viewPhone, items: items, updatedAt: now()
+        showPhone: !!emp.viewPhone, showPhoto: emp.viewPhoto !== false, items: items, updatedAt: now()
     };
 }
 function staffLinkDocPath(linkId) { return 'projects/' + FB.projectId + '/databases/(default)/documents/shops/' + CS.uid + '/public/' + linkId; }
@@ -3634,6 +3637,7 @@ function handlePhotoUpload(e) {
         appData.customers[idx].photo = dataUrl;
         save();
         filterCustomers();
+        genPhotoThumb(dataUrl, thumb => { if (appData.customers[idx]) { appData.customers[idx].photoThumb = thumb; save(); } });
     });
 }
 
@@ -3641,9 +3645,40 @@ function removePhoto(idx) {
     document.querySelectorAll('.photo-menu').forEach(m => m.classList.remove('show'));
     showConfirmDelete('ছবিটি ডিলিট করবেন?', function() {
         appData.customers[idx].photo = null;
+        appData.customers[idx].photoThumb = null;
         save();
         filterCustomers();
     });
+}
+
+// তদারকি-লিংকে পাঠানোর জন্য ছবির খুব ছোট্ট থাম্বনেইল বানানো (Firestore ডকুমেন্টের সাইজ লিমিটের মধ্যে রাখতে)
+const THUMB_OUT = 48;
+function genPhotoThumb(dataUrl, cb) {
+    try {
+        const img = new Image();
+        img.onload = function() {
+            try {
+                const cv = document.createElement('canvas'); cv.width = cv.height = THUMB_OUT;
+                const g = cv.getContext('2d'), s = Math.min(img.width, img.height);
+                g.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, THUMB_OUT, THUMB_OUT);
+                cb(cv.toDataURL('image/jpeg', 0.5));
+            } catch (e) { cb(''); }
+        };
+        img.onerror = function() { cb(''); };
+        img.src = dataUrl;
+    } catch (e) { cb(''); }
+}
+// পুরোনো কাস্টমার যাদের ছবি আছে কিন্তু থাম্বনেইল এখনো বানানো হয়নি, সেগুলো একবার ধীরে ধীরে (প্রতি সেকেন্ডে একটা) বানিয়ে নেওয়া
+function backfillPhotoThumbs() {
+    const list = (appData.customers || []).filter(c => c.photo && !c.photoThumb);
+    if (!list.length) return;
+    let i = 0;
+    const step = () => {
+        if (i >= list.length) return;
+        const c = list[i++];
+        genPhotoThumb(c.photo, thumb => { if (thumb) { c.photoThumb = thumb; save(); } setTimeout(step, 800); });
+    };
+    step();
 }
 function viewPhoto(idx) {
     const c = appData.customers[idx];
@@ -6431,7 +6466,8 @@ function renderViewer() {
     if (!allowed.includes(vwTab)) vwTab = allowed[0];
     tabs.innerHTML = allowed.map(n => `<span class="${n === vwTab ? 'on' : ''}" onclick="vwPick('${escapeHtml(n).replace(/'/g, "\\'")}')">${escapeHtml(n)}</span>`).join('');
     const it = (appData.itemList || []).find(i => i.name === vwTab), u = escapeHtml((it && it.unit) || '');
-    const rows = viewerRows(vwTab), showPh = !!(acc && acc.viewPhone);
+    const rows = viewerRows(vwTab), showPh = !!(acc && acc.viewPhone), showPhotoVw = !acc || acc.viewPhoto !== false;
+    const vwAvatar = c => showPhotoVw ? avatarHtml(c) : avatarHtml({ name: c.name });
     // আদায়-ভিত্তিক: নগদ + বাকি-তে নিয়ে যা শোধ হয়েছে = আদায় হয়েছে; বাকি থাকা অংশ = আদায় বাকি
     let q = 0, qc = 0, tk = 0, dueAmt = 0; const dueOf = {};
     rows.forEach(r => {
@@ -6456,12 +6492,12 @@ function renderViewer() {
         const tot = Calc.r2(owed.reduce((a, o) => a + o.due, 0));
         h += '<div class="vw-card"><div class="vw-h">📒 যাদের কাছে বাকি আছে</div>' + owed.map(o => {
             const days = o.old ? Math.max(0, Math.floor((Date.now() - new Date(o.old + 'T00:00:00').getTime()) / 864e5)) : 0;
-            return `<div class="vw-row"><div class="vw-av">${avatarHtml(o.c)}</div><div class="vw-nm"><div>${escapeHtml(o.c.name)}</div><small>${showPh && o.c.phone ? '<a href="tel:' + escapeHtml(String(o.c.phone).replace(/[^0-9+]/g, '')) + '" style="color:inherit">📞 ' + escapeHtml(o.c.phone) + '</a> · ' : ''}<span>${days} দিন আগে থেকে</span></small></div><div class="vw-q"><span class="vw-tag b">${o.due} ৳</span></div></div>`;
+            return `<div class="vw-row"><div class="vw-av">${vwAvatar(o.c)}</div><div class="vw-nm"><div>${escapeHtml(o.c.name)}</div><small>${showPh && o.c.phone ? '<a href="tel:' + escapeHtml(String(o.c.phone).replace(/[^0-9+]/g, '')) + '" style="color:inherit">📞 ' + escapeHtml(o.c.phone) + '</a> · ' : ''}<span>${days} দিন আগে থেকে</span></small></div><div class="vw-q"><span class="vw-tag b">${o.due} ৳</span></div></div>`;
         }).join('') + `<div style="text-align:right;font-weight:800;padding:8px 4px 0">মোট আটকে আছে: ${tot} ৳</div></div>`;
     }
     h += '<div class="vw-card"><div class="vw-h">কে কত নিয়েছে</div>' + (rows.map(r => {
         const c = r.c;
-        return `<div class="vw-row"><div class="vw-av">${avatarHtml(c)}</div><div class="vw-nm"><div>${escapeHtml(c.name)}</div><small>${showPh && c.phone ? '📞 ' + escapeHtml(c.phone) + ' · ' : ''}${escapeHtml(formatDateBn(r.dt))}</small></div>` +
+        return `<div class="vw-row"><div class="vw-av">${vwAvatar(c)}</div><div class="vw-nm"><div>${escapeHtml(c.name)}</div><small>${showPh && c.phone ? '📞 ' + escapeHtml(c.phone) + ' · ' : ''}${escapeHtml(formatDateBn(r.dt))}</small></div>` +
             `<div class="vw-q">${r.qty ? Calc.r2(r.qty) + ' ' + u : ''}<div><span class="vw-tag ${r.cash || r.hist || r.due <= 0 ? 'c' : 'b'}">${r.cash ? '💵 নগদ' : (r.hist || r.due <= 0 ? '✅ শোধ' : '📒 বাকি ' + r.due + ' ৳')}</span></div></div></div>`;
     }).join('') || '<p style="text-align:center;color:#64748b">এখনো কোনো বিক্রি নেই</p>') + '</div>';
     body.innerHTML = h;

@@ -26,7 +26,8 @@
   .sum span { font-size: 10.5px; color: #64748b; }
   .prow { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f1f5f9; }
   .prow:last-child { border-bottom: none; }
-  .av { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #818cf8, #6366f1); color: #fff; font-weight: 900; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .av { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #818cf8, #6366f1); color: #fff; font-weight: 900; font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+  .av img { width: 100%; height: 100%; object-fit: cover; }
   .pnm { flex: 1; min-width: 0; }
   .pnm b { display: block; font-size: 13.5px; }
   .pnm small { color: #64748b; font-size: 11px; }
@@ -85,6 +86,7 @@
     return t(Math.floor(s / 86400) + ' দিন আগে', Math.floor(s / 86400) + ' days ago');
   }
   function initial(s) { return String(s || '?').trim().charAt(0).toUpperCase() || '?'; }
+  function avatarHtml(x, showPhoto) { return (showPhoto && x.photo) ? `<img src="${x.photo}">` : esc(initial(x.name)); }
 
   async function sha256Hex(str) {
     try {
@@ -186,14 +188,14 @@
 
       ${owed.length ? `<div class="card"><h3>📒 ${t('যাদের কাছে বাকি আছে', 'Who still owes')}</h3>` + owed.map(o => `
         <div class="prow">
-          <div class="av">${esc(initial(o.name))}</div>
+          <div class="av">${avatarHtml(o, d.showPhoto)}</div>
           <div class="pnm"><b>${esc(o.name)}</b><small>${showPh && o.phone ? '📞 <a href="tel:' + esc(String(o.phone).replace(/[^0-9+]/g, '')) + '" style="color:inherit">' + esc(o.phone) + '</a> · ' : ''}${o.days} ${t('দিন আগে থেকে', 'days ago')}</small></div>
           <div class="ptag due">${o.due} ৳</div>
         </div>`).join('') + `</div>` : ''}
 
       <div class="card"><h3>🧾 ${t('কে কত নিয়েছে', 'Who took how much')}</h3>` + (rows.length ? rows.map(r => `
         <div class="prow">
-          <div class="av">${esc(initial(r.name))}</div>
+          <div class="av">${avatarHtml(r, d.showPhoto)}</div>
           <div class="pnm"><b>${esc(r.name)}</b><small>${showPh && r.phone ? '📞 ' + esc(r.phone) + ' · ' : ''}${esc(r.dt)}</small></div>
           <div style="text-align:right">
             <div style="font-size:12.5px;font-weight:700">${r.qty ? r.qty + (it.unit ? ' ' + esc(unitTxt(it.unit)) : '') : ''}</div>
