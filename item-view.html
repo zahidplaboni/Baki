@@ -34,6 +34,8 @@
   .ptag.cash { background: #dcfce7; color: #15803d; }
   .ptag.paid { background: #e0e7ff; color: #4338ca; }
   .foot { text-align: center; font-size: 11.5px; color: #94a3b8; margin-top: 10px; }
+  .top-upd { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; color: #64748b; margin-bottom: 10px; }
+  .top-upd button { background: #fff7ed; color: #c2410c; border: none; border-radius: 8px; padding: 4px 10px; font-weight: 800; font-size: 11px; cursor: pointer; }
   .refresh-btn { display: block; margin: 14px auto 0; background: #fff7ed; color: #c2410c; border: none; border-radius: 12px; padding: 10px 20px; font-weight: 800; font-size: 13px; cursor: pointer; }
   .state { text-align: center; padding: 60px 20px; color: #64748b; }
   .state .em { font-size: 40px; margin-bottom: 10px; }
@@ -69,6 +71,8 @@
 
   function t(bn, en) { return LANG === 'en' ? en : bn; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+  const I18N_UNITS = { 'কার্টুন': 'carton', 'কেস': 'case', 'পিস': 'pc', 'প্যাকেট': 'packet', 'পরিমাণ': 'qty', 'ডজন': 'dozen', 'বস্তা': 'sack', 'কেজি': 'kg', 'গ্রাম': 'gram', 'লিটার': 'liter', 'বোতল': 'bottle', 'বান্ডিল': 'bundle', 'জোড়া': 'pair', 'মিটার': 'meter', 'ফুট': 'ft', 'কৌটা': 'can', 'টিন': 'tin', 'ব্যাগ': 'bag', 'সেট': 'set', 'রিম': 'ream' };
+  function unitTxt(u) { if (!u) return ''; return LANG === 'en' ? (I18N_UNITS[u] || u) : u; }
   function fmtAgo(iso) {
     const d = Date.parse(iso); if (isNaN(d)) return '';
     const s = Math.max(0, Math.floor((Date.now() - d) / 1000));
@@ -134,6 +138,7 @@
   };
 
   function isVerified() { try { return sessionStorage.getItem(verifiedKey) === '1'; } catch (e) { return false; } }
+  function canShow() { return !!(DATA && !DATA.pinHash) || isVerified(); }
 
   window.pickTab = function (name) { TAB = name; renderContent(); };
 
@@ -159,18 +164,19 @@
         <div class="item">👁️ ${esc(d.viewerName || '')}</div>
       </div>
       <div class="tabs">${items.map(x => `<span class="${x.name === TAB ? 'on' : ''}" onclick="pickTab('${esc(x.name).replace(/'/g, "\\'")}')">${esc(x.name)}</span>`).join('')}</div>
+      <div class="top-upd">🔄 ${t('সর্বশেষ হালনাগাদ', 'Last updated')}: ${fmtAgo(d.updatedAt)} <button onclick="fetchData()">${t('রিফ্রেশ', 'Refresh')}</button></div>
       <div class="card">
         <div class="sum">
-          <div><b>${it.q}${it.unit ? ' ' + esc(it.unit) : ''}</b><span>${t('মোট বিক্রি', 'Total sold')}</span></div>
-          <div><b style="color:#15803d">${it.qc}${it.unit ? ' ' + esc(it.unit) : ''}</b><span>${t('আদায় হয়েছে', 'Collected')}</span></div>
-          <div><b style="color:#b91c1c">${it.qb}${it.unit ? ' ' + esc(it.unit) : ''}</b><span>${t('আদায় বাকি', 'Still to collect')}</span></div>
+          <div><b>${it.q}${it.unit ? ' ' + esc(unitTxt(it.unit)) : ''}</b><span>${t('মোট বিক্রি', 'Total sold')}</span></div>
+          <div><b style="color:#15803d">${it.qc}${it.unit ? ' ' + esc(unitTxt(it.unit)) : ''}</b><span>${t('আদায় হয়েছে', 'Collected')}</span></div>
+          <div><b style="color:#b91c1c">${it.qb}${it.unit ? ' ' + esc(unitTxt(it.unit)) : ''}</b><span>${t('আদায় বাকি', 'Still to collect')}</span></div>
         </div>
         <div class="sum">
           <div><b>${it.tk} ৳</b><span>${t('মোট টাকা', 'Total amount')}</span></div>
           <div><b style="color:#15803d">${it.got} ৳</b><span>${t('আদায় হয়েছে', 'Collected')}</span></div>
           <div><b style="color:#b91c1c">${it.dueAmt} ৳</b><span>${t('আদায় বাকি', 'Still to collect')}</span></div>
         </div>
-        ${it.remaining >= 0 ? `<div class="sum"><div><b>${it.remaining}${it.unit ? ' ' + esc(it.unit) : ''}</b><span>${t('এখন আছে', 'In stock now')}</span></div></div>` : ''}
+        ${it.remaining >= 0 ? `<div class="sum"><div><b>${it.remaining}${it.unit ? ' ' + esc(unitTxt(it.unit)) : ''}</b><span>${t('এখন আছে', 'In stock now')}</span></div></div>` : ''}
       </div>
 
       ${owed.length ? `<div class="card"><h3>📒 ${t('যাদের কাছে বাকি আছে', 'Who still owes')}</h3>` + owed.map(o => `
@@ -185,7 +191,7 @@
           <div class="av">${esc(initial(r.name))}</div>
           <div class="pnm"><b>${esc(r.name)}</b><small>${showPh && r.phone ? '📞 ' + esc(r.phone) + ' · ' : ''}${esc(r.dt)}</small></div>
           <div style="text-align:right">
-            <div style="font-size:12.5px;font-weight:700">${r.qty ? r.qty + (it.unit ? ' ' + esc(it.unit) : '') : ''}</div>
+            <div style="font-size:12.5px;font-weight:700">${r.qty ? r.qty + (it.unit ? ' ' + esc(unitTxt(it.unit)) : '') : ''}</div>
             <div class="ptag ${r.tag === 'cash' ? 'cash' : (r.tag === 'paid' ? 'paid' : 'due')}">${r.tag === 'cash' ? '💵 ' + t('নগদ', 'Cash') : (r.tag === 'paid' ? '✅ ' + t('শোধ', 'Paid') : '📒 ' + r.due + ' ৳')}</div>
           </div>
         </div>`).join('') : `<p style="text-align:center;color:#64748b;font-size:13px">${t('এখনো কোনো বিক্রি নেই', 'No sales yet')}</p>`) + `</div>
@@ -206,7 +212,7 @@
   window.toggleLang = function () {
     LANG = LANG === 'en' ? 'bn' : 'en';
     try { localStorage.setItem('itemViewLang', LANG); } catch (e) {}
-    if (DATA && DATA !== 'notfound' && DATA !== 'error') { isVerified() ? renderContent() : renderPinScreen(false); }
+    if (DATA && DATA !== 'notfound' && DATA !== 'error') { canShow() ? renderContent() : renderPinScreen(false); }
     else document.getElementById('langBtn').textContent = t('English', 'বাংলা');
   };
 
@@ -219,12 +225,12 @@
       if (!r.ok) { renderState('error'); return; }
       const j = await r.json();
       DATA = parseFields(j.fields);
-      if (isVerified()) renderContent(); else renderPinScreen(false);
+      if (canShow()) renderContent(); else renderPinScreen(false);
     } catch (e) { renderState('error'); }
   };
 
   fetchData();
-  setInterval(() => { if (isVerified()) fetchData(); }, 25000);
+  setInterval(() => { if (canShow()) fetchData(); }, 25000);
 })();
 </script>
 </body>
