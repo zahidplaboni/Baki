@@ -1814,11 +1814,13 @@ function toggleBlockEmployee(id) {
     if (!isOwner()) return;
     const e = appData.employees.find(x => x.id === id); if (!e) return;
     if (!e.blocked) {
-        if (!confirm('🚫 "' + e.name + '" কে ব্লক করবেন?\n\nসে আর লগইন করতে পারবে না, এখন ঢুকে থাকলেও কিছুক্ষণের মধ্যে বের হয়ে যাবে। পরে আনব্লক করা যাবে। তার ডেটা ও এন্ট্রি যেমন আছে তেমনই থাকবে।')) return;
+        if (!confirm('🚫 "' + e.name + '" কে ব্লক করবেন?\n\nসে আর লগইন করতে পারবে না, এখন ঢুকে থাকলেও কিছুক্ষণের মধ্যে বের হয়ে যাবে। পরে আনব্লক করা যাবে। তার ডেটা ও এন্ট্রি যেমন আছে তেমনই থাকবে। তার তদারকি লিংক (যদি থাকে) আপাতত বন্ধ হয়ে যাবে।')) return;
         e.blocked = true; e.blockedAt = Date.now();
+        if (e.viewLink) deleteStaffLinkDoc(e.viewLink); // লিংক আপাতত অকেজো — টোকেন মুছে না, আনব্লক করলে আবার চালু হবে
     } else {
         if (!confirm('✅ "' + e.name + '" কে আনব্লক করবেন? সে আবার লগইন করতে পারবে।')) return;
         e.blocked = false; delete e.blockedAt;
+        if (e.viewLink) pushStaffLinkSnapshot(e); // লিংক আবার চালু হবে (একই URL)
     }
     save(); renderEmployeesList();
 }
@@ -1946,6 +1948,7 @@ function deleteEmployee(id) {
     const emp = appData.employees.find(e => e.id === id);
     if (!emp) return;
     showConfirmDelete(`"${emp.name}" কে ডিলিট করবেন?`, function() {
+        if (emp.viewLink) deleteStaffLinkDoc(emp.viewLink); // তার তদারকি লিংক থাকলে সেটাও বন্ধ হয়ে যাবে
         appData.employees = appData.employees.filter(e => e.id !== id);
         save();
         renderEmployeesList();
@@ -2634,12 +2637,22 @@ function renderVpLinkBox() {
     box.style.display = 'block';
     if (!CS || !CS.uid) { row.innerHTML = '<p style="color:#b91c1c;font-size:12px;margin:0">☁️ এই ফিচার ব্যবহার করতে ক্লাউড সিঙ্ক (একাধিক ডিভাইস) চালু থাকতে হবে।</p>'; return; }
     if (e.viewLink) {
+        const hasPin = !!e.viewPinHash;
         row.innerHTML = `
             <input type="text" readonly value="${escapeHtml(staffLinkUrl(e))}" style="width:100%;font-size:11px;padding:8px;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;box-sizing:border-box" onclick="this.select()">
             <div style="display:flex;gap:6px">
                 <button type="button" class="modal-btn confirm" style="flex:1;padding:8px;font-size:12px" onclick="copyStaffLink()">📋 কপি</button>
                 <button type="button" class="modal-btn confirm" style="flex:1;padding:8px;font-size:12px" onclick="shareStaffLink()">💬 শেয়ার</button>
                 <button type="button" class="modal-btn cancel" style="flex:1;padding:8px;font-size:12px;color:#b91c1c" onclick="revokeStaffLink()">🗑️ বন্ধ</button>
+            </div>
+            <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #e2e8f0">
+                <label style="display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;cursor:pointer">
+                    <input type="checkbox" id="vpPinToggle" ${hasPin ? 'checked' : ''} onchange="toggleVpPinInput()"> 🔒 পিন দিয়ে সুরক্ষিত রাখুন
+                </label>
+                <div id="vpPinInputWrap" style="display:${hasPin ? 'block' : 'none'};margin-top:6px">
+                    <input type="text" id="vpLinkPinInput2" maxlength="4" inputmode="numeric" placeholder="নতুন পিন দিতে চাইলে লিখুন (না হলে ফাঁকা রাখুন)" style="width:100%;font-size:13px;padding:8px;border:1px solid #e2e8f0;border-radius:8px;box-sizing:border-box;text-align:center;letter-spacing:3px">
+                </div>
+                <button type="button" class="modal-btn confirm" style="width:100%;margin-top:8px;padding:8px;font-size:12px" onclick="updateStaffLinkPin()">✅ আপডেট করুন</button>
             </div>`;
     } else {
         row.innerHTML = `
@@ -2656,6 +2669,30 @@ async function createStaffLink() {
     save();
     pushStaffLinkSnapshot(e);
     renderVpLinkBox();
+}
+function toggleVpPinInput() {
+    const on = document.getElementById('vpPinToggle').checked;
+    document.getElementById('vpPinInputWrap').style.display = on ? 'block' : 'none';
+}
+async function updateStaffLinkPin() {
+    const e = appData.employees.find(x => x.id === vpEmpId); if (!e || !e.viewLink) return;
+    const on = document.getElementById('vpPinToggle').checked;
+    if (on) {
+        const pinEl = document.getElementById('vpLinkPinInput2'), pin = (pinEl && pinEl.value || '').trim();
+        if (pin) {
+            if (!/^\d{4}$/.test(pin)) return alert('৪ ডিজিটের পিন দিন (শুধু সংখ্যা, ৪ অঙ্ক)');
+            e.viewPinHash = await sha256Hex(pin);
+        } else if (!e.viewPinHash) {
+            return alert('৪ ডিজিটের একটা পিন দিন');
+        }
+    } else {
+        if (e.viewPinHash && !confirm('⚠️ পিন বন্ধ করলে লিংকে ঢুকলেই সবাই পূর্ণ হিসাব (নাম-নম্বরসহ) দেখতে পারবে, কোনো পিন ছাড়াই। চালিয়ে যাবেন?')) return;
+        e.viewPinHash = '';
+    }
+    save();
+    pushStaffLinkSnapshot(e);
+    renderVpLinkBox();
+    alert('✅ আপডেট হয়েছে');
 }
 function revokeStaffLink() {
     const e = appData.employees.find(x => x.id === vpEmpId); if (!e || !e.viewLink) return;
