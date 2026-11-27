@@ -2748,7 +2748,7 @@ function staffLinkItemData(name) {
         name: r.c.name || '', phone: r.c.phone || '', dt: r.dt || '', qty: Calc.r2(r.qty),
         tag: r.cash ? 'cash' : (r.hist || r.due <= 0 ? 'paid' : 'due'), due: Calc.r2(r.due || 0)
     }));
-    return { name: name, unit: u, q: Calc.r2(q), qc: Calc.r2(qc), qb: Calc.r2(qb), tk: Calc.r2(tk), got: got, dueAmt: dueAmt, remaining: stockObj ? stockObj.remaining : -1, owed: owedList, rows: rowsList };
+    return { name: name, en: (it && it.en) || '', unit: u, q: Calc.r2(q), qc: Calc.r2(qc), qb: Calc.r2(qb), tk: Calc.r2(tk), got: got, dueAmt: dueAmt, remaining: stockObj ? stockObj.remaining : -1, owed: owedList, rows: rowsList };
 }
 // পুরো তদারকি-লিংকের ডেটা: ওই স্টাফকে যে যে পণ্য দেখার অনুমতি দেওয়া আছে সবগুলোই (ট্যাব আকারে), ফোন নম্বর শুধু অনুমতি থাকলে
 function staffLinkData(emp) {

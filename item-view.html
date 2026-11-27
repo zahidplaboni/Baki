@@ -14,7 +14,8 @@
   .hero { background: linear-gradient(135deg, #ea580c, #c2410c); color: #fff; border-radius: 18px; padding: 18px; margin-bottom: 14px; box-shadow: 0 8px 20px rgba(194,65,12,.25); }
   .hero .shop { font-size: 12px; opacity: .85; font-weight: 700; }
   .hero .item { font-size: 20px; font-weight: 900; margin-top: 2px; }
-  .tabs { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 12px; padding-bottom: 2px; }
+  .tab-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; flex: 1 1 auto; min-width: 0; }
   .tabs span { flex-shrink: 0; background: #fff; border: 1px solid #e2e8f0; color: #475569; font-size: 12.5px; font-weight: 800; padding: 7px 14px; border-radius: 20px; cursor: pointer; white-space: nowrap; }
   .tabs span.on { background: #4f46e5; border-color: #4f46e5; color: #fff; }
   .card { background: #fff; border-radius: 16px; padding: 16px; margin-bottom: 12px; box-shadow: 0 3px 10px rgba(0,0,0,.05); }
@@ -34,9 +35,9 @@
   .ptag.cash { background: #dcfce7; color: #15803d; }
   .ptag.paid { background: #e0e7ff; color: #4338ca; }
   .foot { text-align: center; font-size: 11.5px; color: #94a3b8; margin-top: 10px; }
-  .top-upd { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 6px; font-size: 10.5px; color: #64748b; margin-bottom: 10px; white-space: nowrap; }
-  .top-upd span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .top-upd button { flex: 0 0 auto; background: #fff7ed; color: #c2410c; border: none; border-radius: 8px; padding: 4px 9px; font-weight: 800; font-size: 10.5px; cursor: pointer; white-space: nowrap; }
+  .top-upd { display: flex; flex: 0 0 auto; flex-wrap: nowrap; align-items: center; gap: 5px; font-size: 10px; color: #64748b; white-space: nowrap; }
+  .top-upd span { white-space: nowrap; }
+  .top-upd button { flex: 0 0 auto; background: #fff7ed; color: #c2410c; border: none; border-radius: 8px; padding: 5px 9px; font-weight: 800; font-size: 11px; cursor: pointer; white-space: nowrap; line-height: 1; }
   .refresh-btn { display: block; margin: 14px auto 0; background: #fff7ed; color: #c2410c; border: none; border-radius: 12px; padding: 10px 20px; font-weight: 800; font-size: 13px; cursor: pointer; }
   .state { text-align: center; padding: 60px 20px; color: #64748b; }
   .state .em { font-size: 40px; margin-bottom: 10px; }
@@ -74,6 +75,7 @@
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
   const I18N_UNITS = { 'কার্টুন': 'carton', 'কেস': 'case', 'পিস': 'pc', 'প্যাকেট': 'packet', 'পরিমাণ': 'qty', 'ডজন': 'dozen', 'বস্তা': 'sack', 'কেজি': 'kg', 'গ্রাম': 'gram', 'লিটার': 'liter', 'বোতল': 'bottle', 'বান্ডিল': 'bundle', 'জোড়া': 'pair', 'মিটার': 'meter', 'ফুট': 'ft', 'কৌটা': 'can', 'টিন': 'tin', 'ব্যাগ': 'bag', 'সেট': 'set', 'রিম': 'ream' };
   function unitTxt(u) { if (!u) return ''; return LANG === 'en' ? (I18N_UNITS[u] || u) : u; }
+  function itemLabel(x) { return (LANG === 'en' && x.en) ? x.en : x.name; }
   function fmtAgo(iso) {
     const d = Date.parse(iso); if (isNaN(d)) return '';
     const s = Math.max(0, Math.floor((Date.now() - d) / 1000));
@@ -164,8 +166,10 @@
         <div class="shop">🏪 ${esc(d.shopName || '')}</div>
         <div class="item">👁️ ${esc(d.viewerName || '')}</div>
       </div>
-      <div class="tabs">${items.map(x => `<span class="${x.name === TAB ? 'on' : ''}" onclick="pickTab('${esc(x.name).replace(/'/g, "\\'")}')">${esc(x.name)}</span>`).join('')}</div>
-      <div class="top-upd"><span>🔄 ${t('সর্বশেষ হালনাগাদ', 'Last updated')}: ${fmtAgo(d.updatedAt)}</span><button onclick="fetchData()">${t('রিফ্রেশ', 'Refresh')}</button></div>
+      <div class="tab-row">
+        <div class="tabs">${items.map(x => `<span class="${x.name === TAB ? 'on' : ''}" onclick="pickTab('${esc(x.name).replace(/'/g, "\\'")}')">${esc(itemLabel(x))}</span>`).join('')}</div>
+        <div class="top-upd" title="${t('সর্বশেষ হালনাগাদ', 'Last updated')}: ${fmtAgo(d.updatedAt)}"><span>🔄 ${fmtAgo(d.updatedAt)}</span><button onclick="fetchData()">↻ ${t('রিফ্রেশ', 'Refresh')}</button></div>
+      </div>
       <div class="card">
         <div class="sum">
           <div><b>${it.q}${it.unit ? ' ' + esc(unitTxt(it.unit)) : ''}</b><span>${t('মোট বিক্রি', 'Total sold')}</span></div>
