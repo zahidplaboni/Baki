@@ -34,8 +34,9 @@
   .ptag.cash { background: #dcfce7; color: #15803d; }
   .ptag.paid { background: #e0e7ff; color: #4338ca; }
   .foot { text-align: center; font-size: 11.5px; color: #94a3b8; margin-top: 10px; }
-  .top-upd { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 11px; color: #64748b; margin-bottom: 10px; }
-  .top-upd button { background: #fff7ed; color: #c2410c; border: none; border-radius: 8px; padding: 4px 10px; font-weight: 800; font-size: 11px; cursor: pointer; }
+  .top-upd { display: flex; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 6px; font-size: 10.5px; color: #64748b; margin-bottom: 10px; white-space: nowrap; }
+  .top-upd span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .top-upd button { flex: 0 0 auto; background: #fff7ed; color: #c2410c; border: none; border-radius: 8px; padding: 4px 9px; font-weight: 800; font-size: 10.5px; cursor: pointer; white-space: nowrap; }
   .refresh-btn { display: block; margin: 14px auto 0; background: #fff7ed; color: #c2410c; border: none; border-radius: 12px; padding: 10px 20px; font-weight: 800; font-size: 13px; cursor: pointer; }
   .state { text-align: center; padding: 60px 20px; color: #64748b; }
   .state .em { font-size: 40px; margin-bottom: 10px; }
@@ -164,7 +165,7 @@
         <div class="item">👁️ ${esc(d.viewerName || '')}</div>
       </div>
       <div class="tabs">${items.map(x => `<span class="${x.name === TAB ? 'on' : ''}" onclick="pickTab('${esc(x.name).replace(/'/g, "\\'")}')">${esc(x.name)}</span>`).join('')}</div>
-      <div class="top-upd">🔄 ${t('সর্বশেষ হালনাগাদ', 'Last updated')}: ${fmtAgo(d.updatedAt)} <button onclick="fetchData()">${t('রিফ্রেশ', 'Refresh')}</button></div>
+      <div class="top-upd"><span>🔄 ${t('সর্বশেষ হালনাগাদ', 'Last updated')}: ${fmtAgo(d.updatedAt)}</span><button onclick="fetchData()">${t('রিফ্রেশ', 'Refresh')}</button></div>
       <div class="card">
         <div class="sum">
           <div><b>${it.q}${it.unit ? ' ' + esc(unitTxt(it.unit)) : ''}</b><span>${t('মোট বিক্রি', 'Total sold')}</span></div>

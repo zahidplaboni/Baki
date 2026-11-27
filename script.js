@@ -1797,14 +1797,18 @@ function renderEmployeesList() {
             ? `<img src="${emp.photo}">`
             : getInitial(emp.name);
         div.innerHTML = `
-            <div class="emp-avatar">${photoInner}</div>
-            <div class="emp-info">
-                <div class="emp-name">${escapeHtml(emp.name)}</div>
-                <div class="emp-user">👤 ${escapeHtml(emp.username)} ${emp.viewer ? '<span class="vw-badge sm">👁️ তদারকি</span>' : '<span class="st-badge">🧑‍💼 স্টাফ</span>'}${emp.blocked ? ' <span class="blk-badge">⛔ ব্লক</span>' : ''}</div>
+            <div class="emp-top">
+                <div class="emp-avatar">${photoInner}</div>
+                <div class="emp-info">
+                    <div class="emp-name">${escapeHtml(emp.name)}</div>
+                    <div class="emp-user">👤 ${escapeHtml(emp.username)} ${emp.viewer ? '<span class="vw-badge sm">👁️ তদারকি</span>' : '<span class="st-badge">🧑‍💼 স্টাফ</span>'}${emp.blocked ? ' <span class="blk-badge">⛔ ব্লক</span>' : ''}</div>
+                </div>
             </div>
-            ${emp.viewer ? `<button class="emp-del emp-perm" onclick="openViewerPerm('${emp.id}')">অনুমতি</button>` : `<button class="emp-del emp-perm" onclick="openStaffPerm('${emp.id}')">অনুমতি</button>`}
-            <button class="emp-del emp-blk${emp.blocked ? ' on' : ''}" onclick="toggleBlockEmployee('${emp.id}')">${emp.blocked ? '✅ আনব্লক' : '🚫 ব্লক'}</button>
-            <button class="emp-del" onclick="deleteEmployee('${emp.id}')">ডিলিট</button>
+            <div class="emp-actions">
+                ${emp.viewer ? `<button class="emp-del emp-perm" onclick="openViewerPerm('${emp.id}')">অনুমতি</button>` : `<button class="emp-del emp-perm" onclick="openStaffPerm('${emp.id}')">অনুমতি</button>`}
+                <button class="emp-del emp-blk${emp.blocked ? ' on' : ''}" onclick="toggleBlockEmployee('${emp.id}')">${emp.blocked ? '✅ আনব্লক' : '🚫 ব্লক'}</button>
+                <button class="emp-del" onclick="deleteEmployee('${emp.id}')">ডিলিট</button>
+            </div>
         `;
         wrap.appendChild(div);
     });
@@ -2770,7 +2774,11 @@ async function deleteStaffLinkDoc(linkId) {
 }
 function pushAllStaffLinks() {
     if (!CS || !CS.uid) return;
-    (appData.employees || []).forEach(e => { if (e && e.viewer && e.viewLink) pushStaffLinkSnapshot(e); });
+    (appData.employees || []).forEach(e => {
+        if (!e || !e.viewer || !e.viewLink) return;
+        if (e.blocked) deleteStaffLinkDoc(e.viewLink);   // ব্লক করা থাকলে প্রতি সিঙ্কে লিংক ডকুমেন্ট মুছে দেওয়া হয় (নাহলে অটো-সিঙ্ক আবার বানিয়ে ফেলত)
+        else pushStaffLinkSnapshot(e);
+    });
 }
 
 // ================== 9. কাস্টমার কার্ড ==================
