@@ -2001,14 +2001,11 @@ function closePinModal() {
     closeModal('pinModal');
     pendingAction = null;
 }
-let EYE_ID_SEQ = 0;
 function eyeOpenSvg() {
-    const u = 'eo' + (++EYE_ID_SEQ);
-    return '<svg viewBox="0 0 24 24"><defs><linearGradient id="' + u + 'a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4d8fb"/><stop offset="1" stop-color="#c9a9f5"/></linearGradient><linearGradient id="' + u + 'b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fc1ff"/><stop offset="1" stop-color="#0d85e6"/></linearGradient></defs><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="url(#' + u + 'a)" opacity=".6"/><circle cx="12" cy="12" r="5.6" fill="url(#' + u + 'b)"/><circle cx="12" cy="12" r="2.3" fill="#0a5ea3"/></svg>';
+    return '<svg viewBox="0 0 24 24"><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="#c9a9f5" opacity=".55"/><circle cx="12" cy="12" r="5.6" fill="#0d85e6"/><circle cx="12" cy="12" r="2.3" fill="#0a5ea3"/></svg>';
 }
 function eyeSlashSvg() {
-    const u = 'es' + (++EYE_ID_SEQ);
-    return '<svg viewBox="0 0 24 24"><defs><linearGradient id="' + u + 'a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe17a"/><stop offset="1" stop-color="#ffb020"/></linearGradient><linearGradient id="' + u + 'b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#ff8c1a"/></linearGradient></defs><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="url(#' + u + 'a)"/><circle cx="12" cy="12" r="5.2" fill="url(#' + u + 'b)"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffd9d9" stroke-width="4.4" stroke-linecap="round"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffb4ab" stroke-width="2.3" stroke-linecap="round"/></svg>';
+    return '<svg viewBox="0 0 24 24"><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="#ffb020"/><circle cx="12" cy="12" r="5.2" fill="#ff8c1a"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffd9d9" stroke-width="4.4" stroke-linecap="round"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffb4ab" stroke-width="2.3" stroke-linecap="round"/></svg>';
 }
 function togglePass(inputId, el) {
     const input = document.getElementById(inputId);
