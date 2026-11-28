@@ -1513,7 +1513,7 @@ function openChangeMyPassword() {
         const el = document.getElementById(id);
         el.value = ''; el.type = 'password';
     });
-    document.querySelectorAll('#changePassModal .toggle-eye').forEach(eye => eye.innerHTML = EYE_OPEN_SVG);
+    document.querySelectorAll('#changePassModal .toggle-eye').forEach(eye => eye.innerHTML = eyeOpenSvg());
     
     openModal('changePassModal');
     setTimeout(() => document.getElementById('changePassAnswerInput').focus(), 300);
@@ -2001,19 +2001,26 @@ function closePinModal() {
     closeModal('pinModal');
     pendingAction = null;
 }
-const EYE_OPEN_SVG = '<svg viewBox="0 0 24 24"><defs><linearGradient id="eoLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4d8fb"/><stop offset="1" stop-color="#c9a9f5"/></linearGradient><linearGradient id="eoIris" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fc1ff"/><stop offset="1" stop-color="#0d85e6"/></linearGradient></defs><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="url(#eoLid)" opacity=".6"/><circle cx="12" cy="12" r="5.6" fill="url(#eoIris)"/><circle cx="12" cy="12" r="2.3" fill="#0a5ea3"/></svg>';
-const EYE_SLASH_SVG = '<svg viewBox="0 0 24 24"><defs><linearGradient id="esLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe17a"/><stop offset="1" stop-color="#ffb020"/></linearGradient><linearGradient id="esIris" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#ff8c1a"/></linearGradient></defs><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="url(#esLid)"/><circle cx="12" cy="12" r="5.2" fill="url(#esIris)"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffd9d9" stroke-width="4.4" stroke-linecap="round"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffb4ab" stroke-width="2.3" stroke-linecap="round"/></svg>';
+let EYE_ID_SEQ = 0;
+function eyeOpenSvg() {
+    const u = 'eo' + (++EYE_ID_SEQ);
+    return '<svg viewBox="0 0 24 24"><defs><linearGradient id="' + u + 'a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4d8fb"/><stop offset="1" stop-color="#c9a9f5"/></linearGradient><linearGradient id="' + u + 'b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fc1ff"/><stop offset="1" stop-color="#0d85e6"/></linearGradient></defs><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="url(#' + u + 'a)" opacity=".6"/><circle cx="12" cy="12" r="5.6" fill="url(#' + u + 'b)"/><circle cx="12" cy="12" r="2.3" fill="#0a5ea3"/></svg>';
+}
+function eyeSlashSvg() {
+    const u = 'es' + (++EYE_ID_SEQ);
+    return '<svg viewBox="0 0 24 24"><defs><linearGradient id="' + u + 'a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe17a"/><stop offset="1" stop-color="#ffb020"/></linearGradient><linearGradient id="' + u + 'b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#ff8c1a"/></linearGradient></defs><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="url(#' + u + 'a)"/><circle cx="12" cy="12" r="5.2" fill="url(#' + u + 'b)"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffd9d9" stroke-width="4.4" stroke-linecap="round"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffb4ab" stroke-width="2.3" stroke-linecap="round"/></svg>';
+}
 function togglePass(inputId, el) {
     const input = document.getElementById(inputId);
-    if (input.type === 'password') { input.type = 'text'; el.innerHTML = EYE_SLASH_SVG; }
-    else { input.type = 'password'; el.innerHTML = EYE_OPEN_SVG; }
+    if (input.type === 'password') { input.type = 'text'; el.innerHTML = eyeSlashSvg(); }
+    else { input.type = 'password'; el.innerHTML = eyeOpenSvg(); }
 }
 
 function checkMyPassword(callback) {
     pendingAction = callback;
     document.getElementById('pinInput').value = '';
     document.getElementById('pinInput').type = 'password';
-    document.querySelectorAll('#pinModal .toggle-eye').forEach(e => e.innerHTML = EYE_OPEN_SVG);
+    document.querySelectorAll('#pinModal .toggle-eye').forEach(e => e.innerHTML = eyeOpenSvg());
     openModal('pinModal');
     setTimeout(() => document.getElementById('pinInput').focus(), 200);
 }
@@ -2054,7 +2061,7 @@ function requestTransactionPin(title, subtitle, callback) {
     const inp = document.getElementById('txPinInput');
     inp.value = '';
     inp.type = 'password';
-    document.querySelectorAll('#transactionPinModal .toggle-eye').forEach(e => e.innerHTML = EYE_OPEN_SVG);
+    document.querySelectorAll('#transactionPinModal .toggle-eye').forEach(e => e.innerHTML = eyeOpenSvg());
     openModal('transactionPinModal');
     setTimeout(() => inp.focus(), 250);
 }
@@ -2083,7 +2090,7 @@ function openChangeTxPin() {
         const el = document.getElementById(id);
         el.value = ''; el.type = 'password';
     });
-    document.querySelectorAll('#changeTxPinModal .toggle-eye').forEach(e => e.innerHTML = EYE_OPEN_SVG);
+    document.querySelectorAll('#changeTxPinModal .toggle-eye').forEach(e => e.innerHTML = eyeOpenSvg());
     document.getElementById('txPinErrorMsg').style.display = 'none';
     openModal('changeTxPinModal');
     setTimeout(() => document.getElementById('oldTxPinInput').focus(), 250);
