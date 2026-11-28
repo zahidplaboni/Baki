@@ -126,31 +126,14 @@
       <div class="pin-wrap">
         <div class="em">🔒</div>
         <h2>${t('দেখতে হলে পিন দিন', 'Enter PIN to view')}</h2>
-        <div class="pin-wrap-box">
-          <input type="password" inputmode="numeric" maxlength="4" class="pin-input" id="pinBox" placeholder="••••">
-          <span class="pin-eye" id="pinEye" onclick="toggleIvPass()"></span>
-        </div>
+        <input type="password" inputmode="numeric" maxlength="4" class="pin-input" id="pinBox" placeholder="••••">
         <button class="pin-btn" onclick="checkPin()">${t('দেখুন', 'View')}</button>
         <div class="pin-err" id="pinErr" style="${err ? 'display:block' : ''}">${t('ভুল পিন, আবার চেষ্টা করুন', 'Wrong PIN, try again')}</div>
       </div>`;
     const box = document.getElementById('pinBox');
     box.focus();
     box.addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
-    setIvEyeIcon(false);
   }
-
-  const EYE_OPEN_SVG = '<svg viewBox="0 0 24 24"><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="#c9a9f5" opacity=".55"/><circle cx="12" cy="12" r="5.6" fill="#0d85e6"/><circle cx="12" cy="12" r="2.3" fill="#0a5ea3"/></svg>';
-  const EYE_SLASH_SVG = '<svg viewBox="0 0 24 24"><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="#ffb020"/><circle cx="12" cy="12" r="5.2" fill="#ff8c1a"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffd9d9" stroke-width="4.4" stroke-linecap="round"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffb4ab" stroke-width="2.3" stroke-linecap="round"/></svg>';
-  function setIvEyeIcon(visible) {
-    const eye = document.getElementById('pinEye');
-    if (eye) eye.innerHTML = visible ? EYE_SLASH_SVG : EYE_OPEN_SVG;
-  }
-  window.toggleIvPass = function () {
-    const box = document.getElementById('pinBox');
-    if (!box) return;
-    if (box.type === 'password') { box.type = 'text'; setIvEyeIcon(true); }
-    else { box.type = 'password'; setIvEyeIcon(false); }
-  };
 
   window.checkPin = async function () {
     const box = document.getElementById('pinBox'), pin = (box.value || '').trim();
