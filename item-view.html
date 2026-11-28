@@ -45,7 +45,11 @@
   .pin-wrap { background: #fff; border-radius: 18px; padding: 28px 20px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
   .pin-wrap .em { font-size: 36px; margin-bottom: 10px; }
   .pin-wrap h2 { font-size: 16px; margin: 0 0 16px; }
-  .pin-input { width: 160px; font-size: 24px; letter-spacing: 10px; text-align: center; padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; margin: 0 auto 12px; display: block; }
+  .pin-input { width: 160px; font-size: 24px; letter-spacing: 10px; text-align: center; padding: 12px 38px 12px 12px; border: 2px solid #e2e8f0; border-radius: 12px; margin: 0 auto 12px; display: block; }
+  .pin-wrap-box { position: relative; width: 160px; margin: 0 auto 12px; }
+  .pin-wrap-box .pin-input { margin: 0; }
+  .pin-eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #94a3b8; padding: 4px; display: flex; align-items: center; justify-content: center; }
+  .pin-eye svg { width: 18px; height: 18px; display: block; pointer-events: none; }
   .pin-btn { background: #ea580c; color: #fff; border: none; border-radius: 12px; padding: 11px 26px; font-weight: 800; font-size: 14px; cursor: pointer; }
   .pin-err { color: #dc2626; font-size: 12.5px; margin-top: 10px; display: none; }
   .skel { background: #e2e8f0; border-radius: 8px; height: 14px; margin: 6px 0; animation: pulse 1.2s infinite ease-in-out; }
@@ -122,14 +126,31 @@
       <div class="pin-wrap">
         <div class="em">🔒</div>
         <h2>${t('দেখতে হলে পিন দিন', 'Enter PIN to view')}</h2>
-        <input type="password" inputmode="numeric" maxlength="4" class="pin-input" id="pinBox" placeholder="••••">
+        <div class="pin-wrap-box">
+          <input type="password" inputmode="numeric" maxlength="4" class="pin-input" id="pinBox" placeholder="••••">
+          <span class="pin-eye" id="pinEye" onclick="toggleIvPass()"></span>
+        </div>
         <button class="pin-btn" onclick="checkPin()">${t('দেখুন', 'View')}</button>
         <div class="pin-err" id="pinErr" style="${err ? 'display:block' : ''}">${t('ভুল পিন, আবার চেষ্টা করুন', 'Wrong PIN, try again')}</div>
       </div>`;
     const box = document.getElementById('pinBox');
     box.focus();
     box.addEventListener('keydown', e => { if (e.key === 'Enter') checkPin(); });
+    setIvEyeIcon(false);
   }
+
+  const EYE_OPEN_SVG = '<svg viewBox="0 0 24 24"><defs><linearGradient id="eoLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e4d8fb"/><stop offset="1" stop-color="#c9a9f5"/></linearGradient><linearGradient id="eoIris" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fc1ff"/><stop offset="1" stop-color="#0d85e6"/></linearGradient></defs><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="url(#eoLid)" opacity=".6"/><circle cx="12" cy="12" r="5.6" fill="url(#eoIris)"/><circle cx="12" cy="12" r="2.3" fill="#0a5ea3"/></svg>';
+  const EYE_SLASH_SVG = '<svg viewBox="0 0 24 24"><defs><linearGradient id="esLid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe17a"/><stop offset="1" stop-color="#ffb020"/></linearGradient><linearGradient id="esIris" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset="1" stop-color="#ff8c1a"/></linearGradient></defs><path d="M1 12C1 12 5 5 12 5C19 5 23 12 23 12C23 12 19 19 12 19C5 19 1 12 1 12Z" fill="url(#esLid)"/><circle cx="12" cy="12" r="5.2" fill="url(#esIris)"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffd9d9" stroke-width="4.4" stroke-linecap="round"/><line x1="2" y1="21" x2="22" y2="3" stroke="#ffb4ab" stroke-width="2.3" stroke-linecap="round"/></svg>';
+  function setIvEyeIcon(visible) {
+    const eye = document.getElementById('pinEye');
+    if (eye) eye.innerHTML = visible ? EYE_SLASH_SVG : EYE_OPEN_SVG;
+  }
+  window.toggleIvPass = function () {
+    const box = document.getElementById('pinBox');
+    if (!box) return;
+    if (box.type === 'password') { box.type = 'text'; setIvEyeIcon(true); }
+    else { box.type = 'password'; setIvEyeIcon(false); }
+  };
 
   window.checkPin = async function () {
     const box = document.getElementById('pinBox'), pin = (box.value || '').trim();
